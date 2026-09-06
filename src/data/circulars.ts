@@ -10,6 +10,8 @@ export const circulars: Circular[] = [
     summary:
       'Adds expectations on ransomware readiness, privileged access monitoring, and third-party SOC integration.',
     audience: 'All Scheduled Commercial Banks',
+    effectiveNote: 'Illustrative incremental controls — sample framing only.',
+    relatedTopics: ['Cyber security', 'Third-party risk', 'SOC'],
     body: [
       'Banks should review incident response playbooks for ransomware scenarios at least annually and involve board risk committees in tabletop exercises.',
       'Privileged access to core banking and payment systems must be vaulted, time-bound, and logged with immutable retention.',
@@ -26,6 +28,8 @@ export const circulars: Circular[] = [
     summary:
       'Clarifies tiered KYC and MCC controls when onboarding small merchants onto UPI QR acceptance.',
     audience: 'Payment System Participants',
+    effectiveNote: 'Educational note on risk-based merchant due diligence.',
+    relatedTopics: ['UPI', 'MCC', 'Merchant KYC'],
     body: [
       'Acquirers may apply simplified due diligence for micro-merchants below defined turnover thresholds while retaining fraud monitoring.',
       'High-risk MCCs require enhanced verification and velocity limits on first settlement cycles.',
@@ -41,6 +45,8 @@ export const circulars: Circular[] = [
     summary:
       'Streamlines Form ECB filing timelines and clarifies end-use certificates for refinancing.',
     audience: 'Authorised Dealer Category-I Banks',
+    effectiveNote: 'Sample ECB reporting theme for AD literacy.',
+    relatedTopics: ['ECB', 'FEMA', 'Reporting'],
     body: [
       'AD banks should ensure borrowers file drawdown and parameter changes within the revised windows.',
       'Refinancing of existing ECBs remains subject to all-in-cost ceilings applicable on the date of fresh agreement.',
@@ -56,6 +62,8 @@ export const circulars: Circular[] = [
     summary:
       'Reiterates that borrower accounts can be upgraded only after arrears of interest and principal are paid in full.',
     audience: 'Commercial Banks & NBFCs',
+    effectiveNote: 'Prudential clarification style — illustrative paraphrase.',
+    relatedTopics: ['NPA', 'Asset classification'],
     body: [
       'Partial recovery does not by itself upgrade an NPA. All contractual dues must be cleared.',
       'Restructuring classification follows the applicable framework; cosmetic rescheduling is not a substitute.',
@@ -71,6 +79,8 @@ export const circulars: Circular[] = [
     summary:
       'Updates escrow, customer interface and default loss sharing disclosures for co-lending arrangements.',
     audience: 'Banks and NBFCs in co-lending',
+    effectiveNote: 'Operational co-lending themes for prototype UX.',
+    relatedTopics: ['Co-lending', 'Escrow', 'KFS'],
     body: [
       'The customer-facing entity must be clearly identified in Key Fact Statements.',
       'Escrow for shared loans should segregate partner shares on T+0 or next working day settlement.',
@@ -86,6 +96,8 @@ export const circulars: Circular[] = [
     summary:
       'Reminds acquirers and merchants that storing actual card data is prohibited; tokens and COF frameworks apply.',
     audience: 'Card payment ecosystem',
+    effectiveNote: 'Tokenisation reminder — educational composite.',
+    relatedTopics: ['Tokenisation', 'Card data', 'COF'],
     body: [
       'Merchants must complete migration to network tokens or issuer tokens for recurring payments.',
       'Guest-checkout flows should not capture permanent card credentials on merchant servers.',
@@ -101,6 +113,8 @@ export const circulars: Circular[] = [
     summary:
       'FAQ-style clarifications on eligible activities, third-party assurance and allocation reporting for green deposits.',
     audience: 'Regulated Entities offering green deposits',
+    effectiveNote: 'Green deposits FAQ-style educational note.',
+    relatedTopics: ['Green finance', 'Assurance'],
     body: [
       'Allocation of proceeds must map to a board-approved financing framework with excluded sectors listed.',
       'Independent assurance of allocation reports strengthens market integrity.',
@@ -116,6 +130,8 @@ export const circulars: Circular[] = [
     summary:
       'Penal charges must be reasonable, non-capitalised, and disclosed; interest-on-penalty practices are discouraged.',
     audience: 'Banks and NBFCs',
+    effectiveNote: 'Penal charges conduct theme for consumer protection literacy.',
+    relatedTopics: ['Penal charges', 'Fair conduct'],
     body: [
       'Penal charges cannot be levied in the form of higher interest on the entire loan for minor defaults.',
       'Boards should approve a schedule of penal charges that is product-agnostic where possible.',
@@ -131,6 +147,8 @@ export const circulars: Circular[] = [
     summary:
       'Strengthens EWS frameworks, forensic audit triggers and timelines for reporting frauds to law enforcement.',
     audience: 'Commercial Banks',
+    effectiveNote: 'EWS and fraud reporting education note.',
+    relatedTopics: ['Fraud', 'EWS', 'Forensic audit'],
     body: [
       'EWS dashboards should combine financial, transactional and behavioural indicators.',
       'Decision to order a forensic audit must be documented with clear terms of reference.',
@@ -146,6 +164,8 @@ export const circulars: Circular[] = [
     summary:
       'Updates remittance cut-offs and soiled note packing standards for currency chest linked branches.',
     audience: 'Currency chest banks',
+    effectiveNote: 'Chest remittance operations — illustrative.',
+    relatedTopics: ['Currency chest', 'Soiled notes'],
     body: [
       'Chests must adhere to remittance calendars communicated by Issue Departments.',
       'Soiled notes should be packed denomination-wise with prescribed seals and CCTV coverage.',
@@ -161,6 +181,8 @@ export const circulars: Circular[] = [
     summary:
       'Answers frequently asked questions on trading book boundary and standardised approach computations during parallel run.',
     audience: 'Banks with material trading books',
+    effectiveNote: 'Basel market-risk parallel-run FAQ style (sample).',
+    relatedTopics: ['Market risk', 'Trading book', 'Basel III'],
     body: [
       'Trading book vs banking book boundary decisions require documented policies and periodic reclassification reviews.',
       'Parallel run outputs help calibrate capital planning before go-live dates announced separately.',

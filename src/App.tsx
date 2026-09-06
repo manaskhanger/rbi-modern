@@ -1,45 +1,69 @@
+import { lazy, Suspense } from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { ThemeProvider } from './hooks/useTheme'
 import { Layout } from './components/Layout'
-import { Home } from './pages/Home'
-import { About } from './pages/About'
-import { MonetaryPolicy } from './pages/MonetaryPolicy'
-import { MastersDirections } from './pages/MastersDirections'
-import { MastersDirectionDetail } from './pages/MastersDirectionDetail'
-import { Circulars } from './pages/Circulars'
-import { CircularDetail } from './pages/CircularDetail'
-import { News } from './pages/News'
-import { NewsDetail } from './pages/NewsDetail'
-import { Reports } from './pages/Reports'
-import { ReportDetail } from './pages/ReportDetail'
-import { Data } from './pages/Data'
-import { Learn } from './pages/Learn'
-import { Offices } from './pages/Offices'
-import { NotFound } from './pages/NotFound'
+
+const Home = lazy(() => import('./pages/Home').then((m) => ({ default: m.Home })))
+const About = lazy(() => import('./pages/About').then((m) => ({ default: m.About })))
+const MonetaryPolicy = lazy(() =>
+  import('./pages/MonetaryPolicy').then((m) => ({ default: m.MonetaryPolicy })),
+)
+const MastersDirections = lazy(() =>
+  import('./pages/MastersDirections').then((m) => ({ default: m.MastersDirections })),
+)
+const MastersDirectionDetail = lazy(() =>
+  import('./pages/MastersDirectionDetail').then((m) => ({ default: m.MastersDirectionDetail })),
+)
+const Circulars = lazy(() => import('./pages/Circulars').then((m) => ({ default: m.Circulars })))
+const CircularDetail = lazy(() =>
+  import('./pages/CircularDetail').then((m) => ({ default: m.CircularDetail })),
+)
+const News = lazy(() => import('./pages/News').then((m) => ({ default: m.News })))
+const NewsDetail = lazy(() =>
+  import('./pages/NewsDetail').then((m) => ({ default: m.NewsDetail })),
+)
+const Reports = lazy(() => import('./pages/Reports').then((m) => ({ default: m.Reports })))
+const ReportDetail = lazy(() =>
+  import('./pages/ReportDetail').then((m) => ({ default: m.ReportDetail })),
+)
+const Data = lazy(() => import('./pages/Data').then((m) => ({ default: m.Data })))
+const Learn = lazy(() => import('./pages/Learn').then((m) => ({ default: m.Learn })))
+const Offices = lazy(() => import('./pages/Offices').then((m) => ({ default: m.Offices })))
+const NotFound = lazy(() => import('./pages/NotFound').then((m) => ({ default: m.NotFound })))
+
+function RouteFallback() {
+  return (
+    <div className="mx-auto max-w-6xl px-4 py-20 text-sm text-ink-muted dark:text-cream/60">
+      Loading…
+    </div>
+  )
+}
 
 export default function App() {
   return (
     <ThemeProvider>
-      <BrowserRouter basename={import.meta.env.BASE_URL.replace(/\/$/, "") || "/"}>
-        <Routes>
-          <Route element={<Layout />}>
-            <Route index element={<Home />} />
-            <Route path="about" element={<About />} />
-            <Route path="monetary-policy" element={<MonetaryPolicy />} />
-            <Route path="masters-directions" element={<MastersDirections />} />
-            <Route path="masters-directions/:slug" element={<MastersDirectionDetail />} />
-            <Route path="circulars" element={<Circulars />} />
-            <Route path="circulars/:slug" element={<CircularDetail />} />
-            <Route path="news" element={<News />} />
-            <Route path="news/:slug" element={<NewsDetail />} />
-            <Route path="reports" element={<Reports />} />
-            <Route path="reports/:slug" element={<ReportDetail />} />
-            <Route path="data" element={<Data />} />
-            <Route path="learn" element={<Learn />} />
-            <Route path="offices" element={<Offices />} />
-            <Route path="*" element={<NotFound />} />
-          </Route>
-        </Routes>
+      <BrowserRouter basename={import.meta.env.BASE_URL.replace(/\/$/, '') || '/'}>
+        <Suspense fallback={<RouteFallback />}>
+          <Routes>
+            <Route element={<Layout />}>
+              <Route index element={<Home />} />
+              <Route path="about" element={<About />} />
+              <Route path="monetary-policy" element={<MonetaryPolicy />} />
+              <Route path="masters-directions" element={<MastersDirections />} />
+              <Route path="masters-directions/:slug" element={<MastersDirectionDetail />} />
+              <Route path="circulars" element={<Circulars />} />
+              <Route path="circulars/:slug" element={<CircularDetail />} />
+              <Route path="news" element={<News />} />
+              <Route path="news/:slug" element={<NewsDetail />} />
+              <Route path="reports" element={<Reports />} />
+              <Route path="reports/:slug" element={<ReportDetail />} />
+              <Route path="data" element={<Data />} />
+              <Route path="learn" element={<Learn />} />
+              <Route path="offices" element={<Offices />} />
+              <Route path="*" element={<NotFound />} />
+            </Route>
+          </Routes>
+        </Suspense>
       </BrowserRouter>
     </ThemeProvider>
   )

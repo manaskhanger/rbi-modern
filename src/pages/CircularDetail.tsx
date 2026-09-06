@@ -11,7 +11,8 @@ export function CircularDetail() {
   if (!doc) {
     return (
       <div className="mx-auto max-w-3xl px-4 py-20 text-center">
-        <p>Circular not found.</p>
+        <p className="text-lg font-semibold">Circular not found</p>
+        <p className="mt-2 text-sm text-ink-muted">That slug is not in this prototype set.</p>
         <Link to="/circulars" className="mt-4 inline-block text-gold-dim underline">
           Back
         </Link>
@@ -20,27 +21,63 @@ export function CircularDetail() {
   }
 
   return (
-    <div className="mx-auto max-w-3xl px-4 py-12 md:px-6 md:py-16">
+    <div className="mx-auto max-w-3xl px-4 py-10 md:px-6 md:py-14">
       <Link
         to="/circulars"
-        className="mb-8 inline-flex items-center gap-2 text-sm text-ink-muted hover:text-navy dark:hover:text-cream"
+        className="mb-6 inline-flex items-center gap-2 text-sm text-ink-muted hover:text-navy dark:hover:text-cream"
       >
         <ArrowLeft className="h-4 w-4" /> All circulars
       </Link>
       <Badge>{doc.category}</Badge>
-      <h1 className="mt-4 text-3xl font-bold text-navy dark:text-cream">{doc.title}</h1>
-      <p className="mt-3 text-sm text-ink-muted dark:text-cream/55">
-        {doc.date} · {doc.ref} · Audience: {doc.audience}
+      <h1 className="mt-3 text-2xl font-bold text-navy dark:text-cream md:text-3xl">{doc.title}</h1>
+      <p className="mt-2 text-sm text-ink-muted dark:text-cream/55">
+        {doc.date} · <span className="font-mono text-gold-dim">{doc.ref}</span>
       </p>
-      <p className="mt-6 text-lg text-ink-muted dark:text-cream/75">{doc.summary}</p>
-      <div className="mt-8 space-y-4">
-        {doc.body.map((p) => (
-          <p key={p} className="leading-relaxed text-ink-muted dark:text-cream/70">
-            {p}
-          </p>
-        ))}
-      </div>
-      <div className="mt-12">
+
+      <section className="mt-8">
+        <h2 className="text-sm font-semibold uppercase tracking-wider text-gold-dim dark:text-gold">
+          Executive summary
+        </h2>
+        <p className="mt-2 text-base text-ink-muted dark:text-cream/75">{doc.summary}</p>
+      </section>
+
+      <section className="mt-6">
+        <h2 className="text-sm font-semibold uppercase tracking-wider text-gold-dim dark:text-gold">
+          Who it applies to
+        </h2>
+        <p className="mt-2 rounded-lg border border-navy/10 bg-white/70 px-4 py-3 text-sm dark:border-white/10 dark:bg-navy-light/40">
+          {doc.audience}
+        </p>
+      </section>
+
+      <section className="mt-6">
+        <h2 className="text-sm font-semibold uppercase tracking-wider text-gold-dim dark:text-gold">
+          Key points
+        </h2>
+        <div className="mt-3 space-y-3">
+          {doc.body.map((p) => (
+            <p key={p} className="text-sm leading-relaxed text-ink-muted dark:text-cream/70">
+              {p}
+            </p>
+          ))}
+        </div>
+      </section>
+
+      <section className="mt-6">
+        <h2 className="text-sm font-semibold uppercase tracking-wider text-gold-dim dark:text-gold">
+          Related topics
+        </h2>
+        <div className="mt-2 flex flex-wrap gap-2">
+          {doc.relatedTopics.map((t) => (
+            <Badge key={t} tone="muted">
+              {t}
+            </Badge>
+          ))}
+        </div>
+        <p className="mt-3 text-xs text-ink-muted dark:text-cream/50">{doc.effectiveNote}</p>
+      </section>
+
+      <div className="mt-10">
         <DisclaimerBanner />
       </div>
     </div>

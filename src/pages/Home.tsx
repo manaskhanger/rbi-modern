@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
 import { motion, useReducedMotion } from 'framer-motion'
 import { ArrowRight, Landmark, Scale, Smartphone, Shield } from 'lucide-react'
-import { keyRates } from '../data/rates'
+import { keyRates, keyRatesAsOf } from '../data/rates'
 import { newsItems } from '../data/news'
 import { Reveal } from '../components/Reveal'
 import { CardLink } from '../components/Card'
@@ -13,22 +13,22 @@ const pillars = [
   {
     icon: Scale,
     title: 'Monetary policy',
-    text: 'Sets the policy repo rate to keep inflation near target while supporting growth.',
+    text: 'Operates flexible inflation targeting through the Monetary Policy Committee, signalling the policy repo rate to anchor inflation expectations while supporting growth.',
   },
   {
     icon: Landmark,
-    title: 'Banking regulation',
-    text: 'Licenses and supervises banks and NBFCs so deposits and credit stay sound.',
+    title: 'Regulation & supervision',
+    text: 'Licenses and supervises banks, NBFCs and other regulated entities under prudential and conduct frameworks that protect depositors and market integrity.',
   },
   {
     icon: Smartphone,
     title: 'Payment systems',
-    text: 'Authorises and oversees rails like UPI, NEFT and RTGS for safe transfers.',
+    text: 'Authorises and oversees payment and settlement systems so retail and wholesale transfers remain safe, efficient and interoperable.',
   },
   {
     icon: Shield,
-    title: 'Financial stability',
-    text: 'Watches systemic risks and maintains forex reserves for external buffers.',
+    title: 'Financial stability & reserves',
+    text: 'Monitors systemic risk, issues currency, and manages foreign exchange reserves as an external buffer for the economy.',
   },
 ]
 
@@ -38,9 +38,9 @@ export function Home() {
 
   return (
     <div>
-      <section className="relative overflow-hidden">
-        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_rgba(197,165,114,0.18),_transparent_55%)] dark:bg-[radial-gradient(ellipse_at_top_right,_rgba(197,165,114,0.12),_transparent_50%)]" />
-        <div className="mx-auto max-w-6xl px-4 pb-16 pt-14 md:px-6 md:pb-24 md:pt-20">
+      <section className="relative overflow-hidden border-b border-navy/8 dark:border-white/10">
+        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_rgba(197,165,114,0.12),_transparent_55%)]" />
+        <div className="mx-auto max-w-6xl px-4 pb-14 pt-12 md:px-6 md:pb-20 md:pt-16">
           <motion.div
             variants={reduce ? undefined : stagger}
             initial={reduce ? undefined : 'hidden'}
@@ -48,53 +48,63 @@ export function Home() {
             className="max-w-3xl"
           >
             <motion.div variants={reduce ? undefined : fadeUp}>
-              <Badge>Educational demo · Not official RBI</Badge>
+              <Badge>Unofficial educational / UX prototype</Badge>
             </motion.div>
             <motion.h1
               variants={reduce ? undefined : fadeUp}
-              className="mt-5 text-4xl font-bold tracking-tight text-navy dark:text-cream md:text-6xl md:leading-[1.05]"
+              className="mt-5 text-3xl font-bold tracking-tight text-navy dark:text-cream md:text-5xl md:leading-[1.12]"
             >
-              India’s central bank, explained in plain English.
+              Clearer public communication of India’s central bank — as a concept prototype.
             </motion.h1>
             <motion.p
               variants={reduce ? undefined : fadeUp}
-              className="mt-6 text-lg leading-relaxed text-ink-muted dark:text-cream/70 md:text-xl"
+              className="mt-5 text-base leading-relaxed text-ink-muted dark:text-cream/70 md:text-lg"
             >
-              The Reserve Bank of India manages monetary policy, issues currency, regulates banks
-              and payment systems, and works to keep the financial system stable. This site is a
-              modern learning companion — not the official portal.
+              The Reserve Bank of India is the nation’s monetary authority and the principal
+              regulator of banks and payment systems. Its public mandate spans price stability,
+              financial system soundness, currency issue, and the orderly development of markets.
+            </motion.p>
+            <motion.p
+              variants={reduce ? undefined : fadeUp}
+              className="mt-4 text-base leading-relaxed text-ink-muted dark:text-cream/70 md:text-lg"
+            >
+              <strong className="font-semibold text-navy dark:text-cream">Why this prototype
+              exists:</strong>{' '}
+              to explore how Masters Directions, circulars, reports and data might be presented with
+              denser, more navigable information architecture for officers, students and serious
+              stakeholders — without impersonating the official website.
             </motion.p>
             <motion.div variants={reduce ? undefined : fadeUp} className="mt-8 flex flex-wrap gap-3">
               <Link
-                to="/learn"
-                className="inline-flex items-center gap-2 rounded-full bg-navy px-5 py-2.5 text-sm font-semibold text-cream transition hover:bg-navy-light dark:bg-gold dark:text-navy dark:hover:bg-gold-soft"
+                to="/about"
+                className="inline-flex items-center gap-2 rounded-md bg-navy px-5 py-2.5 text-sm font-semibold text-cream transition hover:bg-navy-light dark:bg-gold dark:text-navy dark:hover:bg-gold-soft"
               >
-                Start learning <ArrowRight className="h-4 w-4" />
+                Mandate &amp; organisation <ArrowRight className="h-4 w-4" />
               </Link>
               <Link
-                to="/monetary-policy"
-                className="inline-flex items-center gap-2 rounded-full border border-navy/15 bg-white/70 px-5 py-2.5 text-sm font-semibold text-navy backdrop-blur transition hover:bg-white dark:border-white/20 dark:bg-white/5 dark:text-cream"
+                to="/masters-directions"
+                className="inline-flex items-center gap-2 rounded-md border border-navy/15 bg-white/80 px-5 py-2.5 text-sm font-semibold text-navy transition hover:bg-white dark:border-white/20 dark:bg-white/5 dark:text-cream"
               >
-                Monetary policy
+                Masters Directions
               </Link>
             </motion.div>
           </motion.div>
         </div>
       </section>
 
-      <section className="border-y border-navy/10 bg-white/60 dark:border-white/10 dark:bg-navy-light/50">
-        <div className="mx-auto max-w-6xl px-4 py-6 md:px-6">
-          <p className="mb-4 text-center text-xs font-semibold uppercase tracking-widest text-gold-dim dark:text-gold">
-            Key rates · illustrative demo numbers
+      <section className="border-b border-navy/10 bg-white/70 dark:border-white/10 dark:bg-navy-light/40">
+        <div className="mx-auto max-w-6xl px-4 py-5 md:px-6">
+          <p className="mb-3 text-center text-[11px] font-semibold uppercase tracking-widest text-gold-dim dark:text-gold">
+            Key rates · ILLUSTRATIVE SAMPLE DATA · {keyRatesAsOf}
           </p>
-          <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6">
+          <div className="grid grid-cols-2 gap-2 sm:grid-cols-3 lg:grid-cols-6">
             {keyRates.map((r) => (
               <div
                 key={r.label}
-                className="rounded-2xl border border-navy/8 bg-cream/80 px-3 py-3 text-center dark:border-white/10 dark:bg-navy/40"
+                className="rounded-lg border border-navy/8 bg-cream/90 px-3 py-2.5 text-center dark:border-white/10 dark:bg-navy/50"
               >
-                <p className="text-[11px] text-ink-muted dark:text-cream/55">{r.label}</p>
-                <p className="mt-1 text-lg font-bold text-navy dark:text-cream">{r.value}</p>
+                <p className="text-[10px] leading-tight text-ink-muted dark:text-cream/55">{r.label}</p>
+                <p className="mt-1 text-lg font-bold tabular-nums text-navy dark:text-cream">{r.value}</p>
                 <p className="text-[10px] text-gold-dim">{r.hint}</p>
               </div>
             ))}
@@ -102,21 +112,21 @@ export function Home() {
         </div>
       </section>
 
-      <section className="mx-auto max-w-6xl px-4 py-16 md:px-6 md:py-20">
+      <section className="mx-auto max-w-6xl px-4 py-14 md:px-6 md:py-16">
         <Reveal>
-          <h2 className="text-2xl font-bold text-navy dark:text-cream md:text-3xl">
-            What does RBI actually do?
+          <h2 className="text-2xl font-bold text-navy dark:text-cream md:text-[1.75rem]">
+            Core public functions
           </h2>
-          <p className="mt-3 max-w-2xl text-ink-muted dark:text-cream/65">
-            Four everyday jobs that touch every household and business in India.
+          <p className="mt-2 max-w-2xl text-sm text-ink-muted dark:text-cream/65 md:text-base">
+            High-level framing for educational use — not a statutory schedule.
           </p>
         </Reveal>
-        <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
           {pillars.map((p, i) => (
-            <Reveal key={p.title} delay={i * 0.05}>
-              <div className="glass-card h-full rounded-2xl p-5 transition hover:-translate-y-1 hover:shadow-lg">
-                <p.icon className="h-8 w-8 text-gold-dim dark:text-gold" />
-                <h3 className="mt-4 font-semibold text-navy dark:text-cream">{p.title}</h3>
+            <Reveal key={p.title} delay={i * 0.04}>
+              <div className="glass-card h-full rounded-xl p-5">
+                <p.icon className="h-6 w-6 text-gold-dim dark:text-gold" aria-hidden />
+                <h3 className="mt-3 text-sm font-semibold text-navy dark:text-cream">{p.title}</h3>
                 <p className="mt-2 text-sm leading-relaxed text-ink-muted dark:text-cream/65">
                   {p.text}
                 </p>
@@ -126,13 +136,16 @@ export function Home() {
         </div>
       </section>
 
-      <section className="bg-white/50 dark:bg-navy-light/30">
-        <div className="mx-auto max-w-6xl px-4 py-16 md:px-6">
-          <div className="mb-8 flex items-end justify-between gap-4">
+      <section className="bg-white/60 dark:bg-navy-light/25">
+        <div className="mx-auto max-w-6xl px-4 py-14 md:px-6">
+          <div className="mb-6 flex items-end justify-between gap-4">
             <Reveal>
-              <h2 className="text-2xl font-bold text-navy dark:text-cream md:text-3xl">
-                Featured updates
+              <h2 className="text-2xl font-bold text-navy dark:text-cream md:text-[1.75rem]">
+                Sample updates
               </h2>
+              <p className="mt-1 text-sm text-ink-muted dark:text-cream/55">
+                Illustrative press-style cards for navigation testing.
+              </p>
             </Reveal>
             <Link
               to="/news"
@@ -141,39 +154,39 @@ export function Home() {
               All news
             </Link>
           </div>
-          <div className="grid gap-4 md:grid-cols-3">
+          <div className="grid gap-3 md:grid-cols-3">
             {featured.map((n) => (
-              <CardLink key={n.slug} to={`/news/${n.slug}`}>
+              <CardLink key={n.slug} to={`/news/${n.slug}`} className="!rounded-xl !p-4">
                 <Badge tone="muted">{n.category}</Badge>
-                <h3 className="mt-3 font-semibold text-navy group-hover:text-gold-dim dark:text-cream dark:group-hover:text-gold">
+                <h3 className="mt-2 text-sm font-semibold text-navy group-hover:text-gold-dim dark:text-cream dark:group-hover:text-gold">
                   {n.title}
                 </h3>
                 <p className="mt-2 line-clamp-3 text-sm text-ink-muted dark:text-cream/60">
                   {n.excerpt}
                 </p>
-                <p className="mt-4 text-xs text-ink-muted/80 dark:text-cream/45">{n.date}</p>
+                <p className="mt-3 text-xs text-ink-muted/80 dark:text-cream/45">{n.date}</p>
               </CardLink>
             ))}
           </div>
         </div>
       </section>
 
-      <section className="mx-auto max-w-6xl px-4 py-16 md:px-6">
+      <section className="mx-auto max-w-6xl px-4 py-14 md:px-6">
         <Reveal>
-          <div className="overflow-hidden rounded-3xl bg-navy p-8 text-cream md:flex md:items-center md:justify-between md:p-12">
+          <div className="overflow-hidden rounded-2xl bg-navy p-8 text-cream md:flex md:items-center md:justify-between md:p-10">
             <div className="max-w-xl">
-              <p className="text-sm font-semibold uppercase tracking-widest text-gold">Organisation</p>
-              <h2 className="mt-3 text-2xl font-bold md:text-3xl">
-                Board, departments, and how decisions flow
+              <p className="text-xs font-semibold uppercase tracking-widest text-gold">Organisation</p>
+              <h2 className="mt-2 text-xl font-bold md:text-2xl">
+                Central Board → departments (illustrative schematic)
               </h2>
-              <p className="mt-3 text-cream/70">
-                Explore an interactive sketch of the Central Board and major functional departments —
-                built for learners, not for org-chart legal precision.
+              <p className="mt-3 text-sm text-cream/70">
+                A structured sketch of how oversight, the MPC and functional departments relate —
+                labelled illustrative for training and UX review.
               </p>
             </div>
             <Link
               to="/about"
-              className="mt-6 inline-flex items-center gap-2 rounded-full bg-gold px-5 py-2.5 text-sm font-semibold text-navy transition hover:bg-gold-soft md:mt-0"
+              className="mt-6 inline-flex items-center gap-2 rounded-md bg-gold px-5 py-2.5 text-sm font-semibold text-navy transition hover:bg-gold-soft md:mt-0"
             >
               View about page <ArrowRight className="h-4 w-4" />
             </Link>

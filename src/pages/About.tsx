@@ -15,11 +15,11 @@ import { Reveal } from '../components/Reveal'
 import { DisclaimerBanner } from '../components/DisclaimerBanner'
 
 const timeline = [
-  { year: '1935', text: 'RBI begins operations as India’s central bank (founded by statute in 1934).' },
+  { year: '1934–35', text: 'Reserve Bank of India Act, 1934 establishes the Bank; operations begin in 1935 as India’s central bank.' },
   { year: '1949', text: 'Nationalisation — RBI becomes fully owned by the Government of India.' },
-  { year: '1991+', text: 'Liberalisation era: stronger markets focus, gradual financial sector reforms.' },
-  { year: '2016', text: 'Flexible inflation targeting formalised; Monetary Policy Committee created.' },
-  { year: 'Today', text: 'Oversees a digital-first payments landscape alongside classic central bank roles.' },
+  { year: '1991+', text: 'Liberalisation era: stronger markets orientation and gradual financial-sector reforms.' },
+  { year: '2016', text: 'Flexible inflation targeting formalised; statutory Monetary Policy Committee created.' },
+  { year: 'Today', text: 'Continues classic central-bank roles alongside oversight of a digital-first payments landscape.' },
 ]
 
 const duties = [
@@ -31,7 +31,7 @@ const duties = [
   {
     icon: Landmark,
     title: 'Banker & debt manager',
-    text: 'Banker to the Government and to banks; manages public debt and the money markets toolkit.',
+    text: 'Banker to the Government and to banks; manages public debt operations and money-market tools.',
   },
   {
     icon: Banknote,
@@ -72,15 +72,15 @@ const orgTree: {
 }[] = [
   {
     name: 'Central Board',
-    blurb: 'Oversight of general superintendence and direction of RBI affairs.',
+    blurb: 'General superintendence and direction of the Bank’s affairs under the RBI Act framework (high-level educational framing).',
     children: [
-      { name: 'Governor & Deputy Governors', blurb: 'Executive leadership of the Bank.' },
-      { name: 'Monetary Policy Committee', blurb: 'Votes on the policy repo rate (statutory).' },
+      { name: 'Governor & Deputy Governors', blurb: 'Executive leadership responsible for day-to-day administration.' },
+      { name: 'Monetary Policy Committee', blurb: 'Statutory body that votes on the policy repo rate under the inflation-targeting mandate.' },
     ],
   },
   {
     name: 'Markets & Monetary Policy',
-    blurb: 'Open market operations, liquidity and policy implementation.',
+    blurb: 'Open market operations, liquidity management and policy implementation.',
   },
   {
     name: 'Banking / NBFC Supervision',
@@ -92,11 +92,11 @@ const orgTree: {
   },
   {
     name: 'Currency & Financial Inclusion',
-    blurb: 'Note issue logistics and inclusion programmes.',
+    blurb: 'Note-issue logistics and inclusion programmes.',
   },
   {
     name: 'Foreign Exchange',
-    blurb: 'FEMA administration and reserves management support.',
+    blurb: 'FEMA administration support and reserves-management functions.',
   },
   {
     name: 'Financial Stability & Research',
@@ -109,92 +109,131 @@ export function About() {
   const node = orgTree[active]
 
   return (
-    <div className="mx-auto max-w-6xl px-4 py-12 md:px-6 md:py-16">
+    <div className="mx-auto max-w-6xl px-4 py-10 md:px-6 md:py-14">
       <PageHeader
         eyebrow="About"
-        title="Purpose, history & organisation"
-        description="A learner-friendly tour of why RBI exists, how it grew, and how major functions connect — written in original language for this demo."
+        title="Statutory mandate, history & organisation"
+        description="High-level educational framing of why RBI exists under the Reserve Bank of India Act, 1934, how the institution evolved, and how major functions connect. Original copy for this prototype — not official RBI text."
       />
 
       <Reveal>
-        <div className="glass-card mb-14 rounded-3xl p-6 md:p-8">
-          <h2 className="text-xl font-bold text-navy dark:text-cream">Purpose in one paragraph</h2>
-          <p className="mt-3 leading-relaxed text-ink-muted dark:text-cream/70">
-            RBI is India’s central bank. Its core public mission is to secure monetary stability,
-            regulate and supervise the financial system, issue currency, facilitate safe payments,
-            and help the economy absorb shocks — including through foreign exchange reserves. It
-            balances price stability with growth, and depositor protection with credit intermediation.
+        <div className="glass-card mb-12 rounded-xl p-6 md:p-8">
+          <h2 className="text-lg font-bold text-navy dark:text-cream">
+            Statutory mandate (high-level)
+          </h2>
+          <p className="mt-3 text-sm leading-relaxed text-ink-muted dark:text-cream/70 md:text-base">
+            The Reserve Bank of India was constituted under the <strong>Reserve Bank of India Act,
+            1934</strong>. In educational terms, the Act provides the legal foundation for a central
+            bank tasked with regulating the issue of banknotes, keeping reserves to secure monetary
+            stability, and operating the credit and currency system to the country’s advantage. Over
+            time, Parliament and the Government have layered additional statutes and policy frameworks
+            (including flexible inflation targeting and payment-system law) onto that foundation.
+          </p>
+          <p className="mt-3 text-sm leading-relaxed text-ink-muted dark:text-cream/70 md:text-base">
+            This page paraphrases those themes for officers and learners reviewing communication
+            design. It is <em>not</em> a legal commentary and omits procedural detail that belongs in
+            primary sources.
           </p>
         </div>
       </Reveal>
 
-      <section className="mb-16">
+      <section className="mb-14">
         <Reveal>
-          <h2 className="mb-8 text-2xl font-bold text-navy dark:text-cream">History timeline</h2>
+          <h2 className="mb-6 text-xl font-bold text-navy dark:text-cream md:text-2xl">
+            History timeline
+          </h2>
         </Reveal>
         <div className="relative space-y-0 border-l-2 border-gold/40 pl-6">
           {timeline.map((t, i) => (
-            <Reveal key={t.year} delay={i * 0.05}>
-              <div className="relative pb-10">
+            <Reveal key={t.year} delay={i * 0.04}>
+              <div className="relative pb-8">
                 <span className="absolute -left-[1.9rem] top-1 h-3.5 w-3.5 rounded-full border-2 border-gold bg-cream dark:bg-navy" />
                 <p className="text-sm font-bold text-gold-dim dark:text-gold">{t.year}</p>
-                <p className="mt-1 text-ink-muted dark:text-cream/70">{t.text}</p>
+                <p className="mt-1 text-sm text-ink-muted dark:text-cream/70">{t.text}</p>
               </div>
             </Reveal>
           ))}
         </div>
       </section>
 
-      <section className="mb-16">
+      <section className="mb-14">
         <Reveal>
-          <h2 className="mb-2 text-2xl font-bold text-navy dark:text-cream">
-            Interactive org sketch
+          <h2 className="mb-2 text-xl font-bold text-navy dark:text-cream md:text-2xl">
+            Organisation schematic
           </h2>
-          <p className="mb-8 text-sm text-ink-muted dark:text-cream/60">
-            Tap a node to explore. Simplified for education — not a legal organisation chart.
+          <p className="mb-2 text-sm text-ink-muted dark:text-cream/60">
+            Central Board → executive leadership &amp; MPC → functional departments. Tap a node to
+            inspect. <strong>Labelled illustrative</strong> — not a legal organisation chart.
           </p>
         </Reveal>
-        <div className="grid gap-6 lg:grid-cols-[1fr_1.1fr]">
-          <div className="space-y-2">
+
+        <div className="mb-6 overflow-x-auto rounded-xl border border-navy/10 bg-white/80 p-4 dark:border-white/10 dark:bg-navy-light/40">
+          <div className="flex min-w-[640px] flex-col items-center gap-3 text-center text-xs">
+            <div className="rounded-md border border-gold/50 bg-gold/15 px-4 py-2 font-semibold text-navy dark:text-cream">
+              Central Board
+            </div>
+            <div className="h-4 w-px bg-gold/50" />
+            <div className="grid w-full grid-cols-2 gap-3">
+              <div className="rounded-md border border-navy/15 px-3 py-2 dark:border-white/15">
+                Governor &amp; Deputy Governors
+              </div>
+              <div className="rounded-md border border-navy/15 px-3 py-2 dark:border-white/15">
+                Monetary Policy Committee
+              </div>
+            </div>
+            <div className="h-4 w-px bg-gold/50" />
+            <div className="grid w-full grid-cols-3 gap-2 md:grid-cols-6">
+              {['Markets', 'Supervision', 'Payments', 'Currency', 'Forex', 'Stability'].map((d) => (
+                <div
+                  key={d}
+                  className="rounded-md border border-dashed border-navy/20 px-2 py-2 text-[11px] dark:border-white/20"
+                >
+                  {d}
+                </div>
+              ))}
+            </div>
+            <p className="mt-1 text-[10px] uppercase tracking-wider text-ink-muted dark:text-cream/45">
+              Illustrative schematic · not official
+            </p>
+          </div>
+        </div>
+
+        <div className="grid gap-5 lg:grid-cols-[1fr_1.1fr]">
+          <div className="space-y-1.5">
             {orgTree.map((item, i) => (
               <button
                 key={item.name}
                 type="button"
                 onClick={() => setActive(i)}
-                className={`flex w-full items-center justify-between rounded-2xl border px-4 py-3 text-left transition ${
+                className={`flex w-full items-center justify-between rounded-lg border px-3 py-2.5 text-left transition ${
                   active === i
                     ? 'border-gold bg-gold/15 text-navy dark:text-cream'
                     : 'border-navy/10 bg-white/70 hover:border-gold/40 dark:border-white/10 dark:bg-navy-light/50'
                 }`}
               >
                 <span className="text-sm font-semibold">{item.name}</span>
-                <ChevronRight className="h-4 w-4 opacity-50" />
+                <ChevronRight className="h-4 w-4 opacity-50" aria-hidden />
               </button>
             ))}
           </div>
-          <div className="glass-card rounded-3xl p-6">
-            <p className="text-xs font-semibold uppercase tracking-widest text-gold-dim dark:text-gold">
-              Selected
+          <div className="glass-card rounded-xl p-5">
+            <p className="text-[10px] font-semibold uppercase tracking-widest text-gold-dim dark:text-gold">
+              Selected · illustrative
             </p>
-            <h3 className="mt-2 text-xl font-bold text-navy dark:text-cream">{node.name}</h3>
-            <p className="mt-3 text-ink-muted dark:text-cream/70">{node.blurb}</p>
+            <h3 className="mt-2 text-lg font-bold text-navy dark:text-cream">{node.name}</h3>
+            <p className="mt-2 text-sm text-ink-muted dark:text-cream/70">{node.blurb}</p>
             {node.children && (
-              <ul className="mt-6 space-y-3">
+              <ul className="mt-5 space-y-2">
                 {node.children.map((c) => (
                   <li
                     key={c.name}
-                    className="rounded-xl border border-navy/10 bg-cream/50 px-4 py-3 dark:border-white/10 dark:bg-navy/40"
+                    className="rounded-lg border border-navy/10 bg-cream/50 px-3 py-2.5 dark:border-white/10 dark:bg-navy/40"
                   >
-                    <p className="font-medium text-navy dark:text-cream">{c.name}</p>
+                    <p className="text-sm font-medium text-navy dark:text-cream">{c.name}</p>
                     <p className="text-sm text-ink-muted dark:text-cream/60">{c.blurb}</p>
                   </li>
                 ))}
               </ul>
-            )}
-            {active === 0 && (
-              <p className="mt-4 text-xs text-ink-muted dark:text-cream/50">
-                Diagram cue: Board → executive leadership & MPC → functional departments.
-              </p>
             )}
           </div>
         </div>
@@ -202,17 +241,17 @@ export function About() {
 
       <section className="mb-10">
         <Reveal>
-          <h2 className="mb-8 text-2xl font-bold text-navy dark:text-cream">
-            Responsibilities & duties
+          <h2 className="mb-6 text-xl font-bold text-navy dark:text-cream md:text-2xl">
+            Functional responsibilities
           </h2>
         </Reveal>
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
           {duties.map((d, i) => (
-            <Reveal key={d.title} delay={i * 0.04}>
-              <div className="h-full rounded-2xl border border-navy/8 bg-white/80 p-5 dark:border-white/10 dark:bg-navy-light/40">
-                <d.icon className="h-7 w-7 text-gold-dim dark:text-gold" />
-                <h3 className="mt-3 font-semibold text-navy dark:text-cream">{d.title}</h3>
-                <p className="mt-2 text-sm text-ink-muted dark:text-cream/65">{d.text}</p>
+            <Reveal key={d.title} delay={i * 0.03}>
+              <div className="h-full rounded-xl border border-navy/8 bg-white/80 p-4 dark:border-white/10 dark:bg-navy-light/40">
+                <d.icon className="h-6 w-6 text-gold-dim dark:text-gold" aria-hidden />
+                <h3 className="mt-2 text-sm font-semibold text-navy dark:text-cream">{d.title}</h3>
+                <p className="mt-1.5 text-sm text-ink-muted dark:text-cream/65">{d.text}</p>
               </div>
             </Reveal>
           ))}

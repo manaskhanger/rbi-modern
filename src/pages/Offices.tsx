@@ -18,9 +18,13 @@ export function Offices() {
       <PageHeader
         eyebrow="Network"
         title="Regional offices"
-        description="Mock directory of regional touchpoints for educational navigation. Addresses are illustrative placeholders."
+        description="Illustrative directory of regional touchpoints for navigation testing. Addresses are placeholders. Do not use for official correspondence."
       />
-      <div className="mb-8 flex flex-wrap gap-2">
+      <p className="mb-6 rounded-lg border border-navy/10 bg-white/70 px-3 py-2 text-xs text-ink-muted dark:border-white/10 dark:bg-navy-light/40 dark:text-cream/65">
+        Contact via official RBI directory — this prototype does not list phone numbers or email
+        addresses that could be mistaken for live contacts.
+      </p>
+      <div className="mb-6 flex flex-wrap gap-2">
         {regions.map((r) => (
           <button
             key={r}
@@ -40,7 +44,7 @@ export function Offices() {
         {list.map((o) => (
           <div
             key={o.city}
-            className="glass-card rounded-2xl p-5 transition hover:-translate-y-1 hover:shadow-lg"
+            className="glass-card rounded-xl p-4"
           >
             <div className="flex items-start gap-3">
               <div className="rounded-xl bg-gold/15 p-2">
@@ -55,6 +59,9 @@ export function Offices() {
             </div>
             <p className="mt-3 text-sm text-ink-muted dark:text-cream/65">{o.address}</p>
             <p className="mt-2 text-sm text-ink-muted dark:text-cream/60">{o.focus}</p>
+            <p className="mt-3 text-xs text-ink-muted/80 dark:text-cream/45">
+              Contact via official RBI directory
+            </p>
           </div>
         ))}
       </div>

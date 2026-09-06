@@ -1,11 +1,13 @@
-/** ILLUSTRATIVE demo figures — not live RBI data */
+/** ILLUSTRATIVE SAMPLE DATA — not live RBI / DBIE extracts. As-of labels are demo only. */
+export const keyRatesAsOf = 'Illustrative as-of Nov 2025'
+
 export const keyRates = [
-  { label: 'Policy Repo Rate', value: '6.50%', hint: 'Illustrative' },
-  { label: 'SDF Rate', value: '6.25%', hint: 'Illustrative' },
-  { label: 'MSF Rate', value: '6.75%', hint: 'Illustrative' },
-  { label: 'Bank Rate', value: '6.75%', hint: 'Illustrative' },
-  { label: 'CRR', value: '4.50%', hint: 'Illustrative' },
-  { label: 'SLR', value: '18.00%', hint: 'Illustrative' },
+  { label: 'Policy Repo Rate', value: '5.50%', hint: 'Sample' },
+  { label: 'SDF Rate', value: '5.25%', hint: 'Sample' },
+  { label: 'MSF Rate', value: '5.75%', hint: 'Sample' },
+  { label: 'Bank Rate', value: '5.75%', hint: 'Sample' },
+  { label: 'CRR', value: '4.00%', hint: 'Sample' },
+  { label: 'SLR', value: '18.00%', hint: 'Sample' },
 ]
 
 export const policyRateHistory = [
@@ -59,3 +61,6 @@ export const dashboardTable = [
   { id: 11, indicator: 'Current Account / GDP', latest: '-0.8%', previous: '-1.1%', unit: '%', category: 'External' },
   { id: 12, indicator: 'GDP Growth (est.)', latest: '6.8%', previous: '6.5%', unit: '%', category: 'Growth' },
 ]
+
+export const dataFootnote =
+  'Sources: illustrative composite for UX prototyping — not an RBI DBIE extract or official statistical release.'

@@ -8,6 +8,7 @@ export const reports: Report[] = [
     type: 'Stability',
     pages: 48,
     rich: true,
+    variant: 'fsr',
     summary:
       'Sample digest covering banking soundness, household leverage themes, and market volatility indicators with demo charts.',
   },
@@ -17,8 +18,10 @@ export const reports: Report[] = [
     date: '2025-10-01',
     type: 'Monetary Policy',
     pages: 72,
+    rich: true,
+    variant: 'mpr',
     summary:
-      'Educational chapters explaining forecasting fan charts, output gap concepts, and transmission channels.',
+      'Educational chapters explaining forecasting fan charts, output gap concepts, and transmission channels — illustrative figures only.',
   },
   {
     slug: 'report-trend-banking-2025',
@@ -58,6 +61,7 @@ export const reports: Report[] = [
   },
 ]
 
+/** ILLUSTRATIVE SAMPLE DATA — not an RBI publication extract */
 export const sampleReportCharts = {
   capitalAdequacy: [
     { year: '2021', crar: 16.2 },
@@ -85,5 +89,39 @@ export const sampleReportCharts = {
     { metric: 'Provision coverage', value: '76%', note: 'Illustrative' },
     { metric: 'Credit growth (YoY)', value: '12.1%', note: 'Illustrative' },
     { metric: 'Deposit growth (YoY)', value: '10.4%', note: 'Illustrative' },
+  ],
+}
+
+/** ILLUSTRATIVE SAMPLE DATA for Monetary Policy Report-style pages */
+export const mprCharts = {
+  inflationPath: [
+    { quarter: 'Q1 FY25', actual: 4.8, forecast: 4.6, low: 3.8, high: 5.6 },
+    { quarter: 'Q2 FY25', actual: 4.2, forecast: 4.1, low: 3.2, high: 5.1 },
+    { quarter: 'Q3 FY25', actual: 3.6, forecast: 3.8, low: 2.8, high: 4.8 },
+    { quarter: 'Q4 FY25', actual: null, forecast: 4.0, low: 3.0, high: 5.0 },
+    { quarter: 'Q1 FY26', actual: null, forecast: 4.2, low: 3.1, high: 5.3 },
+    { quarter: 'Q2 FY26', actual: null, forecast: 4.0, low: 2.9, high: 5.1 },
+  ],
+  growthPath: [
+    { quarter: 'Q1 FY25', gdp: 6.7 },
+    { quarter: 'Q2 FY25', gdp: 6.5 },
+    { quarter: 'Q3 FY25', gdp: 6.4 },
+    { quarter: 'Q4 FY25', gdp: 6.6 },
+    { quarter: 'Q1 FY26', gdp: 6.8 },
+    { quarter: 'Q2 FY26', gdp: 6.7 },
+  ],
+  transmission: [
+    { channel: 'Money market', strength: 92 },
+    { channel: 'Bank lending', strength: 74 },
+    { channel: 'Deposit rates', strength: 68 },
+    { channel: 'Bond yields', strength: 81 },
+    { channel: 'Credit demand', strength: 55 },
+  ],
+  assumptions: [
+    { item: 'Crude (Indian basket)', value: 'USD 80 / bbl', note: 'Sample assumption' },
+    { item: 'Exchange rate (INR/USD)', value: '84.0', note: 'Sample assumption' },
+    { item: 'Monsoon / food prices', value: 'Normal base case', note: 'Narrative only' },
+    { item: 'Fiscal impulse', value: 'Neutral-to-mild', note: 'Illustrative' },
+    { item: 'Global growth', value: 'Soft landing', note: 'Scenario label' },
   ],
 }

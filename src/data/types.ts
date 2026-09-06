@@ -11,13 +11,17 @@ export type Category =
 
 export interface MastersDirection {
   slug: string
+  code: string
   title: string
   category: Category
+  audience: string
   issued: string
   updated: string
+  effectiveNote: string
   summary: string
   plainEnglish: string
   obligations: string[]
+  relatedTopics: string[]
   toc: { id: string; label: string }[]
   sections: { id: string; heading: string; body: string }[]
 }
@@ -31,6 +35,8 @@ export interface Circular {
   summary: string
   body: string[]
   audience: string
+  relatedTopics: string[]
+  effectiveNote: string
 }
 
 export interface NewsItem {
@@ -51,6 +57,7 @@ export interface Report {
   summary: string
   pages: number
   rich?: boolean
+  variant?: 'fsr' | 'mpr'
 }
 
 export interface GlossaryTerm {

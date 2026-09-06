@@ -15,6 +15,14 @@ import { glossary, howRbiWorks } from '../data/glossary'
 
 const icons = { Target, Building2, Smartphone, Banknote, Globe2, Shield } as const
 
+const functionMap = [
+  { cluster: 'Price & liquidity', items: ['Monetary policy / MPC', 'Liquidity operations (LAF)', 'Government securities markets'] },
+  { cluster: 'Prudential oversight', items: ['Bank licensing & supervision', 'NBFC scale-based regulation', 'Conduct & consumer protection'] },
+  { cluster: 'Payments & currency', items: ['Payment system authorisation', 'UPI / NEFT / RTGS oversight', 'Note issue & clean-note policy'] },
+  { cluster: 'External & stability', items: ['FEMA / forex administration', 'Foreign exchange reserves', 'Financial stability monitoring'] },
+]
+
+
 export function Learn() {
   const [q, setQ] = useState('')
   const terms = useMemo(() => {
@@ -31,11 +39,56 @@ export function Learn() {
     <div className="mx-auto max-w-6xl px-4 py-12 md:px-6 md:py-16">
       <PageHeader
         eyebrow="Learn"
-        title="How RBI works & glossary"
-        description="Illustrated explainers plus a searchable glossary of central-banking terms used across this demo."
+        title="Function map, explainers & glossary"
+        description="Tone aimed at officers reviewing communication design and at students building central-banking literacy. Original educational copy for this prototype."
       />
 
-      <section className="mb-16">
+
+      <section className="mb-14">
+        <Reveal>
+          <h2 className="mb-2 text-xl font-bold text-navy dark:text-cream md:text-2xl">
+            Map of RBI functions
+          </h2>
+          <p className="mb-6 text-sm text-ink-muted dark:text-cream/60">
+            One-page schematic clustering public functions. Illustrative — not an organisation chart
+            or statutory schedule.
+          </p>
+        </Reveal>
+        <div className="rounded-xl border border-navy/10 bg-white/80 p-5 dark:border-white/10 dark:bg-navy-light/40">
+          <div className="mb-4 text-center">
+            <span className="inline-block rounded-md border border-gold/40 bg-gold/10 px-4 py-2 text-sm font-semibold text-navy dark:text-cream">
+              Reserve Bank of India — public functions (educational map)
+            </span>
+          </div>
+          <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+            {functionMap.map((col) => (
+              <div
+                key={col.cluster}
+                className="rounded-lg border border-navy/10 bg-cream/60 p-3 dark:border-white/10 dark:bg-navy/40"
+              >
+                <p className="text-[10px] font-semibold uppercase tracking-widest text-gold-dim dark:text-gold">
+                  {col.cluster}
+                </p>
+                <ul className="mt-2 space-y-1.5">
+                  {col.items.map((item) => (
+                    <li
+                      key={item}
+                      className="rounded-md bg-white/80 px-2 py-1.5 text-xs text-navy dark:bg-navy-light/60 dark:text-cream"
+                    >
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+          <p className="mt-4 text-center text-[10px] uppercase tracking-wider text-ink-muted dark:text-cream/45">
+            Illustrative composite for this prototype
+          </p>
+        </div>
+      </section>
+
+      <section className="mb-14">
         <Reveal>
           <h2 className="mb-8 text-2xl font-bold text-navy dark:text-cream">
             How RBI works
@@ -46,11 +99,11 @@ export function Learn() {
             const Icon = icons[item.icon as keyof typeof icons]
             return (
               <Reveal key={item.id} delay={i * 0.05}>
-                <div className="glass-card h-full rounded-3xl p-6">
+                <div className="glass-card h-full rounded-xl p-5">
                   <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-gold/15">
                     <Icon className="h-6 w-6 text-gold-dim dark:text-gold" />
                   </div>
-                  <h3 className="mt-4 text-lg font-semibold text-navy dark:text-cream">
+                  <h3 className="mt-4 text-sm font-semibold text-navy dark:text-cream">
                     {item.title}
                   </h3>
                   <p className="mt-2 text-sm leading-relaxed text-ink-muted dark:text-cream/65">
