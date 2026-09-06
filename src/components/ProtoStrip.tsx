@@ -12,6 +12,10 @@ export function ProtoStrip() {
           <Link to="/about/prototype" className="underline-offset-2 hover:underline">
             About this prototype
           </Link>
+          {' · '}
+          <Link to="/tour" className="underline-offset-2 hover:underline">
+            Guided tour
+          </Link>
         </p>
       </div>
     </div>

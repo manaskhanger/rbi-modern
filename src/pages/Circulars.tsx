@@ -1,5 +1,5 @@
 import { useMemo, useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useSearchParams } from 'react-router-dom'
 import { LayoutGrid, Table2 } from 'lucide-react'
 import { PageHeader } from '../components/PageHeader'
 import { SearchFilter } from '../components/SearchFilter'
@@ -17,12 +17,27 @@ const yearOptions = [
   ),
 ] as const
 
+function audienceFromParam(raw: string | null): AudienceFilter {
+  if (raw && (AUDIENCE_FILTERS as readonly string[]).includes(raw)) {
+    return raw as AudienceFilter
+  }
+  return 'All'
+}
+
 export function Circulars() {
+  const [params, setParams] = useSearchParams()
   const [query, setQuery] = useState('')
   const [category, setCategory] = useState('All')
-  const [audience, setAudience] = useState<AudienceFilter>('All')
+  const audience = audienceFromParam(params.get('audience'))
   const [year, setYear] = useState<string>('All')
   const [view, setView] = useState<'cards' | 'table'>('cards')
+
+  function setAudienceFilter(v: AudienceFilter) {
+    const next = new URLSearchParams(params)
+    if (v === 'All') next.delete('audience')
+    else next.set('audience', v)
+    setParams(next, { replace: true })
+  }
 
   const filtered = useMemo(() => {
     const q = query.toLowerCase().trim()
@@ -39,7 +54,7 @@ export function Circulars() {
   function clearFilters() {
     setQuery('')
     setCategory('All')
-    setAudience('All')
+    setAudienceFilter('All')
     setYear('All')
   }
 
@@ -58,7 +73,7 @@ export function Circulars() {
         onCategory={setCategory}
         audiences={AUDIENCE_FILTERS}
         audience={audience}
-        onAudience={(v) => setAudience(v as AudienceFilter)}
+        onAudience={(v) => setAudienceFilter(v as AudienceFilter)}
         years={yearOptions}
         year={year}
         onYear={setYear}

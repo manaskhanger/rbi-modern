@@ -1,4 +1,5 @@
 import { useMemo, useState } from 'react'
+import { useSearchParams } from 'react-router-dom'
 import {
   PieChart, Pie, Cell, LineChart, Line, BarChart, Bar,
   XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend,
@@ -167,9 +168,21 @@ function OfficialStructureView() {
   )
 }
 
+function modeFromParam(raw: string | null): DataMode {
+  return raw === 'official' ? 'official' : 'sample'
+}
+
 export function Data() {
-  const [mode, setMode] = useState<DataMode>('sample')
+  const [params, setParams] = useSearchParams()
+  const mode = modeFromParam(params.get('mode'))
   const [q, setQ] = useState('')
+
+  function setModeAndUrl(m: DataMode) {
+    const next = new URLSearchParams(params)
+    if (m === 'sample') next.set('mode', 'sample')
+    else next.set('mode', 'official')
+    setParams(next, { replace: true })
+  }
   const [sortKey, setSortKey] = useState<SortKey>('indicator')
   const [asc, setAsc] = useState(true)
 
@@ -237,7 +250,7 @@ export function Data() {
         </div>
 
         <div className="mb-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-          <ModeToggle mode={mode} onChange={setMode} />
+          <ModeToggle mode={mode} onChange={setModeAndUrl} />
           {mode === 'sample' && (
             <button
               type="button"

@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import {
   Target,
   Building2,
@@ -8,9 +8,11 @@ import {
   Shield,
   Search,
 } from 'lucide-react'
+import { Link, useLocation } from 'react-router-dom'
 import { PageHeader } from '../components/PageHeader'
 import { Reveal } from '../components/Reveal'
 import { DisclaimerBanner } from '../components/DisclaimerBanner'
+import { PersonaCards } from '../components/PersonaCards'
 import { glossary, howRbiWorks } from '../data/glossary'
 import { slugifyTerm } from '../lib/searchIndex'
 
@@ -25,7 +27,18 @@ const functionMap = [
 
 
 export function Learn() {
+  const location = useLocation()
   const [q, setQ] = useState('')
+
+  useEffect(() => {
+    if (!location.hash) return
+    const id = location.hash.replace(/^#/, '')
+    // defer until layout paints
+    const t = window.setTimeout(() => {
+      document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    }, 80)
+    return () => window.clearTimeout(t)
+  }, [location.hash])
   const terms = useMemo(() => {
     const needle = q.toLowerCase().trim()
     if (!needle) return glossary
@@ -44,6 +57,23 @@ export function Learn() {
         description="Tone aimed at officers reviewing communication design and at students building central-banking literacy. Original educational copy for this prototype."
       />
 
+
+
+      <section className="mb-14" aria-labelledby="learn-personas">
+        <Reveal>
+          <h2 id="learn-personas" className="mb-2 text-xl font-bold text-navy dark:text-cream md:text-2xl">
+            Persona paths
+          </h2>
+          <p className="mb-6 text-sm text-ink-muted dark:text-cream/60">
+            Prescribed demo routes — or take the{' '}
+            <Link to="/tour" className="font-medium text-gold-dim hover:underline dark:text-gold">
+              guided tour
+            </Link>
+            .
+          </p>
+        </Reveal>
+        <PersonaCards compact />
+      </section>
 
       <section className="mb-14">
         <Reveal>

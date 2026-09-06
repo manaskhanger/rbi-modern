@@ -13,6 +13,7 @@ const groups: NavGroup[] = [
     items: [
       { to: '/about', label: 'About', hi: 'परिचय' },
       { to: '/about/prototype', label: 'About this prototype', hi: 'इस प्रोटोटाइप के बारे में' },
+      { to: '/tour', label: 'Guided tour', hi: 'मार्गदर्शित दौरा' },
       { to: '/monetary-policy', label: 'Monetary policy', hi: 'मौद्रिक नीति' },
       { to: '/offices', label: 'Offices', hi: 'कार्यालय' },
     ],
@@ -276,6 +277,13 @@ export function Navbar() {
         </nav>
 
         <div className="flex items-center gap-2">
+          <Link
+            to="/tour"
+            className="hidden rounded-lg border border-navy/10 px-2.5 py-1.5 text-[12px] font-semibold text-navy transition hover:bg-navy/5 sm:inline-flex dark:border-white/15 dark:text-cream dark:hover:bg-white/10"
+            onClick={() => setOpen(false)}
+          >
+            Tour
+          </Link>
           <HeaderSearch />
           <Link
             to="/search"

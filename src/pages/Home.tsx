@@ -1,13 +1,16 @@
 import { Link } from 'react-router-dom'
 import { motion, useReducedMotion } from 'framer-motion'
-import { ArrowRight, Landmark, Scale, Smartphone, Shield, Info } from 'lucide-react'
+import { ArrowRight, Compass, Landmark, Scale, Smartphone, Shield, Info } from 'lucide-react'
 import { newsItems } from '../data/news'
 import { Reveal } from '../components/Reveal'
 import { CardLink } from '../components/Card'
 import { Badge } from '../components/Badge'
 import { DisclaimerBanner } from '../components/DisclaimerBanner'
 import { KeyRatesStrip } from '../components/KeyRatesStrip'
+import { TourPrompt } from '../components/TourPrompt'
+import { PersonaCards } from '../components/PersonaCards'
 import { fadeUp, stagger } from '../lib/motion'
+import { TOUR_DURATION_LABEL } from '../data/tour'
 
 const pillars = [
   {
@@ -82,8 +85,14 @@ export function Home() {
             </motion.p>
             <motion.div variants={reduce ? undefined : fadeUp} className="mt-8 flex flex-wrap gap-3">
               <Link
-                to="/about"
+                to="/tour"
                 className="inline-flex items-center gap-2 rounded-md bg-navy px-5 py-2.5 text-sm font-semibold text-cream transition hover:bg-navy-light dark:bg-gold dark:text-navy dark:hover:bg-gold-soft"
+              >
+                <Compass className="h-4 w-4" aria-hidden /> Start here · Guided tour
+              </Link>
+              <Link
+                to="/about"
+                className="inline-flex items-center gap-2 rounded-md border border-navy/15 bg-white/80 px-5 py-2.5 text-sm font-semibold text-navy transition hover:bg-white dark:border-white/20 dark:bg-white/5 dark:text-cream"
               >
                 Mandate &amp; organisation <ArrowRight className="h-4 w-4" />
               </Link>
@@ -124,6 +133,15 @@ export function Home() {
               </div>
             </Link>
           </motion.div>
+
+          <motion.div
+            variants={reduce ? undefined : fadeUp}
+            initial={reduce ? undefined : 'hidden'}
+            animate={reduce ? undefined : 'visible'}
+            className="mt-4 max-w-3xl"
+          >
+            <TourPrompt />
+          </motion.div>
         </div>
       </section>
 
@@ -154,6 +172,32 @@ export function Home() {
             </Reveal>
           ))}
         </div>
+      </section>
+
+
+      <section className="mx-auto max-w-6xl px-4 py-14 md:px-6 md:py-16" aria-labelledby="personas-heading">
+        <Reveal>
+          <h2 id="personas-heading" className="text-2xl font-bold text-navy dark:text-cream md:text-[1.75rem]">
+            Start with a persona
+            <span lang="hi" className="bilingual-hi mt-1 text-base font-semibold normal-case tracking-normal text-ink-muted dark:text-cream/60">
+              व्यक्तित्व से शुरू करें
+            </span>
+          </h2>
+          <p className="mt-2 max-w-2xl text-sm text-ink-muted dark:text-cream/65 md:text-base">
+            Three short prescribed paths for demos — banker, student, or journalist. Deep-links into
+            filtered catalogues and sample-mode data. Unofficial educational framing throughout.
+          </p>
+        </Reveal>
+        <div className="mt-8">
+          <PersonaCards />
+        </div>
+        <p className="mt-4 text-sm text-ink-muted dark:text-cream/55">
+          Or take the{' '}
+          <Link to="/tour" className="font-medium text-gold-dim hover:underline dark:text-gold">
+            guided tour ({TOUR_DURATION_LABEL})
+          </Link>
+          .
+        </p>
       </section>
 
       <section className="bg-white/60 dark:bg-navy-light/25">
