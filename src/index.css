@@ -1,6 +1,7 @@
 @import "tailwindcss";
 
 @custom-variant dark (&:where(.dark, .dark *));
+@custom-variant hc (&:where(.hc, .hc *));
 
 @theme {
   --color-navy: #0B1D36;
@@ -8,7 +9,7 @@
   --color-navy-muted: #1a3558;
   --color-gold: #C5A572;
   --color-gold-soft: #d4bc94;
-  --color-gold-dim: #9a7b45;
+  --color-gold-dim: #8a6b38;
   --color-cream: #F7F4EF;
   --color-cream-dark: #ebe6dc;
   --color-surface: #ffffff;
@@ -41,9 +42,24 @@ body {
   line-height: 1.55;
 }
 
+/* Focus visible everywhere — gold ring with navy fallback for contrast */
 :focus-visible {
   outline: 2px solid #C5A572;
   outline-offset: 2px;
+}
+
+.dark :focus-visible {
+  outline-color: #e0c892;
+}
+
+.hc :focus-visible {
+  outline: 3px solid #0B1D36;
+  outline-offset: 3px;
+}
+
+.hc.dark :focus-visible,
+.dark.hc :focus-visible {
+  outline-color: #F7F4EF;
 }
 
 .skip-link {
@@ -59,8 +75,11 @@ body {
   border-radius: 0 0 0.5rem 0;
 }
 
-.skip-link:focus {
+.skip-link:focus,
+.skip-link:focus-visible {
   left: 0;
+  outline: 2px solid #e0c892;
+  outline-offset: 2px;
 }
 
 .glass {
@@ -99,6 +118,18 @@ body {
   border-bottom: 1px solid rgba(197, 165, 114, 0.2);
 }
 
+/*
+ * Gold-on-navy contrast: #C5A572 on #0B1D36 is ~5.2:1 (AA large only).
+ * Prefer brighter gold for small text on navy surfaces.
+ */
+.text-gold-on-navy,
+footer .text-gold,
+.proto-strip a,
+.bg-navy .text-gold,
+.bg-navy [class*="text-gold"] {
+  color: #e0c892 !important;
+}
+
 .prose-toc a {
   transition: color 0.15s ease;
 }
@@ -119,4 +150,204 @@ body {
   clip: rect(0, 0, 0, 0);
   white-space: nowrap;
   border-width: 0;
+}
+
+.bilingual-hi {
+  display: block;
+  font-size: 0.7em;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  opacity: 0.75;
+  line-height: 1.35;
+}
+
+/* ——— High-contrast mode (works with light & dark) ——— */
+html.hc {
+  --color-ink-muted: #1a2433;
+  --color-gold: #9a7020;
+  --color-gold-dim: #6b4e12;
+  --color-gold-soft: #b8923a;
+}
+
+html.hc.dark {
+  --color-ink-muted: #d8dde6;
+  --color-gold: #f0d9a0;
+  --color-gold-dim: #e8c988;
+  --color-gold-soft: #f5e4b8;
+  --color-cream: #ffffff;
+}
+
+html.hc .glass,
+html.hc .glass-card {
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+html.hc .glass {
+  background: #ffffff;
+  border-bottom: 2px solid #0B1D36;
+}
+
+html.hc.dark .glass {
+  background: #0B1D36;
+  border-bottom: 2px solid #f0d9a0;
+}
+
+html.hc .glass-card {
+  background: #ffffff;
+  border: 2px solid #0B1D36;
+}
+
+html.hc.dark .glass-card {
+  background: #132a4a;
+  border: 2px solid #f0d9a0;
+}
+
+html.hc body {
+  -webkit-font-smoothing: auto;
+}
+
+html.hc .proto-strip {
+  background: #000;
+  color: #fff;
+  border-bottom: 2px solid #f0d9a0;
+}
+
+html.hc .text-ink-muted,
+html.hc .dark\:text-cream\/55,
+html.hc .dark\:text-cream\/60,
+html.hc .dark\:text-cream\/65,
+html.hc .dark\:text-cream\/70,
+html.hc .dark\:text-cream\/75 {
+  opacity: 1;
+}
+
+html.hc .text-gold-on-navy,
+html.hc footer .text-gold,
+html.hc .bg-navy .text-gold {
+  color: #f5e4b8 !important;
+}
+
+/* ——— Print / PDF ——— */
+@media print {
+  html {
+    font-size: 12pt;
+  }
+
+  body {
+    background: #fff !important;
+    color: #000 !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .skip-link,
+  header.glass,
+  .proto-strip,
+  footer,
+  .no-print,
+  [aria-label="Toggle dark mode"],
+  [aria-label="Toggle high contrast"] {
+    display: none !important;
+  }
+
+  main#main-content {
+    display: block !important;
+    flex: none !important;
+  }
+
+  .glass,
+  .glass-card {
+    background: #fff !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    border: 1px solid #ccc !important;
+    box-shadow: none !important;
+  }
+
+  .prose-toc {
+    display: none !important;
+  }
+
+  /* Expand content: drop sticky/grid chrome */
+  .print-root {
+    max-width: 100% !important;
+    padding: 0 !important;
+  }
+
+  .print-root .lg\:grid-cols-\[200px_1fr\] {
+    display: block !important;
+  }
+
+  h1, h2, h3 {
+    break-after: avoid;
+    page-break-after: avoid;
+    color: #000 !important;
+  }
+
+  section, article, .glass-card, table, tr {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  a[href]::after {
+    content: " (" attr(href) ")";
+    font-size: 0.75em;
+    font-weight: 400;
+    word-break: break-all;
+    color: #444;
+  }
+
+  a[href^="#"]::after,
+  a[href^="javascript"]::after {
+    content: none;
+  }
+
+  /* Relative in-app links: show path only */
+  a[href^="/"]::after {
+    content: " (" attr(href) ")";
+  }
+
+  .text-navy,
+  .text-ink,
+  .dark\:text-cream,
+  .text-ink-muted,
+  .dark\:text-cream\/55,
+  .dark\:text-cream\/60,
+  .dark\:text-cream\/65,
+  .dark\:text-cream\/70,
+  .dark\:text-cream\/75 {
+    color: #111 !important;
+  }
+
+  .text-gold,
+  .text-gold-dim,
+  .dark\:text-gold {
+    color: #6b4e12 !important;
+  }
+
+  .bg-navy,
+  .bg-gold\/10,
+  .dark\:bg-navy-light\/40 {
+    background: #fff !important;
+    color: #000 !important;
+  }
+
+  details.chart-summary summary,
+  .chart-summary summary {
+    display: none;
+  }
+
+  .chart-summary details {
+    display: block !important;
+  }
+
+  .chart-summary details > *:not(summary) {
+    display: block !important;
+  }
+
+  /* Hide decorative chart canvases if summary present — keep both for now */
+  .recharts-wrapper {
+    break-inside: avoid;
+  }
 }

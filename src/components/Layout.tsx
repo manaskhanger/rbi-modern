@@ -9,7 +9,18 @@ export function Layout() {
   const location = useLocation()
   return (
     <div className="flex min-h-screen flex-col bg-cream text-ink dark:bg-navy dark:text-cream">
-      <a href="#main-content" className="skip-link">
+      <a
+        href="#main-content"
+        className="skip-link"
+        onClick={(e) => {
+          const main = document.getElementById('main-content')
+          if (main) {
+            e.preventDefault()
+            main.focus()
+            main.scrollIntoView({ behavior: 'smooth', block: 'start' })
+          }
+        }}
+      >
         Skip to content
       </a>
       <Navbar />

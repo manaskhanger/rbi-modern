@@ -11,6 +11,7 @@ import { SummaryModeToggle } from '../components/SummaryModeToggle'
 import { ObligationsChecklist } from '../components/ObligationsChecklist'
 import { ApplicabilityMatrix } from '../components/ApplicabilityMatrix'
 import { ChangeHistory } from '../components/ChangeHistory'
+import { PrintButton } from '../components/PrintButton'
 
 export function MastersDirectionDetail() {
   const { slug } = useParams()
@@ -34,13 +35,16 @@ export function MastersDirectionDetail() {
     .filter(Boolean)
 
   return (
-    <div className="mx-auto max-w-6xl px-4 py-10 md:px-6 md:py-14">
+    <div className="print-root mx-auto max-w-6xl px-4 py-10 md:px-6 md:py-14">
+      <div className="mb-6 flex flex-wrap items-center justify-between gap-3">
       <Link
         to="/masters-directions"
-        className="mb-6 inline-flex items-center gap-2 text-sm text-ink-muted hover:text-navy dark:hover:text-cream"
+        className="inline-flex items-center gap-2 text-sm text-ink-muted hover:text-navy dark:hover:text-cream"
       >
         <ArrowLeft className="h-4 w-4" /> All directions
       </Link>
+      <PrintButton />
+      </div>
       <div className="grid gap-10 lg:grid-cols-[200px_1fr]">
         <aside className="prose-toc lg:sticky lg:top-28 lg:self-start">
           <p className="mb-3 text-[10px] font-semibold uppercase tracking-widest text-gold-dim dark:text-gold">

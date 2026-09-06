@@ -20,7 +20,7 @@ export function Footer() {
           </p>
         </div>
         <div>
-          <h3 className="mb-3 text-sm font-semibold text-gold">About &amp; policy</h3>
+          <h3 className="mb-3 text-sm font-semibold text-gold-on-navy">About &amp; policy</h3>
           <ul className="space-y-2 text-sm text-cream/70">
             <li>
               <Link to="/about" className="hover:text-cream">
@@ -45,7 +45,7 @@ export function Footer() {
           </ul>
         </div>
         <div>
-          <h3 className="mb-3 text-sm font-semibold text-gold">Regulatory &amp; data</h3>
+          <h3 className="mb-3 text-sm font-semibold text-gold-on-navy">Regulatory &amp; data</h3>
           <ul className="space-y-2 text-sm text-cream/70">
             <li>
               <Link to="/masters-directions" className="hover:text-cream">
@@ -88,7 +88,7 @@ export function Footer() {
               href={RBI_HOME}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1 font-medium text-gold hover:underline"
+              className="inline-flex items-center gap-1 font-medium text-gold-on-navy hover:underline"
             >
               rbi.org.in
               <ExternalLink className="h-3 w-3" aria-hidden />

@@ -55,6 +55,12 @@ export function Home() {
               className="mt-5 text-3xl font-bold tracking-tight text-navy dark:text-cream md:text-5xl md:leading-[1.12]"
             >
               Clearer public communication of India’s central bank — as a concept prototype.
+              <span
+                lang="hi"
+                className="mt-2 block text-lg font-semibold tracking-normal text-ink-muted dark:text-cream/65 md:text-2xl md:leading-snug"
+              >
+                भारत के केंद्रीय बैंक का स्पष्ट सार्वजनिक संचार — एक अवधारणा प्रोटोटाइप।
+              </span>
             </motion.h1>
             <motion.p
               variants={reduce ? undefined : fadeUp}
@@ -127,6 +133,9 @@ export function Home() {
         <Reveal>
           <h2 className="text-2xl font-bold text-navy dark:text-cream md:text-[1.75rem]">
             Core public functions
+            <span lang="hi" className="bilingual-hi mt-1 text-base font-semibold normal-case tracking-normal text-ink-muted dark:text-cream/60">
+              मुख्य सार्वजनिक कार्य
+            </span>
           </h2>
           <p className="mt-2 max-w-2xl text-sm text-ink-muted dark:text-cream/65 md:text-base">
             High-level framing for educational use — not a statutory schedule.
@@ -153,6 +162,9 @@ export function Home() {
             <Reveal>
               <h2 className="text-2xl font-bold text-navy dark:text-cream md:text-[1.75rem]">
                 Sample updates
+                <span lang="hi" className="bilingual-hi mt-1 text-base font-semibold normal-case tracking-normal text-ink-muted dark:text-cream/60">
+                  नमूना अपडेट
+                </span>
               </h2>
               <p className="mt-1 text-sm text-ink-muted dark:text-cream/55">
                 Illustrative press-style cards for navigation testing.
@@ -186,9 +198,15 @@ export function Home() {
         <Reveal>
           <div className="overflow-hidden rounded-2xl bg-navy p-8 text-cream md:flex md:items-center md:justify-between md:p-10">
             <div className="max-w-xl">
-              <p className="text-xs font-semibold uppercase tracking-widest text-gold">Organisation</p>
+              <p className="text-xs font-semibold uppercase tracking-widest text-gold-on-navy">
+                Organisation
+                <span lang="hi" className="ml-1.5 font-medium normal-case tracking-normal opacity-80">संगठन</span>
+              </p>
               <h2 className="mt-2 text-xl font-bold md:text-2xl">
                 Central Board → departments (illustrative schematic)
+                <span lang="hi" className="mt-1 block text-base font-semibold text-cream/75 md:text-lg">
+                  केंद्रीय बोर्ड → विभाग (उदाहरणात्मक आरेख)
+                </span>
               </h2>
               <p className="mt-3 text-sm text-cream/70">
                 A structured sketch of how oversight, the MPC and functional departments relate —

@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useId, useState } from 'react'
 
 export type SummaryMode = 'plain' | 'formal'
 
@@ -12,6 +12,9 @@ type Props = {
 
 export function SummaryModeToggle({ plain, formal, lead, className = '' }: Props) {
   const [mode, setMode] = useState<SummaryMode>('plain')
+  const panelId = useId()
+  const plainTabId = useId()
+  const formalTabId = useId()
 
   return (
     <div className={className}>
@@ -25,17 +28,26 @@ export function SummaryModeToggle({ plain, formal, lead, className = '' }: Props
       >
         {(
           [
-            ['plain', 'Plain English'],
-            ['formal', 'Formal summary'],
+            ['plain', 'Plain English', plainTabId],
+            ['formal', 'Formal summary', formalTabId],
           ] as const
-        ).map(([id, label]) => (
+        ).map(([id, label, tabId]) => (
           <button
             key={id}
+            id={tabId}
             type="button"
             role="tab"
             aria-selected={mode === id}
+            aria-controls={panelId}
+            tabIndex={mode === id ? 0 : -1}
             onClick={() => setMode(id)}
-            className={`rounded-md px-3 py-1.5 text-xs font-semibold transition ${
+            onKeyDown={(e) => {
+              if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') {
+                e.preventDefault()
+                setMode((m) => (m === 'plain' ? 'formal' : 'plain'))
+              }
+            }}
+            className={`rounded-md px-3 py-1.5 text-xs font-semibold transition-colors ${
               mode === id
                 ? 'bg-navy text-cream dark:bg-gold dark:text-navy'
                 : 'text-ink-muted hover:text-navy dark:text-cream/60 dark:hover:text-cream'
@@ -45,9 +57,16 @@ export function SummaryModeToggle({ plain, formal, lead, className = '' }: Props
           </button>
         ))}
       </div>
-      <p className="mt-3 text-sm leading-relaxed text-ink-muted dark:text-cream/75">
-        {mode === 'plain' ? plain : formal}
-      </p>
+      <div
+        id={panelId}
+        role="tabpanel"
+        aria-labelledby={mode === 'plain' ? plainTabId : formalTabId}
+        className="mt-3"
+      >
+        <p className="text-sm leading-relaxed text-ink-muted dark:text-cream/75">
+          {mode === 'plain' ? plain : formal}
+        </p>
+      </div>
       <p className="mt-2 text-[10px] text-ink-muted/70 dark:text-cream/40">
         Both versions are original educational paraphrases for this prototype — not scraped RBI text.
       </p>

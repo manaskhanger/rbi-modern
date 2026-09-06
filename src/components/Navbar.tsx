@@ -1,43 +1,58 @@
 import { useCallback, useEffect, useId, useRef, useState } from 'react'
 import { Link, NavLink, useLocation, useNavigate } from 'react-router-dom'
-import { ChevronDown, Menu, Moon, Search, Sun, X } from 'lucide-react'
+import { ChevronDown, Contrast, Menu, Moon, Search, Sun, X } from 'lucide-react'
 import { useTheme } from '../hooks/useTheme'
 
-type NavItem = { to: string; label: string }
-type NavGroup = { label: string; items: NavItem[] }
+type NavItem = { to: string; label: string; hi: string }
+type NavGroup = { label: string; hi: string; items: NavItem[] }
 
 const groups: NavGroup[] = [
   {
     label: 'About & Policy',
+    hi: 'बारे में और नीति',
     items: [
-      { to: '/about', label: 'About' },
-      { to: '/about/prototype', label: 'About this prototype' },
-      { to: '/monetary-policy', label: 'Monetary policy' },
-      { to: '/offices', label: 'Offices' },
+      { to: '/about', label: 'About', hi: 'परिचय' },
+      { to: '/about/prototype', label: 'About this prototype', hi: 'इस प्रोटोटाइप के बारे में' },
+      { to: '/monetary-policy', label: 'Monetary policy', hi: 'मौद्रिक नीति' },
+      { to: '/offices', label: 'Offices', hi: 'कार्यालय' },
     ],
   },
   {
     label: 'Regulatory',
+    hi: 'विनियामक',
     items: [
-      { to: '/masters-directions', label: 'Masters Directions' },
-      { to: '/circulars', label: 'Circulars' },
+      { to: '/masters-directions', label: 'Masters Directions', hi: 'मास्टर निर्देश' },
+      { to: '/circulars', label: 'Circulars', hi: 'परिपत्र' },
     ],
   },
   {
     label: 'Publications',
+    hi: 'प्रकाशन',
     items: [
-      { to: '/news', label: 'News' },
-      { to: '/reports', label: 'Reports' },
+      { to: '/news', label: 'News', hi: 'समाचार' },
+      { to: '/reports', label: 'Reports', hi: 'रिपोर्ट' },
     ],
   },
   {
     label: 'Data & Learn',
+    hi: 'डेटा और सीखें',
     items: [
-      { to: '/data', label: 'Data' },
-      { to: '/learn', label: 'Learn' },
+      { to: '/data', label: 'Data', hi: 'डेटा' },
+      { to: '/learn', label: 'Learn', hi: 'सीखें' },
     ],
   },
 ]
+
+function BiLabel({ en, hi, compact }: { en: string; hi: string; compact?: boolean }) {
+  return (
+    <span className={compact ? 'inline' : 'inline-flex flex-col items-start leading-tight'}>
+      <span>{en}</span>
+      <span lang="hi" className={compact ? 'ml-1 text-[10px] opacity-70' : 'bilingual-hi'}>
+        {compact ? `(${hi})` : hi}
+      </span>
+    </span>
+  )
+}
 
 function linkClass({ isActive }: { isActive: boolean }) {
   return `rounded-md px-2 py-1.5 text-[13px] font-medium transition-colors ${
@@ -70,13 +85,14 @@ function HeaderSearch({ compact }: { compact?: boolean }) {
         Search
       </label>
       <div className="relative">
-        <Search className="pointer-events-none absolute left-2.5 top-1/2 h-3.5 w-3.5 -translate-y-1/2 text-ink-muted dark:text-cream/50" />
+        <Search className="pointer-events-none absolute left-2.5 top-1/2 h-3.5 w-3.5 -translate-y-1/2 text-ink-muted dark:text-cream/50" aria-hidden />
         <input
           id={inputId}
           value={value}
           onChange={(e) => setValue(e.target.value)}
           placeholder="Search…"
-          className={`rounded-lg border border-navy/10 bg-white/90 py-1.5 pl-8 pr-2 text-xs outline-none ring-gold/40 focus:ring-2 dark:border-white/15 dark:bg-navy-light/80 dark:text-cream ${
+          autoComplete="off"
+          className={`rounded-lg border border-navy/10 bg-white/90 py-1.5 pl-8 pr-2 text-xs outline-none focus-visible:ring-2 focus-visible:ring-gold/50 dark:border-white/15 dark:bg-navy-light/80 dark:text-cream ${
             compact ? 'w-full' : 'w-40 lg:w-48'
           }`}
         />
@@ -166,15 +182,18 @@ function DesktopDropdown({ group }: { group: NavGroup }) {
         onClick={() => setOpen((v) => !v)}
         onKeyDown={onButtonKeyDown}
       >
-        {group.label}
-        <ChevronDown className={`h-3.5 w-3.5 opacity-70 transition ${open ? 'rotate-180' : ''}`} />
+        <BiLabel en={group.label} hi={group.hi} />
+        <ChevronDown
+          className={`h-3.5 w-3.5 shrink-0 opacity-70 transition-transform ${open ? 'rotate-180' : ''}`}
+          aria-hidden
+        />
       </button>
       {open && (
         <div
           id={menuId}
           role="menu"
-          aria-label={group.label}
-          className="absolute left-0 top-full z-50 mt-1 min-w-[12.5rem] rounded-lg border border-navy/10 bg-white py-1 shadow-lg dark:border-white/15 dark:bg-navy-light"
+          aria-label={`${group.label} / ${group.hi}`}
+          className="absolute left-0 top-full z-50 mt-1 min-w-[14rem] rounded-lg border border-navy/10 bg-white py-1 shadow-lg dark:border-white/15 dark:bg-navy-light"
           onKeyDown={onMenuKeyDown}
         >
           {group.items.map((item, i) => (
@@ -195,7 +214,7 @@ function DesktopDropdown({ group }: { group: NavGroup }) {
               }
               onClick={() => close()}
             >
-              {item.label}
+              <BiLabel en={item.label} hi={item.hi} />
             </NavLink>
           ))}
         </div>
@@ -205,7 +224,7 @@ function DesktopDropdown({ group }: { group: NavGroup }) {
 }
 
 export function Navbar() {
-  const { theme, toggle } = useTheme()
+  const { theme, toggle, highContrast, toggleHighContrast } = useTheme()
   const [open, setOpen] = useState(false)
   const drawerId = useId()
   const navigate = useNavigate()
@@ -232,7 +251,7 @@ export function Navbar() {
           onClick={() => setOpen(false)}
         >
           <span
-            className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg border border-gold/40 bg-navy text-[10px] font-bold tracking-wide text-gold dark:bg-navy-light"
+            className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg border border-gold/40 bg-navy text-[10px] font-bold tracking-wide text-gold-on-navy dark:bg-navy-light"
             aria-hidden
           >
             KP
@@ -243,6 +262,9 @@ export function Navbar() {
             </span>
             <span className="block text-[10px] font-medium uppercase tracking-wider text-ink-muted dark:text-cream/50">
               Unofficial · Educational UX
+              <span lang="hi" className="ml-1 font-normal normal-case tracking-normal opacity-80">
+                · अनौपचारिक
+              </span>
             </span>
           </span>
         </Link>
@@ -261,15 +283,30 @@ export function Navbar() {
             aria-label="Open search"
             onClick={() => setOpen(false)}
           >
-            <Search className="h-4 w-4" />
+            <Search className="h-4 w-4" aria-hidden />
           </Link>
+          <button
+            type="button"
+            onClick={toggleHighContrast}
+            aria-label="Toggle high contrast"
+            aria-pressed={highContrast}
+            title={highContrast ? 'High contrast on' : 'High contrast off'}
+            className={`rounded-lg border p-2 transition ${
+              highContrast
+                ? 'border-navy bg-navy/10 text-navy dark:border-gold dark:bg-gold/15 dark:text-gold'
+                : 'border-navy/10 text-navy hover:bg-navy/5 dark:border-white/15 dark:text-cream dark:hover:bg-white/10'
+            }`}
+          >
+            <Contrast className="h-4 w-4" aria-hidden />
+          </button>
           <button
             type="button"
             onClick={toggle}
             aria-label="Toggle dark mode"
+            aria-pressed={theme === 'dark'}
             className="rounded-lg border border-navy/10 p-2 text-navy transition hover:bg-navy/5 dark:border-white/15 dark:text-cream dark:hover:bg-white/10"
           >
-            {theme === 'dark' ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
+            {theme === 'dark' ? <Sun className="h-4 w-4" aria-hidden /> : <Moon className="h-4 w-4" aria-hidden />}
           </button>
           <button
             type="button"
@@ -279,7 +316,7 @@ export function Navbar() {
             aria-controls={drawerId}
             onClick={() => setOpen((v) => !v)}
           >
-            {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+            {open ? <X className="h-5 w-5" aria-hidden /> : <Menu className="h-5 w-5" aria-hidden />}
           </button>
         </div>
       </div>
@@ -298,6 +335,9 @@ export function Navbar() {
               <div key={g.label}>
                 <p className="mb-2 text-[10px] font-semibold uppercase tracking-widest text-gold-dim dark:text-gold">
                   {g.label}
+                  <span lang="hi" className="ml-1.5 font-medium normal-case tracking-normal opacity-80">
+                    {g.hi}
+                  </span>
                 </p>
                 <div className="flex flex-col gap-0.5">
                   {g.items.map((l) => (
@@ -307,7 +347,7 @@ export function Navbar() {
                       className={linkClass}
                       onClick={() => setOpen(false)}
                     >
-                      {l.label}
+                      <BiLabel en={l.label} hi={l.hi} compact />
                     </NavLink>
                   ))}
                 </div>

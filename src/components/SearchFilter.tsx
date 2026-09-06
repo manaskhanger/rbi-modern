@@ -47,12 +47,12 @@ export function SearchFilter({
   return (
     <div className="mb-8 space-y-4">
       <div className="relative w-full md:max-w-md">
-        <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-ink-muted" />
+        <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-ink-muted" aria-hidden />
         <input
           value={query}
           onChange={(e) => onQuery(e.target.value)}
           placeholder={placeholder}
-          className="w-full rounded-xl border border-navy/10 bg-white py-2.5 pl-10 pr-3 text-sm outline-none ring-gold/40 focus:ring-2 dark:border-white/15 dark:bg-navy-light"
+          className="w-full rounded-xl border border-navy/10 bg-white py-2.5 pl-10 pr-3 text-sm outline-none focus-visible:ring-2 focus-visible:ring-gold/50 dark:border-white/15 dark:bg-navy-light"
           aria-label={placeholder}
         />
       </div>

@@ -9,6 +9,7 @@ import { DisclaimerBanner } from '../components/DisclaimerBanner'
 import { AuthoritativeSource } from '../components/AuthoritativeSource'
 import { ContentReviewed, IllustrativeLabel } from '../components/IllustrativeLabel'
 import { ChartFootnote } from '../components/ChartFootnote'
+import { ChartSummary } from '../components/ChartSummary'
 import { KeyRatesStrip } from '../components/KeyRatesStrip'
 import {
   dashboardPie, dashboardLine, dashboardBar, dashboardTable, dataFootnote, keyRatesAsOf,
@@ -269,6 +270,11 @@ export function Data() {
                     </PieChart>
                   </ResponsiveContainer>
                 </div>
+                <ChartSummary
+                  title="FX reserves mix (sample)"
+                  summary="Illustrative foreign-exchange reserves composition by asset class."
+                  rows={dashboardPie}
+                />
                 <ChartFootnote methodology={chartMethodology.fxReserves} />
               </div>
               <div className="glass-card flex h-auto min-h-72 flex-col rounded-xl p-4 lg:col-span-2">
@@ -288,6 +294,11 @@ export function Data() {
                     </LineChart>
                   </ResponsiveContainer>
                 </div>
+                <ChartSummary
+                  title="Payment volumes (bn txns, sample)"
+                  summary="Illustrative monthly UPI, NEFT and RTGS volumes in billions of transactions."
+                  rows={dashboardLine}
+                />
                 <ChartFootnote methodology={chartMethodology.payments} />
               </div>
             </div>
@@ -305,6 +316,11 @@ export function Data() {
                   </BarChart>
                 </ResponsiveContainer>
               </div>
+              <ChartSummary
+                title="Bank group credit (index, sample)"
+                summary="Illustrative credit index by bank-group segment."
+                rows={dashboardBar}
+              />
               <ChartFootnote methodology={chartMethodology.bankCredit} />
             </div>
 
@@ -318,8 +334,12 @@ export function Data() {
                 </div>
                 <div className="flex flex-col gap-2 sm:flex-row sm:items-center">
                   <div className="relative w-full sm:max-w-xs">
-                    <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-ink-muted" />
+                    <label htmlFor="data-indicator-search" className="sr-only">
+                      Search sample indicators
+                    </label>
+                    <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-ink-muted" aria-hidden />
                     <input
+                      id="data-indicator-search"
                       value={q}
                       onChange={(e) => setQ(e.target.value)}
                       placeholder="Search sample indicators…"

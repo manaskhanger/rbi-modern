@@ -26,6 +26,8 @@ import { Badge } from '../components/Badge'
 import { DisclaimerBanner } from '../components/DisclaimerBanner'
 import { AuthoritativeSource } from '../components/AuthoritativeSource'
 import { ContentReviewed, IllustrativeLabel } from '../components/IllustrativeLabel'
+import { PrintButton } from '../components/PrintButton'
+import { ChartSummary } from '../components/ChartSummary'
 
 const COLORS = ['#0B1D36', '#C5A572', '#1a3558', '#d4bc94']
 
@@ -90,12 +92,13 @@ function FsrBody() {
         <strong>ILLUSTRATIVE SAMPLE DATA</strong> for UX review.
       </p>
       <div className="mt-10 grid gap-5 lg:grid-cols-2">
-        <div className="glass-card h-72 rounded-xl p-4">
+        <div className="glass-card flex min-h-72 flex-col rounded-xl p-4">
           <h2 className="mb-1 px-1 text-sm font-semibold text-navy dark:text-cream">
             System CRAR (sample)
           </h2>
           <IllustrativeLabel tone="chip" className="mb-2 px-1" />
-          <ResponsiveContainer width="100%" height="90%">
+          <div className="min-h-0 flex-1" style={{ height: 220 }}>
+          <ResponsiveContainer width="100%" height="100%">
             <LineChart data={sampleReportCharts.capitalAdequacy}>
               <CartesianGrid strokeDasharray="3 3" stroke="rgba(128,128,128,0.2)" />
               <XAxis dataKey="year" tick={{ fontSize: 11 }} />
@@ -104,13 +107,21 @@ function FsrBody() {
               <Line type="monotone" dataKey="crar" name="CRAR %" stroke="#C5A572" strokeWidth={2} />
             </LineChart>
           </ResponsiveContainer>
+          </div>
+          <ChartSummary
+            title="System CRAR (sample)"
+            summary="Illustrative capital adequacy ratio trend by year. Values are sample only."
+            rows={sampleReportCharts.capitalAdequacy}
+            className="px-1"
+          />
         </div>
-        <div className="glass-card h-72 rounded-xl p-4">
+        <div className="glass-card flex min-h-72 flex-col rounded-xl p-4">
           <h2 className="mb-1 px-1 text-sm font-semibold text-navy dark:text-cream">
             GNPA / NNPA (sample)
           </h2>
           <IllustrativeLabel tone="chip" className="mb-2 px-1" />
-          <ResponsiveContainer width="100%" height="90%">
+          <div className="min-h-0 flex-1" style={{ height: 220 }}>
+          <ResponsiveContainer width="100%" height="100%">
             <BarChart data={sampleReportCharts.npaTrend}>
               <CartesianGrid strokeDasharray="3 3" stroke="rgba(128,128,128,0.2)" />
               <XAxis dataKey="year" tick={{ fontSize: 11 }} />
@@ -121,13 +132,21 @@ function FsrBody() {
               <Bar dataKey="nnpa" name="NNPA %" fill="#C5A572" radius={[3, 3, 0, 0]} />
             </BarChart>
           </ResponsiveContainer>
+          </div>
+          <ChartSummary
+            title="GNPA / NNPA (sample)"
+            summary="Illustrative gross and net NPA percentages by year."
+            rows={sampleReportCharts.npaTrend}
+            className="px-1"
+          />
         </div>
       </div>
       <div className="mt-5 grid gap-5 lg:grid-cols-2">
-        <div className="glass-card h-72 rounded-xl p-4">
+        <div className="glass-card flex min-h-72 flex-col rounded-xl p-4">
           <h2 className="mb-1 px-1 text-sm font-semibold">Credit share by sector (sample)</h2>
           <IllustrativeLabel tone="chip" className="mb-2 px-1" />
-          <ResponsiveContainer width="100%" height="90%">
+          <div className="min-h-0 flex-1" style={{ height: 220 }}>
+          <ResponsiveContainer width="100%" height="100%">
             <PieChart>
               <Pie
                 data={sampleReportCharts.creditShare}
@@ -145,6 +164,13 @@ function FsrBody() {
               <Tooltip />
             </PieChart>
           </ResponsiveContainer>
+          </div>
+          <ChartSummary
+            title="Credit share by sector (sample)"
+            summary="Illustrative sector credit share percentages."
+            rows={sampleReportCharts.creditShare}
+            className="px-1"
+          />
         </div>
         <div className="glass-card rounded-xl p-5">
           <h2 className="mb-1 text-sm font-semibold">Snapshot table (sample)</h2>
@@ -184,10 +210,11 @@ function MprBody() {
         are schematic only.
       </p>
       <div className="mt-10 grid gap-5 lg:grid-cols-2">
-        <div className="glass-card h-72 rounded-xl p-4">
+        <div className="glass-card flex min-h-72 flex-col rounded-xl p-4">
           <h2 className="mb-1 px-1 text-sm font-semibold">CPI path &amp; sample forecast band</h2>
           <IllustrativeLabel tone="chip" className="mb-2 px-1" />
-          <ResponsiveContainer width="100%" height="90%">
+          <div className="min-h-0 flex-1" style={{ height: 220 }}>
+          <ResponsiveContainer width="100%" height="100%">
             <LineChart data={mprCharts.inflationPath}>
               <CartesianGrid strokeDasharray="3 3" stroke="rgba(128,128,128,0.2)" />
               <XAxis dataKey="quarter" tick={{ fontSize: 10 }} />
@@ -226,6 +253,13 @@ function MprBody() {
               />
             </LineChart>
           </ResponsiveContainer>
+          </div>
+          <ChartSummary
+            title="CPI path and sample forecast band"
+            summary="Illustrative inflation actuals, forecast, and high/low bands by quarter."
+            rows={mprCharts.inflationPath}
+            className="px-1"
+          />
         </div>
         <div className="glass-card h-72 rounded-xl p-4">
           <h2 className="mb-1 px-1 text-sm font-semibold">Real GDP growth path (sample)</h2>
@@ -291,10 +325,11 @@ function AnnualBody() {
         not extracts from any RBI Annual Report or Trend &amp; Progress publication.
       </p>
       <div className="mt-10 grid gap-5 lg:grid-cols-2">
-        <div className="glass-card h-72 rounded-xl p-4">
+        <div className="glass-card flex min-h-72 flex-col rounded-xl p-4">
           <h2 className="mb-1 px-1 text-sm font-semibold">Balance sheet aggregates (index)</h2>
           <IllustrativeLabel tone="chip" className="mb-2 px-1" />
-          <ResponsiveContainer width="100%" height="90%">
+          <div className="min-h-0 flex-1" style={{ height: 220 }}>
+          <ResponsiveContainer width="100%" height="100%">
             <LineChart data={annualCharts.balanceSheet}>
               <CartesianGrid strokeDasharray="3 3" stroke="rgba(128,128,128,0.2)" />
               <XAxis dataKey="year" tick={{ fontSize: 11 }} />
@@ -312,6 +347,13 @@ function AnnualBody() {
               <Line type="monotone" dataKey="credit" name="Credit" stroke="#1a3558" strokeWidth={2} />
             </LineChart>
           </ResponsiveContainer>
+          </div>
+          <ChartSummary
+            title="Balance sheet aggregates (index)"
+            summary="Illustrative assets, deposits, and credit indices by year."
+            rows={annualCharts.balanceSheet}
+            className="px-1"
+          />
         </div>
         <div className="glass-card h-72 rounded-xl p-4">
           <h2 className="mb-1 px-1 text-sm font-semibold">Credit growth by bank group (sample %)</h2>
@@ -386,10 +428,11 @@ function PaymentsBody() {
         payment system statistics.
       </p>
       <div className="mt-10 grid gap-5 lg:grid-cols-2">
-        <div className="glass-card h-72 rounded-xl p-4">
+        <div className="glass-card flex min-h-72 flex-col rounded-xl p-4">
           <h2 className="mb-1 px-1 text-sm font-semibold">Payment systems — volume vs value index</h2>
           <IllustrativeLabel tone="chip" className="mb-2 px-1" />
-          <ResponsiveContainer width="100%" height="90%">
+          <div className="min-h-0 flex-1" style={{ height: 220 }}>
+          <ResponsiveContainer width="100%" height="100%">
             <BarChart data={paymentsCharts.volumes}>
               <CartesianGrid strokeDasharray="3 3" stroke="rgba(128,128,128,0.2)" />
               <XAxis dataKey="system" tick={{ fontSize: 11 }} />
@@ -400,6 +443,13 @@ function PaymentsBody() {
               <Bar dataKey="value" name="Value idx" fill="#C5A572" radius={[3, 3, 0, 0]} />
             </BarChart>
           </ResponsiveContainer>
+          </div>
+          <ChartSummary
+            title="Payment systems volume vs value index"
+            summary="Illustrative volume and value indices by payment system."
+            rows={paymentsCharts.volumes}
+            className="px-1"
+          />
         </div>
         <div className="glass-card h-72 rounded-xl p-4">
           <h2 className="mb-1 px-1 text-sm font-semibold">UPI monthly volume (bn, sample)</h2>
@@ -488,13 +538,16 @@ export function ReportDetail() {
   }
 
   return (
-    <div className="mx-auto max-w-6xl px-4 py-10 md:px-6 md:py-14">
+    <div className="print-root mx-auto max-w-6xl px-4 py-10 md:px-6 md:py-14">
+      <div className="mb-6 flex flex-wrap items-center justify-between gap-3">
       <Link
         to="/reports"
-        className="mb-6 inline-flex items-center gap-2 text-sm text-ink-muted hover:text-navy dark:hover:text-cream"
+        className="inline-flex items-center gap-2 text-sm text-ink-muted hover:text-navy dark:hover:text-cream"
       >
         <ArrowLeft className="h-4 w-4" /> All reports
       </Link>
+      <PrintButton />
+      </div>
       <Badge>{report.type}</Badge>
       <h1 className="mt-3 text-2xl font-bold text-navy dark:text-cream md:text-3xl">{report.title}</h1>
       <p className="mt-2 text-sm text-ink-muted dark:text-cream/55">

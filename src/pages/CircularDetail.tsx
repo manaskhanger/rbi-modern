@@ -8,6 +8,7 @@ import { DisclaimerBanner } from '../components/DisclaimerBanner'
 import { AuthoritativeSource } from '../components/AuthoritativeSource'
 import { ContentReviewed } from '../components/IllustrativeLabel'
 import { SummaryModeToggle } from '../components/SummaryModeToggle'
+import { PrintButton } from '../components/PrintButton'
 
 export function CircularDetail() {
   const { slug } = useParams()
@@ -31,13 +32,16 @@ export function CircularDetail() {
     .filter(Boolean)
 
   return (
-    <div className="mx-auto max-w-3xl px-4 py-10 md:px-6 md:py-14">
+    <div className="print-root mx-auto max-w-3xl px-4 py-10 md:px-6 md:py-14">
+      <div className="mb-6 flex flex-wrap items-center justify-between gap-3">
       <Link
         to="/circulars"
-        className="mb-6 inline-flex items-center gap-2 text-sm text-ink-muted hover:text-navy dark:hover:text-cream"
+        className="inline-flex items-center gap-2 text-sm text-ink-muted hover:text-navy dark:hover:text-cream"
       >
         <ArrowLeft className="h-4 w-4" /> All circulars
       </Link>
+      <PrintButton />
+      </div>
       <div className="flex flex-wrap gap-2">
         <Badge>{doc.category}</Badge>
         {doc.audiences.map((a) => (
