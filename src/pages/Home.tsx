@@ -1,13 +1,12 @@
 import { Link } from 'react-router-dom'
 import { motion, useReducedMotion } from 'framer-motion'
 import { ArrowRight, Landmark, Scale, Smartphone, Shield, Info } from 'lucide-react'
-import { keyRates, keyRatesAsOf } from '../data/rates'
 import { newsItems } from '../data/news'
 import { Reveal } from '../components/Reveal'
 import { CardLink } from '../components/Card'
 import { Badge } from '../components/Badge'
 import { DisclaimerBanner } from '../components/DisclaimerBanner'
-import { IllustrativeLabel } from '../components/IllustrativeLabel'
+import { KeyRatesStrip } from '../components/KeyRatesStrip'
 import { fadeUp, stagger } from '../lib/motion'
 
 const pillars = [
@@ -122,23 +121,7 @@ export function Home() {
         </div>
       </section>
 
-      <section className="border-b border-navy/10 bg-white/70 dark:border-white/10 dark:bg-navy-light/40">
-        <div className="mx-auto max-w-6xl px-4 py-5 md:px-6">
-          <IllustrativeLabel asOf={keyRatesAsOf} tone="chip" className="mb-3 text-center" />
-          <div className="grid grid-cols-2 gap-2 sm:grid-cols-3 lg:grid-cols-6">
-            {keyRates.map((r) => (
-              <div
-                key={r.label}
-                className="rounded-lg border border-navy/8 bg-cream/90 px-3 py-2.5 text-center dark:border-white/10 dark:bg-navy/50"
-              >
-                <p className="text-[10px] leading-tight text-ink-muted dark:text-cream/55">{r.label}</p>
-                <p className="mt-1 text-lg font-bold tabular-nums text-navy dark:text-cream">{r.value}</p>
-                <p className="text-[10px] text-gold-dim">Illustrative · not for compliance</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+      <KeyRatesStrip />
 
       <section className="mx-auto max-w-6xl px-4 py-14 md:px-6 md:py-16">
         <Reveal>

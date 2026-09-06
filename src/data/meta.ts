@@ -3,6 +3,9 @@ export const CONTENT_LAST_REVIEWED = '2026-09-06'
 
 export const RBI_HOME = 'https://www.rbi.org.in/'
 
+/** Official RBI data portal (DBIE). Live series only on this site — not mirrored here. */
+export const RBI_DBIE = 'https://data.rbi.org.in/'
+
 /** Sensible official section URLs on rbi.org.in (not deep-links to specific sample docs). */
 export const RBI_SECTIONS = {
   home: {
@@ -38,6 +41,16 @@ export const RBI_SECTIONS = {
     href: 'https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx',
     label: 'Authoritative source on rbi.org.in',
     sectionNote: 'Official RBI website (section) — MPC / policy releases',
+  },
+  policyRates: {
+    href: 'https://www.rbi.org.in/Scripts/BS_ViewMonetaryCreditPolicy.aspx',
+    label: 'Official policy rates on rbi.org.in',
+    sectionNote: 'Monetary / credit policy section — confirm current rates on rbi.org.in',
+  },
+  dbie: {
+    href: RBI_DBIE,
+    label: 'Open RBI DBIE (data.rbi.org.in)',
+    sectionNote: 'Database on Indian Economy — live official time series',
   },
 } as const
 

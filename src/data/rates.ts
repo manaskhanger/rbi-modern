@@ -63,4 +63,53 @@ export const dashboardTable = [
 ]
 
 export const dataFootnote =
-  'Illustrative · not for compliance. Sources: illustrative composite for UX prototyping — not an RBI DBIE extract or official statistical release. Always defer to rbi.org.in / DBIE for authoritative series.'
+  'Illustrative · not for compliance. Sources: illustrative composite for UX prototyping — not an RBI DBIE extract or official statistical release. Always defer to rbi.org.in / data.rbi.org.in (DBIE) for authoritative series.'
+
+/** Short methodology one-liners for chart footnotes (sample data only). */
+export const chartMethodology = {
+  fxReserves:
+    'Methodology (sample): invented composition shares for pie-layout review — not a Weekly Statistical Supplement extract.',
+  payments:
+    'Methodology (sample): invented monthly volumes (bn transactions) to exercise line charts — not NPCI / RBI payment statistics.',
+  bankCredit:
+    'Methodology (sample): relative credit index by bank group, scaled for bar demo — not a BSR / DBIE credit series.',
+  policyRates:
+    'Methodology (sample): stylised repo vs CPI path for band visualisation — not MPC minutes or CPI releases.',
+  indicatorsTable:
+    'Methodology (sample): hand-authored indicator rows for search/sort/CSV UX — not an official statistical table.',
+} as const
+
+/**
+ * Honest “official structure” panels for link-out mode.
+ * No fabricated live numbers — only series names + where officers should look.
+ */
+export const officialStructurePanels = [
+  {
+    id: 'fx-reserves',
+    title: 'Foreign exchange reserves',
+    structure: 'Typical DBIE / WSS presentation: foreign currency assets, gold, SDRs, reserve tranche — levels and week-on-week changes.',
+    where: 'RBI Database on Indian Economy (DBIE) and Weekly Statistical Supplement on rbi.org.in',
+    hrefKey: 'dbie' as const,
+  },
+  {
+    id: 'payments',
+    title: 'Payment system volumes & values',
+    structure: 'Retail and wholesale systems (UPI, NEFT, RTGS, IMPS, cards) by month — volume and value tables.',
+    where: 'RBI Statistics / payment system indicators; also DBIE time-series tables',
+    hrefKey: 'statistics' as const,
+  },
+  {
+    id: 'bank-credit',
+    title: 'Bank group credit & deposits',
+    structure: 'Scheduled commercial banks by ownership group — credit, deposits, and year-on-year growth.',
+    where: 'DBIE banking statistics and RBI Bulletin / Handbook tables',
+    hrefKey: 'dbie' as const,
+  },
+  {
+    id: 'key-indicators',
+    title: 'Macro & financial indicators',
+    structure: 'Prices, policy rates, markets, forex, external sector, banking soundness — multi-frequency series.',
+    where: 'DBIE subject-area tables; confirm policy rates on the monetary policy section of rbi.org.in',
+    hrefKey: 'dbie' as const,
+  },
+] as const

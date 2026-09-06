@@ -9,12 +9,15 @@ import {
   Legend,
   ReferenceArea,
 } from 'recharts'
+import { ExternalLink } from 'lucide-react'
 import { PageHeader } from '../components/PageHeader'
 import { Reveal } from '../components/Reveal'
 import { DisclaimerBanner } from '../components/DisclaimerBanner'
 import { AuthoritativeSource } from '../components/AuthoritativeSource'
 import { ContentReviewed, IllustrativeLabel } from '../components/IllustrativeLabel'
-import { policyRateHistory, keyRatesAsOf } from '../data/rates'
+import { ChartFootnote } from '../components/ChartFootnote'
+import { policyRateHistory, keyRatesAsOf, chartMethodology } from '../data/rates'
+import { RBI_SECTIONS } from '../data/meta'
 
 const mpcSteps = [
   {
@@ -49,18 +52,22 @@ function SampleTooltip({ active, payload, label }: {
   if (!active || !payload?.length) return null
   return (
     <div className="rounded-md border border-navy/10 bg-white px-3 py-2 text-xs shadow-md dark:border-white/15 dark:bg-navy-light">
-      <p className="mb-1 font-semibold">{label}</p>
+      <p className="mb-1 font-semibold text-navy dark:text-cream">{label} (sample)</p>
       {payload.map((p) => (
-        <p key={p.name} style={{ color: p.color }}>
+        <p key={p.name} style={{ color: p.color }} className="tabular-nums">
           {p.name}: {p.value}%
         </p>
       ))}
-      <p className="mt-1 text-[10px] text-ink-muted">Illustrative · not for compliance</p>
+      <p className="mt-1.5 border-t border-navy/5 pt-1 text-[10px] leading-snug text-ink-muted dark:border-white/10 dark:text-cream/50">
+        Sample path · Illustrative · not for compliance
+      </p>
     </div>
   )
 }
 
 export function MonetaryPolicy() {
+  const policy = RBI_SECTIONS.policyRates
+
   return (
     <div className="mx-auto max-w-6xl px-4 py-10 md:px-6 md:py-14">
       <PageHeader
@@ -97,10 +104,23 @@ export function MonetaryPolicy() {
 
       <section className="mb-12">
         <Reveal>
-          <h2 className="mb-1 text-xl font-bold text-navy dark:text-cream md:text-2xl">
-            Policy rates &amp; inflation
-          </h2>
-          <IllustrativeLabel asOf={keyRatesAsOf} className="mb-5" />
+          <div className="mb-5 flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
+            <div>
+              <h2 className="text-xl font-bold text-navy dark:text-cream md:text-2xl">
+                Policy rates &amp; inflation (sample chart)
+              </h2>
+              <IllustrativeLabel asOf={keyRatesAsOf} className="mt-1" />
+            </div>
+            <a
+              href={policy.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 text-xs font-medium text-gold-dim underline-offset-2 hover:underline dark:text-gold"
+            >
+              Official policy rates on rbi.org.in
+              <ExternalLink className="h-3.5 w-3.5" aria-hidden />
+            </a>
+          </div>
         </Reveal>
         <div className="glass-card h-80 rounded-xl p-3 md:p-5">
           <ResponsiveContainer width="100%" height="100%">
@@ -130,9 +150,19 @@ export function MonetaryPolicy() {
             </LineChart>
           </ResponsiveContainer>
         </div>
-        <p className="mt-2 text-xs text-ink-muted dark:text-cream/50">
+        <ChartFootnote methodology={chartMethodology.policyRates} />
+        <p className="mt-1 text-xs text-ink-muted dark:text-cream/50">
           Shaded band marks the educational 2–6% CPI tolerance zone around the 4% target.
-          Illustrative · not for compliance.
+          Confirm live rates via{' '}
+          <a
+            href={policy.href}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="font-medium text-gold-dim underline-offset-2 hover:underline dark:text-gold"
+          >
+            rbi.org.in monetary / credit policy
+          </a>
+          .
         </p>
       </section>
 
