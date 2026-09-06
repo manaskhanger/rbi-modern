@@ -6,6 +6,8 @@ import {
 import { ArrowDownUp, Search } from 'lucide-react'
 import { PageHeader } from '../components/PageHeader'
 import { DisclaimerBanner } from '../components/DisclaimerBanner'
+import { AuthoritativeSource } from '../components/AuthoritativeSource'
+import { ContentReviewed, IllustrativeLabel } from '../components/IllustrativeLabel'
 import {
   dashboardPie, dashboardLine, dashboardBar, dashboardTable, dataFootnote, keyRatesAsOf,
 } from '../data/rates'
@@ -26,7 +28,7 @@ function ChartTip({ active, payload, label }: {
       {payload.map((p) => (
         <p key={p.name} style={{ color: p.color }}>{p.name}: {p.value}</p>
       ))}
-      <p className="mt-1 text-[10px] uppercase tracking-wide text-gold-dim">Sample dataset</p>
+      <p className="mt-1 text-[10px] text-ink-muted">Illustrative · not for compliance</p>
     </div>
   )
 }
@@ -58,15 +60,28 @@ export function Data() {
       <PageHeader
         eyebrow="Data lab"
         title="Sample datasets & charts"
-        description="Demo charts and an export-style searchable table. Every number is ILLUSTRATIVE SAMPLE DATA for interface exploration — not a live statistical feed."
+        description="Demo charts and an export-style searchable table. Every number is illustrative sample data for interface exploration — not a live statistical feed."
       />
-      <p className="mb-5 rounded-lg border border-gold/30 bg-gold/10 px-3 py-2 text-xs font-medium text-navy dark:text-cream">
-        Sample dataset · {keyRatesAsOf} · {dataFootnote}
-      </p>
+      <ContentReviewed className="mb-4 -mt-4" />
+
+      <div className="mb-6">
+        <AuthoritativeSource section="statistics" />
+      </div>
+
+      <div className="mb-5 rounded-lg border border-gold/30 bg-gold/10 px-3 py-3 text-xs text-navy dark:text-cream">
+        <IllustrativeLabel asOf={keyRatesAsOf} className="!text-xs font-medium !text-navy dark:!text-cream" />
+        <p className="mt-1.5 leading-relaxed text-ink-muted dark:text-cream/70">{dataFootnote}</p>
+        <p className="mt-1.5 leading-relaxed text-ink-muted dark:text-cream/70">
+          Footnote: chart tooltips, table cells and as-of stamps on this page are prototype labels
+          only. Do not use them for compliance, market decisions, or citation as official statistics.
+        </p>
+      </div>
+
       <div className="grid gap-5 lg:grid-cols-3">
         <div className="glass-card h-72 rounded-xl p-4 lg:col-span-1">
           <h2 className="mb-1 px-1 text-sm font-semibold">FX reserves mix (sample)</h2>
-          <ResponsiveContainer width="100%" height="90%">
+          <IllustrativeLabel tone="chip" className="mb-1 px-1" />
+          <ResponsiveContainer width="100%" height="85%">
             <PieChart>
               <Pie data={dashboardPie} dataKey="value" nameKey="name" outerRadius={80} label>
                 {dashboardPie.map((_, i) => (
@@ -79,7 +94,8 @@ export function Data() {
         </div>
         <div className="glass-card h-72 rounded-xl p-4 lg:col-span-2">
           <h2 className="mb-1 px-1 text-sm font-semibold">Payment volumes (bn txns, sample)</h2>
-          <ResponsiveContainer width="100%" height="90%">
+          <IllustrativeLabel tone="chip" className="mb-1 px-1" />
+          <ResponsiveContainer width="100%" height="85%">
             <LineChart data={dashboardLine}>
               <CartesianGrid strokeDasharray="3 3" stroke="rgba(128,128,128,0.2)" />
               <XAxis dataKey="month" tick={{ fontSize: 11 }} />
@@ -95,7 +111,8 @@ export function Data() {
       </div>
       <div className="mt-5 glass-card h-72 rounded-xl p-4">
         <h2 className="mb-1 px-1 text-sm font-semibold">Bank group credit (index, sample)</h2>
-        <ResponsiveContainer width="100%" height="90%">
+        <IllustrativeLabel tone="chip" className="mb-1 px-1" />
+        <ResponsiveContainer width="100%" height="85%">
           <BarChart data={dashboardBar}>
             <CartesianGrid strokeDasharray="3 3" stroke="rgba(128,128,128,0.2)" />
             <XAxis dataKey="segment" tick={{ fontSize: 11 }} />
@@ -109,7 +126,7 @@ export function Data() {
         <div className="mb-3 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
           <div>
             <h2 className="text-lg font-bold text-navy dark:text-cream">Indicators table</h2>
-            <p className="text-xs text-ink-muted dark:text-cream/50">Export-style view · sort &amp; search · sample dataset</p>
+            <IllustrativeLabel asOf={keyRatesAsOf} className="mt-0.5" />
           </div>
           <div className="relative w-full sm:max-w-xs">
             <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-ink-muted" />

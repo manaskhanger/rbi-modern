@@ -12,6 +12,8 @@ import {
 import { PageHeader } from '../components/PageHeader'
 import { Reveal } from '../components/Reveal'
 import { DisclaimerBanner } from '../components/DisclaimerBanner'
+import { AuthoritativeSource } from '../components/AuthoritativeSource'
+import { ContentReviewed, IllustrativeLabel } from '../components/IllustrativeLabel'
 import { policyRateHistory, keyRatesAsOf } from '../data/rates'
 
 const mpcSteps = [
@@ -53,7 +55,7 @@ function SampleTooltip({ active, payload, label }: {
           {p.name}: {p.value}%
         </p>
       ))}
-      <p className="mt-1 text-[10px] text-ink-muted">ILLUSTRATIVE SAMPLE DATA</p>
+      <p className="mt-1 text-[10px] text-ink-muted">Illustrative · not for compliance</p>
     </div>
   )
 }
@@ -66,6 +68,11 @@ export function MonetaryPolicy() {
         title="MPC, inflation targeting & the policy rate"
         description="Careful educational framing of the Monetary Policy Committee, the 2–6% CPI tolerance band, and illustrative charts of repo versus inflation. Not a live policy dashboard."
       />
+      <ContentReviewed className="mb-6 -mt-4" />
+
+      <div className="mb-10">
+        <AuthoritativeSource section="monetaryPolicy" />
+      </div>
 
       <section className="mb-12">
         <Reveal>
@@ -93,9 +100,7 @@ export function MonetaryPolicy() {
           <h2 className="mb-1 text-xl font-bold text-navy dark:text-cream md:text-2xl">
             Policy rates &amp; inflation
           </h2>
-          <p className="mb-5 text-sm text-ink-muted dark:text-cream/60">
-            ILLUSTRATIVE SAMPLE DATA · {keyRatesAsOf} · not an official time series
-          </p>
+          <IllustrativeLabel asOf={keyRatesAsOf} className="mb-5" />
         </Reveal>
         <div className="glass-card h-80 rounded-xl p-3 md:p-5">
           <ResponsiveContainer width="100%" height="100%">
@@ -127,6 +132,7 @@ export function MonetaryPolicy() {
         </div>
         <p className="mt-2 text-xs text-ink-muted dark:text-cream/50">
           Shaded band marks the educational 2–6% CPI tolerance zone around the 4% target.
+          Illustrative · not for compliance.
         </p>
       </section>
 

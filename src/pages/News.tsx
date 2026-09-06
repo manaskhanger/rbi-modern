@@ -3,6 +3,7 @@ import { CardLink } from '../components/Card'
 import { Badge } from '../components/Badge'
 import { DisclaimerBanner } from '../components/DisclaimerBanner'
 import { newsItems } from '../data/news'
+import { formatContentReviewed } from '../data/meta'
 
 export function News() {
   return (
@@ -21,6 +22,7 @@ export function News() {
               {n.excerpt}
             </p>
             <p className="mt-4 text-xs text-ink-muted/80 dark:text-cream/45">{n.date}</p>
+            <p className="mt-1 text-[10px] text-ink-muted/70 dark:text-cream/40">{formatContentReviewed(n.lastReviewed)}</p>
           </CardLink>
         ))}
       </div>

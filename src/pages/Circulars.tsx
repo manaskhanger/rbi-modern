@@ -7,6 +7,7 @@ import { CardLink } from '../components/Card'
 import { Badge } from '../components/Badge'
 import { DisclaimerBanner } from '../components/DisclaimerBanner'
 import { circulars, circularCategories } from '../data/circulars'
+import { formatContentReviewed } from '../data/meta'
 
 export function Circulars() {
   const [query, setQuery] = useState('')
@@ -77,6 +78,7 @@ export function Circulars() {
               <h2 className="mt-1.5 text-sm font-semibold text-navy dark:text-cream">{c.title}</h2>
               <p className="mt-1 text-sm text-ink-muted dark:text-cream/65">{c.summary}</p>
               <p className="mt-1.5 text-xs text-ink-muted dark:text-cream/50">Audience: {c.audience}</p>
+              <p className="mt-1 text-[10px] text-ink-muted/80 dark:text-cream/40">{formatContentReviewed(c.lastReviewed)}</p>
             </CardLink>
           ))}
         </div>

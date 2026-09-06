@@ -5,6 +5,9 @@ import { Layout } from './components/Layout'
 
 const Home = lazy(() => import('./pages/Home').then((m) => ({ default: m.Home })))
 const About = lazy(() => import('./pages/About').then((m) => ({ default: m.About })))
+const Prototype = lazy(() =>
+  import('./pages/Prototype').then((m) => ({ default: m.Prototype })),
+)
 const MonetaryPolicy = lazy(() =>
   import('./pages/MonetaryPolicy').then((m) => ({ default: m.MonetaryPolicy })),
 )
@@ -48,6 +51,8 @@ export default function App() {
             <Route element={<Layout />}>
               <Route index element={<Home />} />
               <Route path="about" element={<About />} />
+              <Route path="about/prototype" element={<Prototype />} />
+              <Route path="prototype" element={<Prototype />} />
               <Route path="monetary-policy" element={<MonetaryPolicy />} />
               <Route path="masters-directions" element={<MastersDirections />} />
               <Route path="masters-directions/:slug" element={<MastersDirectionDetail />} />

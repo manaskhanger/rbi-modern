@@ -5,6 +5,7 @@ import { Card } from '../components/Card'
 import { Badge } from '../components/Badge'
 import { DisclaimerBanner } from '../components/DisclaimerBanner'
 import { reports } from '../data/reports'
+import { formatContentReviewed } from '../data/meta'
 
 export function Reports() {
   return (
@@ -30,6 +31,9 @@ export function Reports() {
                 </div>
                 <h2 className="mt-2 text-sm font-semibold text-navy dark:text-cream">{r.title}</h2>
                 <p className="mt-1.5 text-sm text-ink-muted dark:text-cream/65">{r.summary}</p>
+                <p className="mt-2 text-[10px] text-ink-muted/70 dark:text-cream/40">
+                  {formatContentReviewed(r.lastReviewed)}
+                </p>
                 {r.rich ? (
                   <Link
                     to={`/reports/${r.slug}`}

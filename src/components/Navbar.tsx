@@ -11,6 +11,7 @@ const groups: NavGroup[] = [
     label: 'About & Policy',
     items: [
       { to: '/about', label: 'About' },
+      { to: '/about/prototype', label: 'About this prototype' },
       { to: '/monetary-policy', label: 'Monetary policy' },
     ],
   },

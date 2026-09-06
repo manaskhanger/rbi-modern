@@ -3,6 +3,8 @@ import { ArrowLeft } from 'lucide-react'
 import { mastersDirections } from '../data/mastersDirections'
 import { Badge } from '../components/Badge'
 import { DisclaimerBanner } from '../components/DisclaimerBanner'
+import { AuthoritativeSource } from '../components/AuthoritativeSource'
+import { ContentReviewed } from '../components/IllustrativeLabel'
 
 export function MastersDirectionDetail() {
   const { slug } = useParams()
@@ -58,9 +60,14 @@ export function MastersDirectionDetail() {
           <p className="mt-2 text-sm text-ink-muted dark:text-cream/55">
             Issued {doc.issued} · Updated {doc.updated} · Educational paraphrase
           </p>
+          <ContentReviewed lastReviewed={doc.lastReviewed} className="mt-1" />
           <p className="mt-2 text-xs leading-relaxed text-ink-muted dark:text-cream/50">
             {doc.effectiveNote}
           </p>
+
+          <div className="mt-6">
+            <AuthoritativeSource section="mastersDirections" />
+          </div>
 
           <section id="executive" className="mt-8 scroll-mt-32">
             <h2 className="text-lg font-bold text-navy dark:text-cream">Executive summary</h2>

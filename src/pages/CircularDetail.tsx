@@ -3,6 +3,8 @@ import { ArrowLeft } from 'lucide-react'
 import { circulars } from '../data/circulars'
 import { Badge } from '../components/Badge'
 import { DisclaimerBanner } from '../components/DisclaimerBanner'
+import { AuthoritativeSource } from '../components/AuthoritativeSource'
+import { ContentReviewed } from '../components/IllustrativeLabel'
 
 export function CircularDetail() {
   const { slug } = useParams()
@@ -33,6 +35,11 @@ export function CircularDetail() {
       <p className="mt-2 text-sm text-ink-muted dark:text-cream/55">
         {doc.date} · <span className="font-mono text-gold-dim">{doc.ref}</span>
       </p>
+      <ContentReviewed lastReviewed={doc.lastReviewed} className="mt-1" />
+
+      <div className="mt-6">
+        <AuthoritativeSource section="notifications" />
+      </div>
 
       <section className="mt-8">
         <h2 className="text-sm font-semibold uppercase tracking-wider text-gold-dim dark:text-gold">

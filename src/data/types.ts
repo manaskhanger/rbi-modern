@@ -9,7 +9,12 @@ export type Category =
   | 'Consumer Protection'
   | 'Supervision'
 
-export interface MastersDirection {
+/** Optional per-item review stamp; UI falls back to CONTENT_LAST_REVIEWED. */
+export interface ContentMeta {
+  lastReviewed?: string
+}
+
+export interface MastersDirection extends ContentMeta {
   slug: string
   code: string
   title: string
@@ -26,7 +31,7 @@ export interface MastersDirection {
   sections: { id: string; heading: string; body: string }[]
 }
 
-export interface Circular {
+export interface Circular extends ContentMeta {
   slug: string
   title: string
   category: Category
@@ -39,7 +44,7 @@ export interface Circular {
   effectiveNote: string
 }
 
-export interface NewsItem {
+export interface NewsItem extends ContentMeta {
   slug: string
   title: string
   date: string
@@ -49,7 +54,7 @@ export interface NewsItem {
   featured?: boolean
 }
 
-export interface Report {
+export interface Report extends ContentMeta {
   slug: string
   title: string
   date: string

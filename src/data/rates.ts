@@ -1,5 +1,5 @@
 /** ILLUSTRATIVE SAMPLE DATA — not live RBI / DBIE extracts. As-of labels are demo only. */
-export const keyRatesAsOf = 'Illustrative as-of Nov 2025'
+export const keyRatesAsOf = 'Nov 2025 (sample)'
 
 export const keyRates = [
   { label: 'Policy Repo Rate', value: '5.50%', hint: 'Sample' },
@@ -63,4 +63,4 @@ export const dashboardTable = [
 ]
 
 export const dataFootnote =
-  'Sources: illustrative composite for UX prototyping — not an RBI DBIE extract or official statistical release.'
+  'Illustrative · not for compliance. Sources: illustrative composite for UX prototyping — not an RBI DBIE extract or official statistical release. Always defer to rbi.org.in / DBIE for authoritative series.'

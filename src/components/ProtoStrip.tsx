@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom'
+
 export function ProtoStrip() {
   return (
     <div className="proto-strip" role="note">
@@ -6,7 +8,10 @@ export function ProtoStrip() {
           Unofficial prototype · Illustrative data
         </p>
         <p className="text-[0.65rem] normal-case tracking-normal text-cream/70">
-          Not rbi.org.in · Not affiliated with the Reserve Bank of India
+          Not rbi.org.in · Not affiliated with RBI ·{' '}
+          <Link to="/about/prototype" className="underline-offset-2 hover:underline">
+            About this prototype
+          </Link>
         </p>
       </div>
     </div>

@@ -1,4 +1,6 @@
 import { Link } from 'react-router-dom'
+import { ExternalLink } from 'lucide-react'
+import { RBI_HOME } from '../data/meta'
 
 export function Footer() {
   return (
@@ -23,6 +25,11 @@ export function Footer() {
             <li>
               <Link to="/about" className="hover:text-cream">
                 About &amp; mandate
+              </Link>
+            </li>
+            <li>
+              <Link to="/about/prototype" className="hover:text-cream">
+                About this prototype
               </Link>
             </li>
             <li>
@@ -75,8 +82,18 @@ export function Footer() {
           <p>
             All figures, rates, charts, circulars and document summaries are{' '}
             <strong className="text-cream/85">illustrative sample data</strong> created for this
-            concept. For authoritative information, consult the official RBI website and primary
-            legal sources.
+            concept. The <strong className="text-cream/85">only authoritative source</strong> is
+            the official RBI website at{' '}
+            <a
+              href={RBI_HOME}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1 font-medium text-gold hover:underline"
+            >
+              rbi.org.in
+              <ExternalLink className="h-3 w-3" aria-hidden />
+            </a>
+            .
           </p>
           <p>
             © {new Date().getFullYear()} RBI Knowledge Prototype (Unofficial Educational UX). Brand

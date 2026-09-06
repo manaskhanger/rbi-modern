@@ -18,6 +18,8 @@ import {
 import { reports, sampleReportCharts, mprCharts } from '../data/reports'
 import { Badge } from '../components/Badge'
 import { DisclaimerBanner } from '../components/DisclaimerBanner'
+import { AuthoritativeSource } from '../components/AuthoritativeSource'
+import { ContentReviewed, IllustrativeLabel } from '../components/IllustrativeLabel'
 
 const COLORS = ['#0B1D36', '#C5A572', '#1a3558', '#d4bc94']
 
@@ -36,7 +38,7 @@ function SampleTip({ active, payload, label }: {
           {typeof p.value === 'number' && p.name.includes('%') ? '' : ''}
         </p>
       ))}
-      <p className="mt-1 text-[10px] text-ink-muted">ILLUSTRATIVE SAMPLE DATA</p>
+      <p className="mt-1 text-[10px] text-ink-muted">Illustrative · not for compliance</p>
     </div>
   )
 }
@@ -51,9 +53,10 @@ function FsrBody() {
       </p>
       <div className="mt-10 grid gap-5 lg:grid-cols-2">
         <div className="glass-card h-72 rounded-xl p-4">
-          <h2 className="mb-2 px-1 text-sm font-semibold text-navy dark:text-cream">
+          <h2 className="mb-1 px-1 text-sm font-semibold text-navy dark:text-cream">
             System CRAR (sample)
           </h2>
+          <IllustrativeLabel tone="chip" className="mb-2 px-1" />
           <ResponsiveContainer width="100%" height="90%">
             <LineChart data={sampleReportCharts.capitalAdequacy}>
               <CartesianGrid strokeDasharray="3 3" stroke="rgba(128,128,128,0.2)" />
@@ -65,9 +68,10 @@ function FsrBody() {
           </ResponsiveContainer>
         </div>
         <div className="glass-card h-72 rounded-xl p-4">
-          <h2 className="mb-2 px-1 text-sm font-semibold text-navy dark:text-cream">
+          <h2 className="mb-1 px-1 text-sm font-semibold text-navy dark:text-cream">
             GNPA / NNPA (sample)
           </h2>
+          <IllustrativeLabel tone="chip" className="mb-2 px-1" />
           <ResponsiveContainer width="100%" height="90%">
             <BarChart data={sampleReportCharts.npaTrend}>
               <CartesianGrid strokeDasharray="3 3" stroke="rgba(128,128,128,0.2)" />
@@ -83,7 +87,8 @@ function FsrBody() {
       </div>
       <div className="mt-5 grid gap-5 lg:grid-cols-2">
         <div className="glass-card h-72 rounded-xl p-4">
-          <h2 className="mb-2 px-1 text-sm font-semibold">Credit share by sector (sample)</h2>
+          <h2 className="mb-1 px-1 text-sm font-semibold">Credit share by sector (sample)</h2>
+          <IllustrativeLabel tone="chip" className="mb-2 px-1" />
           <ResponsiveContainer width="100%" height="90%">
             <PieChart>
               <Pie
@@ -104,7 +109,8 @@ function FsrBody() {
           </ResponsiveContainer>
         </div>
         <div className="glass-card rounded-xl p-5">
-          <h2 className="mb-3 text-sm font-semibold">Snapshot table (sample)</h2>
+          <h2 className="mb-1 text-sm font-semibold">Snapshot table (sample)</h2>
+          <IllustrativeLabel className="mb-3" />
           <div className="overflow-x-auto">
             <table className="w-full text-left text-sm">
               <thead>
@@ -141,7 +147,8 @@ function MprBody() {
       </p>
       <div className="mt-10 grid gap-5 lg:grid-cols-2">
         <div className="glass-card h-72 rounded-xl p-4">
-          <h2 className="mb-2 px-1 text-sm font-semibold">CPI path &amp; sample forecast band</h2>
+          <h2 className="mb-1 px-1 text-sm font-semibold">CPI path &amp; sample forecast band</h2>
+          <IllustrativeLabel tone="chip" className="mb-2 px-1" />
           <ResponsiveContainer width="100%" height="90%">
             <LineChart data={mprCharts.inflationPath}>
               <CartesianGrid strokeDasharray="3 3" stroke="rgba(128,128,128,0.2)" />
@@ -157,7 +164,8 @@ function MprBody() {
           </ResponsiveContainer>
         </div>
         <div className="glass-card h-72 rounded-xl p-4">
-          <h2 className="mb-2 px-1 text-sm font-semibold">Real GDP growth path (sample)</h2>
+          <h2 className="mb-1 px-1 text-sm font-semibold">Real GDP growth path (sample)</h2>
+          <IllustrativeLabel tone="chip" className="mb-2 px-1" />
           <ResponsiveContainer width="100%" height="90%">
             <BarChart data={mprCharts.growthPath}>
               <CartesianGrid strokeDasharray="3 3" stroke="rgba(128,128,128,0.2)" />
@@ -171,7 +179,8 @@ function MprBody() {
       </div>
       <div className="mt-5 grid gap-5 lg:grid-cols-2">
         <div className="glass-card h-72 rounded-xl p-4">
-          <h2 className="mb-2 px-1 text-sm font-semibold">Transmission channels (index, sample)</h2>
+          <h2 className="mb-1 px-1 text-sm font-semibold">Transmission channels (index, sample)</h2>
+          <IllustrativeLabel tone="chip" className="mb-2 px-1" />
           <ResponsiveContainer width="100%" height="90%">
             <BarChart data={mprCharts.transmission} layout="vertical" margin={{ left: 24 }}>
               <CartesianGrid strokeDasharray="3 3" stroke="rgba(128,128,128,0.2)" />
@@ -183,7 +192,8 @@ function MprBody() {
           </ResponsiveContainer>
         </div>
         <div className="glass-card rounded-xl p-5">
-          <h2 className="mb-3 text-sm font-semibold">Baseline assumptions (illustrative)</h2>
+          <h2 className="mb-1 text-sm font-semibold">Baseline assumptions (illustrative)</h2>
+          <IllustrativeLabel className="mb-3" />
           <table className="w-full text-left text-sm">
             <thead>
               <tr className="border-b border-navy/10 dark:border-white/10">
@@ -237,9 +247,14 @@ export function ReportDetail() {
       <Badge>{report.type}</Badge>
       <h1 className="mt-3 text-2xl font-bold text-navy dark:text-cream md:text-3xl">{report.title}</h1>
       <p className="mt-2 text-sm text-ink-muted dark:text-cream/55">
-        {report.date} · ~{report.pages} pages · ILLUSTRATIVE SAMPLE DATA
+        {report.date} · ~{report.pages} pages · Illustrative · not for compliance
       </p>
+      <ContentReviewed lastReviewed={report.lastReviewed} className="mt-1" />
       <p className="mt-3 max-w-3xl text-sm text-ink-muted dark:text-cream/70">{report.summary}</p>
+
+      <div className="mt-6 max-w-3xl">
+        <AuthoritativeSource section="publications" />
+      </div>
 
       {report.variant === 'mpr' ? <MprBody /> : <FsrBody />}
 

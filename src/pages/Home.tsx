@@ -1,12 +1,13 @@
 import { Link } from 'react-router-dom'
 import { motion, useReducedMotion } from 'framer-motion'
-import { ArrowRight, Landmark, Scale, Smartphone, Shield } from 'lucide-react'
+import { ArrowRight, Landmark, Scale, Smartphone, Shield, Info } from 'lucide-react'
 import { keyRates, keyRatesAsOf } from '../data/rates'
 import { newsItems } from '../data/news'
 import { Reveal } from '../components/Reveal'
 import { CardLink } from '../components/Card'
 import { Badge } from '../components/Badge'
 import { DisclaimerBanner } from '../components/DisclaimerBanner'
+import { IllustrativeLabel } from '../components/IllustrativeLabel'
 import { fadeUp, stagger } from '../lib/motion'
 
 const pillars = [
@@ -89,14 +90,41 @@ export function Home() {
               </Link>
             </motion.div>
           </motion.div>
+
+          <motion.div
+            variants={reduce ? undefined : fadeUp}
+            initial={reduce ? undefined : 'hidden'}
+            animate={reduce ? undefined : 'visible'}
+            className="mt-10 max-w-3xl"
+          >
+            <Link
+              to="/about/prototype"
+              className="group flex gap-3 rounded-xl border border-gold/40 bg-gold/10 p-4 transition hover:border-gold/60 hover:bg-gold/15 dark:border-gold/30"
+            >
+              <Info
+                className="mt-0.5 h-5 w-5 shrink-0 text-gold-dim dark:text-gold"
+                aria-hidden
+              />
+              <div className="min-w-0">
+                <p className="text-sm font-semibold text-navy dark:text-cream">
+                  What this prototype is / isn’t
+                </p>
+                <p className="mt-1 text-sm text-ink-muted dark:text-cream/65">
+                  Educational UX concept · not affiliated with RBI · illustrative data · always
+                  defer to rbi.org.in for official text.
+                </p>
+                <span className="mt-2 inline-flex items-center gap-1 text-sm font-medium text-gold-dim group-hover:underline dark:text-gold">
+                  About this prototype <ArrowRight className="h-3.5 w-3.5" />
+                </span>
+              </div>
+            </Link>
+          </motion.div>
         </div>
       </section>
 
       <section className="border-b border-navy/10 bg-white/70 dark:border-white/10 dark:bg-navy-light/40">
         <div className="mx-auto max-w-6xl px-4 py-5 md:px-6">
-          <p className="mb-3 text-center text-[11px] font-semibold uppercase tracking-widest text-gold-dim dark:text-gold">
-            Key rates · ILLUSTRATIVE SAMPLE DATA · {keyRatesAsOf}
-          </p>
+          <IllustrativeLabel asOf={keyRatesAsOf} tone="chip" className="mb-3 text-center" />
           <div className="grid grid-cols-2 gap-2 sm:grid-cols-3 lg:grid-cols-6">
             {keyRates.map((r) => (
               <div
@@ -105,7 +133,7 @@ export function Home() {
               >
                 <p className="text-[10px] leading-tight text-ink-muted dark:text-cream/55">{r.label}</p>
                 <p className="mt-1 text-lg font-bold tabular-nums text-navy dark:text-cream">{r.value}</p>
-                <p className="text-[10px] text-gold-dim">{r.hint}</p>
+                <p className="text-[10px] text-gold-dim">Illustrative · not for compliance</p>
               </div>
             ))}
           </div>

@@ -7,6 +7,7 @@ import { CardLink } from '../components/Card'
 import { Badge } from '../components/Badge'
 import { DisclaimerBanner } from '../components/DisclaimerBanner'
 import { mastersDirections, mdCategories } from '../data/mastersDirections'
+import { formatContentReviewed } from '../data/meta'
 
 export function MastersDirections() {
   const [query, setQuery] = useState('')
@@ -77,6 +78,7 @@ export function MastersDirections() {
               <h2 className="mt-2 text-sm font-semibold text-navy dark:text-cream">{d.title}</h2>
               <p className="mt-1.5 line-clamp-2 text-sm text-ink-muted dark:text-cream/65">{d.summary}</p>
               <p className="mt-2 text-xs text-ink-muted dark:text-cream/50">Audience: {d.audience}</p>
+              <p className="mt-1 text-[10px] text-ink-muted/80 dark:text-cream/40">{formatContentReviewed(d.lastReviewed)}</p>
             </CardLink>
           ))}
         </div>

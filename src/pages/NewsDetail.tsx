@@ -3,6 +3,8 @@ import { ArrowLeft } from 'lucide-react'
 import { newsItems } from '../data/news'
 import { Badge } from '../components/Badge'
 import { DisclaimerBanner } from '../components/DisclaimerBanner'
+import { AuthoritativeSource } from '../components/AuthoritativeSource'
+import { ContentReviewed } from '../components/IllustrativeLabel'
 
 export function NewsDetail() {
   const { slug } = useParams()
@@ -30,6 +32,12 @@ export function NewsDetail() {
         {item.title}
       </h1>
       <p className="mt-3 text-sm text-ink-muted dark:text-cream/55">{item.date}</p>
+      <ContentReviewed lastReviewed={item.lastReviewed} className="mt-1" />
+
+      <div className="mt-6">
+        <AuthoritativeSource section="pressReleases" />
+      </div>
+
       <p className="mt-6 text-lg text-ink-muted dark:text-cream/75">{item.excerpt}</p>
       <div className="mt-8 space-y-4">
         {item.body.map((p) => (

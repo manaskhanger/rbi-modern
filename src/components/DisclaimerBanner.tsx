@@ -1,11 +1,21 @@
-import { AlertTriangle } from 'lucide-react'
+import { AlertTriangle, ExternalLink } from 'lucide-react'
+import { RBI_HOME } from '../data/meta'
 
 export function DisclaimerBanner({ compact = false }: { compact?: boolean }) {
   if (compact) {
     return (
       <p className="text-xs text-ink-muted dark:text-cream/50">
         Unofficial educational / UX prototype — not the Reserve Bank of India website. Figures are
-        illustrative sample data.
+        illustrative sample data. The only authoritative source is{' '}
+        <a
+          href={RBI_HOME}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="font-medium text-gold-dim underline-offset-2 hover:underline dark:text-gold"
+        >
+          rbi.org.in
+        </a>
+        .
       </p>
     )
   }
@@ -19,9 +29,19 @@ export function DisclaimerBanner({ compact = false }: { compact?: boolean }) {
           affiliated with, endorsed by, or connected to RBI.
         </p>
         <p className="text-ink-muted dark:text-cream/65">
-          All rates, charts, circulars and document summaries are <strong>illustrative sample
-          content</strong> written for this prototype. For authoritative information, use the
-          official RBI website and gazetted instruments.
+          All rates, charts, circulars and document summaries are{' '}
+          <strong>illustrative sample content</strong> written for this prototype. The only
+          authoritative source is the official RBI website at{' '}
+          <a
+            href={RBI_HOME}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-1 font-medium text-gold-dim underline-offset-2 hover:underline dark:text-gold"
+          >
+            rbi.org.in
+            <ExternalLink className="h-3 w-3" aria-hidden />
+          </a>
+          ; always defer to gazetted instruments and primary legal sources.
         </p>
       </div>
     </div>
