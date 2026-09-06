@@ -20,6 +20,20 @@ export interface ContentMeta {
   lastReviewed?: string
 }
 
+export type ApplicabilityLevel = 'Yes' | 'Partial' | 'No' | 'Case-by-case'
+
+export interface ApplicabilityRow {
+  entity: string
+  applies: ApplicabilityLevel
+  notes: string
+}
+
+export interface ChangeHistoryEntry {
+  date: string
+  label: string
+  note: string
+}
+
 export interface MastersDirection extends ContentMeta {
   slug: string
   code: string
@@ -30,10 +44,19 @@ export interface MastersDirection extends ContentMeta {
   issued: string
   updated: string
   effectiveNote: string
+  /** Short formal educational paraphrase */
   summary: string
+  /** Longer plain-English educational paraphrase */
   plainEnglish: string
+  /** Deeper formal summary for Plain/Formal toggle (falls back to summary) */
+  formalSummary?: string
   obligations: string[]
   relatedTopics: string[]
+  /** Related circular slugs in this prototype catalogue */
+  relatedCircularSlugs?: string[]
+  applicability?: ApplicabilityRow[]
+  /** Prototype timeline — entries labeled illustrative in UI */
+  changeHistory?: ChangeHistoryEntry[]
   toc: { id: string; label: string }[]
   sections: { id: string; heading: string; body: string }[]
 }
@@ -45,10 +68,13 @@ export interface Circular extends ContentMeta {
   date: string
   ref: string
   summary: string
+  plainEnglish?: string
+  formalSummary?: string
   body: string[]
   audience: string
   audiences: AudienceTag[]
   relatedTopics: string[]
+  relatedDirectionSlugs?: string[]
   effectiveNote: string
 }
 
@@ -62,6 +88,12 @@ export interface NewsItem extends ContentMeta {
   featured?: boolean
 }
 
+export interface ReportRelatedLink {
+  label: string
+  href: string
+  kind: 'policy' | 'data' | 'directions' | 'circulars'
+}
+
 export interface Report extends ContentMeta {
   slug: string
   title: string
@@ -70,7 +102,8 @@ export interface Report extends ContentMeta {
   summary: string
   pages: number
   rich?: boolean
-  variant?: 'fsr' | 'mpr'
+  variant?: 'fsr' | 'mpr' | 'annual' | 'payments'
+  relatedLinks?: ReportRelatedLink[]
 }
 
 export interface GlossaryTerm {

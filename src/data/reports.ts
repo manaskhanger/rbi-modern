@@ -11,6 +11,11 @@ export const reports: Report[] = [
     variant: 'fsr',
     summary:
       'Sample digest covering banking soundness, household leverage themes, and market volatility indicators with demo charts.',
+    relatedLinks: [
+      { label: 'Monetary policy desk', href: '/monetary-policy', kind: 'policy' },
+      { label: 'Key rates & data charts', href: '/data', kind: 'data' },
+      { label: 'Masters Directions catalogue', href: '/masters-directions', kind: 'directions' },
+    ],
   },
   {
     slug: 'monetary-policy-report-demo',
@@ -22,24 +27,44 @@ export const reports: Report[] = [
     variant: 'mpr',
     summary:
       'Educational chapters explaining forecasting fan charts, output gap concepts, and transmission channels — illustrative figures only.',
+    relatedLinks: [
+      { label: 'Monetary policy desk', href: '/monetary-policy', kind: 'policy' },
+      { label: 'Macro data samples', href: '/data', kind: 'data' },
+    ],
   },
   {
     slug: 'report-trend-banking-2025',
-    title: 'Report on Trend and Progress of Banking in India (Demo Extract)',
+    title: 'Annual Report Style — Trend & Progress of Banking (Demo)',
     date: '2025-08-15',
-    type: 'Banking',
+    type: 'Annual / Banking',
     pages: 120,
+    rich: true,
+    variant: 'annual',
     summary:
-      'High-level narrative on credit growth, asset quality and digital adoption across bank groups — sample figures only.',
+      'Annual-report style chapters on balance-sheet growth, group-wise credit, digital adoption and capital — all illustrative sample figures.',
+    relatedLinks: [
+      { label: 'Masters Directions', href: '/masters-directions', kind: 'directions' },
+      { label: 'Recent circulars', href: '/circulars', kind: 'circulars' },
+      { label: 'Banking data samples', href: '/data', kind: 'data' },
+      { label: 'Monetary policy', href: '/monetary-policy', kind: 'policy' },
+    ],
   },
   {
     slug: 'payments-and-settlement-systems',
-    title: 'Payment and Settlement Systems — Annual Illustrative Review',
+    title: 'Payments & Financial Inclusion — Illustrative Annual Review',
     date: '2025-05-20',
-    type: 'Payments',
+    type: 'Payments / Inclusion',
     pages: 64,
+    rich: true,
+    variant: 'payments',
     summary:
-      'Volumes and values across UPI, IMPS, NEFT, RTGS and card networks with consumer protection notes.',
+      'Volumes and values across UPI, IMPS, NEFT, RTGS plus financial-inclusion outreach metrics — educational charts only.',
+    relatedLinks: [
+      { label: 'Payment Aggregators MD', href: '/masters-directions/payment-aggregation', kind: 'directions' },
+      { label: 'PPI Master Direction', href: '/masters-directions/prepaid-payment-instruments', kind: 'directions' },
+      { label: 'Payments circulars', href: '/circulars', kind: 'circulars' },
+      { label: 'Data desk', href: '/data', kind: 'data' },
+    ],
   },
   {
     slug: 'handbook-statistics-excerpt',
@@ -49,6 +74,7 @@ export const reports: Report[] = [
     pages: 200,
     summary:
       'Curated demo tables for GDP, CPI, money aggregates and external sector indicators for classroom use.',
+    relatedLinks: [{ label: 'Interactive data samples', href: '/data', kind: 'data' }],
   },
   {
     slug: 'currency-management-review',
@@ -58,6 +84,14 @@ export const reports: Report[] = [
     pages: 36,
     summary:
       'Explains indent planning, chest operations and counterfeit detection trends using illustrative data.',
+    relatedLinks: [
+      {
+        label: 'Currency Distribution MD',
+        href: '/masters-directions/currency-distribution',
+        kind: 'directions',
+      },
+      { label: 'Currency chest circular', href: '/circulars/currency-chest-operations', kind: 'circulars' },
+    ],
   },
 ]
 
@@ -123,5 +157,67 @@ export const mprCharts = {
     { item: 'Monsoon / food prices', value: 'Normal base case', note: 'Narrative only' },
     { item: 'Fiscal impulse', value: 'Neutral-to-mild', note: 'Illustrative' },
     { item: 'Global growth', value: 'Soft landing', note: 'Scenario label' },
+  ],
+}
+
+/** ILLUSTRATIVE — Annual / Trend & Progress style */
+export const annualCharts = {
+  balanceSheet: [
+    { year: 'FY21', assets: 180, deposits: 142, credit: 108 },
+    { year: 'FY22', assets: 195, deposits: 152, credit: 118 },
+    { year: 'FY23', assets: 212, deposits: 164, credit: 132 },
+    { year: 'FY24', assets: 228, deposits: 176, credit: 148 },
+    { year: 'FY25', assets: 246, deposits: 190, credit: 164 },
+  ],
+  groupCredit: [
+    { group: 'Public sector', growth: 11.2 },
+    { group: 'Private sector', growth: 14.8 },
+    { group: 'Foreign banks', growth: 8.4 },
+    { group: 'SFBs (sample)', growth: 18.1 },
+  ],
+  digitalAdoption: [
+    { channel: 'Mobile / UPI', share: 48 },
+    { channel: 'Internet banking', share: 22 },
+    { channel: 'Branch / other', share: 18 },
+    { channel: 'Cards / POS', share: 12 },
+  ],
+  snapshot: [
+    { metric: 'System assets (₹ lakh cr, sample)', value: '246', note: 'Illustrative index' },
+    { metric: 'Credit–deposit ratio', value: '86%', note: 'Illustrative' },
+    { metric: 'CASA share', value: '41%', note: 'Illustrative' },
+    { metric: 'Digital txn share of retail', value: '70%', note: 'Illustrative' },
+    { metric: 'Branches (indexed)', value: '102', note: 'FY21=100 sample' },
+  ],
+}
+
+/** ILLUSTRATIVE — Payments & financial inclusion */
+export const paymentsCharts = {
+  volumes: [
+    { system: 'UPI', volume: 140, value: 20 },
+    { system: 'IMPS', volume: 18, value: 8 },
+    { system: 'NEFT', volume: 9, value: 35 },
+    { system: 'RTGS', volume: 2, value: 55 },
+    { system: 'Cards', volume: 25, value: 12 },
+  ],
+  upiTrend: [
+    { month: 'Apr', bn: 11.2 },
+    { month: 'May', bn: 11.8 },
+    { month: 'Jun', bn: 12.4 },
+    { month: 'Jul', bn: 13.1 },
+    { month: 'Aug', bn: 13.6 },
+    { month: 'Sep', bn: 14.0 },
+  ],
+  inclusion: [
+    { indicator: 'PMJDY accounts (index)', value: 128 },
+    { indicator: 'RuPay issuance (index)', value: 115 },
+    { indicator: 'BC outlets (index)', value: 122 },
+    { indicator: 'Women account share %', value: 56 },
+  ],
+  tableRows: [
+    { metric: 'UPI monthly volume (bn, sample)', value: '14.0', note: 'Illustrative peak month' },
+    { metric: 'Share of digital in retail payments', value: '82%', note: 'Illustrative' },
+    { metric: 'Complaint resolution within TAT', value: '94%', note: 'Illustrative SLA' },
+    { metric: 'Villages with BC access (index)', value: '119', note: 'FY21=100 sample' },
+    { metric: 'PPI outstanding (index)', value: '108', note: 'Illustrative' },
   ],
 }

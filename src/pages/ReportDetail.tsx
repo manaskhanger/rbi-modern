@@ -15,7 +15,13 @@ import {
   ResponsiveContainer,
   Legend,
 } from 'recharts'
-import { reports, sampleReportCharts, mprCharts } from '../data/reports'
+import {
+  reports,
+  sampleReportCharts,
+  mprCharts,
+  annualCharts,
+  paymentsCharts,
+} from '../data/reports'
 import { Badge } from '../components/Badge'
 import { DisclaimerBanner } from '../components/DisclaimerBanner'
 import { AuthoritativeSource } from '../components/AuthoritativeSource'
@@ -23,7 +29,11 @@ import { ContentReviewed, IllustrativeLabel } from '../components/IllustrativeLa
 
 const COLORS = ['#0B1D36', '#C5A572', '#1a3558', '#d4bc94']
 
-function SampleTip({ active, payload, label }: {
+function SampleTip({
+  active,
+  payload,
+  label,
+}: {
   active?: boolean
   payload?: { name: string; value: number; color: string }[]
   label?: string
@@ -35,11 +45,39 @@ function SampleTip({ active, payload, label }: {
       {payload.map((p) => (
         <p key={p.name} style={{ color: p.color }}>
           {p.name}: {p.value}
-          {typeof p.value === 'number' && p.name.includes('%') ? '' : ''}
         </p>
       ))}
       <p className="mt-1 text-[10px] text-ink-muted">Illustrative · not for compliance</p>
     </div>
+  )
+}
+
+function RelatedLinks({
+  links,
+}: {
+  links: NonNullable<(typeof reports)[number]['relatedLinks']>
+}) {
+  return (
+    <section className="mt-10 max-w-3xl">
+      <h2 className="text-sm font-semibold uppercase tracking-wider text-gold-dim dark:text-gold">
+        Related policy &amp; data
+      </h2>
+      <p className="mt-1 text-xs text-ink-muted dark:text-cream/50">
+        In-prototype cross-links for officers navigating from publications to policy/data pages.
+      </p>
+      <ul className="mt-3 flex flex-wrap gap-2">
+        {links.map((l) => (
+          <li key={l.href + l.label}>
+            <Link
+              to={l.href}
+              className="inline-flex items-center rounded-full border border-navy/10 bg-white/80 px-3 py-1.5 text-xs font-semibold text-navy transition hover:border-gold/40 dark:border-white/10 dark:bg-navy-light/40 dark:text-cream"
+            >
+              {l.label}
+            </Link>
+          </li>
+        ))}
+      </ul>
+    </section>
   )
 }
 
@@ -156,10 +194,36 @@ function MprBody() {
               <YAxis domain={[0, 8]} tick={{ fontSize: 11 }} />
               <Tooltip content={<SampleTip />} />
               <Legend />
-              <Line type="monotone" dataKey="high" name="High band" stroke="#d4bc94" strokeDasharray="4 4" dot={false} />
-              <Line type="monotone" dataKey="low" name="Low band" stroke="#d4bc94" strokeDasharray="4 4" dot={false} />
-              <Line type="monotone" dataKey="forecast" name="Forecast %" stroke="#C5A572" strokeWidth={2} />
-              <Line type="monotone" dataKey="actual" name="Actual %" stroke="#0B1D36" strokeWidth={2} />
+              <Line
+                type="monotone"
+                dataKey="high"
+                name="High band"
+                stroke="#d4bc94"
+                strokeDasharray="4 4"
+                dot={false}
+              />
+              <Line
+                type="monotone"
+                dataKey="low"
+                name="Low band"
+                stroke="#d4bc94"
+                strokeDasharray="4 4"
+                dot={false}
+              />
+              <Line
+                type="monotone"
+                dataKey="forecast"
+                name="Forecast %"
+                stroke="#C5A572"
+                strokeWidth={2}
+              />
+              <Line
+                type="monotone"
+                dataKey="actual"
+                name="Actual %"
+                stroke="#0B1D36"
+                strokeWidth={2}
+              />
             </LineChart>
           </ResponsiveContainer>
         </div>
@@ -218,6 +282,193 @@ function MprBody() {
   )
 }
 
+function AnnualBody() {
+  return (
+    <>
+      <p className="mt-6 max-w-3xl text-sm leading-relaxed text-ink-muted dark:text-cream/75">
+        Annual-report style digest: balance-sheet aggregates, group-wise credit growth, and digital
+        channel mix. Figures are <strong>ILLUSTRATIVE SAMPLE DATA</strong> for officer UX review —
+        not extracts from any RBI Annual Report or Trend &amp; Progress publication.
+      </p>
+      <div className="mt-10 grid gap-5 lg:grid-cols-2">
+        <div className="glass-card h-72 rounded-xl p-4">
+          <h2 className="mb-1 px-1 text-sm font-semibold">Balance sheet aggregates (index)</h2>
+          <IllustrativeLabel tone="chip" className="mb-2 px-1" />
+          <ResponsiveContainer width="100%" height="90%">
+            <LineChart data={annualCharts.balanceSheet}>
+              <CartesianGrid strokeDasharray="3 3" stroke="rgba(128,128,128,0.2)" />
+              <XAxis dataKey="year" tick={{ fontSize: 11 }} />
+              <YAxis tick={{ fontSize: 11 }} />
+              <Tooltip content={<SampleTip />} />
+              <Legend />
+              <Line type="monotone" dataKey="assets" name="Assets" stroke="#0B1D36" strokeWidth={2} />
+              <Line
+                type="monotone"
+                dataKey="deposits"
+                name="Deposits"
+                stroke="#C5A572"
+                strokeWidth={2}
+              />
+              <Line type="monotone" dataKey="credit" name="Credit" stroke="#1a3558" strokeWidth={2} />
+            </LineChart>
+          </ResponsiveContainer>
+        </div>
+        <div className="glass-card h-72 rounded-xl p-4">
+          <h2 className="mb-1 px-1 text-sm font-semibold">Credit growth by bank group (sample %)</h2>
+          <IllustrativeLabel tone="chip" className="mb-2 px-1" />
+          <ResponsiveContainer width="100%" height="90%">
+            <BarChart data={annualCharts.groupCredit} layout="vertical" margin={{ left: 16 }}>
+              <CartesianGrid strokeDasharray="3 3" stroke="rgba(128,128,128,0.2)" />
+              <XAxis type="number" tick={{ fontSize: 11 }} />
+              <YAxis type="category" dataKey="group" width={110} tick={{ fontSize: 10 }} />
+              <Tooltip content={<SampleTip />} />
+              <Bar dataKey="growth" name="YoY %" fill="#C5A572" radius={[0, 3, 3, 0]} />
+            </BarChart>
+          </ResponsiveContainer>
+        </div>
+      </div>
+      <div className="mt-5 grid gap-5 lg:grid-cols-2">
+        <div className="glass-card h-72 rounded-xl p-4">
+          <h2 className="mb-1 px-1 text-sm font-semibold">Retail channel mix (sample %)</h2>
+          <IllustrativeLabel tone="chip" className="mb-2 px-1" />
+          <ResponsiveContainer width="100%" height="90%">
+            <PieChart>
+              <Pie
+                data={annualCharts.digitalAdoption}
+                dataKey="share"
+                nameKey="channel"
+                cx="50%"
+                cy="50%"
+                outerRadius={90}
+                label
+              >
+                {annualCharts.digitalAdoption.map((_, i) => (
+                  <Cell key={i} fill={COLORS[i % COLORS.length]} />
+                ))}
+              </Pie>
+              <Tooltip />
+            </PieChart>
+          </ResponsiveContainer>
+        </div>
+        <div className="glass-card rounded-xl p-5">
+          <h2 className="mb-1 text-sm font-semibold">Annual snapshot (illustrative)</h2>
+          <IllustrativeLabel className="mb-3" />
+          <table className="w-full text-left text-sm">
+            <thead>
+              <tr className="border-b border-navy/10 dark:border-white/10">
+                <th className="py-2">Metric</th>
+                <th className="py-2">Value</th>
+                <th className="py-2">Note</th>
+              </tr>
+            </thead>
+            <tbody>
+              {annualCharts.snapshot.map((row) => (
+                <tr key={row.metric} className="border-b border-navy/5 dark:border-white/5">
+                  <td className="py-2">{row.metric}</td>
+                  <td className="py-2 font-medium tabular-nums">{row.value}</td>
+                  <td className="py-2 text-ink-muted dark:text-cream/55">{row.note}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </>
+  )
+}
+
+function PaymentsBody() {
+  return (
+    <>
+      <p className="mt-6 max-w-3xl text-sm leading-relaxed text-ink-muted dark:text-cream/75">
+        Payments and financial-inclusion style review: system volumes/values, UPI trend, and
+        outreach indices. All numbers are <strong>ILLUSTRATIVE SAMPLE DATA</strong> — not official
+        payment system statistics.
+      </p>
+      <div className="mt-10 grid gap-5 lg:grid-cols-2">
+        <div className="glass-card h-72 rounded-xl p-4">
+          <h2 className="mb-1 px-1 text-sm font-semibold">Payment systems — volume vs value index</h2>
+          <IllustrativeLabel tone="chip" className="mb-2 px-1" />
+          <ResponsiveContainer width="100%" height="90%">
+            <BarChart data={paymentsCharts.volumes}>
+              <CartesianGrid strokeDasharray="3 3" stroke="rgba(128,128,128,0.2)" />
+              <XAxis dataKey="system" tick={{ fontSize: 11 }} />
+              <YAxis tick={{ fontSize: 11 }} />
+              <Tooltip content={<SampleTip />} />
+              <Legend />
+              <Bar dataKey="volume" name="Volume idx" fill="#0B1D36" radius={[3, 3, 0, 0]} />
+              <Bar dataKey="value" name="Value idx" fill="#C5A572" radius={[3, 3, 0, 0]} />
+            </BarChart>
+          </ResponsiveContainer>
+        </div>
+        <div className="glass-card h-72 rounded-xl p-4">
+          <h2 className="mb-1 px-1 text-sm font-semibold">UPI monthly volume (bn, sample)</h2>
+          <IllustrativeLabel tone="chip" className="mb-2 px-1" />
+          <ResponsiveContainer width="100%" height="90%">
+            <LineChart data={paymentsCharts.upiTrend}>
+              <CartesianGrid strokeDasharray="3 3" stroke="rgba(128,128,128,0.2)" />
+              <XAxis dataKey="month" tick={{ fontSize: 11 }} />
+              <YAxis tick={{ fontSize: 11 }} />
+              <Tooltip content={<SampleTip />} />
+              <Line type="monotone" dataKey="bn" name="Bn txns" stroke="#C5A572" strokeWidth={2} />
+            </LineChart>
+          </ResponsiveContainer>
+        </div>
+      </div>
+      <div className="mt-5 grid gap-5 lg:grid-cols-2">
+        <div className="glass-card h-72 rounded-xl p-4">
+          <h2 className="mb-1 px-1 text-sm font-semibold">Inclusion indicators (index / %)</h2>
+          <IllustrativeLabel tone="chip" className="mb-2 px-1" />
+          <ResponsiveContainer width="100%" height="90%">
+            <BarChart data={paymentsCharts.inclusion} layout="vertical" margin={{ left: 8 }}>
+              <CartesianGrid strokeDasharray="3 3" stroke="rgba(128,128,128,0.2)" />
+              <XAxis type="number" tick={{ fontSize: 11 }} />
+              <YAxis type="category" dataKey="indicator" width={140} tick={{ fontSize: 9 }} />
+              <Tooltip content={<SampleTip />} />
+              <Bar dataKey="value" name="Index / %" fill="#1a3558" radius={[0, 3, 3, 0]} />
+            </BarChart>
+          </ResponsiveContainer>
+        </div>
+        <div className="glass-card rounded-xl p-5">
+          <h2 className="mb-1 text-sm font-semibold">Payments &amp; inclusion snapshot</h2>
+          <IllustrativeLabel className="mb-3" />
+          <table className="w-full text-left text-sm">
+            <thead>
+              <tr className="border-b border-navy/10 dark:border-white/10">
+                <th className="py-2">Metric</th>
+                <th className="py-2">Value</th>
+                <th className="py-2">Note</th>
+              </tr>
+            </thead>
+            <tbody>
+              {paymentsCharts.tableRows.map((row) => (
+                <tr key={row.metric} className="border-b border-navy/5 dark:border-white/5">
+                  <td className="py-2">{row.metric}</td>
+                  <td className="py-2 font-medium tabular-nums">{row.value}</td>
+                  <td className="py-2 text-ink-muted dark:text-cream/55">{row.note}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </>
+  )
+}
+
+function RichBody({ variant }: { variant?: string }) {
+  switch (variant) {
+    case 'mpr':
+      return <MprBody />
+    case 'annual':
+      return <AnnualBody />
+    case 'payments':
+      return <PaymentsBody />
+    default:
+      return <FsrBody />
+  }
+}
+
 export function ReportDetail() {
   const { slug } = useParams()
   const report = reports.find((r) => r.slug === slug)
@@ -227,7 +478,7 @@ export function ReportDetail() {
       <div className="mx-auto max-w-3xl px-4 py-20 text-center">
         <p className="font-semibold">Rich report sample not available for this slug.</p>
         <p className="mt-2 text-sm text-ink-muted">
-          Open the Financial Stability or Monetary Policy report cards for full demo layouts.
+          Open FSR, MPR, Annual banking, or Payments/Inclusion cards for full demo layouts.
         </p>
         <Link to="/reports" className="mt-4 inline-block text-gold-dim underline">
           Back to reports
@@ -256,7 +507,11 @@ export function ReportDetail() {
         <AuthoritativeSource section="publications" />
       </div>
 
-      {report.variant === 'mpr' ? <MprBody /> : <FsrBody />}
+      <RichBody variant={report.variant} />
+
+      {report.relatedLinks && report.relatedLinks.length > 0 && (
+        <RelatedLinks links={report.relatedLinks} />
+      )}
 
       <div className="mt-10">
         <DisclaimerBanner />
