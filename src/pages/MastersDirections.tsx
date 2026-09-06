@@ -7,21 +7,44 @@ import { CardLink } from '../components/Card'
 import { Badge } from '../components/Badge'
 import { DisclaimerBanner } from '../components/DisclaimerBanner'
 import { mastersDirections, mdCategories } from '../data/mastersDirections'
+import { AUDIENCE_FILTERS, yearFromDate, type AudienceFilter } from '../data/types'
 import { formatContentReviewed } from '../data/meta'
+
+const yearOptions = [
+  'All',
+  ...Array.from(
+    new Set(mastersDirections.flatMap((d) => [yearFromDate(d.updated), yearFromDate(d.issued)])),
+  ).sort((a, b) => b.localeCompare(a)),
+] as const
 
 export function MastersDirections() {
   const [query, setQuery] = useState('')
   const [category, setCategory] = useState('All')
+  const [audience, setAudience] = useState<AudienceFilter>('All')
+  const [year, setYear] = useState<string>('All')
   const [view, setView] = useState<'cards' | 'table'>('cards')
 
   const filtered = useMemo(() => {
     const q = query.toLowerCase().trim()
     return mastersDirections.filter((d) => {
       const catOk = category === 'All' || d.category === category
+      const audOk =
+        audience === 'All' || d.audiences.includes(audience as Exclude<AudienceFilter, 'All'>)
+      const yearOk =
+        year === 'All' ||
+        yearFromDate(d.updated) === year ||
+        yearFromDate(d.issued) === year
       const text = `${d.title} ${d.summary} ${d.category} ${d.code} ${d.audience}`.toLowerCase()
-      return catOk && (!q || text.includes(q))
+      return catOk && audOk && yearOk && (!q || text.includes(q))
     })
-  }, [query, category])
+  }, [query, category, audience, year])
+
+  function clearFilters() {
+    setQuery('')
+    setCategory('All')
+    setAudience('All')
+    setYear('All')
+  }
 
   return (
     <div className="mx-auto max-w-6xl px-4 py-10 md:px-6 md:py-14">
@@ -36,13 +59,23 @@ export function MastersDirections() {
         categories={mdCategories}
         category={category}
         onCategory={setCategory}
+        audiences={AUDIENCE_FILTERS}
+        audience={audience}
+        onAudience={(v) => setAudience(v as AudienceFilter)}
+        years={yearOptions}
+        year={year}
+        onYear={setYear}
         placeholder="Search by title, code, audience…"
       />
       <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
         <p className="text-sm text-ink-muted dark:text-cream/55">
           Showing {filtered.length} of {mastersDirections.length}
         </p>
-        <div className="flex rounded-md border border-navy/10 dark:border-white/15" role="group" aria-label="View mode">
+        <div
+          className="flex rounded-md border border-navy/10 dark:border-white/15"
+          role="group"
+          aria-label="View mode"
+        >
           <button
             type="button"
             onClick={() => setView('cards')}
@@ -77,8 +110,22 @@ export function MastersDirections() {
               </div>
               <h2 className="mt-2 text-sm font-semibold text-navy dark:text-cream">{d.title}</h2>
               <p className="mt-1.5 line-clamp-2 text-sm text-ink-muted dark:text-cream/65">{d.summary}</p>
-              <p className="mt-2 text-xs text-ink-muted dark:text-cream/50">Audience: {d.audience}</p>
-              <p className="mt-1 text-[10px] text-ink-muted/80 dark:text-cream/40">{formatContentReviewed(d.lastReviewed)}</p>
+              <p className="mt-2 text-xs text-ink-muted dark:text-cream/50">
+                Audience: {d.audience}
+              </p>
+              <p className="mt-1 flex flex-wrap gap-1">
+                {d.audiences.map((a) => (
+                  <span
+                    key={a}
+                    className="rounded border border-navy/10 px-1.5 py-0.5 text-[10px] text-ink-muted dark:border-white/15 dark:text-cream/50"
+                  >
+                    {a}
+                  </span>
+                ))}
+              </p>
+              <p className="mt-1 text-[10px] text-ink-muted/80 dark:text-cream/40">
+                {formatContentReviewed(d.lastReviewed)}
+              </p>
             </CardLink>
           ))}
         </div>
@@ -107,8 +154,12 @@ export function MastersDirections() {
                     </Link>
                   </td>
                   <td className="px-3 py-2 text-ink-muted dark:text-cream/65">{d.category}</td>
-                  <td className="px-3 py-2 tabular-nums text-ink-muted dark:text-cream/65">{d.updated}</td>
-                  <td className="px-3 py-2 text-xs text-ink-muted dark:text-cream/55">{d.audience}</td>
+                  <td className="px-3 py-2 tabular-nums text-ink-muted dark:text-cream/65">
+                    {d.updated}
+                  </td>
+                  <td className="px-3 py-2 text-xs text-ink-muted dark:text-cream/55">
+                    {d.audiences.join(', ')}
+                  </td>
                 </tr>
               ))}
             </tbody>
@@ -122,10 +173,7 @@ export function MastersDirections() {
           <button
             type="button"
             className="mt-3 text-sm font-medium text-gold-dim underline dark:text-gold"
-            onClick={() => {
-              setQuery('')
-              setCategory('All')
-            }}
+            onClick={clearFilters}
           >
             Clear filters
           </button>

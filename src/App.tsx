@@ -32,6 +32,7 @@ const ReportDetail = lazy(() =>
 const Data = lazy(() => import('./pages/Data').then((m) => ({ default: m.Data })))
 const Learn = lazy(() => import('./pages/Learn').then((m) => ({ default: m.Learn })))
 const Offices = lazy(() => import('./pages/Offices').then((m) => ({ default: m.Offices })))
+const Search = lazy(() => import('./pages/Search').then((m) => ({ default: m.Search })))
 const NotFound = lazy(() => import('./pages/NotFound').then((m) => ({ default: m.NotFound })))
 
 function RouteFallback() {
@@ -65,6 +66,7 @@ export default function App() {
               <Route path="data" element={<Data />} />
               <Route path="learn" element={<Learn />} />
               <Route path="offices" element={<Offices />} />
+              <Route path="search" element={<Search />} />
               <Route path="*" element={<NotFound />} />
             </Route>
           </Routes>

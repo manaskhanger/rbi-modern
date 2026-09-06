@@ -12,6 +12,7 @@ import { PageHeader } from '../components/PageHeader'
 import { Reveal } from '../components/Reveal'
 import { DisclaimerBanner } from '../components/DisclaimerBanner'
 import { glossary, howRbiWorks } from '../data/glossary'
+import { slugifyTerm } from '../lib/searchIndex'
 
 const icons = { Target, Building2, Smartphone, Banknote, Globe2, Shield } as const
 
@@ -116,7 +117,7 @@ export function Learn() {
         </div>
       </section>
 
-      <section>
+      <section id="glossary">
         <div className="mb-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
           <h2 className="text-2xl font-bold text-navy dark:text-cream">Glossary</h2>
           <div className="relative w-full sm:max-w-xs">
@@ -133,7 +134,8 @@ export function Learn() {
           {terms.map((t) => (
             <div
               key={t.term}
-              className="rounded-2xl border border-navy/8 bg-white/70 px-5 py-4 dark:border-white/10 dark:bg-navy-light/40"
+              id={`glossary-${slugifyTerm(t.term)}`}
+              className="scroll-mt-28 rounded-2xl border border-navy/8 bg-white/70 px-5 py-4 dark:border-white/10 dark:bg-navy-light/40"
             >
               <h3 className="font-semibold text-navy dark:text-cream">{t.term}</h3>
               <p className="mt-1 text-sm leading-relaxed text-ink-muted dark:text-cream/70">

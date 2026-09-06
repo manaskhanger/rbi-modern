@@ -10,6 +10,7 @@ export const circulars: Circular[] = [
     summary:
       'Adds expectations on ransomware readiness, privileged access monitoring, and third-party SOC integration.',
     audience: 'All Scheduled Commercial Banks',
+    audiences: ['Banks'],
     effectiveNote: 'Illustrative incremental controls — sample framing only.',
     relatedTopics: ['Cyber security', 'Third-party risk', 'SOC'],
     body: [
@@ -28,6 +29,7 @@ export const circulars: Circular[] = [
     summary:
       'Clarifies tiered KYC and MCC controls when onboarding small merchants onto UPI QR acceptance.',
     audience: 'Payment System Participants',
+    audiences: ['PSPs'],
     effectiveNote: 'Educational note on risk-based merchant due diligence.',
     relatedTopics: ['UPI', 'MCC', 'Merchant KYC'],
     body: [
@@ -45,6 +47,7 @@ export const circulars: Circular[] = [
     summary:
       'Streamlines Form ECB filing timelines and clarifies end-use certificates for refinancing.',
     audience: 'Authorised Dealer Category-I Banks',
+    audiences: ['Banks'],
     effectiveNote: 'Sample ECB reporting theme for AD literacy.',
     relatedTopics: ['ECB', 'FEMA', 'Reporting'],
     body: [
@@ -62,6 +65,7 @@ export const circulars: Circular[] = [
     summary:
       'Reiterates that borrower accounts can be upgraded only after arrears of interest and principal are paid in full.',
     audience: 'Commercial Banks & NBFCs',
+    audiences: ['Banks', 'NBFCs'],
     effectiveNote: 'Prudential clarification style — illustrative paraphrase.',
     relatedTopics: ['NPA', 'Asset classification'],
     body: [
@@ -79,6 +83,7 @@ export const circulars: Circular[] = [
     summary:
       'Updates escrow, customer interface and default loss sharing disclosures for co-lending arrangements.',
     audience: 'Banks and NBFCs in co-lending',
+    audiences: ['Banks', 'NBFCs'],
     effectiveNote: 'Operational co-lending themes for prototype UX.',
     relatedTopics: ['Co-lending', 'Escrow', 'KFS'],
     body: [
@@ -96,6 +101,7 @@ export const circulars: Circular[] = [
     summary:
       'Reminds acquirers and merchants that storing actual card data is prohibited; tokens and COF frameworks apply.',
     audience: 'Card payment ecosystem',
+    audiences: ['Banks', 'PSPs'],
     effectiveNote: 'Tokenisation reminder — educational composite.',
     relatedTopics: ['Tokenisation', 'Card data', 'COF'],
     body: [
@@ -113,6 +119,7 @@ export const circulars: Circular[] = [
     summary:
       'FAQ-style clarifications on eligible activities, third-party assurance and allocation reporting for green deposits.',
     audience: 'Regulated Entities offering green deposits',
+    audiences: ['Banks'],
     effectiveNote: 'Green deposits FAQ-style educational note.',
     relatedTopics: ['Green finance', 'Assurance'],
     body: [
@@ -130,6 +137,7 @@ export const circulars: Circular[] = [
     summary:
       'Penal charges must be reasonable, non-capitalised, and disclosed; interest-on-penalty practices are discouraged.',
     audience: 'Banks and NBFCs',
+    audiences: ['Banks', 'NBFCs'],
     effectiveNote: 'Penal charges conduct theme for consumer protection literacy.',
     relatedTopics: ['Penal charges', 'Fair conduct'],
     body: [
@@ -147,6 +155,7 @@ export const circulars: Circular[] = [
     summary:
       'Strengthens EWS frameworks, forensic audit triggers and timelines for reporting frauds to law enforcement.',
     audience: 'Commercial Banks',
+    audiences: ['Banks'],
     effectiveNote: 'EWS and fraud reporting education note.',
     relatedTopics: ['Fraud', 'EWS', 'Forensic audit'],
     body: [
@@ -164,6 +173,7 @@ export const circulars: Circular[] = [
     summary:
       'Updates remittance cut-offs and soiled note packing standards for currency chest linked branches.',
     audience: 'Currency chest banks',
+    audiences: ['Banks'],
     effectiveNote: 'Chest remittance operations — illustrative.',
     relatedTopics: ['Currency chest', 'Soiled notes'],
     body: [
@@ -181,6 +191,7 @@ export const circulars: Circular[] = [
     summary:
       'Answers frequently asked questions on trading book boundary and standardised approach computations during parallel run.',
     audience: 'Banks with material trading books',
+    audiences: ['Banks'],
     effectiveNote: 'Basel market-risk parallel-run FAQ style (sample).',
     relatedTopics: ['Market risk', 'Trading book', 'Basel III'],
     body: [

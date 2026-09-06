@@ -9,6 +9,12 @@ export type Category =
   | 'Consumer Protection'
   | 'Supervision'
 
+/** Filter tags officers use; an item may apply to more than one. */
+export type AudienceTag = 'Banks' | 'NBFCs' | 'PSPs'
+
+export const AUDIENCE_FILTERS = ['All', 'Banks', 'NBFCs', 'PSPs'] as const
+export type AudienceFilter = (typeof AUDIENCE_FILTERS)[number]
+
 /** Optional per-item review stamp; UI falls back to CONTENT_LAST_REVIEWED. */
 export interface ContentMeta {
   lastReviewed?: string
@@ -20,6 +26,7 @@ export interface MastersDirection extends ContentMeta {
   title: string
   category: Category
   audience: string
+  audiences: AudienceTag[]
   issued: string
   updated: string
   effectiveNote: string
@@ -40,6 +47,7 @@ export interface Circular extends ContentMeta {
   summary: string
   body: string[]
   audience: string
+  audiences: AudienceTag[]
   relatedTopics: string[]
   effectiveNote: string
 }
@@ -77,4 +85,8 @@ export interface Office {
   type: 'Regional Office' | 'Sub-Office' | 'Training Centre'
   address: string
   focus: string
+}
+
+export function yearFromDate(iso: string): string {
+  return iso.slice(0, 4)
 }
