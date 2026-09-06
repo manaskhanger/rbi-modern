@@ -1,0 +1,472 @@
+import type { MastersDirection } from './types'
+
+export const mastersDirections: MastersDirection[] = [
+  {
+    slug: 'know-your-customer',
+    title: 'Master Direction – Know Your Customer (KYC)',
+    category: 'Banking',
+    issued: '2016-02-25',
+    updated: '2025-11-12',
+    summary:
+      'Sets out how banks and regulated entities verify customer identity, monitor accounts, and report suspicious activity.',
+    plainEnglish:
+      'Before opening an account or offering many financial products, a regulated entity must confirm who you are, understand why you need the service, and keep watching for unusual patterns. KYC is the rulebook for that process — from documents and biometric checks to ongoing monitoring and reporting obligations.',
+    obligations: [
+      'Collect and verify identity and address using prescribed Officially Valid Documents or digital KYC.',
+      'Assign a risk category to each customer and refresh KYC at defined intervals.',
+      'Screen customers against sanctions and watchlists where applicable.',
+      'File Suspicious Transaction Reports (STRs) and Cash Transaction Reports as required.',
+      'Maintain KYC records for the prescribed retention period after relationship ends.',
+    ],
+    toc: [
+      { id: 'purpose', label: 'Purpose & scope' },
+      { id: 'cdd', label: 'Customer due diligence' },
+      { id: 'ongoing', label: 'Ongoing monitoring' },
+      { id: 'reporting', label: 'Reporting duties' },
+    ],
+    sections: [
+      {
+        id: 'purpose',
+        heading: 'Purpose & scope',
+        body: 'This Direction applies to banks, NBFCs, payment system operators and other entities notified by RBI. It aims to prevent misuse of the financial system for money laundering and terrorist financing while enabling legitimate access to banking.',
+      },
+      {
+        id: 'cdd',
+        heading: 'Customer due diligence',
+        body: 'Entities must identify and verify customers at onboarding. Enhanced due diligence applies to higher-risk profiles such as politically exposed persons or complex ownership structures. Simplified measures may be available for low-risk, small-ticket products.',
+      },
+      {
+        id: 'ongoing',
+        heading: 'Ongoing monitoring',
+        body: 'Periodic KYC updates and transaction monitoring help spot changes in customer behaviour. Alerts should be investigated and escalated under the entity’s AML programme.',
+      },
+      {
+        id: 'reporting',
+        heading: 'Reporting duties',
+        body: 'Suspicious and large cash transactions must be reported to the Financial Intelligence Unit–India within prescribed timelines. Boards and senior management remain accountable for programme effectiveness.',
+      },
+    ],
+  },
+  {
+    slug: 'liquidity-risk-management-banks',
+    title: 'Master Direction – Liquidity Risk Management for Banks',
+    category: 'Banking',
+    issued: '2021-06-01',
+    updated: '2024-08-20',
+    summary:
+      'Framework for banks to measure, monitor and manage funding and market liquidity risk, including LCR and NSFR expectations.',
+    plainEnglish:
+      'Banks must always be able to meet cash needs — deposit withdrawals, loan drawdowns, and market shocks. This Direction explains how to plan funding, hold high-quality liquid assets, and report liquidity metrics so supervisors can see stress early.',
+    obligations: [
+      'Maintain Liquidity Coverage Ratio (LCR) and Net Stable Funding Ratio (NSFR) above regulatory floors.',
+      'Run liquidity stress tests under multiple scenarios.',
+      'Establish a contingency funding plan approved by the board.',
+      'Set internal limits for funding concentrations and maturity mismatches.',
+      'Report liquidity positions to RBI in the prescribed formats.',
+    ],
+    toc: [
+      { id: 'overview', label: 'Overview' },
+      { id: 'metrics', label: 'Key metrics' },
+      { id: 'governance', label: 'Governance' },
+    ],
+    sections: [
+      {
+        id: 'overview',
+        heading: 'Overview',
+        body: 'Liquidity risk arises when a bank cannot fund assets or meet obligations as they fall due without unacceptable losses. The Direction aligns Indian banks with Basel III liquidity standards adapted to local markets.',
+      },
+      {
+        id: 'metrics',
+        heading: 'Key metrics',
+        body: 'LCR requires enough high-quality liquid assets to cover a 30-day stress outflow. NSFR encourages stable longer-term funding of assets. Intraday liquidity and currency-wise positions also matter for large banks.',
+      },
+      {
+        id: 'governance',
+        heading: 'Governance',
+        body: 'Boards must approve the liquidity risk appetite. Asset-liability committees oversee day-to-day management. Independent risk and internal audit provide challenge and assurance.',
+      },
+    ],
+  },
+  {
+    slug: 'nbfc-scale-based-regulation',
+    title: 'Master Direction – NBFC Scale Based Regulation',
+    category: 'NBFC',
+    issued: '2021-10-22',
+    updated: '2025-03-15',
+    summary:
+      'Layered prudential norms for Non-Banking Financial Companies based on size, activity and systemic importance.',
+    plainEnglish:
+      'Not every NBFC is regulated the same way. Smaller lenders face lighter rules; large or deposit-taking ones face bank-like capital, governance and disclosure standards. Scale-based regulation matches intensity of oversight to risk.',
+    obligations: [
+      'Identify the correct regulatory layer (Base, Middle, Upper, Top).',
+      'Meet layer-specific capital, leverage and provisioning norms.',
+      'Implement board governance and fit-and-proper criteria as applicable.',
+      'Disclose financial and risk information at the required frequency.',
+      'Seek prior approval for changes in control or major business lines where prescribed.',
+    ],
+    toc: [
+      { id: 'layers', label: 'Regulatory layers' },
+      { id: 'prudential', label: 'Prudential norms' },
+      { id: 'transition', label: 'Transition' },
+    ],
+    sections: [
+      {
+        id: 'layers',
+        heading: 'Regulatory layers',
+        body: 'Base Layer covers smaller NBFCs. Middle and Upper Layers apply progressively tighter rules. A Top Layer may be invoked for entities posing extreme systemic risk.',
+      },
+      {
+        id: 'prudential',
+        heading: 'Prudential norms',
+        body: 'Capital adequacy, concentration limits, liquidity buffers and ICAAP-style assessments intensify as you move up the pyramid. Upper Layer entities resemble banks in several respects.',
+      },
+      {
+        id: 'transition',
+        heading: 'Transition',
+        body: 'When an NBFC crosses size or activity thresholds, it must migrate to the higher layer within timelines set by RBI, including governance upgrades.',
+      },
+    ],
+  },
+  {
+    slug: 'payment-aggregation',
+    title: 'Master Direction – Payment Aggregators and Gateways',
+    category: 'Payments',
+    issued: '2020-03-17',
+    updated: '2025-01-08',
+    summary:
+      'Authorisation, capital, escrow and governance requirements for entities that collect payments on behalf of merchants.',
+    plainEnglish:
+      'When you pay a merchant online and money sits briefly with a middleman before reaching the seller, that middleman is often a payment aggregator. This Direction says who can do that job, how customer funds must be protected, and what consumer-protection steps are mandatory.',
+    obligations: [
+      'Obtain RBI authorisation before commencing aggregation of funds.',
+      'Maintain net-worth and escrow accounts with scheduled commercial banks.',
+      'Separate merchant funds from own operating money.',
+      'Implement KYC for merchants and grievance redress timelines.',
+      'Submit periodic compliance and cybersecurity reports.',
+    ],
+    toc: [
+      { id: 'authorisation', label: 'Authorisation' },
+      { id: 'escrow', label: 'Escrow & settlement' },
+      { id: 'conduct', label: 'Conduct of business' },
+    ],
+    sections: [
+      {
+        id: 'authorisation',
+        heading: 'Authorisation',
+        body: 'Non-bank payment aggregators need prior authorisation. Banks offering aggregation follow a lighter path but still meet operational and technology standards.',
+      },
+      {
+        id: 'escrow',
+        heading: 'Escrow & settlement',
+        body: 'Customer funds must sit in escrow until settled to merchants within prescribed timelines. Co-mingling with own funds is prohibited.',
+      },
+      {
+        id: 'conduct',
+        heading: 'Conduct of business',
+        body: 'Fair disclosure of fees, dispute handling, and data security are core expectations. Aggregators remain responsible for merchant due diligence.',
+      },
+    ],
+  },
+  {
+    slug: 'currency-distribution',
+    title: 'Master Direction – Currency Distribution & Exchange',
+    category: 'Currency',
+    issued: '2018-04-03',
+    updated: '2024-06-30',
+    summary:
+      'Rules for note issue logistics, clean note policy, exchange of soiled or mutilated notes, and detection of counterfeits.',
+    plainEnglish:
+      'RBI issues banknotes and coins and expects banks to keep currency in circulation clean and trustworthy. This Direction covers how branches exchange damaged notes, detect fakes, and recycle fit notes back to the public.',
+    obligations: [
+      'Adjudicate and exchange soiled or mutilated notes as per note refund rules.',
+      'Impound and report suspected counterfeit notes promptly.',
+      'Maintain currency chests and report balances accurately.',
+      'Follow clean note policy for sorting and re-issuance.',
+      'Train cashiers on security features of genuine notes.',
+    ],
+    toc: [
+      { id: 'issue', label: 'Note issue' },
+      { id: 'exchange', label: 'Public exchange' },
+      { id: 'counterfeit', label: 'Counterfeit handling' },
+    ],
+    sections: [
+      {
+        id: 'issue',
+        heading: 'Note issue',
+        body: 'RBI is the sole issuer of banknotes in India. Coins are minted by the Government; RBI puts them into circulation. Distribution relies on currency chests linked to banks.',
+      },
+      {
+        id: 'exchange',
+        heading: 'Public exchange',
+        body: 'Members of the public can exchange soiled notes at bank branches. Value paid for mutilated notes depends on prescribed adjudication rules.',
+      },
+      {
+        id: 'counterfeit',
+        heading: 'Counterfeit handling',
+        body: 'Suspected forgeries must be stamped, recorded and reported to police and RBI. Staff must not return forged notes to the presenter.',
+      },
+    ],
+  },
+  {
+    slug: 'fema-current-account',
+    title: 'Master Direction – FEMA Current Account Transactions',
+    category: 'Forex',
+    issued: '2015-01-01',
+    updated: '2025-02-18',
+    summary:
+      'Liberalised framework for remittances and payments on current account under the Foreign Exchange Management Act.',
+    plainEnglish:
+      'Most day-to-day cross-border payments — imports, travel, education, royalties — fall under current account rules. This Direction summarises what residents can do freely, what needs documentation, and what remains restricted.',
+    obligations: [
+      'Classify transactions correctly as current vs capital account.',
+      'Obtain and retain prescribed documentary evidence for remittances.',
+      'Observe Liberalised Remittance Scheme limits where applicable.',
+      'Report transactions through AD banks in FEMA formats.',
+      'Do not facilitate prohibited current account transactions.',
+    ],
+    toc: [
+      { id: 'scope', label: 'Scope' },
+      { id: 'lrs', label: 'LRS overview' },
+      { id: 'prohibited', label: 'Prohibited items' },
+    ],
+    sections: [
+      {
+        id: 'scope',
+        heading: 'Scope',
+        body: 'Current account transactions relate to trade in goods and services, short-term banking, and unilateral transfers. Capital account rules (investments, loans) sit in separate Directions.',
+      },
+      {
+        id: 'lrs',
+        heading: 'LRS overview',
+        body: 'Resident individuals may remit abroad up to the Liberalised Remittance Scheme limit each financial year for permitted purposes, channelled through authorised dealers.',
+      },
+      {
+        id: 'prohibited',
+        heading: 'Prohibited items',
+        body: 'Certain remittances — for example to lottery or speculative schemes listed by Government — remain prohibited irrespective of amount.',
+      },
+    ],
+  },
+  {
+    slug: 'digital-lending',
+    title: 'Master Direction – Digital Lending',
+    category: 'Banking',
+    issued: '2022-09-02',
+    updated: '2025-04-10',
+    summary:
+      'Conduct and technology norms for digital lending by RBI-regulated entities and their lending service providers.',
+    plainEnglish:
+      'App-based loans must be transparent: show the all-in cost, get explicit consent, and disburse to the borrower’s own account — not to a third-party pool. This Direction curbs unfair recovery and hidden fees in digital credit.',
+    obligations: [
+      'Disclose Annual Percentage Rate and all fees before loan acceptance.',
+      'Disburse and collect only through borrower-owned bank accounts.',
+      'Execute loan agreements directly between RE and borrower.',
+      'Store data on servers in India as required; minimise data collection.',
+      'Publish a list of Lending Service Providers on the RE website.',
+    ],
+    toc: [
+      { id: 'model', label: 'Lending model' },
+      { id: 'disclosures', label: 'Disclosures' },
+      { id: 'data', label: 'Data & recovery' },
+    ],
+    sections: [
+      {
+        id: 'model',
+        heading: 'Lending model',
+        body: 'Regulated entities remain responsible for the credit decision even when apps or LSPs originate leads. Synthetic structures that hide the true lender are not permitted.',
+      },
+      {
+        id: 'disclosures',
+        heading: 'Disclosures',
+        body: 'Key Fact Statements must show APR, cooling-off options, recovery agents’ identity, and grievance contacts in a clear format.',
+      },
+      {
+        id: 'data',
+        heading: 'Data & recovery',
+        body: 'Borrower data use needs informed consent. Harassment in recovery is prohibited; agents must be properly empanelled and trained.',
+      },
+    ],
+  },
+  {
+    slug: 'interest-rate-risk-banking-book',
+    title: 'Master Direction – Interest Rate Risk in the Banking Book',
+    category: 'Banking',
+    issued: '2023-02-17',
+    updated: '2024-11-05',
+    summary:
+      'Measurement and capital considerations for IRRBB, including earnings and economic value approaches.',
+    plainEnglish:
+      'When interest rates rise or fall, a bank’s loan and deposit values change. This Direction tells banks how to measure that risk to earnings and net worth, and how to report it to supervisors.',
+    obligations: [
+      'Measure IRRBB using both earnings-at-risk and economic value of equity.',
+      'Apply standardised interest rate shock scenarios.',
+      'Set internal limits and escalate breaches to ALCO/board.',
+      'Disclose IRRBB metrics in regulatory returns.',
+      'Integrate IRRBB into ICAAP where applicable.',
+    ],
+    toc: [
+      { id: 'concepts', label: 'Core concepts' },
+      { id: 'measurement', label: 'Measurement' },
+    ],
+    sections: [
+      {
+        id: 'concepts',
+        heading: 'Core concepts',
+        body: 'IRRBB captures gaps between rate-sensitive assets and liabilities, optionality in deposits and loans, and basis risk across benchmarks.',
+      },
+      {
+        id: 'measurement',
+        heading: 'Measurement',
+        body: 'Banks model behavioural assumptions for non-maturity deposits and prepayments. Supervisory outlier tests flag extreme economic value declines.',
+      },
+    ],
+  },
+  {
+    slug: 'prepaid-payment-instruments',
+    title: 'Master Direction – Prepaid Payment Instruments',
+    category: 'Payments',
+    issued: '2021-08-27',
+    updated: '2025-06-01',
+    summary:
+      'Issuance, loading, interoperability and customer protection rules for wallets and other PPIs.',
+    plainEnglish:
+      'Prepaid wallets and cards hold money you load in advance. Issuers must safeguard float, verify users, enable easy refunds, and increasingly support interoperability so balances can move across systems.',
+    obligations: [
+      'Obtain authorisation and meet minimum net-worth criteria.',
+      'Cap wallet balances and loading as per instrument type.',
+      'Protect outstanding balances in escrow with a scheduled bank.',
+      'Enable KYC tiers and cross-border loading only where allowed.',
+      'Provide customer grievance redress within defined SLAs.',
+    ],
+    toc: [
+      { id: 'types', label: 'Instrument types' },
+      { id: 'safeguards', label: 'Safeguards' },
+    ],
+    sections: [
+      {
+        id: 'types',
+        heading: 'Instrument types',
+        body: 'PPIs include closed, semi-closed and open systems with different loading and merchant acceptance rules. Banks and non-banks may issue under distinct pathways.',
+      },
+      {
+        id: 'safeguards',
+        heading: 'Safeguards',
+        body: 'Escrow, fraud monitoring, and clear expiry/refund policies protect customers. Interoperability via UPI or card networks is encouraged for eligible PPIs.',
+      },
+    ],
+  },
+  {
+    slug: 'market-conduct-banks',
+    title: 'Master Direction – Fair Practices Code for Lenders',
+    category: 'Consumer Protection',
+    issued: '2015-07-01',
+    updated: '2024-09-12',
+    summary:
+      'Standards for transparent lending, recovery conduct, and communication with borrowers.',
+    plainEnglish:
+      'Borrowers deserve clear loan terms, reasonable notice before recovery action, and respectful treatment. This Direction captures the fair practices banks and NBFCs should embed in policies and staff training.',
+    obligations: [
+      'Provide clear sanction letters with pricing and repayment schedules.',
+      'Give notice before recalling loans or taking possession of collateral.',
+      'Avoid harassment; recovery agents must identify themselves.',
+      'Establish a grievance redress mechanism with escalation to higher levels.',
+      'Train staff periodically on fair practices and conduct risk.',
+    ],
+    toc: [
+      { id: 'transparency', label: 'Transparency' },
+      { id: 'recovery', label: 'Recovery' },
+    ],
+    sections: [
+      {
+        id: 'transparency',
+        heading: 'Transparency',
+        body: 'All-in pricing, reset clauses, and foreclosure charges must be explained upfront. Changes in terms need timely borrower communication.',
+      },
+      {
+        id: 'recovery',
+        heading: 'Recovery',
+        body: 'Recovery should follow due process. Engagement of agents does not dilute the lender’s responsibility for conduct.',
+      },
+    ],
+  },
+  {
+    slug: 'financial-markets-repo',
+    title: 'Master Direction – Repurchase Transactions (Repo)',
+    category: 'Financial Markets',
+    issued: '2018-07-24',
+    updated: '2023-12-01',
+    summary:
+      'Eligible participants, collateral, haircuts and documentation for repo markets in India.',
+    plainEnglish:
+      'A repo is a short-term loan secured by securities — sell now, buy back later. This Direction sets who can trade, what collateral qualifies, and how haircuts protect against price swings.',
+    obligations: [
+      'Deal only with eligible counterparties and securities.',
+      'Apply prescribed minimum haircuts by collateral type.',
+      'Use standard documentation (e.g., Global Master Repo Agreement adaptations).',
+      'Report trades to authorised trade repositories / CCIL as required.',
+      'Manage collateral valuation and margin calls diligently.',
+    ],
+    toc: [
+      { id: 'mechanics', label: 'Mechanics' },
+      { id: 'risk', label: 'Risk controls' },
+    ],
+    sections: [
+      {
+        id: 'mechanics',
+        heading: 'Mechanics',
+        body: 'Repos support money-market liquidity and RBI’s liquidity operations. Triparty and bilateral structures coexist under clear eligibility rules.',
+      },
+      {
+        id: 'risk',
+        heading: 'Risk controls',
+        body: 'Haircuts, concentration limits and daily mark-to-market reduce credit and market risk between counterparties.',
+      },
+    ],
+  },
+  {
+    slug: 'supervision-reporting',
+    title: 'Master Direction – Supervisory Reporting by Commercial Banks',
+    category: 'Supervision',
+    issued: '2019-05-10',
+    updated: '2025-07-22',
+    summary:
+      'Consolidated expectations for off-site returns, timelines and data quality for commercial banks.',
+    plainEnglish:
+      'Supervisors cannot visit every branch every day, so banks send structured data — capital, NPAs, liquidity, large exposures. This Direction is the catalogue of what to file, when, and how accurate it must be.',
+    obligations: [
+      'Submit off-site returns within stipulated timelines.',
+      'Ensure board-approved data governance for regulatory reports.',
+      'Correct errors promptly and explain material restatements.',
+      'Retain underlying working papers for inspection.',
+      'Designate a senior official accountable for return quality.',
+    ],
+    toc: [
+      { id: 'returns', label: 'Return catalogue' },
+      { id: 'quality', label: 'Data quality' },
+    ],
+    sections: [
+      {
+        id: 'returns',
+        heading: 'Return catalogue',
+        body: 'Returns cover balance sheet, off-balance exposures, asset quality, connected lending and more. Frequency ranges from daily to annual.',
+      },
+      {
+        id: 'quality',
+        heading: 'Data quality',
+        body: 'Late or inaccurate filings attract supervisory attention. Automated reconciliations and maker-checker controls are expected.',
+      },
+    ],
+  },
+]
+
+export const mdCategories = [
+  'All',
+  'Banking',
+  'NBFC',
+  'Payments',
+  'Currency',
+  'Forex',
+  'Financial Markets',
+  'Consumer Protection',
+  'Supervision',
+] as const

@@ -1,0 +1,182 @@
+import type { Circular } from './types'
+
+export const circulars: Circular[] = [
+  {
+    slug: 'cyber-security-framework-update',
+    title: 'Cyber Security Framework for Banks — Incremental Controls',
+    category: 'Banking',
+    date: '2025-11-18',
+    ref: 'RBI/2025-26/112',
+    summary:
+      'Adds expectations on ransomware readiness, privileged access monitoring, and third-party SOC integration.',
+    audience: 'All Scheduled Commercial Banks',
+    body: [
+      'Banks should review incident response playbooks for ransomware scenarios at least annually and involve board risk committees in tabletop exercises.',
+      'Privileged access to core banking and payment systems must be vaulted, time-bound, and logged with immutable retention.',
+      'Material IT service providers require continuous monitoring clauses and right-to-audit language aligned with the IT outsourcing framework.',
+      'This circular is illustrative educational content and does not reproduce official RBI text.',
+    ],
+  },
+  {
+    slug: 'upi-merchant-onboarding',
+    title: 'UPI Merchant Onboarding — Risk-Based Due Diligence',
+    category: 'Payments',
+    date: '2025-09-04',
+    ref: 'RBI/2025-26/87',
+    summary:
+      'Clarifies tiered KYC and MCC controls when onboarding small merchants onto UPI QR acceptance.',
+    audience: 'Payment System Participants',
+    body: [
+      'Acquirers may apply simplified due diligence for micro-merchants below defined turnover thresholds while retaining fraud monitoring.',
+      'High-risk MCCs require enhanced verification and velocity limits on first settlement cycles.',
+      'Customer grievance dashboards should expose merchant dispute status in near real time.',
+    ],
+  },
+  {
+    slug: 'ecb-reporting-simplification',
+    title: 'External Commercial Borrowings — Reporting Simplification',
+    category: 'Forex',
+    date: '2025-07-21',
+    ref: 'RBI/2025-26/64',
+    summary:
+      'Streamlines Form ECB filing timelines and clarifies end-use certificates for refinancing.',
+    audience: 'Authorised Dealer Category-I Banks',
+    body: [
+      'AD banks should ensure borrowers file drawdown and parameter changes within the revised windows.',
+      'Refinancing of existing ECBs remains subject to all-in-cost ceilings applicable on the date of fresh agreement.',
+      'Late reporting may attract compounding under FEMA; educate clients proactively.',
+    ],
+  },
+  {
+    slug: 'npa-upgradation-clarification',
+    title: 'Prudential Norms — Clarification on NPA Upgradation',
+    category: 'Banking',
+    date: '2025-05-12',
+    ref: 'RBI/2025-26/41',
+    summary:
+      'Reiterates that borrower accounts can be upgraded only after arrears of interest and principal are paid in full.',
+    audience: 'Commercial Banks & NBFCs',
+    body: [
+      'Partial recovery does not by itself upgrade an NPA. All contractual dues must be cleared.',
+      'Restructuring classification follows the applicable framework; cosmetic rescheduling is not a substitute.',
+      'Boards should review automated NPA marking logic for edge cases around overdraft and cash-credit accounts.',
+    ],
+  },
+  {
+    slug: 'co-lending-guidelines-tweak',
+    title: 'Co-Lending by Banks and NBFCs — Operational Tweaks',
+    category: 'NBFC',
+    date: '2025-03-28',
+    ref: 'RBI/2024-25/198',
+    summary:
+      'Updates escrow, customer interface and default loss sharing disclosures for co-lending arrangements.',
+    audience: 'Banks and NBFCs in co-lending',
+    body: [
+      'The customer-facing entity must be clearly identified in Key Fact Statements.',
+      'Escrow for shared loans should segregate partner shares on T+0 or next working day settlement.',
+      'Any CLM-1 / CLM-2 style arrangements must map to current regulatory language in internal policies.',
+    ],
+  },
+  {
+    slug: 'tokenisation-card-payments',
+    title: 'Card Tokenisation — Merchant Storage Sunset Reminder',
+    category: 'Payments',
+    date: '2024-12-09',
+    ref: 'RBI/2024-25/142',
+    summary:
+      'Reminds acquirers and merchants that storing actual card data is prohibited; tokens and COF frameworks apply.',
+    audience: 'Card payment ecosystem',
+    body: [
+      'Merchants must complete migration to network tokens or issuer tokens for recurring payments.',
+      'Guest-checkout flows should not capture permanent card credentials on merchant servers.',
+      'Compliance attestations may be sought during supervisory IT examinations.',
+    ],
+  },
+  {
+    slug: 'green-deposits-framework',
+    title: 'Framework for Acceptance of Green Deposits — FAQs',
+    category: 'Banking',
+    date: '2024-10-15',
+    ref: 'RBI/2024-25/99',
+    summary:
+      'FAQ-style clarifications on eligible activities, third-party assurance and allocation reporting for green deposits.',
+    audience: 'Regulated Entities offering green deposits',
+    body: [
+      'Allocation of proceeds must map to a board-approved financing framework with excluded sectors listed.',
+      'Independent assurance of allocation reports strengthens market integrity.',
+      'Green deposits remain subject to general deposit insurance and ALM norms.',
+    ],
+  },
+  {
+    slug: 'penalty-harmonisation',
+    title: 'Harmonisation of Penal Charges on Loans',
+    category: 'Consumer Protection',
+    date: '2024-08-02',
+    ref: 'RBI/2024-25/55',
+    summary:
+      'Penal charges must be reasonable, non-capitalised, and disclosed; interest-on-penalty practices are discouraged.',
+    audience: 'Banks and NBFCs',
+    body: [
+      'Penal charges cannot be levied in the form of higher interest on the entire loan for minor defaults.',
+      'Boards should approve a schedule of penal charges that is product-agnostic where possible.',
+      'Customers must receive reminders before penalties are applied for the first time on an account.',
+    ],
+  },
+  {
+    slug: 'fraud-risk-management',
+    title: 'Fraud Risk Management in Banks — Early Warning Signals',
+    category: 'Supervision',
+    date: '2024-06-20',
+    ref: 'RBI/2024-25/33',
+    summary:
+      'Strengthens EWS frameworks, forensic audit triggers and timelines for reporting frauds to law enforcement.',
+    audience: 'Commercial Banks',
+    body: [
+      'EWS dashboards should combine financial, transactional and behavioural indicators.',
+      'Decision to order a forensic audit must be documented with clear terms of reference.',
+      'Staff accountability frameworks should distinguish process lapses from collusion.',
+    ],
+  },
+  {
+    slug: 'currency-chest-operations',
+    title: 'Currency Chest Operations — Remittance Timelines',
+    category: 'Currency',
+    date: '2024-04-11',
+    ref: 'RBI/2024-25/12',
+    summary:
+      'Updates remittance cut-offs and soiled note packing standards for currency chest linked branches.',
+    audience: 'Currency chest banks',
+    body: [
+      'Chests must adhere to remittance calendars communicated by Issue Departments.',
+      'Soiled notes should be packed denomination-wise with prescribed seals and CCTV coverage.',
+      'Large discrepancies attract supervisory follow-up and possible penalties.',
+    ],
+  },
+  {
+    slug: 'market-risk-capital-faq',
+    title: 'Basel III Market Risk — Parallel Run FAQs',
+    category: 'Financial Markets',
+    date: '2024-01-30',
+    ref: 'RBI/2023-24/210',
+    summary:
+      'Answers frequently asked questions on trading book boundary and standardised approach computations during parallel run.',
+    audience: 'Banks with material trading books',
+    body: [
+      'Trading book vs banking book boundary decisions require documented policies and periodic reclassification reviews.',
+      'Parallel run outputs help calibrate capital planning before go-live dates announced separately.',
+      'Model validation teams should challenge residual risks not captured by standardised buckets.',
+    ],
+  },
+]
+
+export const circularCategories = [
+  'All',
+  'Banking',
+  'NBFC',
+  'Payments',
+  'Currency',
+  'Forex',
+  'Financial Markets',
+  'Consumer Protection',
+  'Supervision',
+] as const
