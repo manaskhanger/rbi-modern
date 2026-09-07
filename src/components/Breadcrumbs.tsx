@@ -51,7 +51,7 @@ function CrumbItem({ crumb, isLast }: { crumb: Crumb; isLast: boolean }) {
       {!isLast && crumb.to ? (
         <Link
           to={crumb.to}
-          className="truncate font-medium text-ink-muted underline-offset-2 hover:text-navy hover:underline dark:text-cream/60 dark:hover:text-cream"
+          className="truncate font-medium text-ink-muted underline-offset-2 hover:text-navy hover:underline dark:text-cream/80 dark:hover:text-cream"
         >
           {crumb.label}
         </Link>
@@ -65,7 +65,7 @@ function CrumbItem({ crumb, isLast }: { crumb: Crumb; isLast: boolean }) {
       )}
       {!isLast && (
         <ChevronRight
-          className="h-3.5 w-3.5 shrink-0 text-ink-muted/50 dark:text-cream/35"
+          className="h-3.5 w-3.5 shrink-0 text-ink-muted/60 dark:text-cream/55"
           aria-hidden
         />
       )}

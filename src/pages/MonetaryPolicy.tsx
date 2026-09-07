@@ -19,6 +19,7 @@ import { ContentReviewed, IllustrativeLabel } from '../components/IllustrativeLa
 import { ChartFootnote } from '../components/ChartFootnote'
 import { policyRateHistory, keyRatesAsOf, chartMethodology } from '../data/rates'
 import { RBI_SECTIONS } from '../data/meta'
+import { chartTick, chartGrid, chartSeriesNavy, chartLegendStyle } from '../lib/chartTheme'
 
 const mpcSteps = [
   {
@@ -59,7 +60,7 @@ function SampleTooltip({ active, payload, label }: {
           {p.name}: {p.value}%
         </p>
       ))}
-      <p className="mt-1.5 border-t border-navy/5 pt-1 text-[10px] leading-snug text-ink-muted dark:border-white/10 dark:text-cream/50">
+      <p className="mt-1.5 border-t border-navy/5 pt-1 text-[10px] leading-snug text-ink-muted dark:border-white/10 dark:text-cream/75">
         Sample path · Illustrative · not for compliance
       </p>
     </div>
@@ -96,7 +97,7 @@ export function MonetaryPolicy() {
                   0{i + 1}
                 </span>
                 <h3 className="mt-1.5 text-sm font-semibold text-navy dark:text-cream">{s.title}</h3>
-                <p className="mt-2 text-sm text-ink-muted dark:text-cream/65">{s.text}</p>
+                <p className="mt-2 text-sm text-ink-muted dark:text-cream/80">{s.text}</p>
               </div>
             </Reveal>
           ))}
@@ -126,12 +127,12 @@ export function MonetaryPolicy() {
         <div className="glass-card h-80 rounded-xl p-3 md:p-5">
           <ResponsiveContainer width="100%" height="100%">
             <LineChart data={policyRateHistory}>
-              <CartesianGrid strokeDasharray="3 3" stroke="rgba(128,128,128,0.2)" />
+              <CartesianGrid strokeDasharray="3 3" stroke={chartGrid} />
               <ReferenceArea y1={2} y2={6} fill="#C5A572" fillOpacity={0.08} />
-              <XAxis dataKey="month" tick={{ fontSize: 11 }} />
-              <YAxis tick={{ fontSize: 11 }} domain={[0, 8]} />
+              <XAxis dataKey="month" tick={chartTick} />
+              <YAxis tick={chartTick} domain={[0, 8]} />
               <Tooltip content={<SampleTooltip />} />
-              <Legend />
+              <Legend wrapperStyle={chartLegendStyle} />
               <Line
                 type="monotone"
                 dataKey="repo"
@@ -144,7 +145,7 @@ export function MonetaryPolicy() {
                 type="monotone"
                 dataKey="inflation"
                 name="CPI YoY %"
-                stroke="#0B1D36"
+                stroke={chartSeriesNavy}
                 strokeWidth={2}
                 dot={false}
               />
@@ -152,7 +153,7 @@ export function MonetaryPolicy() {
           </ResponsiveContainer>
         </div>
         <ChartFootnote methodology={chartMethodology.policyRates} />
-        <p className="mt-1 text-xs text-ink-muted dark:text-cream/50">
+        <p className="mt-1 text-xs text-ink-muted dark:text-cream/75">
           Shaded band marks the educational 2–6% CPI tolerance zone around the 4% target.
           Confirm live rates via{' '}
           <a
@@ -183,11 +184,11 @@ export function MonetaryPolicy() {
                 <span className={`h-2.5 w-2.5 rounded-full ${t.color}`} aria-hidden />
                 <span className="text-sm font-semibold text-navy dark:text-cream">{t.label}</span>
               </div>
-              <span className="text-sm text-ink-muted dark:text-cream/65">{t.tone}</span>
+              <span className="text-sm text-ink-muted dark:text-cream/80">{t.tone}</span>
             </div>
           ))}
         </div>
-        <p className="mt-4 text-sm text-ink-muted dark:text-cream/60">
+        <p className="mt-4 text-sm text-ink-muted dark:text-cream/80">
           When inflation drifts from target, the MPC can raise or lower the repo rate. Banks then
           adjust lending and deposit rates — with lags — affecting spending and investment. This
           transmission story is simplified for education.

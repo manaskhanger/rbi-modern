@@ -29,8 +29,17 @@ import { ContentReviewed, IllustrativeLabel } from '../components/IllustrativeLa
 import { PrintButton } from '../components/PrintButton'
 import { ChartSummary } from '../components/ChartSummary'
 import { CollectionNav } from '../components/CollectionNav'
+import {
+  chartTick,
+  chartTickSm,
+  chartTickXs,
+  chartGrid,
+  chartSeriesNavy,
+  chartSeriesNavyAlt,
+  chartLegendStyle,
+} from '../lib/chartTheme'
 
-const COLORS = ['#0B1D36', '#C5A572', '#1a3558', '#d4bc94']
+const COLORS = ['#C5A572', '#e8d4a8', '#94a3b8', '#d4bc94']
 
 function SampleTip({
   active,
@@ -43,14 +52,14 @@ function SampleTip({
 }) {
   if (!active || !payload?.length) return null
   return (
-    <div className="rounded-md border border-navy/10 bg-white px-3 py-2 text-xs shadow-md dark:bg-navy-light">
-      <p className="mb-1 font-semibold">{label}</p>
+    <div className="rounded-md border border-navy/10 bg-white px-3 py-2 text-xs shadow-md dark:border-white/15 dark:bg-navy-light">
+      <p className="mb-1 font-semibold text-navy dark:text-cream">{label}</p>
       {payload.map((p) => (
-        <p key={p.name} style={{ color: p.color }}>
+        <p key={p.name} style={{ color: p.color }} className="tabular-nums dark:brightness-125">
           {p.name}: {p.value}
         </p>
       ))}
-      <p className="mt-1 text-[10px] text-ink-muted">Illustrative · not for compliance</p>
+      <p className="mt-1 text-[10px] text-ink-muted dark:text-cream/75">Illustrative · not for compliance</p>
     </div>
   )
 }
@@ -65,7 +74,7 @@ function RelatedLinks({
       <h2 className="text-sm font-semibold uppercase tracking-wider text-gold-dim dark:text-gold">
         Related policy &amp; data
       </h2>
-      <p className="mt-1 text-xs text-ink-muted dark:text-cream/50">
+      <p className="mt-1 text-xs text-ink-muted dark:text-cream/75">
         In-prototype cross-links for officers navigating from publications to policy/data pages.
       </p>
       <ul className="mt-3 flex flex-wrap gap-2">
@@ -101,9 +110,9 @@ function FsrBody() {
           <div className="min-h-0 flex-1" style={{ height: 220 }}>
           <ResponsiveContainer width="100%" height="100%">
             <LineChart data={sampleReportCharts.capitalAdequacy}>
-              <CartesianGrid strokeDasharray="3 3" stroke="rgba(128,128,128,0.2)" />
-              <XAxis dataKey="year" tick={{ fontSize: 11 }} />
-              <YAxis domain={[15, 18]} tick={{ fontSize: 11 }} />
+              <CartesianGrid strokeDasharray="3 3" stroke={chartGrid} />
+              <XAxis dataKey="year" tick={chartTick} />
+              <YAxis domain={[15, 18]} tick={chartTick} />
               <Tooltip content={<SampleTip />} />
               <Line type="monotone" dataKey="crar" name="CRAR %" stroke="#C5A572" strokeWidth={2} />
             </LineChart>
@@ -124,12 +133,12 @@ function FsrBody() {
           <div className="min-h-0 flex-1" style={{ height: 220 }}>
           <ResponsiveContainer width="100%" height="100%">
             <BarChart data={sampleReportCharts.npaTrend}>
-              <CartesianGrid strokeDasharray="3 3" stroke="rgba(128,128,128,0.2)" />
-              <XAxis dataKey="year" tick={{ fontSize: 11 }} />
-              <YAxis tick={{ fontSize: 11 }} />
+              <CartesianGrid strokeDasharray="3 3" stroke={chartGrid} />
+              <XAxis dataKey="year" tick={chartTick} />
+              <YAxis tick={chartTick} />
               <Tooltip content={<SampleTip />} />
-              <Legend />
-              <Bar dataKey="gnpa" name="GNPA %" fill="#0B1D36" radius={[3, 3, 0, 0]} />
+              <Legend wrapperStyle={chartLegendStyle} />
+              <Bar dataKey="gnpa" name="GNPA %" fill={chartSeriesNavy} radius={[3, 3, 0, 0]} />
               <Bar dataKey="nnpa" name="NNPA %" fill="#C5A572" radius={[3, 3, 0, 0]} />
             </BarChart>
           </ResponsiveContainer>
@@ -190,7 +199,7 @@ function FsrBody() {
                   <tr key={row.metric} className="border-b border-navy/5 dark:border-white/5">
                     <td className="py-2">{row.metric}</td>
                     <td className="py-2 font-medium tabular-nums">{row.value}</td>
-                    <td className="py-2 text-ink-muted dark:text-cream/55">{row.note}</td>
+                    <td className="py-2 text-ink-muted dark:text-cream/78">{row.note}</td>
                   </tr>
                 ))}
               </tbody>
@@ -217,11 +226,11 @@ function MprBody() {
           <div className="min-h-0 flex-1" style={{ height: 220 }}>
           <ResponsiveContainer width="100%" height="100%">
             <LineChart data={mprCharts.inflationPath}>
-              <CartesianGrid strokeDasharray="3 3" stroke="rgba(128,128,128,0.2)" />
-              <XAxis dataKey="quarter" tick={{ fontSize: 10 }} />
-              <YAxis domain={[0, 8]} tick={{ fontSize: 11 }} />
+              <CartesianGrid strokeDasharray="3 3" stroke={chartGrid} />
+              <XAxis dataKey="quarter" tick={chartTickSm} />
+              <YAxis domain={[0, 8]} tick={chartTick} />
               <Tooltip content={<SampleTip />} />
-              <Legend />
+              <Legend wrapperStyle={chartLegendStyle} />
               <Line
                 type="monotone"
                 dataKey="high"
@@ -249,7 +258,7 @@ function MprBody() {
                 type="monotone"
                 dataKey="actual"
                 name="Actual %"
-                stroke="#0B1D36"
+                stroke={chartSeriesNavy}
                 strokeWidth={2}
               />
             </LineChart>
@@ -267,11 +276,11 @@ function MprBody() {
           <IllustrativeLabel tone="chip" className="mb-2 px-1" />
           <ResponsiveContainer width="100%" height="90%">
             <BarChart data={mprCharts.growthPath}>
-              <CartesianGrid strokeDasharray="3 3" stroke="rgba(128,128,128,0.2)" />
-              <XAxis dataKey="quarter" tick={{ fontSize: 10 }} />
-              <YAxis domain={[5, 8]} tick={{ fontSize: 11 }} />
+              <CartesianGrid strokeDasharray="3 3" stroke={chartGrid} />
+              <XAxis dataKey="quarter" tick={chartTickSm} />
+              <YAxis domain={[5, 8]} tick={chartTick} />
               <Tooltip content={<SampleTip />} />
-              <Bar dataKey="gdp" name="GDP %" fill="#0B1D36" radius={[3, 3, 0, 0]} />
+              <Bar dataKey="gdp" name="GDP %" fill={chartSeriesNavy} radius={[3, 3, 0, 0]} />
             </BarChart>
           </ResponsiveContainer>
         </div>
@@ -282,9 +291,9 @@ function MprBody() {
           <IllustrativeLabel tone="chip" className="mb-2 px-1" />
           <ResponsiveContainer width="100%" height="90%">
             <BarChart data={mprCharts.transmission} layout="vertical" margin={{ left: 24 }}>
-              <CartesianGrid strokeDasharray="3 3" stroke="rgba(128,128,128,0.2)" />
-              <XAxis type="number" domain={[0, 100]} tick={{ fontSize: 11 }} />
-              <YAxis type="category" dataKey="channel" width={100} tick={{ fontSize: 10 }} />
+              <CartesianGrid strokeDasharray="3 3" stroke={chartGrid} />
+              <XAxis type="number" domain={[0, 100]} tick={chartTick} />
+              <YAxis type="category" dataKey="channel" width={100} tick={chartTickSm} />
               <Tooltip content={<SampleTip />} />
               <Bar dataKey="strength" name="Strength" fill="#C5A572" radius={[0, 3, 3, 0]} />
             </BarChart>
@@ -306,7 +315,7 @@ function MprBody() {
                 <tr key={row.item} className="border-b border-navy/5 dark:border-white/5">
                   <td className="py-2">{row.item}</td>
                   <td className="py-2 font-medium">{row.value}</td>
-                  <td className="py-2 text-ink-muted dark:text-cream/55">{row.note}</td>
+                  <td className="py-2 text-ink-muted dark:text-cream/78">{row.note}</td>
                 </tr>
               ))}
             </tbody>
@@ -332,12 +341,12 @@ function AnnualBody() {
           <div className="min-h-0 flex-1" style={{ height: 220 }}>
           <ResponsiveContainer width="100%" height="100%">
             <LineChart data={annualCharts.balanceSheet}>
-              <CartesianGrid strokeDasharray="3 3" stroke="rgba(128,128,128,0.2)" />
-              <XAxis dataKey="year" tick={{ fontSize: 11 }} />
-              <YAxis tick={{ fontSize: 11 }} />
+              <CartesianGrid strokeDasharray="3 3" stroke={chartGrid} />
+              <XAxis dataKey="year" tick={chartTick} />
+              <YAxis tick={chartTick} />
               <Tooltip content={<SampleTip />} />
-              <Legend />
-              <Line type="monotone" dataKey="assets" name="Assets" stroke="#0B1D36" strokeWidth={2} />
+              <Legend wrapperStyle={chartLegendStyle} />
+              <Line type="monotone" dataKey="assets" name="Assets" stroke={chartSeriesNavy} strokeWidth={2} />
               <Line
                 type="monotone"
                 dataKey="deposits"
@@ -345,7 +354,7 @@ function AnnualBody() {
                 stroke="#C5A572"
                 strokeWidth={2}
               />
-              <Line type="monotone" dataKey="credit" name="Credit" stroke="#1a3558" strokeWidth={2} />
+              <Line type="monotone" dataKey="credit" name="Credit" stroke={chartSeriesNavyAlt} strokeWidth={2} />
             </LineChart>
           </ResponsiveContainer>
           </div>
@@ -361,9 +370,9 @@ function AnnualBody() {
           <IllustrativeLabel tone="chip" className="mb-2 px-1" />
           <ResponsiveContainer width="100%" height="90%">
             <BarChart data={annualCharts.groupCredit} layout="vertical" margin={{ left: 16 }}>
-              <CartesianGrid strokeDasharray="3 3" stroke="rgba(128,128,128,0.2)" />
-              <XAxis type="number" tick={{ fontSize: 11 }} />
-              <YAxis type="category" dataKey="group" width={110} tick={{ fontSize: 10 }} />
+              <CartesianGrid strokeDasharray="3 3" stroke={chartGrid} />
+              <XAxis type="number" tick={chartTick} />
+              <YAxis type="category" dataKey="group" width={110} tick={chartTickSm} />
               <Tooltip content={<SampleTip />} />
               <Bar dataKey="growth" name="YoY %" fill="#C5A572" radius={[0, 3, 3, 0]} />
             </BarChart>
@@ -409,7 +418,7 @@ function AnnualBody() {
                 <tr key={row.metric} className="border-b border-navy/5 dark:border-white/5">
                   <td className="py-2">{row.metric}</td>
                   <td className="py-2 font-medium tabular-nums">{row.value}</td>
-                  <td className="py-2 text-ink-muted dark:text-cream/55">{row.note}</td>
+                  <td className="py-2 text-ink-muted dark:text-cream/78">{row.note}</td>
                 </tr>
               ))}
             </tbody>
@@ -435,12 +444,12 @@ function PaymentsBody() {
           <div className="min-h-0 flex-1" style={{ height: 220 }}>
           <ResponsiveContainer width="100%" height="100%">
             <BarChart data={paymentsCharts.volumes}>
-              <CartesianGrid strokeDasharray="3 3" stroke="rgba(128,128,128,0.2)" />
-              <XAxis dataKey="system" tick={{ fontSize: 11 }} />
-              <YAxis tick={{ fontSize: 11 }} />
+              <CartesianGrid strokeDasharray="3 3" stroke={chartGrid} />
+              <XAxis dataKey="system" tick={chartTick} />
+              <YAxis tick={chartTick} />
               <Tooltip content={<SampleTip />} />
-              <Legend />
-              <Bar dataKey="volume" name="Volume idx" fill="#0B1D36" radius={[3, 3, 0, 0]} />
+              <Legend wrapperStyle={chartLegendStyle} />
+              <Bar dataKey="volume" name="Volume idx" fill={chartSeriesNavy} radius={[3, 3, 0, 0]} />
               <Bar dataKey="value" name="Value idx" fill="#C5A572" radius={[3, 3, 0, 0]} />
             </BarChart>
           </ResponsiveContainer>
@@ -457,9 +466,9 @@ function PaymentsBody() {
           <IllustrativeLabel tone="chip" className="mb-2 px-1" />
           <ResponsiveContainer width="100%" height="90%">
             <LineChart data={paymentsCharts.upiTrend}>
-              <CartesianGrid strokeDasharray="3 3" stroke="rgba(128,128,128,0.2)" />
-              <XAxis dataKey="month" tick={{ fontSize: 11 }} />
-              <YAxis tick={{ fontSize: 11 }} />
+              <CartesianGrid strokeDasharray="3 3" stroke={chartGrid} />
+              <XAxis dataKey="month" tick={chartTick} />
+              <YAxis tick={chartTick} />
               <Tooltip content={<SampleTip />} />
               <Line type="monotone" dataKey="bn" name="Bn txns" stroke="#C5A572" strokeWidth={2} />
             </LineChart>
@@ -472,11 +481,11 @@ function PaymentsBody() {
           <IllustrativeLabel tone="chip" className="mb-2 px-1" />
           <ResponsiveContainer width="100%" height="90%">
             <BarChart data={paymentsCharts.inclusion} layout="vertical" margin={{ left: 8 }}>
-              <CartesianGrid strokeDasharray="3 3" stroke="rgba(128,128,128,0.2)" />
-              <XAxis type="number" tick={{ fontSize: 11 }} />
-              <YAxis type="category" dataKey="indicator" width={140} tick={{ fontSize: 9 }} />
+              <CartesianGrid strokeDasharray="3 3" stroke={chartGrid} />
+              <XAxis type="number" tick={chartTick} />
+              <YAxis type="category" dataKey="indicator" width={140} tick={chartTickXs} />
               <Tooltip content={<SampleTip />} />
-              <Bar dataKey="value" name="Index / %" fill="#1a3558" radius={[0, 3, 3, 0]} />
+              <Bar dataKey="value" name="Index / %" fill={chartSeriesNavyAlt} radius={[0, 3, 3, 0]} />
             </BarChart>
           </ResponsiveContainer>
         </div>
@@ -496,7 +505,7 @@ function PaymentsBody() {
                 <tr key={row.metric} className="border-b border-navy/5 dark:border-white/5">
                   <td className="py-2">{row.metric}</td>
                   <td className="py-2 font-medium tabular-nums">{row.value}</td>
-                  <td className="py-2 text-ink-muted dark:text-cream/55">{row.note}</td>
+                  <td className="py-2 text-ink-muted dark:text-cream/78">{row.note}</td>
                 </tr>
               ))}
             </tbody>
@@ -554,7 +563,7 @@ export function ReportDetail() {
         {report.rich && <Badge tone="muted">Rich sample</Badge>}
       </div>
       <h1 className="mt-3 text-2xl font-bold text-navy dark:text-cream md:text-3xl">{report.title}</h1>
-      <p className="mt-2 text-sm text-ink-muted dark:text-cream/55">
+      <p className="mt-2 text-sm text-ink-muted dark:text-cream/78">
         {report.date} · ~{report.pages} pages · Illustrative · not for compliance
       </p>
       <ContentReviewed lastReviewed={report.lastReviewed} className="mt-1" />

@@ -5,6 +5,7 @@ import { Footer } from './Footer'
 import { ProtoStrip } from './ProtoStrip'
 import { PageTransition } from './PageTransition'
 import { Breadcrumbs } from './Breadcrumbs'
+import { LiveUpdatesTicker } from './LiveUpdatesTicker'
 
 export function Layout() {
   const location = useLocation()
@@ -28,6 +29,9 @@ export function Layout() {
       </a>
       <Navbar />
       <ProtoStrip />
+      <div className="sticky top-[3.4rem] z-40 xl:top-[3.6rem]">
+        <LiveUpdatesTicker />
+      </div>
       {!isHome && <Breadcrumbs />}
       <main id="main-content" className="flex-1" tabIndex={-1}>
         <AnimatePresence mode="wait">

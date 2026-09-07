@@ -39,7 +39,7 @@ export function KeyRatesStrip({ className = '' }: Props) {
               Official policy rates
               <ExternalLink className="h-3 w-3" aria-hidden />
             </a>
-            <span className="text-ink-muted/40 dark:text-cream/30" aria-hidden>
+            <span className="text-ink-muted/40 dark:text-cream/55" aria-hidden>
               ·
             </span>
             <a
@@ -59,9 +59,9 @@ export function KeyRatesStrip({ className = '' }: Props) {
               key={r.label}
               className="rounded-lg border border-navy/8 bg-cream/90 px-3 py-2.5 text-center dark:border-white/10 dark:bg-navy/50"
             >
-              <p className="text-[10px] leading-tight text-ink-muted dark:text-cream/55">{r.label}</p>
+              <p className="text-[10px] leading-tight text-ink-muted dark:text-cream/80">{r.label}</p>
               <p className="mt-1 text-lg font-bold tabular-nums text-navy dark:text-cream"><AnimatedCounter value={r.value} /></p>
-              <p className="mt-0.5 text-[10px] text-ink-muted dark:text-cream/45">
+              <p className="mt-0.5 text-[10px] text-ink-muted dark:text-cream/72">
                 as-of (sample): {keyRatesAsOf}
               </p>
               <p className="text-[10px] text-gold-dim">Illustrative · not for compliance</p>
@@ -77,7 +77,7 @@ export function KeyRatesStrip({ className = '' }: Props) {
             </div>
           ))}
         </div>
-        <p className="mt-3 text-center text-[11px] text-ink-muted dark:text-cream/45">
+        <p className="mt-3 text-center text-[11px] text-ink-muted dark:text-cream/72">
           Prototype chips only — not an official extract. Confirm current rates on{' '}
           <a
             href={policy.href}

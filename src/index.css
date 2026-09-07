@@ -107,7 +107,7 @@ body {
 
 .proto-strip {
   background: #0B1D36;
-  color: rgba(247, 244, 239, 0.88);
+  color: rgba(247, 244, 239, 0.94);
   font-size: 0.6875rem;
   letter-spacing: 0.04em;
   line-height: 1.4;
@@ -118,13 +118,14 @@ body {
   border-bottom: 1px solid rgba(197, 165, 114, 0.2);
 }
 
+/* breadcrumb top set with live-ticker below */
 .breadcrumb-bar {
-  top: 3.4rem; /* under sticky header */
+  top: 5.9rem; /* under sticky header + live ticker */
 }
 
 @media (min-width: 1280px) {
   .breadcrumb-bar {
-    top: 3.6rem;
+    top: 6.1rem;
   }
 }
 
@@ -170,6 +171,146 @@ footer .text-gold,
   letter-spacing: 0.02em;
   opacity: 0.75;
   line-height: 1.35;
+}
+
+
+/* ——— Dark theme foreground tokens (WCAG AA on navy) ——— */
+html.dark {
+  --color-ink: #F7F4EF;
+  --color-ink-muted: rgba(247, 244, 239, 0.78);
+  --chart-tick: rgba(247, 244, 239, 0.78);
+  --chart-legend: rgba(247, 244, 239, 0.88);
+  --chart-grid: rgba(247, 244, 239, 0.14);
+  --chart-series-navy: #e8d4a8;
+  --chart-series-navy-alt: #d4bc94;
+}
+
+:root {
+  --chart-tick: #3d4a5c;
+  --chart-legend: #0B1D36;
+  --chart-grid: rgba(128, 128, 128, 0.2);
+  --chart-series-navy: #0B1D36;
+  --chart-series-navy-alt: #1a3558;
+}
+
+/* Sitewide: raise low-opacity cream utilities on dark navy surfaces */
+html.dark .dark\:text-cream\/35,
+html.dark .dark\:text-cream\/40,
+html.dark .dark\:text-cream\/45 {
+  color: rgba(247, 244, 239, 0.72) !important;
+}
+html.dark .dark\:text-cream\/50,
+html.dark .dark\:text-cream\/55 {
+  color: rgba(247, 244, 239, 0.78) !important;
+}
+html.dark .dark\:text-cream\/60,
+html.dark .dark\:text-cream\/65 {
+  color: rgba(247, 244, 239, 0.84) !important;
+}
+html.dark .dark\:text-cream\/70,
+html.dark .dark\:text-cream\/75 {
+  color: rgba(247, 244, 239, 0.9) !important;
+}
+
+html.dark .text-cream\/30,
+html.dark .text-cream\/40,
+html.dark .text-cream\/45,
+html.dark .text-cream\/50,
+html.dark .text-cream\/55,
+html.dark .text-cream\/70,
+html.dark .text-cream\/75 {
+  color: rgba(247, 244, 239, 0.8);
+}
+
+html.dark .bilingual-hi,
+html.dark [lang="hi"].bilingual-hi {
+  opacity: 0.92;
+  color: rgba(247, 244, 239, 0.85);
+}
+
+html.dark .proto-strip {
+  color: rgba(247, 244, 239, 0.94);
+}
+html.dark .proto-strip .text-cream\/70,
+html.dark .proto-strip .text-cream\/85 {
+  color: rgba(247, 244, 239, 0.88) !important;
+}
+
+html.dark input::placeholder,
+html.dark textarea::placeholder {
+  color: rgba(247, 244, 239, 0.58);
+  opacity: 1;
+}
+
+/* Recharts axis / legend / tooltip text on dark */
+html.dark .recharts-cartesian-axis-tick-value,
+html.dark .recharts-text {
+  fill: var(--chart-tick) !important;
+}
+html.dark .recharts-legend-item-text {
+  color: var(--chart-legend) !important;
+  fill: var(--chart-legend) !important;
+}
+html.dark .recharts-default-tooltip {
+  background: #132a4a !important;
+  border-color: rgba(255, 255, 255, 0.15) !important;
+  color: #F7F4EF !important;
+}
+html.dark .recharts-tooltip-label,
+html.dark .recharts-tooltip-item {
+  color: rgba(247, 244, 239, 0.9) !important;
+}
+
+html.dark .data-table th,
+html.dark thead th {
+  color: rgba(247, 244, 239, 0.88);
+}
+
+/* Live updates ticker */
+.live-ticker {
+  background: #0B1D36;
+  color: rgba(247, 244, 239, 0.92);
+  border-bottom: 1px solid rgba(197, 165, 114, 0.22);
+}
+html.dark .live-ticker {
+  background: #061224;
+  border-bottom-color: rgba(197, 165, 114, 0.28);
+}
+.live-ticker-track {
+  display: flex;
+  width: max-content;
+  animation: live-ticker-scroll 48s linear infinite;
+}
+.live-ticker:hover .live-ticker-track,
+.live-ticker:focus-within .live-ticker-track {
+  animation-play-state: paused;
+}
+@keyframes live-ticker-scroll {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .live-ticker-track {
+    animation: none !important;
+    width: 100%;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+  }
+  .live-ticker-viewport {
+    overflow: visible !important;
+  }
+  .live-ticker-dup {
+    display: none !important;
+  }
+}
+
+.breadcrumb-bar {
+  top: 5.9rem; /* under sticky header + live ticker */
+}
+@media (min-width: 1280px) {
+  .breadcrumb-bar {
+    top: 6.1rem;
+  }
 }
 
 /* ——— High-contrast mode (works with light & dark) ——— */
@@ -225,12 +366,28 @@ html.hc .proto-strip {
 }
 
 html.hc .text-ink-muted,
+html.hc .dark\:text-cream\/35,
+html.hc .dark\:text-cream\/40,
+html.hc .dark\:text-cream\/45,
+html.hc .dark\:text-cream\/50,
 html.hc .dark\:text-cream\/55,
 html.hc .dark\:text-cream\/60,
 html.hc .dark\:text-cream\/65,
 html.hc .dark\:text-cream\/70,
 html.hc .dark\:text-cream\/75 {
   opacity: 1;
+}
+html.hc.dark .text-ink-muted,
+html.hc.dark .dark\:text-cream\/35,
+html.hc.dark .dark\:text-cream\/40,
+html.hc.dark .dark\:text-cream\/45,
+html.hc.dark .dark\:text-cream\/50,
+html.hc.dark .dark\:text-cream\/55,
+html.hc.dark .dark\:text-cream\/60,
+html.hc.dark .dark\:text-cream\/65,
+html.hc.dark .dark\:text-cream\/70,
+html.hc.dark .dark\:text-cream\/75 {
+  color: #ffffff !important;
 }
 
 html.hc .text-gold-on-navy,
@@ -255,6 +412,7 @@ html.hc .bg-navy .text-gold {
   .skip-link,
   header.glass,
   .proto-strip,
+  .live-ticker,
   .breadcrumb-bar,
   footer,
   .no-print,

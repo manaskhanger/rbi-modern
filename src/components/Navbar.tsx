@@ -48,7 +48,7 @@ function BiLabel({ en, hi, compact }: { en: string; hi: string; compact?: boolea
   return (
     <span className={compact ? 'inline' : 'inline-flex flex-col items-start leading-tight'}>
       <span>{en}</span>
-      <span lang="hi" className={compact ? 'ml-1 text-[10px] opacity-70' : 'bilingual-hi'}>
+      <span lang="hi" className={compact ? 'ml-1 text-[10px] text-ink-muted opacity-80 dark:text-cream/85 dark:opacity-95' : 'bilingual-hi'}>
         {compact ? `(${hi})` : hi}
       </span>
     </span>
@@ -59,7 +59,7 @@ function linkClass({ isActive }: { isActive: boolean }) {
   return `rounded-md px-2 py-1.5 text-[13px] font-medium transition-colors ${
     isActive
       ? 'bg-gold/15 text-gold-dim dark:bg-gold/20 dark:text-gold'
-      : 'text-navy/80 hover:bg-navy/5 hover:text-navy dark:text-cream/75 dark:hover:bg-white/10 dark:hover:text-cream'
+      : 'text-navy/80 hover:bg-navy/5 hover:text-navy dark:text-cream/90 dark:hover:bg-white/10 dark:hover:text-cream'
   }`
 }
 
@@ -86,14 +86,14 @@ function HeaderSearch({ compact }: { compact?: boolean }) {
         Search
       </label>
       <div className="relative">
-        <Search className="pointer-events-none absolute left-2.5 top-1/2 h-3.5 w-3.5 -translate-y-1/2 text-ink-muted dark:text-cream/50" aria-hidden />
+        <Search className="pointer-events-none absolute left-2.5 top-1/2 h-3.5 w-3.5 -translate-y-1/2 text-ink-muted dark:text-cream/70" aria-hidden />
         <input
           id={inputId}
           value={value}
           onChange={(e) => setValue(e.target.value)}
           placeholder="Search…"
           autoComplete="off"
-          className={`rounded-lg border border-navy/10 bg-white/90 py-1.5 pl-8 pr-2 text-xs outline-none focus-visible:ring-2 focus-visible:ring-gold/50 dark:border-white/15 dark:bg-navy-light/80 dark:text-cream ${
+          className={`rounded-lg border border-navy/10 bg-white/90 py-1.5 pl-8 pr-2 text-xs outline-none focus-visible:ring-2 focus-visible:ring-gold/50 dark:border-white/15 dark:bg-navy-light/80 dark:text-cream dark:placeholder:text-cream/60 ${
             compact ? 'w-full' : 'w-40 lg:w-48'
           }`}
         />
@@ -206,7 +206,7 @@ function DesktopDropdown({ group }: { group: NavGroup }) {
         className={`inline-flex items-center gap-1 rounded-md px-2 py-1.5 text-[13px] font-medium transition-colors ${
           open || anyActive
             ? 'bg-gold/10 text-navy ring-1 ring-gold/35 dark:bg-gold/15 dark:text-gold dark:ring-gold/40'
-            : 'text-navy/80 hover:bg-navy/5 hover:text-navy dark:text-cream/75 dark:hover:bg-white/10 dark:hover:text-cream'
+            : 'text-navy/80 hover:bg-navy/5 hover:text-navy dark:text-cream/90 dark:hover:bg-white/10 dark:hover:text-cream'
         }`}
         aria-expanded={open}
         aria-haspopup="menu"
@@ -247,7 +247,7 @@ function DesktopDropdown({ group }: { group: NavGroup }) {
                   `block px-3 py-2 text-[13px] transition-colors ${
                     isActive
                       ? 'bg-gold/15 font-medium text-gold-dim dark:text-gold'
-                      : 'text-navy/85 hover:bg-navy/5 dark:text-cream/80 dark:hover:bg-white/10'
+                      : 'text-navy/85 hover:bg-navy/5 dark:text-cream/90 dark:hover:bg-white/10'
                   }`
                 }
                 onClick={() => close()}
@@ -299,7 +299,7 @@ export function Navbar() {
             <span className="block truncate text-sm font-semibold tracking-tight text-navy dark:text-cream">
               RBI Knowledge Prototype
             </span>
-            <span className="block text-[10px] font-medium uppercase tracking-wider text-ink-muted dark:text-cream/50">
+            <span className="block text-[10px] font-medium uppercase tracking-wider text-ink-muted dark:text-cream/75">
               Unofficial · Educational UX
               <span lang="hi" className="ml-1 font-normal normal-case tracking-normal opacity-80">
                 · अनौपचारिक
@@ -324,7 +324,7 @@ export function Navbar() {
           </Link>
           <Link
             to="/sitemap"
-            className="hidden rounded-lg border border-navy/10 px-2.5 py-1.5 text-[12px] font-semibold text-navy/80 transition hover:bg-navy/5 lg:inline-flex dark:border-white/15 dark:text-cream/80 dark:hover:bg-white/10"
+            className="hidden rounded-lg border border-navy/10 px-2.5 py-1.5 text-[12px] font-semibold text-navy/80 transition hover:bg-navy/5 lg:inline-flex dark:border-white/15 dark:text-cream/90 dark:hover:bg-white/10"
             onClick={() => setOpen(false)}
           >
             Sitemap

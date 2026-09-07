@@ -7,7 +7,7 @@ export function ProtoStrip() {
         <p className="font-medium uppercase tracking-wider">
           Unofficial prototype · Illustrative data
         </p>
-        <p className="text-[0.65rem] normal-case tracking-normal text-cream/70">
+        <p className="text-[0.65rem] normal-case tracking-normal text-cream/85">
           Not rbi.org.in · Not affiliated with RBI ·{' '}
           <Link to="/about/prototype" className="underline-offset-2 hover:underline">
             About this prototype

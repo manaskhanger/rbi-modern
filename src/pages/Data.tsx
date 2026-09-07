@@ -19,8 +19,9 @@ import {
 } from '../data/rates'
 import { RBI_SECTIONS } from '../data/meta'
 import { downloadCsv } from '../lib/csv'
+import { chartTick, chartGrid, chartSeriesNavy, chartLegendStyle } from '../lib/chartTheme'
 
-const COLORS = ['#0B1D36', '#C5A572', '#4a5568']
+const COLORS = ['#C5A572', '#e8d4a8', '#94a3b8']
 type Row = (typeof dashboardTable)[number]
 type SortKey = keyof Row
 type DataMode = 'sample' | 'official'
@@ -40,7 +41,7 @@ function ChartTip({ active, payload, label, unitHint }: {
           {p.name}: {p.value}{unitHint ? ` ${unitHint}` : ''}
         </p>
       ))}
-      <p className="mt-1.5 border-t border-navy/5 pt-1 text-[10px] leading-snug text-ink-muted dark:border-white/10 dark:text-cream/50">
+      <p className="mt-1.5 border-t border-navy/5 pt-1 text-[10px] leading-snug text-ink-muted dark:border-white/10 dark:text-cream/75">
         Sample tooltip · Illustrative · not for compliance
       </p>
     </div>
@@ -62,7 +63,7 @@ function ModeToggle({ mode, onChange }: { mode: DataMode; onChange: (m: DataMode
         className={`rounded-md px-3 py-1.5 text-xs font-semibold transition sm:text-sm ${
           mode === 'sample'
             ? 'bg-navy text-cream dark:bg-gold dark:text-navy'
-            : 'text-ink-muted hover:text-navy dark:text-cream/60 dark:hover:text-cream'
+            : 'text-ink-muted hover:text-navy dark:text-cream/80 dark:hover:text-cream'
         }`}
       >
         Sample dataset (illustrative)
@@ -75,7 +76,7 @@ function ModeToggle({ mode, onChange }: { mode: DataMode; onChange: (m: DataMode
         className={`rounded-md px-3 py-1.5 text-xs font-semibold transition sm:text-sm ${
           mode === 'official'
             ? 'bg-navy text-cream dark:bg-gold dark:text-navy'
-            : 'text-ink-muted hover:text-navy dark:text-cream/60 dark:hover:text-cream'
+            : 'text-ink-muted hover:text-navy dark:text-cream/80 dark:hover:text-cream'
         }`}
       >
         Official structure (link-out)
@@ -91,7 +92,7 @@ function OfficialStructureView() {
         <p className="text-sm font-semibold text-navy dark:text-cream">
           Honest empty panels — no fabricated “live” official numbers
         </p>
-        <p className="mt-1.5 text-sm leading-relaxed text-ink-muted dark:text-cream/65">
+        <p className="mt-1.5 text-sm leading-relaxed text-ink-muted dark:text-cream/80">
           This mode shows how a data lab might mirror DBIE / rbi.org.in <em>structure</em> without
           pretending to pull live series. Real figures live only on the Reserve Bank’s data portal
           and statistics pages. Nothing below is an official extract.
@@ -139,15 +140,15 @@ function OfficialStructureView() {
                 Official structure · empty placeholder
               </p>
               <h3 className="mt-1 text-sm font-semibold text-navy dark:text-cream">{panel.title}</h3>
-              <p className="mt-2 text-sm leading-relaxed text-ink-muted dark:text-cream/65">
+              <p className="mt-2 text-sm leading-relaxed text-ink-muted dark:text-cream/80">
                 {panel.structure}
               </p>
               <div className="mt-4 flex flex-1 flex-col justify-end">
                 <div className="rounded-lg border border-navy/10 bg-white/70 px-3 py-6 text-center dark:border-white/10 dark:bg-navy-light/50">
-                  <p className="text-sm font-medium text-ink-muted dark:text-cream/55">
+                  <p className="text-sm font-medium text-ink-muted dark:text-cream/78">
                     No sample values shown in this mode
                   </p>
-                  <p className="mt-1 text-xs text-ink-muted dark:text-cream/45">
+                  <p className="mt-1 text-xs text-ink-muted dark:text-cream/72">
                     Live series: {panel.where}
                   </p>
                 </div>
@@ -297,13 +298,13 @@ export function Data() {
                 <div className="min-h-0 flex-1" style={{ height: 220 }}>
                   <ResponsiveContainer width="100%" height="100%">
                     <LineChart data={dashboardLine}>
-                      <CartesianGrid strokeDasharray="3 3" stroke="rgba(128,128,128,0.2)" />
-                      <XAxis dataKey="month" tick={{ fontSize: 11 }} />
-                      <YAxis tick={{ fontSize: 11 }} />
+                      <CartesianGrid strokeDasharray="3 3" stroke={chartGrid} />
+                      <XAxis dataKey="month" tick={chartTick} />
+                      <YAxis tick={chartTick} />
                       <Tooltip content={<ChartTip unitHint="bn txn (sample)" />} />
-                      <Legend />
+                      <Legend wrapperStyle={chartLegendStyle} />
                       <Line type="monotone" dataKey="upi" name="UPI" stroke="#C5A572" strokeWidth={2} />
-                      <Line type="monotone" dataKey="neft" name="NEFT" stroke="#0B1D36" strokeWidth={2} />
+                      <Line type="monotone" dataKey="neft" name="NEFT" stroke={chartSeriesNavy} strokeWidth={2} />
                       <Line type="monotone" dataKey="rtgs" name="RTGS" stroke="#64748b" strokeWidth={2} />
                     </LineChart>
                   </ResponsiveContainer>
@@ -322,9 +323,9 @@ export function Data() {
               <div className="min-h-0 flex-1" style={{ height: 220 }}>
                 <ResponsiveContainer width="100%" height="100%">
                   <BarChart data={dashboardBar}>
-                    <CartesianGrid strokeDasharray="3 3" stroke="rgba(128,128,128,0.2)" />
-                    <XAxis dataKey="segment" tick={{ fontSize: 11 }} />
-                    <YAxis tick={{ fontSize: 11 }} />
+                    <CartesianGrid strokeDasharray="3 3" stroke={chartGrid} />
+                    <XAxis dataKey="segment" tick={chartTick} />
+                    <YAxis tick={chartTick} />
                     <Tooltip content={<ChartTip unitHint="index (sample)" />} />
                     <Bar dataKey="credit" name="Credit index" fill="#C5A572" radius={[4, 4, 0, 0]} />
                   </BarChart>
@@ -403,7 +404,7 @@ export function Data() {
                         <td className="px-4 py-2 font-medium">{r.indicator}</td>
                         <td className="px-4 py-2">{r.category}</td>
                         <td className="px-4 py-2 tabular-nums">{r.latest}</td>
-                        <td className="px-4 py-2 tabular-nums text-ink-muted dark:text-cream/60">
+                        <td className="px-4 py-2 tabular-nums text-ink-muted dark:text-cream/80">
                           {r.previous}
                         </td>
                         <td className="px-4 py-2">{r.unit}</td>
@@ -416,7 +417,7 @@ export function Data() {
                 <p className="py-8 text-center text-sm text-ink-muted">No indicators match your search.</p>
               )}
               <ChartFootnote methodology={chartMethodology.indicatorsTable} className="mt-3" />
-              <p className="mt-2 text-xs text-ink-muted dark:text-cream/50">{dataFootnote}</p>
+              <p className="mt-2 text-xs text-ink-muted dark:text-cream/75">{dataFootnote}</p>
             </div>
           </>
         )}
