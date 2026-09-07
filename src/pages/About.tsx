@@ -14,6 +14,7 @@ import { PageHeader } from '../components/PageHeader'
 import { Reveal } from '../components/Reveal'
 import { DisclaimerBanner } from '../components/DisclaimerBanner'
 import { ExploreNext, SectionHubCards } from '../components/ExploreNext'
+import { ExploreMapTeaser } from '../components/InteractiveSiteMap'
 
 const timeline = [
   { year: '1934–35', text: 'Reserve Bank of India Act, 1934 establishes the Bank; operations begin in 1935 as India’s central bank.' },
@@ -128,6 +129,10 @@ export function About() {
           { label: 'About this prototype', to: '/about/prototype', note: 'Trust & unofficial framing' },
         ]}
       />
+
+      <div className="mb-10">
+        <ExploreMapTeaser />
+      </div>
 
       <Reveal>
         <div className="glass-card mb-12 rounded-xl p-6 md:p-8">

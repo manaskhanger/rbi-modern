@@ -2,6 +2,7 @@ import { ExternalLink } from 'lucide-react'
 import { keyRates, keyRatesAsOf } from '../data/rates'
 import { RBI_SECTIONS } from '../data/meta'
 import { IllustrativeLabel } from './IllustrativeLabel'
+import { AnimatedCounter } from './AnimatedCounter'
 
 type Props = {
   className?: string
@@ -59,7 +60,7 @@ export function KeyRatesStrip({ className = '' }: Props) {
               className="rounded-lg border border-navy/8 bg-cream/90 px-3 py-2.5 text-center dark:border-white/10 dark:bg-navy/50"
             >
               <p className="text-[10px] leading-tight text-ink-muted dark:text-cream/55">{r.label}</p>
-              <p className="mt-1 text-lg font-bold tabular-nums text-navy dark:text-cream">{r.value}</p>
+              <p className="mt-1 text-lg font-bold tabular-nums text-navy dark:text-cream"><AnimatedCounter value={r.value} /></p>
               <p className="mt-0.5 text-[10px] text-ink-muted dark:text-cream/45">
                 as-of (sample): {keyRatesAsOf}
               </p>

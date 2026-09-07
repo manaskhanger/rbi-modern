@@ -1,15 +1,18 @@
 import { useMemo, useState } from 'react'
 import { Link, useSearchParams } from 'react-router-dom'
+import { motion, useReducedMotion } from 'framer-motion'
 import { LayoutGrid, Table2 } from 'lucide-react'
 import { PageHeader } from '../components/PageHeader'
 import { SearchFilter } from '../components/SearchFilter'
-import { CardLink } from '../components/Card'
 import { Badge } from '../components/Badge'
 import { DisclaimerBanner } from '../components/DisclaimerBanner'
 import { ExploreNext } from '../components/ExploreNext'
+import { OfficialPdfLink, OfficialTitleLink } from '../components/OfficialPdfLink'
 import { mastersDirections, mdCategories } from '../data/mastersDirections'
 import { AUDIENCE_FILTERS, yearFromDate, type AudienceFilter } from '../data/types'
 import { formatContentReviewed } from '../data/meta'
+import { fadeUp, stagger } from '../lib/motion'
+import { officialOpenUrl } from '../lib/officialDocs'
 
 const yearOptions = [
   'All',
@@ -26,6 +29,7 @@ function audienceFromParam(raw: string | null): AudienceFilter {
 }
 
 export function MastersDirections() {
+  const reduce = useReducedMotion()
   const [params, setParams] = useSearchParams()
   const [query, setQuery] = useState('')
   const [category, setCategory] = useState('All')
@@ -67,7 +71,7 @@ export function MastersDirections() {
       <PageHeader
         eyebrow="Regulatory library"
         title="Masters Directions"
-        description="Searchable catalogue of educational summaries of major Masters Direction themes. Original paraphrases with prototype reference codes (MD-XX) — not verbatim official text and not for compliance reliance."
+        description="Searchable catalogue of educational summaries of major Masters Direction themes. Title click / Open PDF opens the official RBI document (or Master Directions index) in a new tab — like rbi.org.in. Prototype summaries remain secondary."
       />
       <SearchFilter
         query={query}
@@ -116,19 +120,38 @@ export function MastersDirections() {
       </div>
 
       {view === 'cards' ? (
-        <div className="grid gap-3 md:grid-cols-2">
+        <motion.div
+          className="grid gap-3 md:grid-cols-2"
+          variants={reduce ? undefined : stagger}
+          initial={reduce ? undefined : 'hidden'}
+          animate={reduce ? undefined : 'visible'}
+        >
           {filtered.map((d) => (
-            <CardLink key={d.slug} to={`/masters-directions/${d.slug}`} className="!rounded-xl !p-4">
+            <motion.article
+              key={d.slug}
+              variants={reduce ? undefined : fadeUp}
+              className="group glass-card rounded-xl p-4 transition-colors duration-200 hover:border-gold/35 hover:shadow-md"
+            >
               <div className="flex flex-wrap items-center gap-2">
                 <Badge>{d.category}</Badge>
                 <span className="font-mono text-[11px] text-gold-dim dark:text-gold">{d.code}</span>
                 <span className="text-xs text-ink-muted dark:text-cream/45">Updated {d.updated}</span>
+                {d.pdfMode === 'index' && (
+                  <span className="rounded border border-navy/10 px-1.5 py-0.5 text-[10px] text-ink-muted dark:border-white/15">
+                    RBI index
+                  </span>
+                )}
               </div>
-              <h2 className="mt-2 text-sm font-semibold text-navy dark:text-cream">{d.title}</h2>
+              <h2 className="mt-2 text-sm font-semibold text-navy dark:text-cream">
+                <OfficialTitleLink
+                  doc={d}
+                  className="underline-offset-2 hover:text-gold-dim hover:underline dark:hover:text-gold"
+                >
+                  {d.title}
+                </OfficialTitleLink>
+              </h2>
               <p className="mt-1.5 line-clamp-2 text-sm text-ink-muted dark:text-cream/65">{d.summary}</p>
-              <p className="mt-2 text-xs text-ink-muted dark:text-cream/50">
-                Audience: {d.audience}
-              </p>
+              <p className="mt-2 text-xs text-ink-muted dark:text-cream/50">Audience: {d.audience}</p>
               <p className="mt-1 flex flex-wrap gap-1">
                 {d.audiences.map((a) => (
                   <span
@@ -139,22 +162,32 @@ export function MastersDirections() {
                   </span>
                 ))}
               </p>
-              <p className="mt-1 text-[10px] text-ink-muted/80 dark:text-cream/40">
+              <div className="mt-3 flex flex-wrap items-center gap-2">
+                <OfficialPdfLink doc={d} variant="button" />
+                <Link
+                  to={`/masters-directions/${d.slug}`}
+                  className="text-xs font-medium text-ink-muted underline-offset-2 hover:text-navy hover:underline dark:text-cream/55 dark:hover:text-cream"
+                >
+                  Read prototype summary →
+                </Link>
+              </div>
+              <p className="mt-2 text-[10px] text-ink-muted/80 dark:text-cream/40">
                 {formatContentReviewed(d.lastReviewed)}
               </p>
-            </CardLink>
+            </motion.article>
           ))}
-        </div>
+        </motion.div>
       ) : (
         <div className="overflow-x-auto rounded-xl border border-navy/10 dark:border-white/10">
-          <table className="data-table w-full min-w-[720px] text-left text-sm">
+          <table className="data-table w-full min-w-[820px] text-left text-sm">
             <thead className="bg-navy/5 dark:bg-white/5">
               <tr>
                 <th className="px-3 py-2.5">Code</th>
                 <th className="px-3 py-2.5">Title</th>
                 <th className="px-3 py-2.5">Category</th>
                 <th className="px-3 py-2.5">Updated</th>
-                <th className="px-3 py-2.5">Audience</th>
+                <th className="px-3 py-2.5">Official</th>
+                <th className="px-3 py-2.5">Summary</th>
               </tr>
             </thead>
             <tbody>
@@ -162,19 +195,29 @@ export function MastersDirections() {
                 <tr key={d.slug} className="border-t border-navy/5 dark:border-white/5">
                   <td className="px-3 py-2 font-mono text-xs text-gold-dim">{d.code}</td>
                   <td className="px-3 py-2">
-                    <Link
-                      to={`/masters-directions/${d.slug}`}
+                    <a
+                      href={officialOpenUrl(d)}
+                      target="_blank"
+                      rel="noopener noreferrer"
                       className="font-medium text-navy hover:underline dark:text-cream"
                     >
                       {d.title}
-                    </Link>
+                    </a>
                   </td>
                   <td className="px-3 py-2 text-ink-muted dark:text-cream/65">{d.category}</td>
                   <td className="px-3 py-2 tabular-nums text-ink-muted dark:text-cream/65">
                     {d.updated}
                   </td>
-                  <td className="px-3 py-2 text-xs text-ink-muted dark:text-cream/55">
-                    {d.audiences.join(', ')}
+                  <td className="px-3 py-2">
+                    <OfficialPdfLink doc={d} variant="inline" />
+                  </td>
+                  <td className="px-3 py-2">
+                    <Link
+                      to={`/masters-directions/${d.slug}`}
+                      className="text-xs text-ink-muted hover:underline dark:text-cream/55"
+                    >
+                      Prototype
+                    </Link>
                   </td>
                 </tr>
               ))}

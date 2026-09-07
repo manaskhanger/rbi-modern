@@ -2,6 +2,8 @@ import { Link } from 'react-router-dom'
 import { PageHeader } from '../components/PageHeader'
 import { DisclaimerBanner } from '../components/DisclaimerBanner'
 import { ExploreNext } from '../components/ExploreNext'
+import { InteractiveSiteMap } from '../components/InteractiveSiteMap'
+import { Reveal } from '../components/Reveal'
 import { mastersDirections } from '../data/mastersDirections'
 import { circulars } from '../data/circulars'
 import { newsItems } from '../data/news'
@@ -64,8 +66,17 @@ export function Sitemap() {
       <PageHeader
         eyebrow="Navigation"
         title="Sitemap"
-        description="Full hierarchical map of this unofficial prototype — section landings plus every seeded Masters Direction, circular, news item, and report. Use it to click through without dead ends."
+        description="Interactive illustrated map of this unofficial prototype — Central Board, functions, regulatory library, publications and data — plus the full hierarchical catalogue underneath."
       />
+
+      <Reveal>
+        <section className="mb-12" aria-labelledby="illustrated-map">
+          <h2 id="illustrated-map" className="sr-only">
+            Illustrated site map
+          </h2>
+          <InteractiveSiteMap />
+        </section>
+      </Reveal>
 
       <section className="mb-12" aria-labelledby="sitemap-overview">
         <h2 id="sitemap-overview" className="mb-4 text-lg font-bold text-navy dark:text-cream">

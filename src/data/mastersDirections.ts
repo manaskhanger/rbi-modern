@@ -3,6 +3,9 @@ import type { MastersDirection } from './types'
 export const mastersDirections: MastersDirection[] = [
   {
     slug: 'know-your-customer',
+    officialPdfUrl: 'https://rbidocs.rbi.org.in/rdocs/notification/PDFs/169MD.PDF',
+    officialHtmlUrl: 'https://www.rbi.org.in/Scripts/BS_ViewMasDirections.aspx?id=13141',
+    pdfMode: 'pdf',
     code: 'MD-BNK-01',
     audience: 'Banks, NBFCs, payment system operators and other notified REs',
     audiences: ['Banks', 'NBFCs', 'PSPs'],
@@ -54,6 +57,9 @@ export const mastersDirections: MastersDirection[] = [
   },
   {
     slug: 'liquidity-risk-management-banks',
+    officialPdfUrl: 'https://www.rbi.org.in/Scripts/BS_ViewMasDirections.aspx',
+    officialHtmlUrl: 'https://www.rbi.org.in/Scripts/BS_ViewMasDirections.aspx',
+    pdfMode: 'index',
     code: 'MD-BNK-02',
     audience: 'Scheduled commercial banks',
     audiences: ['Banks'],
@@ -99,6 +105,9 @@ export const mastersDirections: MastersDirection[] = [
   },
   {
     slug: 'nbfc-scale-based-regulation',
+    officialPdfUrl: 'https://rbidocs.rbi.org.in/rdocs/notification/PDFs/339MD7166A79E96D64572B378949D3972DBD1.PDF',
+    officialHtmlUrl: 'https://www.rbi.org.in/Scripts/BS_ViewMasDirections.aspx?id=12965',
+    pdfMode: 'pdf',
     code: 'MD-NBF-01',
     audience: 'Non-Banking Financial Companies',
     audiences: ['NBFCs'],
@@ -144,6 +153,9 @@ export const mastersDirections: MastersDirection[] = [
   },
   {
     slug: 'payment-aggregation',
+    officialPdfUrl: 'https://rbidocs.rbi.org.in/rdocs/notification/PDFs/141MD7D7F25DEBF1F48449E20D685E4B014E5.PDF',
+    officialHtmlUrl: 'https://www.rbi.org.in/Scripts/BS_ViewMasDirections.aspx?id=12896',
+    pdfMode: 'pdf',
     code: 'MD-PAY-01',
     audience: 'Non-bank payment aggregators and bank PA businesses',
     audiences: ['Banks', 'PSPs'],
@@ -189,6 +201,9 @@ export const mastersDirections: MastersDirection[] = [
   },
   {
     slug: 'currency-distribution',
+    officialPdfUrl: 'https://rbidocs.rbi.org.in/rdocs/notification/PDFs/395MDDCEE303B29F7409B867FAAEC10242C4A.PDF',
+    officialHtmlUrl: 'https://www.rbi.org.in/Scripts/BS_ViewMasDirections.aspx?id=13362',
+    pdfMode: 'pdf',
     code: 'MD-CUR-01',
     audience: 'Banks operating currency chests and branches',
     audiences: ['Banks'],
@@ -234,6 +249,9 @@ export const mastersDirections: MastersDirection[] = [
   },
   {
     slug: 'fema-current-account',
+    officialPdfUrl: 'https://rbidocs.rbi.org.in/rdocs/notification/PDFs/04MD5127742FD0914D54B5EC4ECA8076F325.PDF',
+    officialHtmlUrl: 'https://www.rbi.org.in/Scripts/BS_ViewMasDirections.aspx?id=10193',
+    pdfMode: 'pdf',
     code: 'MD-FEX-01',
     audience: 'Authorised dealers and resident remitters (educational)',
     audiences: ['Banks'],
@@ -279,6 +297,9 @@ export const mastersDirections: MastersDirection[] = [
   },
   {
     slug: 'digital-lending',
+    officialPdfUrl: 'https://rbidocs.rbi.org.in/rdocs/notification/PDFs/36NT8C402BE7C2A349E0BFFF3C526668CD7A.PDF',
+    officialHtmlUrl: 'https://www.rbi.org.in/scripts/NotificationUser.aspx?Id=12848&Mode=0',
+    pdfMode: 'pdf',
     code: 'MD-BNK-03',
     audience: 'REs engaged in digital lending and their LSPs',
     audiences: ['Banks', 'NBFCs'],
@@ -324,6 +345,9 @@ export const mastersDirections: MastersDirection[] = [
   },
   {
     slug: 'interest-rate-risk-banking-book',
+    officialPdfUrl: 'https://www.rbi.org.in/Scripts/BS_ViewMasDirections.aspx',
+    officialHtmlUrl: 'https://www.rbi.org.in/Scripts/BS_ViewMasDirections.aspx',
+    pdfMode: 'index',
     code: 'MD-BNK-04',
     audience: 'Commercial banks with material IRRBB exposures',
     audiences: ['Banks'],
@@ -363,6 +387,9 @@ export const mastersDirections: MastersDirection[] = [
   },
   {
     slug: 'prepaid-payment-instruments',
+    officialPdfUrl: 'https://rbidocs.rbi.org.in/rdocs/notification/PDFs/82MDPPIS2708202181CF0A6FCD1B47B88CAE8E92A228B160.PDF',
+    officialHtmlUrl: 'https://www.rbi.org.in/Scripts/BS_ViewMasDirections.aspx?id=12156',
+    pdfMode: 'pdf',
     code: 'MD-PAY-02',
     audience: 'PPI issuers (banks and non-banks)',
     audiences: ['Banks', 'PSPs'],
@@ -402,6 +429,9 @@ export const mastersDirections: MastersDirection[] = [
   },
   {
     slug: 'market-conduct-banks',
+    officialPdfUrl: 'https://rbidocs.rbi.org.in/rdocs/notification/PDFs/170MD.PDF',
+    officialHtmlUrl: 'https://www.rbi.org.in/Scripts/BS_ViewMasDirections.aspx?id=13140',
+    pdfMode: 'pdf',
     code: 'MD-CON-01',
     audience: 'Banks and NBFCs as lenders',
     audiences: ['Banks', 'NBFCs'],
@@ -441,6 +471,9 @@ export const mastersDirections: MastersDirection[] = [
   },
   {
     slug: 'financial-markets-repo',
+    officialPdfUrl: 'https://rbidocs.rbi.org.in/rdocs/notification/PDFs/142MD1111202598527CBD7B6D4BFC9792D568AD07F27D.PDF',
+    officialHtmlUrl: 'https://www.rbi.org.in/Scripts/BS_ViewMasDirections.aspx?id=12920',
+    pdfMode: 'pdf',
     code: 'MD-MKT-01',
     audience: 'Eligible repo market participants',
     audiences: ['Banks'],
@@ -480,6 +513,9 @@ export const mastersDirections: MastersDirection[] = [
   },
   {
     slug: 'supervision-reporting',
+    officialPdfUrl: 'https://rbidocs.rbi.org.in/rdocs/notification/PDFs/415MD17AD8787C68848D58600F61E35468861.PDF',
+    officialHtmlUrl: 'https://www.rbi.org.in/Scripts/BS_ViewMasDirections.aspx?id=13638',
+    pdfMode: 'pdf',
     code: 'MD-SUP-01',
     audience: 'Commercial banks filing off-site returns',
     audiences: ['Banks'],

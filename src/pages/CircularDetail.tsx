@@ -10,6 +10,8 @@ import { ContentReviewed } from '../components/IllustrativeLabel'
 import { SummaryModeToggle } from '../components/SummaryModeToggle'
 import { PrintButton } from '../components/PrintButton'
 import { CollectionNav } from '../components/CollectionNav'
+import { OfficialPdfLink } from '../components/OfficialPdfLink'
+import { officialViewerPath } from '../lib/officialDocs'
 
 export function CircularDetail() {
   const { slug } = useParams()
@@ -57,11 +59,28 @@ export function CircularDetail() {
       </p>
       <ContentReviewed lastReviewed={doc.lastReviewed} className="mt-1" />
 
-      <div className="mt-6">
+
+      <div className="mt-6 flex flex-wrap items-center gap-3 rounded-xl border border-gold/35 bg-gold/10 p-4 dark:border-gold/25">
+        <OfficialPdfLink doc={doc} variant="prominent" />
+        <Link
+          to={officialViewerPath(doc)}
+          className="text-sm font-medium text-ink-muted underline-offset-2 hover:underline dark:text-cream/60"
+        >
+          Try in-page viewer
+        </Link>
+        <a
+          href="#executive"
+          className="text-sm font-medium text-navy underline-offset-2 hover:underline dark:text-cream"
+        >
+          Read prototype summary ↓
+        </a>
+      </div>
+
+      <div className="mt-4">
         <AuthoritativeSource section="notifications" />
       </div>
 
-      <section className="mt-8">
+      <section id="executive" className="mt-8 scroll-mt-28">
         <h2 className="text-sm font-semibold uppercase tracking-wider text-gold-dim dark:text-gold">
           Executive summary
         </h2>

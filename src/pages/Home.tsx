@@ -11,6 +11,7 @@ import { TourPrompt } from '../components/TourPrompt'
 import { PersonaCards } from '../components/PersonaCards'
 import { fadeUp, stagger } from '../lib/motion'
 import { TOUR_DURATION_LABEL } from '../data/tour'
+import { InteractiveSiteMap } from '../components/InteractiveSiteMap'
 
 const pillars = [
   {
@@ -42,7 +43,13 @@ export function Home() {
   return (
     <div>
       <section className="relative overflow-hidden border-b border-navy/8 dark:border-white/10">
-        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_rgba(197,165,114,0.12),_transparent_55%)]" />
+        <motion.div
+          aria-hidden
+          className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_rgba(197,165,114,0.14),_transparent_55%)]"
+          initial={reduce ? false : { opacity: 0.7, y: -12 }}
+          animate={reduce ? undefined : { opacity: 1, y: 0 }}
+          transition={{ duration: 1.1, ease: [0.22, 1, 0.36, 1] }}
+        />
         <div className="mx-auto max-w-6xl px-4 pb-14 pt-12 md:px-6 md:pb-20 md:pt-16">
           <motion.div
             variants={reduce ? undefined : stagger}
@@ -175,6 +182,24 @@ export function Home() {
       </section>
 
 
+
+      <section className="mx-auto max-w-6xl px-4 pb-4 md:px-6" aria-labelledby="home-map">
+        <Reveal>
+          <h2 id="home-map" className="text-2xl font-bold text-navy dark:text-cream md:text-[1.75rem]">
+            Explore the map
+            <span lang="hi" className="bilingual-hi mt-1 text-base font-semibold normal-case tracking-normal text-ink-muted dark:text-cream/60">
+              मानचित्र देखें
+            </span>
+          </h2>
+          <p className="mt-2 max-w-2xl text-sm text-ink-muted dark:text-cream/65 md:text-base">
+            Animated, clickable information architecture — every node links to a real page in this prototype.
+          </p>
+        </Reveal>
+        <div className="mt-6">
+          <InteractiveSiteMap teaser />
+        </div>
+      </section>
+
       <section className="mx-auto max-w-6xl px-4 py-14 md:px-6 md:py-16" aria-labelledby="personas-heading">
         <Reveal>
           <h2 id="personas-heading" className="text-2xl font-bold text-navy dark:text-cream md:text-[1.75rem]">
@@ -257,12 +282,20 @@ export function Home() {
                 labelled illustrative for training and UX review.
               </p>
             </div>
-            <Link
-              to="/about"
-              className="mt-6 inline-flex items-center gap-2 rounded-md bg-gold px-5 py-2.5 text-sm font-semibold text-navy transition hover:bg-gold-soft md:mt-0"
-            >
-              View about page <ArrowRight className="h-4 w-4" />
-            </Link>
+            <div className="mt-6 flex flex-wrap gap-3 md:mt-0">
+              <Link
+                to="/sitemap"
+                className="inline-flex items-center gap-2 rounded-md bg-gold px-5 py-2.5 text-sm font-semibold text-navy transition hover:bg-gold-soft"
+              >
+                Explore the map <ArrowRight className="h-4 w-4" />
+              </Link>
+              <Link
+                to="/about"
+                className="inline-flex items-center gap-2 rounded-md border border-cream/30 px-5 py-2.5 text-sm font-semibold text-cream transition hover:bg-white/10"
+              >
+                About page
+              </Link>
+            </div>
           </div>
         </Reveal>
         <div className="mt-8">

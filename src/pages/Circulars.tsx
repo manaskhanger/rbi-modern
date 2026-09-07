@@ -1,15 +1,18 @@
 import { useMemo, useState } from 'react'
 import { Link, useSearchParams } from 'react-router-dom'
+import { motion, useReducedMotion } from 'framer-motion'
 import { LayoutGrid, Table2 } from 'lucide-react'
 import { PageHeader } from '../components/PageHeader'
 import { SearchFilter } from '../components/SearchFilter'
-import { CardLink } from '../components/Card'
 import { Badge } from '../components/Badge'
 import { DisclaimerBanner } from '../components/DisclaimerBanner'
 import { ExploreNext } from '../components/ExploreNext'
+import { OfficialPdfLink, OfficialTitleLink } from '../components/OfficialPdfLink'
 import { circulars, circularCategories } from '../data/circulars'
 import { AUDIENCE_FILTERS, yearFromDate, type AudienceFilter } from '../data/types'
 import { formatContentReviewed } from '../data/meta'
+import { fadeUp, stagger } from '../lib/motion'
+import { officialOpenUrl } from '../lib/officialDocs'
 
 const yearOptions = [
   'All',
@@ -26,6 +29,7 @@ function audienceFromParam(raw: string | null): AudienceFilter {
 }
 
 export function Circulars() {
+  const reduce = useReducedMotion()
   const [params, setParams] = useSearchParams()
   const [query, setQuery] = useState('')
   const [category, setCategory] = useState('All')
@@ -64,7 +68,7 @@ export function Circulars() {
       <PageHeader
         eyebrow="Regulatory updates"
         title="Circulars"
-        description="Illustrative circular-style notes showing how incremental regulatory expectations might be browsed. Original educational paraphrases with sample reference codes."
+        description="Illustrative circular-style notes. Title click / Open on RBI opens the official Notifications index in a new tab (RBI-like). Educational paraphrases remain on the prototype detail pages."
       />
       <SearchFilter
         query={query}
@@ -113,45 +117,64 @@ export function Circulars() {
       </div>
 
       {view === 'cards' ? (
-        <div className="space-y-2">
+        <motion.div
+          className="space-y-2"
+          variants={reduce ? undefined : stagger}
+          initial={reduce ? undefined : 'hidden'}
+          animate={reduce ? undefined : 'visible'}
+        >
           {filtered.map((c) => (
-            <CardLink key={c.slug} to={`/circulars/${c.slug}`} className="!rounded-xl !p-4">
+            <motion.article
+              key={c.slug}
+              variants={reduce ? undefined : fadeUp}
+              className="glass-card rounded-xl p-4 transition-colors duration-200 hover:border-gold/35"
+            >
               <div className="flex flex-wrap items-center gap-2">
                 <Badge tone="muted">{c.category}</Badge>
                 <span className="text-xs text-ink-muted dark:text-cream/45">{c.date}</span>
                 <span className="font-mono text-[11px] text-gold-dim">{c.ref}</span>
-              </div>
-              <h2 className="mt-1.5 text-sm font-semibold text-navy dark:text-cream">{c.title}</h2>
-              <p className="mt-1 text-sm text-ink-muted dark:text-cream/65">{c.summary}</p>
-              <p className="mt-1.5 text-xs text-ink-muted dark:text-cream/50">
-                Audience: {c.audience}
-              </p>
-              <p className="mt-1 flex flex-wrap gap-1">
-                {c.audiences.map((a) => (
-                  <span
-                    key={a}
-                    className="rounded border border-navy/10 px-1.5 py-0.5 text-[10px] text-ink-muted dark:border-white/15 dark:text-cream/50"
-                  >
-                    {a}
+                {c.pdfMode === 'index' && (
+                  <span className="rounded border border-navy/10 px-1.5 py-0.5 text-[10px] text-ink-muted dark:border-white/15">
+                    RBI notifications index
                   </span>
-                ))}
-              </p>
-              <p className="mt-1 text-[10px] text-ink-muted/80 dark:text-cream/40">
+                )}
+              </div>
+              <h2 className="mt-1.5 text-sm font-semibold text-navy dark:text-cream">
+                <OfficialTitleLink
+                  doc={c}
+                  className="underline-offset-2 hover:text-gold-dim hover:underline dark:hover:text-gold"
+                >
+                  {c.title}
+                </OfficialTitleLink>
+              </h2>
+              <p className="mt-1 text-sm text-ink-muted dark:text-cream/65">{c.summary}</p>
+              <p className="mt-1.5 text-xs text-ink-muted dark:text-cream/50">Audience: {c.audience}</p>
+              <div className="mt-3 flex flex-wrap items-center gap-2">
+                <OfficialPdfLink doc={c} variant="button" />
+                <Link
+                  to={`/circulars/${c.slug}`}
+                  className="text-xs font-medium text-ink-muted underline-offset-2 hover:text-navy hover:underline dark:text-cream/55 dark:hover:text-cream"
+                >
+                  Read prototype summary →
+                </Link>
+              </div>
+              <p className="mt-2 text-[10px] text-ink-muted/80 dark:text-cream/40">
                 {formatContentReviewed(c.lastReviewed)}
               </p>
-            </CardLink>
+            </motion.article>
           ))}
-        </div>
+        </motion.div>
       ) : (
         <div className="overflow-x-auto rounded-xl border border-navy/10 dark:border-white/10">
-          <table className="data-table w-full min-w-[720px] text-left text-sm">
+          <table className="data-table w-full min-w-[820px] text-left text-sm">
             <thead className="bg-navy/5 dark:bg-white/5">
               <tr>
                 <th className="px-3 py-2.5">Ref</th>
                 <th className="px-3 py-2.5">Title</th>
                 <th className="px-3 py-2.5">Category</th>
                 <th className="px-3 py-2.5">Date</th>
-                <th className="px-3 py-2.5">Audience</th>
+                <th className="px-3 py-2.5">Official</th>
+                <th className="px-3 py-2.5">Summary</th>
               </tr>
             </thead>
             <tbody>
@@ -159,14 +182,24 @@ export function Circulars() {
                 <tr key={c.slug} className="border-t border-navy/5 dark:border-white/5">
                   <td className="px-3 py-2 font-mono text-xs text-gold-dim">{c.ref}</td>
                   <td className="px-3 py-2">
-                    <Link to={`/circulars/${c.slug}`} className="font-medium hover:underline">
+                    <a
+                      href={officialOpenUrl(c)}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="font-medium hover:underline"
+                    >
                       {c.title}
-                    </Link>
+                    </a>
                   </td>
                   <td className="px-3 py-2 text-ink-muted dark:text-cream/65">{c.category}</td>
                   <td className="px-3 py-2 tabular-nums text-ink-muted">{c.date}</td>
-                  <td className="px-3 py-2 text-xs text-ink-muted dark:text-cream/55">
-                    {c.audiences.join(', ')}
+                  <td className="px-3 py-2">
+                    <OfficialPdfLink doc={c} variant="inline" />
+                  </td>
+                  <td className="px-3 py-2">
+                    <Link to={`/circulars/${c.slug}`} className="text-xs hover:underline">
+                      Prototype
+                    </Link>
                   </td>
                 </tr>
               ))}

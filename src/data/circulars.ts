@@ -3,6 +3,9 @@ import type { Circular } from './types'
 export const circulars: Circular[] = [
   {
     slug: 'cyber-security-framework-update',
+    officialPdfUrl: 'https://www.rbi.org.in/Scripts/NotificationUser.aspx',
+    officialHtmlUrl: 'https://www.rbi.org.in/Scripts/NotificationUser.aspx',
+    pdfMode: 'index',
     title: 'Cyber Security Framework for Banks — Incremental Controls',
     category: 'Banking',
     date: '2025-11-18',
@@ -22,6 +25,9 @@ export const circulars: Circular[] = [
   },
   {
     slug: 'upi-merchant-onboarding',
+    officialPdfUrl: 'https://www.rbi.org.in/Scripts/NotificationUser.aspx',
+    officialHtmlUrl: 'https://www.rbi.org.in/Scripts/NotificationUser.aspx',
+    pdfMode: 'index',
     title: 'UPI Merchant Onboarding — Risk-Based Due Diligence',
     category: 'Payments',
     date: '2025-09-04',
@@ -40,6 +46,9 @@ export const circulars: Circular[] = [
   },
   {
     slug: 'ecb-reporting-simplification',
+    officialPdfUrl: 'https://www.rbi.org.in/Scripts/NotificationUser.aspx',
+    officialHtmlUrl: 'https://www.rbi.org.in/Scripts/NotificationUser.aspx',
+    pdfMode: 'index',
     title: 'External Commercial Borrowings — Reporting Simplification',
     category: 'Forex',
     date: '2025-07-21',
@@ -58,6 +67,9 @@ export const circulars: Circular[] = [
   },
   {
     slug: 'npa-upgradation-clarification',
+    officialPdfUrl: 'https://www.rbi.org.in/Scripts/NotificationUser.aspx',
+    officialHtmlUrl: 'https://www.rbi.org.in/Scripts/NotificationUser.aspx',
+    pdfMode: 'index',
     title: 'Prudential Norms — Clarification on NPA Upgradation',
     category: 'Banking',
     date: '2025-05-12',
@@ -76,6 +88,9 @@ export const circulars: Circular[] = [
   },
   {
     slug: 'co-lending-guidelines-tweak',
+    officialPdfUrl: 'https://www.rbi.org.in/Scripts/NotificationUser.aspx',
+    officialHtmlUrl: 'https://www.rbi.org.in/Scripts/NotificationUser.aspx',
+    pdfMode: 'index',
     title: 'Co-Lending by Banks and NBFCs — Operational Tweaks',
     category: 'NBFC',
     date: '2025-03-28',
@@ -94,6 +109,9 @@ export const circulars: Circular[] = [
   },
   {
     slug: 'tokenisation-card-payments',
+    officialPdfUrl: 'https://www.rbi.org.in/Scripts/NotificationUser.aspx',
+    officialHtmlUrl: 'https://www.rbi.org.in/Scripts/NotificationUser.aspx',
+    pdfMode: 'index',
     title: 'Card Tokenisation — Merchant Storage Sunset Reminder',
     category: 'Payments',
     date: '2024-12-09',
@@ -112,6 +130,9 @@ export const circulars: Circular[] = [
   },
   {
     slug: 'green-deposits-framework',
+    officialPdfUrl: 'https://www.rbi.org.in/Scripts/NotificationUser.aspx',
+    officialHtmlUrl: 'https://www.rbi.org.in/Scripts/NotificationUser.aspx',
+    pdfMode: 'index',
     title: 'Framework for Acceptance of Green Deposits — FAQs',
     category: 'Banking',
     date: '2024-10-15',
@@ -130,6 +151,9 @@ export const circulars: Circular[] = [
   },
   {
     slug: 'penalty-harmonisation',
+    officialPdfUrl: 'https://www.rbi.org.in/Scripts/NotificationUser.aspx',
+    officialHtmlUrl: 'https://www.rbi.org.in/Scripts/NotificationUser.aspx',
+    pdfMode: 'index',
     title: 'Harmonisation of Penal Charges on Loans',
     category: 'Consumer Protection',
     date: '2024-08-02',
@@ -148,6 +172,9 @@ export const circulars: Circular[] = [
   },
   {
     slug: 'fraud-risk-management',
+    officialPdfUrl: 'https://www.rbi.org.in/Scripts/NotificationUser.aspx',
+    officialHtmlUrl: 'https://www.rbi.org.in/Scripts/NotificationUser.aspx',
+    pdfMode: 'index',
     title: 'Fraud Risk Management in Banks — Early Warning Signals',
     category: 'Supervision',
     date: '2024-06-20',
@@ -166,6 +193,9 @@ export const circulars: Circular[] = [
   },
   {
     slug: 'currency-chest-operations',
+    officialPdfUrl: 'https://www.rbi.org.in/Scripts/NotificationUser.aspx',
+    officialHtmlUrl: 'https://www.rbi.org.in/Scripts/NotificationUser.aspx',
+    pdfMode: 'index',
     title: 'Currency Chest Operations — Remittance Timelines',
     category: 'Currency',
     date: '2024-04-11',
@@ -184,6 +214,9 @@ export const circulars: Circular[] = [
   },
   {
     slug: 'market-risk-capital-faq',
+    officialPdfUrl: 'https://www.rbi.org.in/Scripts/NotificationUser.aspx',
+    officialHtmlUrl: 'https://www.rbi.org.in/Scripts/NotificationUser.aspx',
+    pdfMode: 'index',
     title: 'Basel III Market Risk — Parallel Run FAQs',
     category: 'Financial Markets',
     date: '2024-01-30',

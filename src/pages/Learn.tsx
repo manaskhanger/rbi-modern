@@ -16,6 +16,7 @@ import { ExploreNext } from '../components/ExploreNext'
 import { PersonaCards } from '../components/PersonaCards'
 import { glossary, howRbiWorks } from '../data/glossary'
 import { slugifyTerm } from '../lib/searchIndex'
+import { ExploreMapTeaser } from '../components/InteractiveSiteMap'
 
 const icons = { Target, Building2, Smartphone, Banknote, Globe2, Shield } as const
 
@@ -58,7 +59,9 @@ export function Learn() {
         description="Tone aimed at officers reviewing communication design and at students building central-banking literacy. Original educational copy for this prototype."
       />
 
-
+      <div className="mb-10">
+        <ExploreMapTeaser />
+      </div>
 
       <section className="mb-14" aria-labelledby="learn-personas">
         <Reveal>

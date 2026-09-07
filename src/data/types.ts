@@ -34,6 +34,9 @@ export interface ChangeHistoryEntry {
   note: string
 }
 
+/** How officialPdfUrl should be presented in the UI. */
+export type PdfMode = 'pdf' | 'index'
+
 export interface MastersDirection extends ContentMeta {
   slug: string
   code: string
@@ -59,6 +62,16 @@ export interface MastersDirection extends ContentMeta {
   changeHistory?: ChangeHistoryEntry[]
   toc: { id: string; label: string }[]
   sections: { id: string; heading: string; body: string }[]
+  /**
+   * Outbound link to official RBI PDF (rbidocs) when verified, or to the
+   * Master Directions / Notifications index when no exact PDF was verified.
+   * Never host RBI PDF binaries in this repo.
+   */
+  officialPdfUrl: string
+  /** Optional official HTML listing / notification page on rbi.org.in */
+  officialHtmlUrl?: string
+  /** 'pdf' = direct document; 'index' = browse official catalogue */
+  pdfMode: PdfMode
 }
 
 export interface Circular extends ContentMeta {
@@ -76,6 +89,10 @@ export interface Circular extends ContentMeta {
   relatedTopics: string[]
   relatedDirectionSlugs?: string[]
   effectiveNote: string
+  /** Outbound official PDF or Notifications index — never hosted locally */
+  officialPdfUrl: string
+  officialHtmlUrl?: string
+  pdfMode: PdfMode
 }
 
 export interface NewsItem extends ContentMeta {

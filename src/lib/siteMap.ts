@@ -176,6 +176,7 @@ const staticCrumbLabels: Record<string, string> = {
   '/learn': 'Learn',
   '/search': 'Search',
   '/sitemap': 'Sitemap',
+  '/viewer': 'PDF viewer',
 }
 
 /**

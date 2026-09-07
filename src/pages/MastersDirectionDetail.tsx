@@ -13,6 +13,8 @@ import { ApplicabilityMatrix } from '../components/ApplicabilityMatrix'
 import { ChangeHistory } from '../components/ChangeHistory'
 import { PrintButton } from '../components/PrintButton'
 import { CollectionNav } from '../components/CollectionNav'
+import { OfficialPdfLink } from '../components/OfficialPdfLink'
+import { officialViewerPath } from '../lib/officialDocs'
 
 export function MastersDirectionDetail() {
   const { slug } = useParams()
@@ -90,7 +92,24 @@ export function MastersDirectionDetail() {
             {doc.effectiveNote}
           </p>
 
-          <div className="mt-6">
+
+          <div className="mt-6 flex flex-wrap items-center gap-3 rounded-xl border border-gold/35 bg-gold/10 p-4 dark:border-gold/25">
+            <OfficialPdfLink doc={doc} variant="prominent" />
+            <Link
+              to={officialViewerPath(doc)}
+              className="text-sm font-medium text-ink-muted underline-offset-2 hover:underline dark:text-cream/60"
+            >
+              Try in-page viewer
+            </Link>
+            <a
+              href="#executive"
+              className="text-sm font-medium text-navy underline-offset-2 hover:underline dark:text-cream"
+            >
+              Read prototype summary ↓
+            </a>
+          </div>
+
+          <div className="mt-4">
             <AuthoritativeSource section="mastersDirections" />
           </div>
 
