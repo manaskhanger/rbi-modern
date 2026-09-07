@@ -1,0 +1,306 @@
+/** Living What’s New feed — outbound official headlines + prototype educational items. */
+export type WhatsNewKind = 'Press' | 'Notification' | 'Direction' | 'Circular' | 'News' | 'Report' | 'Speech'
+
+export type WhatsNewItem = {
+  id: string
+  kind: WhatsNewKind
+  date: string
+  title: string
+  /** Internal route when educational; omit when outbound-only */
+  to?: string
+  /** Official rbi.org.in / rbidocs URL — prefer for real headlines */
+  officialUrl?: string
+  pdfUrl?: string
+}
+
+export const WHATS_NEW_OFFICIAL_INDEX =
+  'https://www.rbi.org.in/'
+
+export const whatsNewItems: WhatsNewItem[] = ([
+  {
+    id: 'wn-1',
+    kind: 'Press',
+    date: '2026-09-05',
+    title: 'Data on Forex inflows via FCNR(B) Deposits, ECBs and Overseas Foreign Currency Borrowings – August 2026',
+    officialUrl: 'https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=63502',
+  },
+  {
+    id: 'wn-2',
+    kind: 'Press',
+    date: '2026-09-04',
+    title: 'Conference for Registrars of Cooperative Societies held at Reserve Bank of India, New Delhi',
+    officialUrl: 'https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=63499',
+  },
+  {
+    id: 'wn-3',
+    kind: 'Press',
+    date: '2026-09-03',
+    title: 'Processing of Applications Received Under the Citizen’s Charter - Status as on August 31, 2026',
+    officialUrl: 'https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=63495',
+  },
+  {
+    id: 'wn-4',
+    kind: 'Press',
+    date: '2026-09-02',
+    title: 'Sources of Variation in India’s Foreign Exchange Reserves during April-June 2026',
+    officialUrl: 'https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=63494',
+  },
+  {
+    id: 'wn-5',
+    kind: 'Press',
+    date: '2026-09-01',
+    title: 'Developments in India’s Balance of Payments during the First Quarter (April-June) of 2026-27',
+    officialUrl: 'https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=63493',
+  },
+  {
+    id: 'wn-6',
+    kind: 'Press',
+    date: '2026-08-29',
+    title: 'RBI appoints Shri Suman Ray as new Executive Director',
+    officialUrl: 'https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=63491',
+  },
+  {
+    id: 'wn-7',
+    kind: 'Press',
+    date: '2026-08-28',
+    title: 'Quarterly BSR-2 on Deposits with Scheduled Commercial Banks - June 2026',
+    officialUrl: 'https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=63476',
+  },
+  {
+    id: 'wn-8',
+    kind: 'Press',
+    date: '2026-08-28',
+    title: 'Quarterly BSR-1 on Credit by Scheduled Commercial Banks – June 2026',
+    officialUrl: 'https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=63477',
+  },
+  {
+    id: 'wn-9',
+    kind: 'Press',
+    date: '2026-08-27',
+    title: 'Survey of Foreign Liabilities and Assets of Mutual Funds – 2025-26',
+    officialUrl: 'https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=63479',
+  },
+  {
+    id: 'wn-10',
+    kind: 'Press',
+    date: '2026-08-22',
+    title: 'Performance of Private Corporate Business Sector during Q1:2026-27',
+    officialUrl: 'https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=63452',
+  },
+  {
+    id: 'wn-11',
+    kind: 'Notification',
+    date: '2026-08-20',
+    title: 'RCB Interest Rate on Deposits — Second Amendment Directions, 2026',
+    officialUrl: 'https://www.rbi.org.in/Scripts/NotificationUser.aspx?Id=13690&Mode=0',
+  },
+  {
+    id: 'wn-12',
+    kind: 'Notification',
+    date: '2026-08-20',
+    title: 'UCB Interest Rate on Deposits — Third Amendment Directions, 2026',
+    officialUrl: 'https://www.rbi.org.in/Scripts/NotificationUser.aspx?Id=13689&Mode=0',
+  },
+  {
+    id: 'wn-13',
+    kind: 'Notification',
+    date: '2026-08-20',
+    title: 'RRB Interest Rate on Deposits — Third Amendment Directions, 2026',
+    officialUrl: 'https://www.rbi.org.in/Scripts/NotificationUser.aspx?Id=13688&Mode=0',
+  },
+  {
+    id: 'wn-14',
+    kind: 'Notification',
+    date: '2026-08-20',
+    title: 'Commercial Banks Interest Rate on Deposits — Third Amendment Directions, 2026',
+    officialUrl: 'https://www.rbi.org.in/Scripts/NotificationUser.aspx?Id=13685&Mode=0',
+  },
+  {
+    id: 'wn-15',
+    kind: 'Notification',
+    date: '2026-08-19',
+    title: 'Commercial Banks CRR and SLR — Fourth Amendment Directions, 2026',
+    officialUrl: 'https://www.rbi.org.in/Scripts/NotificationUser.aspx?Id=13680&Mode=0',
+  },
+  {
+    id: 'wn-16',
+    kind: 'Press',
+    date: '2026-08-18',
+    title: 'RBI Bulletin – August 2026',
+    officialUrl: 'https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=63444',
+  },
+  {
+    id: 'wn-17',
+    kind: 'Press',
+    date: '2026-08-14',
+    title: '624th Meeting of Central Board of the Reserve Bank of India',
+    officialUrl: 'https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=63419',
+  },
+  {
+    id: 'wn-18',
+    kind: 'Press',
+    date: '2026-08-10',
+    title: 'RBI invites comments on Draft Interest Rates on Loans and Advances Directions',
+    officialUrl: 'https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=63355',
+  },
+  {
+    id: 'wn-19',
+    kind: 'Speech',
+    date: '2026-08-05',
+    title: 'Marching ahead with Responsibility and Growth — Keynote Address',
+    officialUrl: 'https://www.rbi.org.in/Scripts/BS_SpeechesView.aspx?Id=1575',
+  },
+  {
+    id: 'wn-20',
+    kind: 'Press',
+    date: '2026-09-07',
+    title: 'Result of the Overnight Variable Rate Reverse Repo (VRRR) auction held on September 07, 2026',
+    officialUrl: 'https://rbidocs.rbi.org.in/rdocs/PressRelease/PDFs/PR1054B19006C3EEBE4A8EBF2E08B9F175E35A.PDF',
+    pdfUrl: 'https://rbidocs.rbi.org.in/rdocs/PressRelease/PDFs/PR1054B19006C3EEBE4A8EBF2E08B9F175E35A.PDF',
+  },
+  {
+    id: 'wn-21',
+    kind: 'Press',
+    date: '2026-09-07',
+    title: 'RBI to conduct Overnight VRRR auction under LAF on September 07, 2026',
+    officialUrl: 'https://rbidocs.rbi.org.in/rdocs/PressRelease/PDFs/PR1052F86EFC4693E74B108DAD5401CAA2229B.PDF',
+    pdfUrl: 'https://rbidocs.rbi.org.in/rdocs/PressRelease/PDFs/PR1052F86EFC4693E74B108DAD5401CAA2229B.PDF',
+  },
+  {
+    id: 'wn-22',
+    kind: 'Press',
+    date: '2026-09-06',
+    title: 'Money Market Operations as on September 06, 2026',
+    officialUrl: 'https://rbidocs.rbi.org.in/rdocs/PressRelease/PDFs/PR1056MMO5B5AB4A6B4684079BFA9059434E3751D.PDF',
+    pdfUrl: 'https://rbidocs.rbi.org.in/rdocs/PressRelease/PDFs/PR1056MMO5B5AB4A6B4684079BFA9059434E3751D.PDF',
+  },
+  {
+    id: 'wn-23',
+    kind: 'Press',
+    date: '2026-09-05',
+    title: 'RBI imposes monetary penalty on Hinduja Leyland Finance Limited',
+    officialUrl: 'https://rbidocs.rbi.org.in/rdocs/PressRelease/PDFs/PR1049BFCD71C6A508466FA30E95CA2DD75091.PDF',
+    pdfUrl: 'https://rbidocs.rbi.org.in/rdocs/PressRelease/PDFs/PR1049BFCD71C6A508466FA30E95CA2DD75091.PDF',
+  },
+  {
+    id: 'wn-24',
+    kind: 'Press',
+    date: '2026-09-04',
+    title: 'Auction of 91-Day, 182-Day and 364-Day Treasury Bills',
+    officialUrl: 'https://rbidocs.rbi.org.in/rdocs/PressRelease/PDFs/PR10463B44BD5834304232B068F83ED7B82CDE.PDF',
+    pdfUrl: 'https://rbidocs.rbi.org.in/rdocs/PressRelease/PDFs/PR10463B44BD5834304232B068F83ED7B82CDE.PDF',
+  },
+  {
+    id: 'wn-25',
+    kind: 'Press',
+    date: '2026-09-03',
+    title: 'Weekly Statistical Supplement – Extract',
+    officialUrl: 'https://rbidocs.rbi.org.in/rdocs/PressRelease/PDFs/PR1041C8690061FACD4295B000205FE36DFBAB.PDF',
+    pdfUrl: 'https://rbidocs.rbi.org.in/rdocs/PressRelease/PDFs/PR1041C8690061FACD4295B000205FE36DFBAB.PDF',
+  },
+  {
+    id: 'wn-26',
+    kind: 'News',
+    date: '2025-12-05',
+    title: 'MPC Holds Policy Repo Rate; Focus Remains on Durable Disinflation',
+    to: '/news/mpc-october-demo-decision',
+  },
+  {
+    id: 'wn-27',
+    kind: 'News',
+    date: '2025-11-14',
+    title: 'Financial Literacy Week Highlights Digital Safety for First-Time Users',
+    to: '/news/financial-literacy-week-2025',
+  },
+  {
+    id: 'wn-28',
+    kind: 'Direction',
+    date: '2025-11-12',
+    title: 'Master Direction – Know Your Customer (KYC) — educational summary updated',
+    to: '/masters-directions/know-your-customer',
+  },
+  {
+    id: 'wn-29',
+    kind: 'Circular',
+    date: '2025-11-18',
+    title: 'Cyber Security Framework for Banks — Incremental Controls (sample)',
+    to: '/circulars/cyber-security-framework-update',
+  },
+  {
+    id: 'wn-30',
+    kind: 'News',
+    date: '2025-10-02',
+    title: 'e₹ Retail Pilot Adds Offline Capability in Select Corridors (illustrative)',
+    to: '/news/cbdc-pilot-retail-update',
+  },
+  {
+    id: 'wn-31',
+    kind: 'Circular',
+    date: '2025-09-04',
+    title: 'UPI Merchant Onboarding — Risk-Based Due Diligence (sample)',
+    to: '/circulars/upi-merchant-onboarding',
+  },
+  {
+    id: 'wn-32',
+    kind: 'News',
+    date: '2025-08-19',
+    title: 'Priority Sector Lending Targets — Mid-Year Review Snapshot',
+    to: '/news/priority-sector-review',
+  },
+  {
+    id: 'wn-33',
+    kind: 'Report',
+    date: '2025-07-22',
+    title: 'Financial Stability Report-style digest (prototype)',
+    to: '/reports',
+  },
+  {
+    id: 'wn-34',
+    kind: 'News',
+    date: '2025-07-08',
+    title: 'Draft Climate Risk Disclosure Expectations for Large Banks',
+    to: '/news/climate-risk-disclosure-draft',
+  },
+  {
+    id: 'wn-35',
+    kind: 'News',
+    date: '2025-06-01',
+    title: 'Foreign Exchange Reserves Remain Comfortable vs Import Cover',
+    to: '/news/fx-reserves-commentary',
+  },
+  {
+    id: 'wn-36',
+    kind: 'News',
+    date: '2025-04-22',
+    title: 'Payments Vision — Progress on Interoperability and User Protection',
+    to: '/news/payments-vision-progress',
+  },
+  {
+    id: 'wn-37',
+    kind: 'Notification',
+    date: '2026-07-15',
+    title: 'Draft on-tap licensing of Urban Co-operative Banks — public comments invited (official)',
+    officialUrl: 'https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=63294',
+  },
+  {
+    id: 'wn-38',
+    kind: 'Press',
+    date: '2026-07-10',
+    title: 'Appointment of part-time Non-official Directors on the Central Board',
+    officialUrl: 'https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=63438',
+  },
+  {
+    id: 'wn-39',
+    kind: 'Press',
+    date: '2026-06-20',
+    title: 'Inclusion of Coastal Local Area Bank Limited in the Second Schedule',
+    officialUrl: 'https://rbidocs.rbi.org.in/rdocs/PressRelease/PDFs/PR10402DEFE3E2FD104E0BBA25585F00B697BD.PDF',
+  },
+  {
+    id: 'wn-40',
+    kind: 'Press',
+    date: '2026-06-12',
+    title: 'Government Stock — Full Auction Results',
+    officialUrl: 'https://rbidocs.rbi.org.in/rdocs/PressRelease/PDFs/PR1039D8F15398F38B459C906EB700B9AD6E7C.PDF',
+  },
+] as WhatsNewItem[]).sort((a, b) => (a.date < b.date ? 1 : a.date > b.date ? -1 : 0))

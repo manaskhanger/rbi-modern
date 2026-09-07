@@ -1,13 +1,22 @@
 export type Category =
   | 'Banking'
+  | 'Commercial Banks'
   | 'NBFC'
+  | 'NBFCs'
   | 'Payments'
   | 'Currency'
   | 'Forex'
+  | 'FEMA'
   | 'Monetary Policy'
   | 'Financial Markets'
   | 'Consumer Protection'
   | 'Supervision'
+  | 'Co-operative Banks'
+  | 'AIFIs'
+  | 'CICs'
+  | 'Banker to Governments'
+  | 'FinTech'
+  | 'Miscellaneous'
 
 /** Filter tags officers use; an item may apply to more than one. */
 export type AudienceTag = 'Banks' | 'NBFCs' | 'PSPs'
@@ -72,6 +81,12 @@ export interface MastersDirection extends ContentMeta {
   officialHtmlUrl?: string
   /** 'pdf' = direct document; 'index' = browse official catalogue */
   pdfMode: PdfMode
+  /** Rich educational paraphrase vs PDF-link catalogue row */
+  entryMode?: 'rich' | 'catalogue'
+  /** Official “Updated as on …” label when known from the RBI index */
+  updatedAsOnLabel?: string
+  /** File size string from official index when known (e.g. “293 kb”) */
+  fileSize?: string
 }
 
 export interface Circular extends ContentMeta {
@@ -103,6 +118,8 @@ export interface NewsItem extends ContentMeta {
   excerpt: string
   body: string[]
   featured?: boolean
+  /** Prefer outbound official What’s New / press when set */
+  officialUrl?: string
 }
 
 export interface ReportRelatedLink {

@@ -1,85 +1,18 @@
 import { Link } from 'react-router-dom'
 import { ExternalLink, FileText, ArrowRight, Compass } from 'lucide-react'
-import { liveFeedItems } from '../data/liveFeed'
-import { keyRates, keyRatesAsOf } from '../data/rates'
 import { mastersDirections } from '../data/mastersDirections'
 import { circulars } from '../data/circulars'
-import { RBI_SECTIONS, RBI_HOME } from '../data/meta'
+import { RBI_HOME } from '../data/meta'
+import { ratesPanels, ratesDeskAsOf, ratesDeskDisclaimer } from '../data/ratesDesk'
+import { whatsNewItems, WHATS_NEW_OFFICIAL_INDEX } from '../data/whatsNew'
+import { rbiFunctions } from '../data/functions'
 import { DisclaimerBanner } from '../components/DisclaimerBanner'
 import { TourPrompt } from '../components/TourPrompt'
 import { PersonaCards } from '../components/PersonaCards'
 import { InteractiveSiteMap } from '../components/InteractiveSiteMap'
 import { DocumentTable, type DocTableRow } from '../components/DocumentTable'
 import { TOUR_DURATION_LABEL } from '../data/tour'
-import {
-  ArtCurrency,
-  ArtMonetaryPolicy,
-  ArtPayments,
-  ArtRegulation,
-  ArtSupervision,
-  ArtFema,
-  ArtMarkets,
-  ArtStability,
-} from '../components/illustrations/InstitutionalArt'
-
-const functions = [
-  {
-    title: 'Monetary Policy',
-    hi: 'मौद्रिक नीति',
-    text: 'Flexible inflation targeting, the Monetary Policy Committee, and the policy repo corridor — educational framing.',
-    to: '/monetary-policy',
-    Art: ArtMonetaryPolicy,
-  },
-  {
-    title: 'Currency',
-    hi: 'मुद्रा',
-    text: 'Note issue, distribution and clean-note practices explained for learners — not an operational desk.',
-    to: '/learn',
-    Art: ArtCurrency,
-  },
-  {
-    title: 'Payments',
-    hi: 'भुगतान',
-    text: 'Authorisation and oversight of payment and settlement systems; links into circulars and learn paths.',
-    to: '/circulars?audience=PSPs',
-    Art: ArtPayments,
-  },
-  {
-    title: 'Regulation',
-    hi: 'विनियमन',
-    text: 'Masters Directions and prudential themes for banks, NBFCs and other regulated entities.',
-    to: '/masters-directions',
-    Art: ArtRegulation,
-  },
-  {
-    title: 'Supervision',
-    hi: 'पर्यवेक्षण',
-    text: 'How supervisory expectations are communicated in this prototype’s document library.',
-    to: '/masters-directions?audience=Banks',
-    Art: ArtSupervision,
-  },
-  {
-    title: 'FEMA / Forex',
-    hi: 'विदेशी मुद्रा',
-    text: 'Foreign exchange administration themes and related educational circulars.',
-    to: '/circulars',
-    Art: ArtFema,
-  },
-  {
-    title: 'Financial Markets',
-    hi: 'वित्तीय बाज़ार',
-    text: 'Money, gilt and related market communication patterns — illustrative only.',
-    to: '/data',
-    Art: ArtMarkets,
-  },
-  {
-    title: 'Financial Stability',
-    hi: 'वित्तीय स्थिरता',
-    text: 'Systemic-risk framing and sample reports for classroom and UX review.',
-    to: '/reports',
-    Art: ArtStability,
-  },
-]
+import { useLang } from '../hooks/useLang'
 
 function formatDate(iso: string) {
   const [y, m, d] = iso.split('-')
@@ -88,8 +21,9 @@ function formatDate(iso: string) {
 }
 
 export function Home() {
-  const whatsNew = liveFeedItems.slice(0, 12)
-  const mdRows: DocTableRow[] = mastersDirections.slice(0, 6).map((d) => ({
+  const { t, isHi } = useLang()
+  const whatsNew = whatsNewItems.slice(0, 40)
+  const mdRows: DocTableRow[] = mastersDirections.slice(0, 8).map((d) => ({
     id: d.slug,
     date: d.updated || d.issued,
     title: d.title,
@@ -113,8 +47,6 @@ export function Home() {
     summaryPath: `/circulars/${c.slug}`,
     summaryLabel: 'Summary',
   }))
-
-  const policy = RBI_SECTIONS.policyRates
 
   return (
     <div className="bg-cream dark:bg-navy">
@@ -199,109 +131,157 @@ export function Home() {
           </div>
         </section>
 
-        {/* Current Rates | What's New */}
-        <div className="mt-6 grid gap-5 lg:grid-cols-2">
-          <section className="portal-panel" aria-labelledby="rates-heading">
-            <div className="portal-panel-head flex flex-wrap items-center justify-between gap-2">
-              <h2 id="rates-heading">
-                Current Rates
-                <span lang="hi" className="ml-2 text-[11px] font-normal opacity-80">
-                  वर्तमान दरें
-                </span>
-              </h2>
-              <span className="text-[10px] font-medium uppercase tracking-wider text-gold-soft">
-                Illustrative sample · {keyRatesAsOf}
+        {/* Current Rates desk */}
+        <section id="rates-desk" className="mt-6" aria-labelledby="rates-heading">
+          <div className="mb-3 flex flex-wrap items-end justify-between gap-2">
+            <h2
+              id="rates-heading"
+              className="font-serif text-xl font-semibold text-navy dark:text-cream"
+            >
+              {t('Current Rates', 'वर्तमान दरें')}
+              <span lang="hi" className="bilingual-hi mt-0.5 text-sm font-medium">
+                {isHi ? 'Current Rates' : 'वर्तमान दरें'}
               </span>
-            </div>
-            <div className="p-0">
-              <table className="rates-table">
-                <thead>
-                  <tr>
-                    <th scope="col">Instrument / ratio</th>
-                    <th scope="col">Rate</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {keyRates.map((r) => (
-                    <tr key={r.label}>
-                      <td>
-                        {r.label}
-                        <span className="mt-0.5 block text-[10px] font-normal text-ink-muted dark:text-cream/55">
-                          Sample · not live official extract
-                        </span>
-                      </td>
-                      <td className="text-navy dark:text-cream">{r.value}</td>
+            </h2>
+            <span className="text-[10px] font-medium uppercase tracking-wider text-gold-dim dark:text-gold">
+              {ratesDeskAsOf} · {t('Illustrative · not for compliance', 'केवल उदाहरण · अनुपालन हेतु नहीं')}
+            </span>
+          </div>
+          <div className="rates-desk-grid">
+            {ratesPanels.map((panel) => (
+              <section key={panel.id} className="portal-panel" aria-labelledby={`rates-${panel.id}`}>
+                <div className="portal-panel-head flex flex-wrap items-center justify-between gap-2">
+                  <h3 id={`rates-${panel.id}`} className="text-sm font-semibold">
+                    {isHi ? panel.titleHi : panel.title}
+                    <span lang={isHi ? 'en' : 'hi'} className="ml-2 text-[10px] font-normal opacity-80">
+                      {isHi ? panel.title : panel.titleHi}
+                    </span>
+                  </h3>
+                  <span className="text-[9px] font-semibold uppercase tracking-wide text-gold-soft">
+                    Sample
+                  </span>
+                </div>
+                <table className="rates-table">
+                  <thead>
+                    <tr>
+                      <th scope="col">{t('Instrument', 'साधन')}</th>
+                      <th scope="col">{t('Rate', 'दर')}</th>
                     </tr>
-                  ))}
-                </tbody>
-              </table>
-              <p className="border-t border-navy/10 px-3 py-2.5 text-[11px] leading-snug text-ink-muted dark:border-white/10 dark:text-cream/65">
-                Figures above are for layout and teaching only. Confirm live policy rates on{' '}
-                <a
-                  href={policy.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="font-medium text-gold-dim underline-offset-2 hover:underline dark:text-gold"
-                >
-                  rbi.org.in
-                  <ExternalLink className="ml-0.5 inline h-3 w-3" aria-hidden />
-                </a>
-                .
-              </p>
-            </div>
-          </section>
+                  </thead>
+                  <tbody>
+                    {panel.rows.map((r) => (
+                      <tr key={r.label}>
+                        <td>
+                          {r.label}
+                          <span className="mt-0.5 block text-[10px] font-normal text-ink-muted dark:text-cream/55">
+                            {t('Illustrative · not for compliance', 'उदाहरण · अनुपालन हेतु नहीं')}
+                          </span>
+                        </td>
+                        <td className="text-navy dark:text-cream">{r.value}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+                <p className="border-t border-navy/10 px-3 py-2 text-[10px] leading-snug text-ink-muted dark:border-white/10 dark:text-cream/65">
+                  {t('Official source:', 'आधिकारिक स्रोत:')}{' '}
+                  <a
+                    href={panel.sourceHref}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="font-medium text-gold-dim underline-offset-2 hover:underline dark:text-gold"
+                  >
+                    {panel.sourceLabel}
+                    <ExternalLink className="ml-0.5 inline h-3 w-3" aria-hidden />
+                  </a>
+                </p>
+              </section>
+            ))}
+          </div>
+          <p className="mt-2 text-[11px] text-ink-muted dark:text-cream/60">{ratesDeskDisclaimer}</p>
+        </section>
 
-          <section className="portal-panel" aria-labelledby="whats-new-heading">
-            <div className="portal-panel-head flex flex-wrap items-center justify-between gap-2">
-              <h2 id="whats-new-heading">
-                What’s New
-                <span lang="hi" className="ml-2 text-[11px] font-normal opacity-80">
-                  क्या नया है
-                </span>
-              </h2>
+        {/* What's New living feed */}
+        <section className="mt-6 portal-panel" aria-labelledby="whats-new-heading">
+          <div className="portal-panel-head flex flex-wrap items-center justify-between gap-2">
+            <h2 id="whats-new-heading">
+              {t("What's New", 'क्या नया है')}
+              <span lang="hi" className="ml-2 text-[11px] font-normal opacity-80">
+                {isHi ? "What's New" : 'क्या नया है'}
+              </span>
+            </h2>
+            <div className="flex flex-wrap items-center gap-3">
               <Link
                 to="/news"
                 className="text-[10px] font-semibold uppercase tracking-wider text-gold-soft hover:underline"
               >
-                View all
+                {t('Prototype news', 'प्रोटोटाइप समाचार')}
               </Link>
+              <a
+                href={WHATS_NEW_OFFICIAL_INDEX}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1 text-[10px] font-semibold uppercase tracking-wider text-gold-soft hover:underline"
+              >
+                {t('View more on rbi.org.in', 'rbi.org.in पर और देखें')}
+                <ExternalLink className="h-3 w-3" aria-hidden />
+              </a>
             </div>
-            <ol className="whats-new-list max-h-[22rem] overflow-y-auto">
-              {whatsNew.map((item) => (
-                <li key={item.id}>
-                  <time dateTime={item.date} className="tabular-nums text-ink-muted dark:text-cream/60">
-                    {formatDate(item.date)}
-                  </time>
-                  <div className="min-w-0">
-                    <span className="mr-1.5 inline-block rounded border border-navy/15 px-1 py-px text-[9px] font-bold uppercase tracking-wide text-ink-muted dark:border-white/20 dark:text-cream/70">
-                      {item.kind}
-                    </span>
-                    <Link
-                      to={item.to}
+          </div>
+          <ol className="whats-new-list max-h-[28rem] overflow-y-auto">
+            {whatsNew.map((item) => (
+              <li key={item.id}>
+                <time dateTime={item.date} className="tabular-nums text-ink-muted dark:text-cream/60">
+                  {formatDate(item.date)}
+                </time>
+                <div className="min-w-0">
+                  <span className="mr-1.5 inline-block rounded border border-navy/15 px-1 py-px text-[9px] font-bold uppercase tracking-wide text-ink-muted dark:border-white/20 dark:text-cream/70">
+                    {item.kind}
+                  </span>
+                  {item.officialUrl ? (
+                    <a
+                      href={item.officialUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
                       className="font-medium text-navy hover:underline dark:text-cream"
                     >
                       {item.title}
-                    </Link>
-                  </div>
-                  {item.pdfUrl ? (
-                    <a
-                      href={item.pdfUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-0.5 text-[10px] font-semibold text-gold-dim hover:underline dark:text-gold"
-                      title="Open official document"
-                    >
-                      <FileText className="h-3 w-3" aria-hidden />
-                      PDF
+                      <ExternalLink className="ml-1 inline h-3 w-3 opacity-70" aria-hidden />
                     </a>
+                  ) : item.to ? (
+                    <Link to={item.to} className="font-medium text-navy hover:underline dark:text-cream">
+                      {item.title}
+                    </Link>
                   ) : (
-                    <span className="text-[10px] text-ink-muted/50">—</span>
+                    <span className="font-medium text-navy dark:text-cream">{item.title}</span>
                   )}
-                </li>
-              ))}
-            </ol>
-          </section>
-        </div>
+                </div>
+                {item.pdfUrl ? (
+                  <a
+                    href={item.pdfUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-0.5 text-[10px] font-semibold text-gold-dim hover:underline dark:text-gold"
+                    title="Open official document"
+                  >
+                    <FileText className="h-3 w-3" aria-hidden />
+                    PDF
+                  </a>
+                ) : item.officialUrl ? (
+                  <a
+                    href={item.officialUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-[10px] font-semibold text-gold-dim hover:underline dark:text-gold"
+                  >
+                    Official
+                  </a>
+                ) : (
+                  <span className="text-[10px] text-ink-muted/50">—</span>
+                )}
+              </li>
+            ))}
+          </ol>
+        </section>
 
         {/* Function-wise directory */}
         <section className="mt-8" aria-labelledby="functions-heading">
@@ -311,40 +291,46 @@ export function Home() {
                 id="functions-heading"
                 className="font-serif text-xl font-semibold text-navy dark:text-cream"
               >
-                Function-wise directory
-                <span lang="hi" className="bilingual-hi mt-0.5 text-sm font-medium">
-                  कार्य-वार निर्देशिका
-                </span>
+                {t('Function-wise directory', 'कार्य-वार निर्देशिका')}
               </h2>
               <p className="mt-1 max-w-2xl text-sm text-ink-muted dark:text-cream/65">
-                Serious cards into this prototype’s routes — inspired by public function groupings,
-                not a statutory schedule.
+                {t(
+                  'Sixteen-plus function landings with short original blurbs and links into MDs, circulars, reports and official rbi.org.in sections.',
+                  'सोलह-से-अधिक कार्य पृष्ठ — मास्टर निर्देश, परिपत्र, रिपोर्ट और आधिकारिक अनुभागों के लिंक के साथ।',
+                )}
               </p>
             </div>
             <Link
-              to="/learn"
+              to="/functions"
               className="text-xs font-semibold text-gold-dim hover:underline dark:text-gold"
             >
-              Learn hub <ArrowRight className="inline h-3 w-3" />
+              {t('All functions', 'सभी कार्य')} <ArrowRight className="inline h-3 w-3" />
             </Link>
           </div>
           <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-            {functions.map((f) => (
-              <Link key={f.title} to={f.to} className="function-card group">
-                <f.Art className="art h-12 w-12" />
+            {rbiFunctions.map((f) => (
+              <Link key={f.slug} to={`/functions/${f.slug}`} className="function-card group">
                 <div>
                   <h3 className="text-sm font-semibold text-navy group-hover:text-rbi-blue dark:text-cream">
-                    {f.title}
+                    {isHi ? f.titleHi : f.title}
                   </h3>
                   <span lang="hi" className="bilingual-hi text-[11px]">
-                    {f.hi}
+                    {isHi ? f.title : f.titleHi}
                   </span>
-                  <p className="mt-1.5 text-xs leading-relaxed text-ink-muted dark:text-cream/65">
-                    {f.text}
+                  <p className="mt-1.5 line-clamp-3 text-xs leading-relaxed text-ink-muted dark:text-cream/65">
+                    {f.blurb}
                   </p>
                 </div>
               </Link>
             ))}
+          </div>
+          <div className="mt-4">
+            <Link
+              to="/citizens"
+              className="inline-flex items-center gap-1.5 border border-navy/15 bg-white px-3 py-2 text-xs font-semibold text-navy hover:border-gold/40 dark:border-white/15 dark:bg-navy-light dark:text-cream"
+            >
+              {t("Citizens' Corner", 'नागरिक कॉर्नर')} <ArrowRight className="h-3 w-3" />
+            </Link>
           </div>
         </section>
 
@@ -364,7 +350,7 @@ export function Home() {
               to="/masters-directions"
               className="text-xs font-semibold text-gold-dim hover:underline dark:text-gold"
             >
-              Full catalogue →
+              {t('Full catalogue', 'पूर्ण सूची')} →
             </Link>
           </div>
           <p className="mb-3 text-xs text-ink-muted dark:text-cream/60">

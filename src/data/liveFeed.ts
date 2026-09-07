@@ -2,6 +2,7 @@ import { circulars } from './circulars'
 import { mastersDirections } from './mastersDirections'
 import { newsItems } from './news'
 import { reports } from './reports'
+import { whatsNewItems } from './whatsNew'
 
 export type FeedKind = 'Circular' | 'Direction' | 'News' | 'Report'
 
@@ -17,7 +18,24 @@ export type LiveFeedItem = {
 }
 
 function buildFeed(): LiveFeedItem[] {
+  const fromWhatsNew: LiveFeedItem[] = whatsNewItems.slice(0, 25).map((w) => ({
+    id: `wn-${w.id}`,
+    kind: (w.kind === 'Direction'
+      ? 'Direction'
+      : w.kind === 'Circular'
+        ? 'Circular'
+        : w.kind === 'Report'
+          ? 'Report'
+          : 'News') as FeedKind,
+    date: w.date,
+    title: w.title,
+    // Keep ticker internal; PDF button carries official outbound when present
+    to: w.to || '/news',
+    pdfUrl: w.pdfUrl || w.officialUrl,
+    pdfMode: w.pdfUrl || w.officialUrl ? ('pdf' as const) : undefined,
+  }))
   const items: LiveFeedItem[] = [
+    ...fromWhatsNew,
     ...circulars.map((c) => ({
       id: `circular-${c.slug}`,
       kind: 'Circular' as const,

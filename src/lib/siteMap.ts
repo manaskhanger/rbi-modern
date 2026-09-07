@@ -26,6 +26,8 @@ export const sectionLandings: SitemapLink[] = [
   { label: 'Reports', to: '/reports' },
   { label: 'Sample data lab', to: '/data' },
   { label: 'Learn & glossary', to: '/learn' },
+  { label: 'Functions', to: '/functions' },
+  { label: "Citizens' Corner", to: '/citizens' },
   { label: 'Search', to: '/search' },
   { label: 'Sitemap', to: '/sitemap' },
 ]
@@ -140,6 +142,24 @@ export const exploreRails: Record<string, { title: string; links: SitemapLink[] 
       { label: 'Sitemap', to: '/sitemap', note: 'All reports' },
     ],
   },
+  '/functions': {
+    title: 'Explore next',
+    links: [
+      { label: "Citizens' Corner", to: '/citizens', note: 'Public services' },
+      { label: 'Masters Directions', to: '/masters-directions', note: 'Regulatory library' },
+      { label: 'Learn', to: '/learn', note: 'Primers' },
+      { label: 'Home', to: '/', note: 'Rates & feed' },
+    ],
+  },
+  '/citizens': {
+    title: 'Explore next',
+    links: [
+      { label: 'Functions', to: '/functions', note: 'Function directory' },
+      { label: 'Learn', to: '/learn', note: 'Literacy' },
+      { label: 'Circulars', to: '/circulars', note: 'Updates' },
+      { label: 'Home', to: '/' },
+    ],
+  },
   '/search': {
     title: 'Browse instead',
     links: [
@@ -174,6 +194,8 @@ const staticCrumbLabels: Record<string, string> = {
   '/reports': 'Reports',
   '/data': 'Data',
   '/learn': 'Learn',
+  '/functions': 'Functions',
+  '/citizens': "Citizens' Corner",
   '/search': 'Search',
   '/sitemap': 'Sitemap',
   '/viewer': 'PDF viewer',
@@ -188,6 +210,13 @@ export function crumbsForPath(pathname: string, itemLabel?: string): Crumb[] {
   if (path === '/') return []
 
   const crumbs: Crumb[] = [{ label: 'Home', to: '/' }]
+
+  const fnMatch = path.match(/^\/functions\/([^/]+)$/)
+  if (fnMatch) {
+    crumbs.push({ label: 'Functions', to: '/functions' })
+    crumbs.push({ label: itemLabel || fnMatch[1].replace(/-/g, ' ') })
+    return crumbs
+  }
 
   const detailMatch = path.match(
     /^\/(masters-directions|circulars|news|reports)\/([^/]+)$/,

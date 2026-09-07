@@ -1,5 +1,5 @@
 /** Shared prototype metadata — not live RBI publication dates. */
-export const CONTENT_LAST_REVIEWED = '2026-09-06'
+export const CONTENT_LAST_REVIEWED = '2026-09-07'
 
 export const RBI_HOME = 'https://www.rbi.org.in/'
 
@@ -41,6 +41,16 @@ export const RBI_SECTIONS = {
     href: 'https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx',
     label: 'Authoritative source on rbi.org.in',
     sectionNote: 'Official RBI website (section) — MPC / policy releases',
+  },
+  citizens: {
+    href: 'https://www.rbi.org.in/',
+    label: 'Citizen resources on rbi.org.in',
+    sectionNote: 'Official RBI website — citizen / public services',
+  },
+  withdrawnNotifications: {
+    href: 'https://www.rbi.org.in/Scripts/NotificationUser.aspx',
+    label: 'Notifications on rbi.org.in',
+    sectionNote: 'Official notifications index (incl. historical)',
   },
   policyRates: {
     href: 'https://www.rbi.org.in/Scripts/BS_ViewMonetaryCreditPolicy.aspx',

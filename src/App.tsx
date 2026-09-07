@@ -39,6 +39,11 @@ const PdfViewer = lazy(() =>
   import('./pages/PdfViewer').then((m) => ({ default: m.PdfViewer })),
 )
 const NotFound = lazy(() => import('./pages/NotFound').then((m) => ({ default: m.NotFound })))
+const Functions = lazy(() => import('./pages/Functions').then((m) => ({ default: m.Functions })))
+const FunctionDetail = lazy(() =>
+  import('./pages/FunctionDetail').then((m) => ({ default: m.FunctionDetail })),
+)
+const Citizens = lazy(() => import('./pages/Citizens').then((m) => ({ default: m.Citizens })))
 
 function RouteFallback() {
   return (
@@ -70,6 +75,9 @@ export default function App() {
               <Route path="reports/:slug" element={<ReportDetail />} />
               <Route path="data" element={<Data />} />
               <Route path="learn" element={<Learn />} />
+              <Route path="functions" element={<Functions />} />
+              <Route path="functions/:slug" element={<FunctionDetail />} />
+              <Route path="citizens" element={<Citizens />} />
               <Route path="tour" element={<Tour />} />
               <Route path="offices" element={<Offices />} />
               <Route path="search" element={<Search />} />

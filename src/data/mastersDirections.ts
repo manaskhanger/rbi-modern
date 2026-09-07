@@ -1,6 +1,7 @@
 import type { MastersDirection } from './types'
+import { mdCatalogueExtra } from './mdCatalogueExtra'
 
-export const mastersDirections: MastersDirection[] = [
+const mastersDirectionsRich: MastersDirection[] = [
   {
     slug: 'know-your-customer',
     officialPdfUrl: 'https://rbidocs.rbi.org.in/rdocs/notification/PDFs/169MD.PDF',
@@ -555,14 +556,28 @@ export const mastersDirections: MastersDirection[] = [
   },
 ]
 
+export const mastersDirections: MastersDirection[] = [
+  ...mastersDirectionsRich.map((d) => ({ ...d, entryMode: d.entryMode ?? ('rich' as const) })),
+  ...mdCatalogueExtra,
+]
+
 export const mdCategories = [
   'All',
-  'Banking',
-  'NBFC',
+  'Commercial Banks',
+  'Co-operative Banks',
+  'NBFCs',
+  'AIFIs',
+  'CICs',
   'Payments',
-  'Currency',
-  'Forex',
+  'FEMA',
   'Financial Markets',
+  'Currency',
+  'Banker to Governments',
   'Consumer Protection',
   'Supervision',
+  'FinTech',
+  'Banking',
+  'NBFC',
+  'Forex',
+  'Miscellaneous',
 ] as const

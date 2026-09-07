@@ -1,0 +1,257 @@
+/** Function-wise information architecture (~16) — educational blurbs + outbound official links. */
+
+export type FunctionLink = { label: string; href: string; external?: boolean }
+
+export type RbiFunction = {
+  slug: string
+  title: string
+  titleHi: string
+  blurb: string
+  officialHref: string
+  officialLabel: string
+  links: FunctionLink[]
+}
+
+export const rbiFunctions: RbiFunction[] = [
+  {
+    slug: 'monetary-policy',
+    title: 'Monetary Policy',
+    titleHi: 'मौद्रिक नीति',
+    blurb:
+      'Flexible inflation targeting, the Monetary Policy Committee, and the policy repo corridor — educational framing of how policy rates and liquidity tools are communicated.',
+    officialHref: 'https://www.rbi.org.in/Scripts/BS_ViewMonetaryCreditPolicy.aspx',
+    officialLabel: 'Monetary / credit policy on rbi.org.in',
+    links: [
+      { label: 'Monetary policy page (prototype)', href: '/monetary-policy' },
+      { label: 'Sample data lab', href: '/data' },
+      { label: 'Reports', href: '/reports' },
+    ],
+  },
+  {
+    slug: 'banker-to-governments',
+    title: 'Banker to Governments',
+    titleHi: 'सरकारों का बैंकर',
+    blurb:
+      'How the central bank acts as banker and debt manager to the Centre and States — agency banking, pensions, and government account themes for learners.',
+    officialHref: 'https://www.rbi.org.in/',
+    officialLabel: 'rbi.org.in home / functions',
+    links: [
+      { label: 'Masters Directions (Banker to Governments)', href: '/masters-directions?category=Banker%20to%20Governments' },
+      { label: 'Circulars', href: '/circulars' },
+    ],
+  },
+  {
+    slug: 'currency',
+    title: 'Currency',
+    titleHi: 'मुद्रा',
+    blurb:
+      'Note issue, distribution, clean-note policy and exchange of notes and coins — educational pointers into currency-related directions and learn content.',
+    officialHref: 'https://www.rbi.org.in/Scripts/BS_ViewMasDirections.aspx',
+    officialLabel: 'Master Directions (currency themes)',
+    links: [
+      { label: 'Learn hub', href: '/learn' },
+      { label: 'Currency MDs', href: '/masters-directions?category=Currency' },
+      { label: 'Currency circulars', href: '/circulars' },
+    ],
+  },
+  {
+    slug: 'consumer-education-protection',
+    title: 'Consumer Education & Protection',
+    titleHi: 'उपभोक्ता शिक्षा और संरक्षण',
+    blurb:
+      'Fair conduct, internal ombudsman frameworks, and grievance awareness — linked to Citizens’ Corner and consumer-protection catalogue entries.',
+    officialHref: 'https://www.rbi.org.in/Scripts/BS_ViewMasDirections.aspx',
+    officialLabel: 'Official MD index (CEP themes)',
+    links: [
+      { label: 'Citizens’ Corner', href: '/citizens' },
+      { label: 'CEP / Consumer Protection MDs', href: '/masters-directions?category=Consumer%20Protection' },
+      { label: 'Learn', href: '/learn' },
+    ],
+  },
+  {
+    slug: 'debt-management',
+    title: 'Debt Management',
+    titleHi: 'ऋण प्रबंधन',
+    blurb:
+      'Illustrative framing of government securities issuance, treasury bills and related market communications — always verify auctions on official releases.',
+    officialHref: 'https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx',
+    officialLabel: 'Press releases (auctions / G-Secs)',
+    links: [
+      { label: 'Financial markets function', href: '/functions/financial-markets' },
+      { label: 'News / press (prototype)', href: '/news' },
+      { label: 'Data lab', href: '/data' },
+    ],
+  },
+  {
+    slug: 'enforcement',
+    title: 'Enforcement',
+    titleHi: 'प्रवर्तन',
+    blurb:
+      'Educational note on how penalties and enforcement actions appear in public press releases — not a case tracker and not legal advice.',
+    officialHref: 'https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx',
+    officialLabel: 'Official press releases',
+    links: [
+      { label: 'What’s New / News', href: '/news' },
+      { label: 'Circulars', href: '/circulars' },
+      { label: 'Supervision function', href: '/functions/supervision' },
+    ],
+  },
+  {
+    slug: 'external-investments',
+    title: 'External Investments',
+    titleHi: 'बाह्य निवेश',
+    blurb:
+      'Overseas investment and related FEMA themes for training — catalogue links to foreign-exchange Master Directions and circulars.',
+    officialHref: 'https://www.rbi.org.in/Scripts/BS_ViewMasDirections.aspx',
+    officialLabel: 'Master Directions index',
+    links: [
+      { label: 'FEMA MDs', href: '/masters-directions?category=FEMA' },
+      { label: 'FEMA circulars', href: '/circulars' },
+      { label: 'FEMA function', href: '/functions/fema' },
+    ],
+  },
+  {
+    slug: 'financial-inclusion',
+    title: 'Financial Inclusion',
+    titleHi: 'वित्तीय समावेशन',
+    blurb:
+      'Access, literacy and priority-sector themes — educational summaries and citizen-facing pointers without reproducing official campaign materials.',
+    officialHref: 'https://www.rbi.org.in/',
+    officialLabel: 'rbi.org.in',
+    links: [
+      { label: 'Citizens’ Corner', href: '/citizens' },
+      { label: 'Learn', href: '/learn' },
+      { label: 'News (inclusion)', href: '/news' },
+    ],
+  },
+  {
+    slug: 'financial-markets',
+    title: 'Financial Markets',
+    titleHi: 'वित्तीय बाज़ार',
+    blurb:
+      'Money, gilt and derivatives market communication patterns — illustrative rates desk plus Masters Directions under Financial Markets.',
+    officialHref: 'https://www.rbi.org.in/Scripts/BS_ViewMasDirections.aspx',
+    officialLabel: 'Master Directions (markets)',
+    links: [
+      { label: 'Markets MDs', href: '/masters-directions?category=Financial%20Markets' },
+      { label: 'Sample data lab', href: '/data' },
+      { label: 'Home rates desk', href: '/#rates-desk' },
+    ],
+  },
+  {
+    slug: 'financial-stability',
+    title: 'Financial Stability',
+    titleHi: 'वित्तीय स्थिरता',
+    blurb:
+      'Systemic-risk framing and sample Financial Stability Report-style digests for classroom and UX review.',
+    officialHref: 'https://www.rbi.org.in/Scripts/Publications.aspx',
+    officialLabel: 'Publications on rbi.org.in',
+    links: [
+      { label: 'Reports', href: '/reports' },
+      { label: 'Supervision', href: '/functions/supervision' },
+      { label: 'Data lab', href: '/data' },
+    ],
+  },
+  {
+    slug: 'fintech',
+    title: 'FinTech',
+    titleHi: 'फिनटेक',
+    blurb:
+      'Innovation, digital lending and regulatory sandbox-style themes — educational paraphrases and links into payments / NBFC catalogues.',
+    officialHref: 'https://www.rbi.org.in/',
+    officialLabel: 'rbi.org.in',
+    links: [
+      { label: 'Digital lending MD (prototype)', href: '/masters-directions/digital-lending' },
+      { label: 'Payments function', href: '/functions/payments' },
+      { label: 'NBFC MDs', href: '/masters-directions?category=NBFCs' },
+    ],
+  },
+  {
+    slug: 'fema',
+    title: 'FEMA',
+    titleHi: 'फेमा / विदेशी मुद्रा',
+    blurb:
+      'Foreign Exchange Management Act administration themes — compounding, ECB and current-account educational entries with outbound PDFs.',
+    officialHref: 'https://www.rbi.org.in/Scripts/BS_ViewMasDirections.aspx',
+    officialLabel: 'Master Directions (FEMA)',
+    links: [
+      { label: 'FEMA MDs', href: '/masters-directions?category=FEMA' },
+      { label: 'Circulars', href: '/circulars' },
+      { label: 'External investments', href: '/functions/external-investments' },
+    ],
+  },
+  {
+    slug: 'international-relations',
+    title: 'International Relations',
+    titleHi: 'अंतरराष्ट्रीय संबंध',
+    blurb:
+      'Cross-border cooperation, BIS-facing themes and external-sector statistics pointers — educational only.',
+    officialHref: 'https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx',
+    officialLabel: 'Press / BoP releases',
+    links: [
+      { label: 'News', href: '/news' },
+      { label: 'Reports', href: '/reports' },
+      { label: 'Statistics (prototype data)', href: '/data' },
+    ],
+  },
+  {
+    slug: 'payments',
+    title: 'Payments',
+    titleHi: 'भुगतान',
+    blurb:
+      'Authorisation and oversight of payment and settlement systems — UPI, PPIs, aggregators and related circulars in this prototype.',
+    officialHref: 'https://www.rbi.org.in/Scripts/BS_ViewMasDirections.aspx',
+    officialLabel: 'Master Directions (payments)',
+    links: [
+      { label: 'Payments MDs', href: '/masters-directions?category=Payments' },
+      { label: 'PSP circulars', href: '/circulars?audience=PSPs' },
+      { label: 'Learn', href: '/learn' },
+    ],
+  },
+  {
+    slug: 'regulation',
+    title: 'Regulation',
+    titleHi: 'विनियमन',
+    blurb:
+      'Prudential and conduct regulation for banks, NBFCs and other regulated entities — Masters Directions library is the primary entry.',
+    officialHref: 'https://www.rbi.org.in/Scripts/BS_ViewMasDirections.aspx',
+    officialLabel: 'Official Master Directions',
+    links: [
+      { label: 'Masters Directions', href: '/masters-directions' },
+      { label: 'Circulars', href: '/circulars' },
+      { label: 'Commercial Banks MDs', href: '/masters-directions?category=Commercial%20Banks' },
+    ],
+  },
+  {
+    slug: 'supervision',
+    title: 'Supervision',
+    titleHi: 'पर्यवेक्षण',
+    blurb:
+      'How supervisory expectations are communicated via reporting directions, circulars and enforcement press notes in this educational library.',
+    officialHref: 'https://www.rbi.org.in/Scripts/BS_ViewMasDirections.aspx',
+    officialLabel: 'Master Directions index',
+    links: [
+      { label: 'Supervision MD (prototype)', href: '/masters-directions/supervision-reporting' },
+      { label: 'Bank audience filters', href: '/masters-directions?audience=Banks' },
+      { label: 'Enforcement', href: '/functions/enforcement' },
+    ],
+  },
+  {
+    slug: 'research',
+    title: 'Research',
+    titleHi: 'अनुसंधान',
+    blurb:
+      'Bulletins, occasional papers and statistical releases — prototype reports and outbound publication links for study.',
+    officialHref: 'https://www.rbi.org.in/Scripts/Publications.aspx',
+    officialLabel: 'Publications on rbi.org.in',
+    links: [
+      { label: 'Reports', href: '/reports' },
+      { label: 'Data lab', href: '/data' },
+      { label: 'News / Bulletin notes', href: '/news' },
+    ],
+  },
+]
+
+export function getFunction(slug: string) {
+  return rbiFunctions.find((f) => f.slug === slug)
+}

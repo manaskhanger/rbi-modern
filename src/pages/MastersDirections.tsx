@@ -32,7 +32,12 @@ export function MastersDirections() {
   const reduce = useReducedMotion()
   const [params, setParams] = useSearchParams()
   const [query, setQuery] = useState('')
-  const [category, setCategory] = useState('All')
+  const categoryParam = params.get('category')
+  const [category, setCategory] = useState(
+    categoryParam && (mdCategories as readonly string[]).includes(categoryParam)
+      ? categoryParam
+      : 'All',
+  )
   const audience = audienceFromParam(params.get('audience'))
   const [year, setYear] = useState<string>('All')
   const [view, setView] = useState<'cards' | 'table'>('table')
@@ -41,6 +46,14 @@ export function MastersDirections() {
     const next = new URLSearchParams(params)
     if (v === 'All') next.delete('audience')
     else next.set('audience', v)
+    setParams(next, { replace: true })
+  }
+
+  function setCategoryFilter(v: string) {
+    setCategory(v)
+    const next = new URLSearchParams(params)
+    if (v === 'All') next.delete('category')
+    else next.set('category', v)
     setParams(next, { replace: true })
   }
 
@@ -88,14 +101,14 @@ export function MastersDirections() {
       <PageHeader
         eyebrow="Regulatory library"
         title="Masters Directions"
-        description="Catalogue styled like a public Master Directions listing: Date · Title · Open PDF · Type. Title / Open PDF open the official RBI document (or index) in a new tab. Prototype summaries remain secondary educational paraphrases."
+        description="RBI-taxonomy catalogue: Commercial Banks, NBFCs, Payments, FEMA, Financial Markets, Currency, Supervision and more. Many rows are PDF-link catalogue entries with real rbidocs URLs. Date · Title · Open PDF · Type. Educational summaries stay secondary."
       />
       <SearchFilter
         query={query}
         onQuery={setQuery}
         categories={mdCategories}
         category={category}
-        onCategory={setCategory}
+        onCategory={setCategoryFilter}
         audiences={AUDIENCE_FILTERS}
         audience={audience}
         onAudience={(v) => setAudienceFilter(v as AudienceFilter)}
@@ -159,7 +172,15 @@ export function MastersDirections() {
               <div className="flex flex-wrap items-center gap-2">
                 <Badge>{d.category}</Badge>
                 <span className="font-mono text-[11px] text-gold-dim dark:text-gold">{d.code}</span>
-                <span className="text-xs text-ink-muted dark:text-cream/45">Updated {d.updated}</span>
+                <span className="text-xs text-ink-muted dark:text-cream/45">
+                  {d.updatedAsOnLabel ? `Updated as on ${d.updatedAsOnLabel}` : `Updated ${d.updated}`}
+                  {d.fileSize ? ` · ${d.fileSize}` : ''}
+                </span>
+                {d.entryMode === 'catalogue' && (
+                  <span className="border border-navy/10 px-1.5 py-0.5 text-[10px] text-ink-muted dark:border-white/15">
+                    Catalogue / Open PDF
+                  </span>
+                )}
                 {d.pdfMode === 'index' && (
                   <span className="border border-navy/10 px-1.5 py-0.5 text-[10px] text-ink-muted dark:border-white/15">
                     RBI index

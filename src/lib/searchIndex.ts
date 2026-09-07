@@ -3,6 +3,9 @@ import { circulars } from '../data/circulars'
 import { newsItems } from '../data/news'
 import { reports } from '../data/reports'
 import { glossary } from '../data/glossary'
+import { rbiFunctions } from '../data/functions'
+import { citizenCards } from '../data/citizens'
+import { whatsNewItems } from '../data/whatsNew'
 
 export type SearchResultType =
   | 'Masters Direction'
@@ -10,6 +13,8 @@ export type SearchResultType =
   | 'News'
   | 'Report'
   | 'Glossary'
+  | 'Function'
+  | 'Citizens'
 
 export interface SearchResult {
   id: string
@@ -104,6 +109,40 @@ export function buildSearchCorpus(): SearchResult[] {
     })
   }
 
+  for (const f of rbiFunctions) {
+    items.push({
+      id: `fn:${f.slug}`,
+      type: 'Function',
+      title: f.title,
+      snippet: f.blurb,
+      href: `/functions/${f.slug}`,
+      meta: f.titleHi,
+    })
+  }
+
+  for (const c of citizenCards) {
+    items.push({
+      id: `cit:${c.id}`,
+      type: 'Citizens',
+      title: c.title,
+      snippet: c.explainer,
+      href: '/citizens',
+      meta: c.titleHi,
+    })
+  }
+
+  for (const w of whatsNewItems) {
+    if (!w.to) continue
+    items.push({
+      id: `wn:${w.id}`,
+      type: 'News',
+      title: w.title,
+      snippet: `${w.kind} · ${w.date}`,
+      href: w.to,
+      meta: w.kind,
+    })
+  }
+
   return items
 }
 
@@ -137,6 +176,16 @@ function indexedCorpus(): Indexed[] {
   }
   for (const g of glossary) {
     hayById.set(`gloss:${slugifyTerm(g.term)}`, haystack(g.term, g.definition, ...(g.related ?? [])))
+  }
+  for (const f of rbiFunctions) {
+    hayById.set(`fn:${f.slug}`, haystack(f.title, f.titleHi, f.blurb, f.slug))
+  }
+  for (const c of citizenCards) {
+    hayById.set(`cit:${c.id}`, haystack(c.title, c.titleHi, c.explainer))
+  }
+  for (const w of whatsNewItems) {
+    if (!w.to) continue
+    hayById.set(`wn:${w.id}`, haystack(w.title, w.kind, w.date))
   }
 
   cached = base.map((item) => ({

@@ -33,9 +33,40 @@ export function MastersDirectionDetail() {
   }
 
   const doc = enrichDirection(raw)
-  const relatedCirculars = doc.relatedCircularSlugs
+  const relatedCirculars = (doc.relatedCircularSlugs ?? [])
     .map((s) => circulars.find((c) => c.slug === s))
     .filter(Boolean)
+
+  if (raw.entryMode === 'catalogue') {
+    return (
+      <div className="mx-auto max-w-3xl px-4 py-10 md:px-6 md:py-14">
+        <Link
+          to="/masters-directions"
+          className="inline-flex items-center gap-2 text-sm text-ink-muted hover:text-navy dark:hover:text-cream"
+        >
+          <ArrowLeft className="h-4 w-4" /> All directions
+        </Link>
+        <div className="mt-6 flex flex-wrap items-center gap-2">
+          <Badge>{doc.category}</Badge>
+          <span className="font-mono text-xs text-gold-dim">{doc.code}</span>
+          <Badge tone="muted">Catalogue entry</Badge>
+        </div>
+        <h1 className="mt-3 text-2xl font-bold text-navy dark:text-cream">{doc.title}</h1>
+        <p className="mt-2 text-sm text-ink-muted dark:text-cream/55">
+          {doc.updatedAsOnLabel
+            ? `Updated as on ${doc.updatedAsOnLabel}`
+            : `Updated ${doc.updated}`}
+          {doc.fileSize ? ` · ${doc.fileSize}` : ''}
+        </p>
+        <p className="mt-3 text-sm text-ink-muted dark:text-cream/70">{doc.summary}</p>
+        <div className="mt-6 flex flex-wrap items-center gap-3 rounded-xl border border-gold/35 bg-gold/10 p-4">
+          <OfficialPdfLink doc={doc} variant="prominent" />
+        </div>
+        <AuthoritativeSource section="mastersDirections" className="mt-6" />
+        <DisclaimerBanner />
+      </div>
+    )
+  }
 
   return (
     <div className="print-root mx-auto max-w-6xl px-4 py-10 md:px-6 md:py-14">

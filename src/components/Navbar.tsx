@@ -2,17 +2,19 @@ import { useCallback, useEffect, useId, useRef, useState } from 'react'
 import { Link, NavLink, useLocation, useNavigate } from 'react-router-dom'
 import { ChevronDown, Contrast, Menu, Moon, Search, Sun, X } from 'lucide-react'
 import { useTheme } from '../hooks/useTheme'
+import { useLang } from '../hooks/useLang'
 
 type NavItem = { to: string; label: string; hi: string }
 type NavGroup = { label: string; hi: string; items: NavItem[] }
 
 const topLinks: NavItem[] = [
   { to: '/about', label: 'About Us', hi: 'परिचय' },
-  { to: '/monetary-policy', label: 'Monetary Policy', hi: 'मौद्रिक नीति' },
+  { to: '/functions', label: 'Functions', hi: 'कार्य' },
   { to: '/masters-directions', label: 'Masters Directions', hi: 'मास्टर निर्देश' },
   { to: '/circulars', label: 'Circulars', hi: 'परिपत्र' },
   { to: '/news', label: 'Press / News', hi: 'समाचार' },
   { to: '/reports', label: 'Publications', hi: 'प्रकाशन' },
+  { to: '/citizens', label: "Citizens' Corner", hi: 'नागरिक कॉर्नर' },
   { to: '/data', label: 'Statistics', hi: 'सांख्यिकी' },
   { to: '/learn', label: 'Learn', hi: 'सीखें' },
 ]
@@ -26,6 +28,8 @@ const groups: NavGroup[] = [
       { to: '/about/prototype', label: 'About this prototype', hi: 'इस प्रोटोटाइप के बारे में' },
       { to: '/tour', label: 'Guided tour', hi: 'मार्गदर्शित दौरा' },
       { to: '/monetary-policy', label: 'Monetary policy', hi: 'मौद्रिक नीति' },
+      { to: '/functions', label: 'Functions', hi: 'कार्य' },
+      { to: '/citizens', label: "Citizens' Corner", hi: 'नागरिक कॉर्नर' },
       { to: '/offices', label: 'Offices', hi: 'कार्यालय' },
     ],
   },
@@ -56,18 +60,21 @@ const groups: NavGroup[] = [
 ]
 
 function BiLabel({ en, hi, compact }: { en: string; hi: string; compact?: boolean }) {
+  const { isHi } = useLang()
+  const primary = isHi ? hi : en
+  const secondary = isHi ? en : hi
   return (
     <span className={compact ? 'inline' : 'inline-flex flex-col items-start leading-tight'}>
-      <span>{en}</span>
+      <span>{primary}</span>
       <span
-        lang="hi"
+        lang={isHi ? 'en' : 'hi'}
         className={
           compact
             ? 'ml-1 text-[10px] opacity-80'
             : 'mt-0.5 text-[10px] font-normal opacity-75'
         }
       >
-        {compact ? `(${hi})` : hi}
+        {compact ? `(${secondary})` : secondary}
       </span>
     </span>
   )
@@ -284,6 +291,7 @@ function DesktopDropdown({ group }: { group: NavGroup }) {
 
 export function Navbar() {
   const { theme, toggle, highContrast, toggleHighContrast } = useTheme()
+  const { lang, setLang, t } = useLang()
   const [open, setOpen] = useState(false)
   const drawerId = useId()
   const navigate = useNavigate()
@@ -319,16 +327,16 @@ export function Navbar() {
             </span>
             <span className="min-w-0">
               <span className="font-serif block truncate text-[15px] font-semibold tracking-tight text-cream md:text-base">
-                Reserve Bank of India
+                {t('Reserve Bank of India', 'भारतीय रिज़र्व बैंक')}
                 <span className="ml-1.5 text-[11px] font-sans font-medium text-gold-soft md:text-xs">
-                  Knowledge Prototype
+                  {t('Knowledge Prototype', 'ज्ञान प्रोटोटाइप')}
                 </span>
               </span>
               <span className="block text-[10px] font-medium text-cream/75">
-                Unofficial modernisation of public RBI web patterns · Educational
-                <span lang="hi" className="ml-1 opacity-80">
-                  · अनौपचारिक शैक्षिक प्रोटोटाइप
-                </span>
+                {t(
+                  'Unofficial modernisation of public RBI web patterns · Educational',
+                  'सार्वजनिक आरबीआई वेब पैटर्न का अनौपचारिक आधुनिकीकरण · शैक्षिक',
+                )}
               </span>
             </span>
           </Link>
@@ -357,6 +365,28 @@ export function Navbar() {
             >
               <Search className="h-4 w-4" aria-hidden />
             </Link>
+            <div
+              className="flex overflow-hidden border border-cream/25 text-[10px] font-bold"
+              role="group"
+              aria-label={t('Language', 'भाषा')}
+            >
+              <button
+                type="button"
+                onClick={() => setLang('en')}
+                aria-pressed={lang === 'en'}
+                className={`px-2 py-1.5 ${lang === 'en' ? 'bg-gold text-navy' : 'text-cream/80 hover:bg-white/10'}`}
+              >
+                EN
+              </button>
+              <button
+                type="button"
+                onClick={() => setLang('hi')}
+                aria-pressed={lang === 'hi'}
+                className={`px-2 py-1.5 ${lang === 'hi' ? 'bg-gold text-navy' : 'text-cream/80 hover:bg-white/10'}`}
+              >
+                हिं
+              </button>
+            </div>
             <button
               type="button"
               onClick={toggleHighContrast}
@@ -406,7 +436,7 @@ export function Navbar() {
         <div className="mx-auto flex max-w-6xl items-stretch gap-0 px-4 md:px-6">
           {topLinks.map((l) => (
             <NavLink key={l.to} to={l.to} className={linkClass} end={l.to === '/about'}>
-              {l.label}
+              {lang === 'hi' ? l.hi : l.label}
             </NavLink>
           ))}
           <div className="ml-auto flex items-center gap-0.5">

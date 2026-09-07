@@ -1,7 +1,6 @@
 import { useMemo, useState } from 'react'
 import { Link, useSearchParams } from 'react-router-dom'
 import { motion, useReducedMotion } from 'framer-motion'
-import { LayoutGrid, Table2 } from 'lucide-react'
 import { PageHeader } from '../components/PageHeader'
 import { SearchFilter } from '../components/SearchFilter'
 import { Badge } from '../components/Badge'
@@ -13,6 +12,8 @@ import { circulars, circularCategories } from '../data/circulars'
 import { AUDIENCE_FILTERS, yearFromDate, type AudienceFilter } from '../data/types'
 import { formatContentReviewed } from '../data/meta'
 import { fadeUp, stagger } from '../lib/motion'
+import { LayoutGrid, Table2, ExternalLink } from 'lucide-react'
+import { WITHDRAWN_CIRCULARS_URL, WITHDRAWN_NOTE } from '../data/withdrawn'
 
 const yearOptions = [
   'All',
@@ -201,6 +202,22 @@ export function Circulars() {
           </button>
         </div>
       )}
+
+      <section className="mt-10 portal-panel p-5" aria-labelledby="withdrawn-heading">
+        <h2 id="withdrawn-heading" className="font-serif text-lg font-semibold text-navy dark:text-cream">
+          Withdrawn / archive (stub)
+        </h2>
+        <p className="mt-2 text-sm text-ink-muted dark:text-cream/65">{WITHDRAWN_NOTE}</p>
+        <a
+          href={WITHDRAWN_CIRCULARS_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="mt-3 inline-flex items-center gap-1.5 text-sm font-semibold text-gold-dim hover:underline dark:text-gold"
+        >
+          Official notifications on rbi.org.in <ExternalLink className="h-3.5 w-3.5" />
+        </a>
+      </section>
+
       <ExploreNext pathname="/circulars" />
       <div className="mt-10">
         <DisclaimerBanner />

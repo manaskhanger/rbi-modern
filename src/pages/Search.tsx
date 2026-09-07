@@ -1,11 +1,12 @@
 import { useMemo } from 'react'
 import { Link, useSearchParams } from 'react-router-dom'
-import { Search as SearchIcon } from 'lucide-react'
+import { Search as SearchIcon, ExternalLink } from 'lucide-react'
 import { PageHeader } from '../components/PageHeader'
 import { Badge } from '../components/Badge'
 import { DisclaimerBanner } from '../components/DisclaimerBanner'
 import { ExploreNext } from '../components/ExploreNext'
 import { searchAll, type SearchResultType } from '../lib/searchIndex'
+import { RBI_HOME } from '../data/meta'
 
 const typeTone: Record<SearchResultType, 'gold' | 'navy' | 'muted'> = {
   'Masters Direction': 'gold',
@@ -13,6 +14,8 @@ const typeTone: Record<SearchResultType, 'gold' | 'navy' | 'muted'> = {
   News: 'muted',
   Report: 'muted',
   Glossary: 'muted',
+  Function: 'navy',
+  Citizens: 'muted',
 }
 
 export function Search() {
@@ -71,14 +74,50 @@ export function Search() {
         </div>
       )}
 
+
+      {q.trim() && results.length <= 3 && (
+        <div className="mb-6 rounded-xl border border-navy/15 bg-white/80 px-4 py-4 dark:border-white/15 dark:bg-navy-light/40">
+          <p className="text-sm font-semibold text-navy dark:text-cream">
+            Search on official RBI
+          </p>
+          <p className="mt-1 text-xs text-ink-muted dark:text-cream/60">
+            Local prototype results are sparse or empty for some queries. Use the official site for authoritative notifications, press releases and Master Directions.
+          </p>
+          <a
+            href={`${RBI_HOME}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-3 inline-flex items-center gap-1.5 text-sm font-semibold text-gold-dim hover:underline dark:text-gold"
+          >
+            Open rbi.org.in <ExternalLink className="h-3.5 w-3.5" />
+          </a>
+          <a
+            href={`https://www.google.com/search?q=site%3Arbi.org.in+${encodeURIComponent(q.trim())}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-2 ml-4 inline-flex items-center gap-1.5 text-sm font-medium text-ink-muted hover:underline dark:text-cream/70"
+          >
+            Site search via Google (rbi.org.in) <ExternalLink className="h-3 w-3" />
+          </a>
+        </div>
+      )}
+
       {q.trim() && results.length === 0 && (
         <div className="rounded-xl border border-dashed border-navy/20 px-6 py-14 text-center dark:border-white/15">
           <p className="text-sm text-ink-muted dark:text-cream/60">
             No results for “{q.trim()}”.
           </p>
+          <a
+            href={RBI_HOME}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-3 inline-flex items-center gap-1 text-sm font-semibold text-gold-dim underline dark:text-gold"
+          >
+            Search on official RBI (rbi.org.in) <ExternalLink className="h-3.5 w-3.5" />
+          </a>
           <button
             type="button"
-            className="mt-3 text-sm font-medium text-gold-dim underline dark:text-gold"
+            className="mt-3 block text-sm font-medium text-gold-dim underline dark:text-gold"
             onClick={() => setParams({})}
           >
             Clear search

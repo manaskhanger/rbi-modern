@@ -1,8 +1,10 @@
 import { Link } from 'react-router-dom'
 import { ExternalLink } from 'lucide-react'
 import { RBI_HOME } from '../data/meta'
+import { useLang } from '../hooks/useLang'
 
 export function Footer() {
+  const { t } = useLang()
   return (
     <footer className="mt-16 border-t border-navy/10 bg-navy text-cream dark:border-gold/20">
       <div className="mx-auto grid max-w-6xl gap-10 px-4 py-12 md:grid-cols-4 md:px-6">
@@ -11,7 +13,7 @@ export function Footer() {
             <span className="flex h-8 w-8 items-center justify-center border border-gold/50 bg-navy-light text-[10px] font-bold text-gold">
               KP
             </span>
-            <span className="font-serif font-semibold">RBI Knowledge Prototype</span>
+            <span className="font-serif font-semibold">{t('RBI Knowledge Prototype', 'आरबीआई ज्ञान प्रोटोटाइप')}</span>
           </div>
           <p className="max-w-md text-sm leading-relaxed text-cream/70">
             An unofficial educational and UX concept exploring clearer public communication of
@@ -20,7 +22,7 @@ export function Footer() {
           </p>
         </div>
         <div>
-          <h3 className="mb-3 text-sm font-semibold text-gold-on-navy">About &amp; policy</h3>
+          <h3 className="mb-3 text-sm font-semibold text-gold-on-navy">{t('About & policy', 'परिचय और नीति')}</h3>
           <ul className="space-y-2 text-sm text-cream/70">
             <li>
               <Link to="/about" className="hover:text-cream">
@@ -39,7 +41,17 @@ export function Footer() {
             </li>
             <li>
               <Link to="/monetary-policy" className="hover:text-cream">
-                Monetary policy
+                {t('Monetary policy', 'मौद्रिक नीति')}
+              </Link>
+            </li>
+            <li>
+              <Link to="/functions" className="hover:text-cream">
+                {t('Functions', 'कार्य')}
+              </Link>
+            </li>
+            <li>
+              <Link to="/citizens" className="hover:text-cream">
+                {t("Citizens' Corner", 'नागरिक कॉर्नर')}
               </Link>
             </li>
             <li>
@@ -50,7 +62,7 @@ export function Footer() {
           </ul>
         </div>
         <div>
-          <h3 className="mb-3 text-sm font-semibold text-gold-on-navy">Regulatory &amp; data</h3>
+          <h3 className="mb-3 text-sm font-semibold text-gold-on-navy">{t('Regulatory & data', 'विनियामक और डेटा')}</h3>
           <ul className="space-y-2 text-sm text-cream/70">
             <li>
               <Link to="/masters-directions" className="hover:text-cream">
