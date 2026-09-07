@@ -5,6 +5,7 @@ import { Badge } from '../components/Badge'
 import { DisclaimerBanner } from '../components/DisclaimerBanner'
 import { AuthoritativeSource } from '../components/AuthoritativeSource'
 import { ContentReviewed } from '../components/IllustrativeLabel'
+import { CollectionNav } from '../components/CollectionNav'
 
 export function NewsDetail() {
   const { slug } = useParams()
@@ -46,6 +47,13 @@ export function NewsDetail() {
           </p>
         ))}
       </div>
+      <CollectionNav
+        items={newsItems.map((n) => ({ slug: n.slug, title: n.title }))}
+        currentSlug={item.slug}
+        basePath="/news"
+        listLabel="news"
+      />
+
       <div className="mt-12">
         <DisclaimerBanner />
       </div>

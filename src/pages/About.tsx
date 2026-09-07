@@ -13,6 +13,7 @@ import {
 import { PageHeader } from '../components/PageHeader'
 import { Reveal } from '../components/Reveal'
 import { DisclaimerBanner } from '../components/DisclaimerBanner'
+import { ExploreNext, SectionHubCards } from '../components/ExploreNext'
 
 const timeline = [
   { year: '1934–35', text: 'Reserve Bank of India Act, 1934 establishes the Bank; operations begin in 1935 as India’s central bank.' },
@@ -114,6 +115,18 @@ export function About() {
         eyebrow="About"
         title="Statutory mandate, history & organisation"
         description="High-level educational framing of why RBI exists under the Reserve Bank of India Act, 1934, how the institution evolved, and how major functions connect. Original copy for this prototype — not official RBI text."
+      />
+
+      <SectionHubCards
+        heading="Browse this section"
+        links={[
+          { label: 'Monetary policy', to: '/monetary-policy', note: 'MPC, repo rate & inflation band' },
+          { label: 'Masters Directions', to: '/masters-directions', note: 'Educational regulatory catalogue' },
+          { label: 'Circulars', to: '/circulars', note: 'Sample notifications' },
+          { label: 'Learn & glossary', to: '/learn', note: 'Primers and definitions' },
+          { label: 'Offices', to: '/offices', note: 'Illustrative regional directory' },
+          { label: 'About this prototype', to: '/about/prototype', note: 'Trust & unofficial framing' },
+        ]}
       />
 
       <Reveal>
@@ -258,6 +271,7 @@ export function About() {
         </div>
       </section>
 
+      <ExploreNext pathname="/about" />
       <DisclaimerBanner />
     </div>
   )

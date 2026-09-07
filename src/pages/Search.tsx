@@ -4,6 +4,7 @@ import { Search as SearchIcon } from 'lucide-react'
 import { PageHeader } from '../components/PageHeader'
 import { Badge } from '../components/Badge'
 import { DisclaimerBanner } from '../components/DisclaimerBanner'
+import { ExploreNext } from '../components/ExploreNext'
 import { searchAll, type SearchResultType } from '../lib/searchIndex'
 
 const typeTone: Record<SearchResultType, 'gold' | 'navy' | 'muted'> = {
@@ -114,6 +115,7 @@ export function Search() {
         </>
       )}
 
+      <ExploreNext pathname="/search" />
       <div className="mt-10">
         <DisclaimerBanner />
       </div>

@@ -118,6 +118,17 @@ body {
   border-bottom: 1px solid rgba(197, 165, 114, 0.2);
 }
 
+.breadcrumb-bar {
+  top: 3.4rem; /* under sticky header */
+}
+
+@media (min-width: 1280px) {
+  .breadcrumb-bar {
+    top: 3.6rem;
+  }
+}
+
+
 /*
  * Gold-on-navy contrast: #C5A572 on #0B1D36 is ~5.2:1 (AA large only).
  * Prefer brighter gold for small text on navy surfaces.
@@ -244,6 +255,7 @@ html.hc .bg-navy .text-gold {
   .skip-link,
   header.glass,
   .proto-strip,
+  .breadcrumb-bar,
   footer,
   .no-print,
   [aria-label="Toggle dark mode"],

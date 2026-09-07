@@ -6,6 +6,7 @@ import { SearchFilter } from '../components/SearchFilter'
 import { CardLink } from '../components/Card'
 import { Badge } from '../components/Badge'
 import { DisclaimerBanner } from '../components/DisclaimerBanner'
+import { ExploreNext } from '../components/ExploreNext'
 import { mastersDirections, mdCategories } from '../data/mastersDirections'
 import { AUDIENCE_FILTERS, yearFromDate, type AudienceFilter } from '../data/types'
 import { formatContentReviewed } from '../data/meta'
@@ -194,6 +195,7 @@ export function MastersDirections() {
           </button>
         </div>
       )}
+      <ExploreNext pathname="/masters-directions" />
       <div className="mt-10">
         <DisclaimerBanner />
       </div>

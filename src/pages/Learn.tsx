@@ -12,6 +12,7 @@ import { Link, useLocation } from 'react-router-dom'
 import { PageHeader } from '../components/PageHeader'
 import { Reveal } from '../components/Reveal'
 import { DisclaimerBanner } from '../components/DisclaimerBanner'
+import { ExploreNext } from '../components/ExploreNext'
 import { PersonaCards } from '../components/PersonaCards'
 import { glossary, howRbiWorks } from '../data/glossary'
 import { slugifyTerm } from '../lib/searchIndex'
@@ -181,6 +182,7 @@ export function Learn() {
         </div>
       </section>
 
+      <ExploreNext pathname="/learn" />
       <div className="mt-10">
         <DisclaimerBanner />
       </div>

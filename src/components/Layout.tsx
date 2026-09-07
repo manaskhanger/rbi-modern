@@ -4,9 +4,12 @@ import { Navbar } from './Navbar'
 import { Footer } from './Footer'
 import { ProtoStrip } from './ProtoStrip'
 import { PageTransition } from './PageTransition'
+import { Breadcrumbs } from './Breadcrumbs'
 
 export function Layout() {
   const location = useLocation()
+  const isHome = (location.pathname.replace(/\/$/, '') || '/') === '/'
+
   return (
     <div className="flex min-h-screen flex-col bg-cream text-ink dark:bg-navy dark:text-cream">
       <a
@@ -25,6 +28,7 @@ export function Layout() {
       </a>
       <Navbar />
       <ProtoStrip />
+      {!isHome && <Breadcrumbs />}
       <main id="main-content" className="flex-1" tabIndex={-1}>
         <AnimatePresence mode="wait">
           <PageTransition key={location.pathname}>

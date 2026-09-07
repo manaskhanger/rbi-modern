@@ -4,6 +4,7 @@ import { ArrowLeft, ArrowRight, Compass, ExternalLink, X } from 'lucide-react'
 import { PageHeader } from '../components/PageHeader'
 import { PersonaCards } from '../components/PersonaCards'
 import { DisclaimerBanner } from '../components/DisclaimerBanner'
+import { ExploreNext } from '../components/ExploreNext'
 import { tourSteps, TOUR_DURATION_LABEL } from '../data/tour'
 import { setTourDismissed } from '../lib/tourStorage'
 
@@ -201,6 +202,7 @@ export function Tour() {
         <PersonaCards compact />
       </section>
 
+      <ExploreNext pathname="/tour" />
       <div className="mt-10">
         <DisclaimerBanner />
       </div>

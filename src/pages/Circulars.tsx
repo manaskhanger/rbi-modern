@@ -6,6 +6,7 @@ import { SearchFilter } from '../components/SearchFilter'
 import { CardLink } from '../components/Card'
 import { Badge } from '../components/Badge'
 import { DisclaimerBanner } from '../components/DisclaimerBanner'
+import { ExploreNext } from '../components/ExploreNext'
 import { circulars, circularCategories } from '../data/circulars'
 import { AUDIENCE_FILTERS, yearFromDate, type AudienceFilter } from '../data/types'
 import { formatContentReviewed } from '../data/meta'
@@ -186,6 +187,7 @@ export function Circulars() {
           </button>
         </div>
       )}
+      <ExploreNext pathname="/circulars" />
       <div className="mt-10">
         <DisclaimerBanner />
       </div>

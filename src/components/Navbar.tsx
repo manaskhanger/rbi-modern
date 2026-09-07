@@ -108,11 +108,34 @@ function DesktopDropdown({ group }: { group: NavGroup }) {
   const buttonRef = useRef<HTMLButtonElement>(null)
   const menuId = useId()
   const itemRefs = useRef<(HTMLAnchorElement | null)[]>([])
+  const openTimer = useRef<ReturnType<typeof setTimeout> | null>(null)
+  const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null)
 
-  const close = useCallback((restoreFocus = false) => {
-    setOpen(false)
-    if (restoreFocus) buttonRef.current?.focus()
+  const clearTimers = useCallback(() => {
+    if (openTimer.current) clearTimeout(openTimer.current)
+    if (closeTimer.current) clearTimeout(closeTimer.current)
+    openTimer.current = null
+    closeTimer.current = null
   }, [])
+
+  const close = useCallback(
+    (restoreFocus = false) => {
+      clearTimers()
+      setOpen(false)
+      if (restoreFocus) buttonRef.current?.focus()
+    },
+    [clearTimers],
+  )
+
+  const scheduleOpen = useCallback(() => {
+    clearTimers()
+    openTimer.current = setTimeout(() => setOpen(true), 80)
+  }, [clearTimers])
+
+  const scheduleClose = useCallback(() => {
+    clearTimers()
+    closeTimer.current = setTimeout(() => setOpen(false), 220)
+  }, [clearTimers])
 
   useEffect(() => {
     if (!open) return
@@ -133,9 +156,12 @@ function DesktopDropdown({ group }: { group: NavGroup }) {
     }
   }, [open, close])
 
+  useEffect(() => () => clearTimers(), [clearTimers])
+
   function onButtonKeyDown(e: React.KeyboardEvent) {
     if (e.key === 'ArrowDown' || e.key === 'Enter' || e.key === ' ') {
       e.preventDefault()
+      clearTimers()
       setOpen(true)
       requestAnimationFrame(() => itemRefs.current[0]?.focus())
     }
@@ -168,19 +194,27 @@ function DesktopDropdown({ group }: { group: NavGroup }) {
   })
 
   return (
-    <div className="relative" ref={rootRef}>
+    <div
+      className="relative"
+      ref={rootRef}
+      onMouseEnter={scheduleOpen}
+      onMouseLeave={scheduleClose}
+    >
       <button
         ref={buttonRef}
         type="button"
         className={`inline-flex items-center gap-1 rounded-md px-2 py-1.5 text-[13px] font-medium transition-colors ${
           open || anyActive
-            ? 'bg-gold/10 text-navy dark:bg-gold/15 dark:text-gold'
+            ? 'bg-gold/10 text-navy ring-1 ring-gold/35 dark:bg-gold/15 dark:text-gold dark:ring-gold/40'
             : 'text-navy/80 hover:bg-navy/5 hover:text-navy dark:text-cream/75 dark:hover:bg-white/10 dark:hover:text-cream'
         }`}
         aria-expanded={open}
         aria-haspopup="menu"
         aria-controls={menuId}
-        onClick={() => setOpen((v) => !v)}
+        onClick={() => {
+          clearTimers()
+          setOpen((v) => !v)
+        }}
         onKeyDown={onButtonKeyDown}
       >
         <BiLabel en={group.label} hi={group.hi} />
@@ -194,30 +228,34 @@ function DesktopDropdown({ group }: { group: NavGroup }) {
           id={menuId}
           role="menu"
           aria-label={`${group.label} / ${group.hi}`}
-          className="absolute left-0 top-full z-50 mt-1 min-w-[14rem] rounded-lg border border-navy/10 bg-white py-1 shadow-lg dark:border-white/15 dark:bg-navy-light"
+          className="absolute left-0 top-full z-50 pt-1"
           onKeyDown={onMenuKeyDown}
+          onMouseEnter={scheduleOpen}
         >
-          {group.items.map((item, i) => (
-            <NavLink
-              key={item.to}
-              to={item.to}
-              role="menuitem"
-              tabIndex={0}
-              ref={(el) => {
-                itemRefs.current[i] = el
-              }}
-              className={({ isActive }) =>
-                `block px-3 py-2 text-[13px] transition-colors ${
-                  isActive
-                    ? 'bg-gold/15 font-medium text-gold-dim dark:text-gold'
-                    : 'text-navy/85 hover:bg-navy/5 dark:text-cream/80 dark:hover:bg-white/10'
-                }`
-              }
-              onClick={() => close()}
-            >
-              <BiLabel en={item.label} hi={item.hi} />
-            </NavLink>
-          ))}
+          {/* pt-1 bridge prevents accidental close when moving pointer into menu */}
+          <div className="min-w-[14rem] rounded-lg border border-navy/10 bg-white py-1 shadow-lg dark:border-white/15 dark:bg-navy-light">
+            {group.items.map((item, i) => (
+              <NavLink
+                key={item.to}
+                to={item.to}
+                role="menuitem"
+                tabIndex={0}
+                ref={(el) => {
+                  itemRefs.current[i] = el
+                }}
+                className={({ isActive }) =>
+                  `block px-3 py-2 text-[13px] transition-colors ${
+                    isActive
+                      ? 'bg-gold/15 font-medium text-gold-dim dark:text-gold'
+                      : 'text-navy/85 hover:bg-navy/5 dark:text-cream/80 dark:hover:bg-white/10'
+                  }`
+                }
+                onClick={() => close()}
+              >
+                <BiLabel en={item.label} hi={item.hi} />
+              </NavLink>
+            ))}
+          </div>
         </div>
       )}
     </div>
@@ -283,6 +321,13 @@ export function Navbar() {
             onClick={() => setOpen(false)}
           >
             Tour
+          </Link>
+          <Link
+            to="/sitemap"
+            className="hidden rounded-lg border border-navy/10 px-2.5 py-1.5 text-[12px] font-semibold text-navy/80 transition hover:bg-navy/5 lg:inline-flex dark:border-white/15 dark:text-cream/80 dark:hover:bg-white/10"
+            onClick={() => setOpen(false)}
+          >
+            Sitemap
           </Link>
           <HeaderSearch />
           <Link
@@ -361,6 +406,13 @@ export function Navbar() {
                 </div>
               </div>
             ))}
+            <NavLink
+              to="/sitemap"
+              className={linkClass}
+              onClick={() => setOpen(false)}
+            >
+              Sitemap
+            </NavLink>
             <button
               type="button"
               className="rounded-md px-2 py-1.5 text-left text-[13px] font-medium text-navy/80 dark:text-cream/75"

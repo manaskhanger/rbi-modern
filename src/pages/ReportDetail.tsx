@@ -28,6 +28,7 @@ import { AuthoritativeSource } from '../components/AuthoritativeSource'
 import { ContentReviewed, IllustrativeLabel } from '../components/IllustrativeLabel'
 import { PrintButton } from '../components/PrintButton'
 import { ChartSummary } from '../components/ChartSummary'
+import { CollectionNav } from '../components/CollectionNav'
 
 const COLORS = ['#0B1D36', '#C5A572', '#1a3558', '#d4bc94']
 
@@ -523,12 +524,12 @@ export function ReportDetail() {
   const { slug } = useParams()
   const report = reports.find((r) => r.slug === slug)
 
-  if (!report || !report.rich) {
+  if (!report) {
     return (
       <div className="mx-auto max-w-3xl px-4 py-20 text-center">
-        <p className="font-semibold">Rich report sample not available for this slug.</p>
+        <p className="font-semibold">Report not found</p>
         <p className="mt-2 text-sm text-ink-muted">
-          Open FSR, MPR, Annual banking, or Payments/Inclusion cards for full demo layouts.
+          That slug is not in this prototype publications set.
         </p>
         <Link to="/reports" className="mt-4 inline-block text-gold-dim underline">
           Back to reports
@@ -548,7 +549,10 @@ export function ReportDetail() {
       </Link>
       <PrintButton />
       </div>
-      <Badge>{report.type}</Badge>
+      <div className="flex flex-wrap gap-2">
+        <Badge>{report.type}</Badge>
+        {report.rich && <Badge tone="muted">Rich sample</Badge>}
+      </div>
       <h1 className="mt-3 text-2xl font-bold text-navy dark:text-cream md:text-3xl">{report.title}</h1>
       <p className="mt-2 text-sm text-ink-muted dark:text-cream/55">
         {report.date} · ~{report.pages} pages · Illustrative · not for compliance
@@ -560,11 +564,31 @@ export function ReportDetail() {
         <AuthoritativeSource section="publications" />
       </div>
 
-      <RichBody variant={report.variant} />
+      {report.rich ? (
+        <RichBody variant={report.variant} />
+      ) : (
+        <section className="mt-8 max-w-3xl rounded-xl border border-navy/10 bg-white/70 p-5 dark:border-white/10 dark:bg-navy-light/40">
+          <h2 className="text-sm font-semibold uppercase tracking-wider text-gold-dim dark:text-gold">
+            Summary card
+          </h2>
+          <p className="mt-2 text-sm leading-relaxed text-ink-muted dark:text-cream/70">
+            This publication is represented as a summary-level card in the prototype. Open the rich
+            digests (FSR, MPR, Annual banking, Payments &amp; inclusion) for full chart layouts.
+            Cross-links below keep desktop traversal open.
+          </p>
+        </section>
+      )}
 
       {report.relatedLinks && report.relatedLinks.length > 0 && (
         <RelatedLinks links={report.relatedLinks} />
       )}
+
+      <CollectionNav
+        items={reports.map((r) => ({ slug: r.slug, title: r.title }))}
+        currentSlug={report.slug}
+        basePath="/reports"
+        listLabel="reports"
+      />
 
       <div className="mt-10">
         <DisclaimerBanner />

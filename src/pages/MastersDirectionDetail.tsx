@@ -12,6 +12,7 @@ import { ObligationsChecklist } from '../components/ObligationsChecklist'
 import { ApplicabilityMatrix } from '../components/ApplicabilityMatrix'
 import { ChangeHistory } from '../components/ChangeHistory'
 import { PrintButton } from '../components/PrintButton'
+import { CollectionNav } from '../components/CollectionNav'
 
 export function MastersDirectionDetail() {
   const { slug } = useParams()
@@ -179,6 +180,13 @@ export function MastersDirectionDetail() {
               </p>
             </section>
           ))}
+
+          <CollectionNav
+            items={mastersDirections.map((d) => ({ slug: d.slug, title: d.title }))}
+            currentSlug={doc.slug}
+            basePath="/masters-directions"
+            listLabel="Masters Directions"
+          />
 
           <div className="mt-10">
             <DisclaimerBanner />

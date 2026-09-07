@@ -13,6 +13,7 @@ import { ExternalLink } from 'lucide-react'
 import { PageHeader } from '../components/PageHeader'
 import { Reveal } from '../components/Reveal'
 import { DisclaimerBanner } from '../components/DisclaimerBanner'
+import { ExploreNext } from '../components/ExploreNext'
 import { AuthoritativeSource } from '../components/AuthoritativeSource'
 import { ContentReviewed, IllustrativeLabel } from '../components/IllustrativeLabel'
 import { ChartFootnote } from '../components/ChartFootnote'
@@ -193,6 +194,7 @@ export function MonetaryPolicy() {
         </p>
       </section>
 
+      <ExploreNext pathname="/monetary-policy" />
       <DisclaimerBanner />
     </div>
   )

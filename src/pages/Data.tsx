@@ -7,6 +7,7 @@ import {
 import { ArrowDownUp, Download, ExternalLink, Search } from 'lucide-react'
 import { PageHeader } from '../components/PageHeader'
 import { DisclaimerBanner } from '../components/DisclaimerBanner'
+import { ExploreNext } from '../components/ExploreNext'
 import { AuthoritativeSource } from '../components/AuthoritativeSource'
 import { ContentReviewed, IllustrativeLabel } from '../components/IllustrativeLabel'
 import { ChartFootnote } from '../components/ChartFootnote'
@@ -420,6 +421,7 @@ export function Data() {
           </>
         )}
 
+        <ExploreNext pathname="/data" />
         <div className="mt-10">
           <DisclaimerBanner />
         </div>

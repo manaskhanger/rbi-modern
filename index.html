@@ -12,6 +12,17 @@
     <title>RBI Knowledge Prototype — Unofficial Educational UX</title>
   </head>
   <body>
+    <script>
+      (function () {
+        var base = "/rbi-modern";
+        var loc = window.location;
+        if (loc.search && loc.search.charAt(1) === "/") {
+          var path = loc.search.slice(1).replace(/~and~/g, "&");
+          window.history.replaceState(null, "", base + path + loc.hash);
+        }
+      })();
+    </script>
+
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>

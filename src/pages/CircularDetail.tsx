@@ -9,6 +9,7 @@ import { AuthoritativeSource } from '../components/AuthoritativeSource'
 import { ContentReviewed } from '../components/IllustrativeLabel'
 import { SummaryModeToggle } from '../components/SummaryModeToggle'
 import { PrintButton } from '../components/PrintButton'
+import { CollectionNav } from '../components/CollectionNav'
 
 export function CircularDetail() {
   const { slug } = useParams()
@@ -139,6 +140,13 @@ export function CircularDetail() {
         </div>
         <p className="mt-3 text-xs text-ink-muted dark:text-cream/50">{doc.effectiveNote}</p>
       </section>
+
+      <CollectionNav
+        items={circulars.map((c) => ({ slug: c.slug, title: c.title }))}
+        currentSlug={doc.slug}
+        basePath="/circulars"
+        listLabel="circulars"
+      />
 
       <div className="mt-10">
         <DisclaimerBanner />

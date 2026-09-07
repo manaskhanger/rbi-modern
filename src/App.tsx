@@ -34,6 +34,7 @@ const Learn = lazy(() => import('./pages/Learn').then((m) => ({ default: m.Learn
 const Tour = lazy(() => import('./pages/Tour').then((m) => ({ default: m.Tour })))
 const Offices = lazy(() => import('./pages/Offices').then((m) => ({ default: m.Offices })))
 const Search = lazy(() => import('./pages/Search').then((m) => ({ default: m.Search })))
+const Sitemap = lazy(() => import('./pages/Sitemap').then((m) => ({ default: m.Sitemap })))
 const NotFound = lazy(() => import('./pages/NotFound').then((m) => ({ default: m.NotFound })))
 
 function RouteFallback() {
@@ -69,6 +70,7 @@ export default function App() {
               <Route path="tour" element={<Tour />} />
               <Route path="offices" element={<Offices />} />
               <Route path="search" element={<Search />} />
+              <Route path="sitemap" element={<Sitemap />} />
               <Route path="*" element={<NotFound />} />
             </Route>
           </Routes>

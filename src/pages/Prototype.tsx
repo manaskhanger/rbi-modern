@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom'
 import { ExternalLink, Info } from 'lucide-react'
 import { PageHeader } from '../components/PageHeader'
 import { DisclaimerBanner } from '../components/DisclaimerBanner'
+import { ExploreNext } from '../components/ExploreNext'
 import { AuthoritativeSource } from '../components/AuthoritativeSource'
 import { ContentReviewed } from '../components/IllustrativeLabel'
 import { RBI_HOME } from '../data/meta'
@@ -88,6 +89,7 @@ export function Prototype() {
         (educational organisation framing)
       </p>
 
+      <ExploreNext pathname="/about/prototype" />
       <div className="mt-10">
         <DisclaimerBanner />
       </div>

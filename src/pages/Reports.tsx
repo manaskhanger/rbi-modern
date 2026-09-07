@@ -6,6 +6,7 @@ import { Badge } from '../components/Badge'
 import { DisclaimerBanner } from '../components/DisclaimerBanner'
 import { reports } from '../data/reports'
 import { formatContentReviewed } from '../data/meta'
+import { ExploreNext } from '../components/ExploreNext'
 
 export function Reports() {
   return (
@@ -35,18 +36,12 @@ export function Reports() {
                 <p className="mt-2 text-[10px] text-ink-muted/70 dark:text-cream/40">
                   {formatContentReviewed(r.lastReviewed)}
                 </p>
-                {r.rich ? (
-                  <Link
-                    to={`/reports/${r.slug}`}
-                    className="mt-3 inline-block text-sm font-semibold text-gold-dim hover:underline dark:text-gold"
-                  >
-                    Open rich sample →
-                  </Link>
-                ) : (
-                  <p className="mt-3 text-xs text-ink-muted/70 dark:text-cream/40">
-                    Summary card in this pass
-                  </p>
-                )}
+                <Link
+                  to={`/reports/${r.slug}`}
+                  className="mt-3 inline-block text-sm font-semibold text-gold-dim hover:underline dark:text-gold"
+                >
+                  {r.rich ? 'Open rich sample →' : 'Open summary →'}
+                </Link>
                 {r.relatedLinks && r.relatedLinks.length > 0 && (
                   <div className="mt-3 flex flex-wrap gap-1.5">
                     {r.relatedLinks.map((l) => (
@@ -65,6 +60,7 @@ export function Reports() {
           </Card>
         ))}
       </div>
+      <ExploreNext pathname="/reports" />
       <div className="mt-10">
         <DisclaimerBanner />
       </div>

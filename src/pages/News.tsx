@@ -2,6 +2,7 @@ import { PageHeader } from '../components/PageHeader'
 import { CardLink } from '../components/Card'
 import { Badge } from '../components/Badge'
 import { DisclaimerBanner } from '../components/DisclaimerBanner'
+import { ExploreNext } from '../components/ExploreNext'
 import { newsItems } from '../data/news'
 import { formatContentReviewed } from '../data/meta'
 
@@ -26,6 +27,7 @@ export function News() {
           </CardLink>
         ))}
       </div>
+      <ExploreNext pathname="/news" />
       <div className="mt-10">
         <DisclaimerBanner />
       </div>

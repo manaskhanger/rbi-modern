@@ -2,6 +2,7 @@ import { useMemo, useState } from 'react'
 import { MapPin } from 'lucide-react'
 import { PageHeader } from '../components/PageHeader'
 import { DisclaimerBanner } from '../components/DisclaimerBanner'
+import { ExploreNext } from '../components/ExploreNext'
 import { offices } from '../data/offices'
 
 const regions = ['All', 'North', 'South', 'East', 'West', 'Central', 'North-East'] as const
@@ -65,6 +66,7 @@ export function Offices() {
           </div>
         ))}
       </div>
+      <ExploreNext pathname="/offices" />
       <div className="mt-10">
         <DisclaimerBanner />
       </div>

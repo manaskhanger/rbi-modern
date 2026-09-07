@@ -72,6 +72,21 @@ export function Footer() {
                 Sample data lab
               </Link>
             </li>
+            <li>
+              <Link to="/news" className="hover:text-cream">
+                News
+              </Link>
+            </li>
+            <li>
+              <Link to="/offices" className="hover:text-cream">
+                Offices
+              </Link>
+            </li>
+            <li>
+              <Link to="/sitemap" className="hover:text-cream">
+                Sitemap
+              </Link>
+            </li>
           </ul>
         </div>
       </div>
