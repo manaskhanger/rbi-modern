@@ -90,7 +90,7 @@ export const reports: Report[] = [
         href: '/masters-directions/currency-distribution',
         kind: 'directions',
       },
-      { label: 'Currency chest circular', href: '/circulars/currency-chest-operations', kind: 'circulars' },
+      { label: 'Currency chest circular', href: '/circulars', kind: 'circulars' },
     ],
   },
 ]

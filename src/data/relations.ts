@@ -10,84 +10,84 @@ import type {
 /** Seeded circular ↔ direction links for this prototype catalogue. */
 export const DIRECTION_TO_CIRCULARS: Record<string, string[]> = {
   'know-your-customer': [
-    'upi-merchant-onboarding',
-    'fraud-risk-management',
-    'tokenisation-card-payments',
+    'implementation-of-section-51a-of-uapa-1967-updates-to-unsc-13678',
+    'deposits-and-accounts-accounts-of-non-resident-banks-13693',
   ],
   'liquidity-risk-management-banks': [
-    'npa-upgradation-clarification',
-    'market-risk-capital-faq',
+    'reserve-bank-of-india-commercial-banks-cash-reserve-ratio-and-13680',
+    'reserve-bank-of-india-commercial-banks-interest-rate-on-deposits-13685',
   ],
-  'nbfc-scale-based-regulation': [
-    'co-lending-guidelines-tweak',
-    'npa-upgradation-clarification',
-    'penalty-harmonisation',
+  'nbfc-scale-based-regulation': ['reserve-bank-of-india-non-banking-financial-companies-concentration-risk-13679'],
+  'payment-aggregation': ['deposits-and-accounts-accounts-of-non-resident-banks-13693'],
+  'currency-distribution': ['relief-measures-in-areas-affected-by-natural-calamities-reporting-through-13692'],
+  'fema-current-account': ['deposits-and-accounts-accounts-of-non-resident-banks-13693'],
+  'digital-lending': ['reserve-bank-of-india-non-banking-financial-companies-concentration-risk-13679'],
+  'interest-rate-risk-banking-book': [
+    'reserve-bank-of-india-commercial-banks-interest-rate-on-deposits-13685',
+    'reserve-bank-of-india-commercial-banks-cash-reserve-ratio-and-13680',
   ],
-  'payment-aggregation': ['upi-merchant-onboarding', 'tokenisation-card-payments'],
-  'currency-distribution': ['currency-chest-operations'],
-  'fema-current-account': ['ecb-reporting-simplification'],
-  'digital-lending': [
-    'penalty-harmonisation',
-    'co-lending-guidelines-tweak',
-    'fraud-risk-management',
-  ],
-  'interest-rate-risk-banking-book': ['market-risk-capital-faq'],
-  'prepaid-payment-instruments': [
-    'tokenisation-card-payments',
-    'upi-merchant-onboarding',
-  ],
-  'market-conduct-banks': ['penalty-harmonisation', 'co-lending-guidelines-tweak'],
-  'financial-markets-repo': ['market-risk-capital-faq'],
+  'prepaid-payment-instruments': ['reserve-bank-of-india-commercial-banks-interest-rate-on-deposits-13685'],
+  'market-conduct-banks': ['reserve-bank-of-india-commercial-banks-interest-rate-on-deposits-13685'],
+  'financial-markets-repo': ['reserve-bank-of-india-urban-co-operative-banks-classification-valuation-13691'],
   'supervision-reporting': [
-    'fraud-risk-management',
-    'npa-upgradation-clarification',
-    'cyber-security-framework-update',
-  ],
+    'implementation-of-section-51a-of-uapa-1967-updates-to-unsc-13678',
+    'reserve-bank-of-india-commercial-banks-cash-reserve-ratio-and-13680',
+    'reserve-bank-of-india-priority-sector-lending-targets-and-classification-13674',
+    'relief-measures-in-areas-affected-by-natural-calamities-reporting-through-13692',
+  ]
 }
 
 export const CIRCULAR_TO_DIRECTIONS: Record<string, string[]> = {
-  'cyber-security-framework-update': ['supervision-reporting', 'payment-aggregation'],
-  'upi-merchant-onboarding': [
-    'payment-aggregation',
-    'know-your-customer',
-    'prepaid-payment-instruments',
-  ],
-  'ecb-reporting-simplification': ['fema-current-account'],
-  'npa-upgradation-clarification': [
-    'nbfc-scale-based-regulation',
-    'supervision-reporting',
-    'liquidity-risk-management-banks',
-  ],
-  'co-lending-guidelines-tweak': [
-    'nbfc-scale-based-regulation',
-    'digital-lending',
-    'market-conduct-banks',
-  ],
-  'tokenisation-card-payments': [
-    'payment-aggregation',
-    'prepaid-payment-instruments',
+  'deposits-and-accounts-accounts-of-non-resident-banks-13693': [
+    'fema-current-account',
     'know-your-customer',
   ],
-  'green-deposits-framework': [
-    'liquidity-risk-management-banks',
+  'relief-measures-in-areas-affected-by-natural-calamities-reporting-through-13692': [
+    'currency-distribution',
     'supervision-reporting',
   ],
-  'penalty-harmonisation': [
-    'market-conduct-banks',
-    'digital-lending',
-    'nbfc-scale-based-regulation',
-  ],
-  'fraud-risk-management': [
-    'know-your-customer',
-    'supervision-reporting',
-    'digital-lending',
-  ],
-  'currency-chest-operations': ['currency-distribution'],
-  'market-risk-capital-faq': [
-    'interest-rate-risk-banking-book',
+  'reserve-bank-of-india-urban-co-operative-banks-classification-valuation-13691': [
     'financial-markets-repo',
     'liquidity-risk-management-banks',
   ],
+  'reserve-bank-of-india-rural-co-operative-banks-interest-rate-13690': ['liquidity-risk-management-banks'],
+  'reserve-bank-of-india-urban-co-operative-banks-interest-rate-13689': ['liquidity-risk-management-banks'],
+  'reserve-bank-of-india-regional-rural-banks-interest-rate-on-13688': ['liquidity-risk-management-banks'],
+  'reserve-bank-of-india-local-area-banks-interest-rate-on-13687': ['liquidity-risk-management-banks'],
+  'reserve-bank-of-india-small-finance-banks-interest-rate-on-13686': ['liquidity-risk-management-banks'],
+  'reserve-bank-of-india-commercial-banks-interest-rate-on-deposits-13685': [
+    'liquidity-risk-management-banks',
+    'interest-rate-risk-banking-book',
+  ],
+  'reserve-bank-of-india-rural-co-operative-banks-cash-reserve-13684': ['liquidity-risk-management-banks'],
+  'reserve-bank-of-india-urban-co-operative-banks-cash-reserve-13683': ['liquidity-risk-management-banks'],
+  'reserve-bank-of-india-regional-rural-banks-cash-reserve-ratio-13682': ['liquidity-risk-management-banks'],
+  'reserve-bank-of-india-small-finance-banks-cash-reserve-ratio-13681': ['liquidity-risk-management-banks'],
+  'reserve-bank-of-india-commercial-banks-cash-reserve-ratio-and-13680': [
+    'liquidity-risk-management-banks',
+    'supervision-reporting',
+  ],
+  'reserve-bank-of-india-non-banking-financial-companies-concentration-risk-13679': [
+    'nbfc-scale-based-regulation',
+    'digital-lending',
+  ],
+  'implementation-of-section-51a-of-uapa-1967-updates-to-unsc-13678': [
+    'know-your-customer',
+    'supervision-reporting',
+  ],
+  'implementation-of-section-51a-of-uapa-1967-updates-to-unsc-13677': [
+    'know-your-customer',
+    'supervision-reporting',
+  ],
+  'implementation-of-section-51a-of-uapa-1967-updates-to-unsc-13676': [
+    'know-your-customer',
+    'supervision-reporting',
+  ],
+  'formation-of-new-districts-in-the-union-territory-of-ladakh-13675': ['supervision-reporting'],
+  'reserve-bank-of-india-priority-sector-lending-targets-and-classification-13674': [
+    'supervision-reporting',
+    'market-conduct-banks',
+  ]
 }
 
 /** Deeper formal paraphrases for Plain/Formal toggle. */
@@ -147,53 +147,89 @@ export const DIRECTION_PLAIN_EXTRA: Record<string, string> = {
 }
 
 const CIRCULAR_PLAIN: Record<string, string> = {
-  'cyber-security-framework-update':
-    'Banks should rehearse ransomware response with the board, lock down privileged access to core systems, and watch important IT vendors continuously — this page is a teaching paraphrase only.',
-  'upi-merchant-onboarding':
-    'Small UPI merchants can get lighter checks; higher-risk business types need stronger verification and slower early settlements. Disputes should be visible to customers quickly.',
-  'ecb-reporting-simplification':
-    'When companies borrow abroad, AD banks help them file changes on time. Refinancing still has cost ceilings, and late filings can mean compounding under FEMA.',
-  'npa-upgradation-clarification':
-    'A loan leaves NPA status only after all overdue interest and principal are paid — partial recovery is not enough. Boards should check that systems mark this correctly.',
-  'co-lending-guidelines-tweak':
-    'In bank–NBFC co-lending, say clearly who the customer deals with, settle partner shares into escrow quickly, and map internal policies to current regulatory language.',
-  'tokenisation-card-payments':
-    'Merchants should not keep raw card numbers; use tokens instead, including for guest checkout and recurring payments. Supervisors may ask for attestations.',
-  'green-deposits-framework':
-    'Green deposit money should fund board-approved eligible activities, with excluded sectors listed and independent checks on how proceeds were allocated.',
-  'penalty-harmonisation':
-    'Penalties for late payment should be reasonable fees — not a jump in interest on the whole loan — and customers should get a warning the first time.',
-  'fraud-risk-management':
-    'Banks need early-warning dashboards, clear rules for when to order a forensic audit, and fair staff accountability that separates process mistakes from collusion.',
-  'currency-chest-operations':
-    'Currency chests must follow remittance calendars, pack soiled notes properly under CCTV, and expect follow-up if tallies are badly off.',
-  'market-risk-capital-faq':
-    'During a Basel market-risk parallel run, banks must document trading-book boundaries and use the outputs to plan capital before any go-live date.',
+  'deposits-and-accounts-accounts-of-non-resident-banks-13693':
+    'Open PDF opens the official RBI file; this prototype paraphrase is educational only — confirm the live notification on rbi.org.in.',
+  'relief-measures-in-areas-affected-by-natural-calamities-reporting-through-13692':
+    'Open PDF opens the official RBI file; this prototype paraphrase is educational only — confirm the live notification on rbi.org.in.',
+  'reserve-bank-of-india-urban-co-operative-banks-classification-valuation-13691':
+    'Open PDF opens the official RBI file; this prototype paraphrase is educational only — confirm the live notification on rbi.org.in.',
+  'reserve-bank-of-india-rural-co-operative-banks-interest-rate-13690':
+    'Open PDF opens the official RBI file; this prototype paraphrase is educational only — confirm the live notification on rbi.org.in.',
+  'reserve-bank-of-india-urban-co-operative-banks-interest-rate-13689':
+    'Open PDF opens the official RBI file; this prototype paraphrase is educational only — confirm the live notification on rbi.org.in.',
+  'reserve-bank-of-india-regional-rural-banks-interest-rate-on-13688':
+    'Open PDF opens the official RBI file; this prototype paraphrase is educational only — confirm the live notification on rbi.org.in.',
+  'reserve-bank-of-india-local-area-banks-interest-rate-on-13687':
+    'Open PDF opens the official RBI file; this prototype paraphrase is educational only — confirm the live notification on rbi.org.in.',
+  'reserve-bank-of-india-small-finance-banks-interest-rate-on-13686':
+    'Open PDF opens the official RBI file; this prototype paraphrase is educational only — confirm the live notification on rbi.org.in.',
+  'reserve-bank-of-india-commercial-banks-interest-rate-on-deposits-13685':
+    'Open PDF opens the official RBI file; this prototype paraphrase is educational only — confirm the live notification on rbi.org.in.',
+  'reserve-bank-of-india-rural-co-operative-banks-cash-reserve-13684':
+    'Open PDF opens the official RBI file; this prototype paraphrase is educational only — confirm the live notification on rbi.org.in.',
+  'reserve-bank-of-india-urban-co-operative-banks-cash-reserve-13683':
+    'Open PDF opens the official RBI file; this prototype paraphrase is educational only — confirm the live notification on rbi.org.in.',
+  'reserve-bank-of-india-regional-rural-banks-cash-reserve-ratio-13682':
+    'Open PDF opens the official RBI file; this prototype paraphrase is educational only — confirm the live notification on rbi.org.in.',
+  'reserve-bank-of-india-small-finance-banks-cash-reserve-ratio-13681':
+    'Open PDF opens the official RBI file; this prototype paraphrase is educational only — confirm the live notification on rbi.org.in.',
+  'reserve-bank-of-india-commercial-banks-cash-reserve-ratio-and-13680':
+    'Open PDF opens the official RBI file; this prototype paraphrase is educational only — confirm the live notification on rbi.org.in.',
+  'reserve-bank-of-india-non-banking-financial-companies-concentration-risk-13679':
+    'Open PDF opens the official RBI file; this prototype paraphrase is educational only — confirm the live notification on rbi.org.in.',
+  'implementation-of-section-51a-of-uapa-1967-updates-to-unsc-13678':
+    'Open PDF opens the official RBI file; this prototype paraphrase is educational only — confirm the live notification on rbi.org.in.',
+  'implementation-of-section-51a-of-uapa-1967-updates-to-unsc-13677':
+    'Open PDF opens the official RBI file; this prototype paraphrase is educational only — confirm the live notification on rbi.org.in.',
+  'implementation-of-section-51a-of-uapa-1967-updates-to-unsc-13676':
+    'Open PDF opens the official RBI file; this prototype paraphrase is educational only — confirm the live notification on rbi.org.in.',
+  'formation-of-new-districts-in-the-union-territory-of-ladakh-13675':
+    'Open PDF opens the official RBI file; this prototype paraphrase is educational only — confirm the live notification on rbi.org.in.',
+  'reserve-bank-of-india-priority-sector-lending-targets-and-classification-13674':
+    'Open PDF opens the official RBI file; this prototype paraphrase is educational only — confirm the live notification on rbi.org.in.',
 }
 
 const CIRCULAR_FORMAL: Record<string, string> = {
-  'cyber-security-framework-update':
-    'Incremental control expectations address ransomware readiness, privileged-access vaulting with immutable logs, and continuous monitoring / audit rights for material IT service providers, aligned with IT outsourcing themes.',
-  'upi-merchant-onboarding':
-    'Risk-based merchant due diligence permits simplified KYC below turnover thresholds while retaining fraud monitoring; enhanced verification and velocity limits apply to higher-risk MCCs.',
-  'ecb-reporting-simplification':
-    'Form ECB filing windows for drawdowns and parameter changes are streamlined; refinancing remains subject to applicable all-in-cost ceilings; late reporting may attract FEMA compounding.',
-  'npa-upgradation-clarification':
-    'Upgradation from NPA requires clearance of entire arrears of interest and principal; partial recovery is insufficient. Automated classification logic for OD/CC accounts warrants board review.',
-  'co-lending-guidelines-tweak':
-    'Operational expectations cover customer-interface clarity in Key Fact Statements, timely escrow segregation of partner shares, and alignment of CLM-style arrangements to current regulatory language.',
-  'tokenisation-card-payments':
-    'Storage of actual card data by merchants remains prohibited; migration to network or issuer tokens (including card-on-file) is required, with possible attestations in IT examinations.',
-  'green-deposits-framework':
-    'Allocation of green deposit proceeds must map to a board-approved framework with excluded sectors; independent assurance of allocation reports is encouraged; general deposit and ALM norms continue to apply.',
-  'penalty-harmonisation':
-    'Penal charges must be reasonable, non-capitalised and disclosed; practices that increase interest on the entire loan for minor defaults are discouraged; first-time application should follow customer reminder.',
-  'fraud-risk-management':
-    'Early warning frameworks should combine financial, transactional and behavioural indicators; forensic audit decisions need documented terms of reference; accountability frameworks should distinguish process lapses from collusion.',
-  'currency-chest-operations':
-    'Chests must observe Issue Department remittance calendars and denomination-wise packing standards with CCTV coverage; material discrepancies attract supervisory follow-up.',
-  'market-risk-capital-faq':
-    'Trading-book boundary policies require periodic reclassification review; parallel-run outputs inform capital planning ahead of separately announced go-live; model validation should challenge residual risks.',
+  'deposits-and-accounts-accounts-of-non-resident-banks-13693':
+    'Catalogue row for a live RBI notification. Open PDF opens the official RBI file; prototype summary is educational only.',
+  'relief-measures-in-areas-affected-by-natural-calamities-reporting-through-13692':
+    'Catalogue row for a live RBI notification. Open PDF opens the official RBI file; prototype summary is educational only.',
+  'reserve-bank-of-india-urban-co-operative-banks-classification-valuation-13691':
+    'Catalogue row for a live RBI notification. Open PDF opens the official RBI file; prototype summary is educational only.',
+  'reserve-bank-of-india-rural-co-operative-banks-interest-rate-13690':
+    'Catalogue row for a live RBI notification. Open PDF opens the official RBI file; prototype summary is educational only.',
+  'reserve-bank-of-india-urban-co-operative-banks-interest-rate-13689':
+    'Catalogue row for a live RBI notification. Open PDF opens the official RBI file; prototype summary is educational only.',
+  'reserve-bank-of-india-regional-rural-banks-interest-rate-on-13688':
+    'Catalogue row for a live RBI notification. Open PDF opens the official RBI file; prototype summary is educational only.',
+  'reserve-bank-of-india-local-area-banks-interest-rate-on-13687':
+    'Catalogue row for a live RBI notification. Open PDF opens the official RBI file; prototype summary is educational only.',
+  'reserve-bank-of-india-small-finance-banks-interest-rate-on-13686':
+    'Catalogue row for a live RBI notification. Open PDF opens the official RBI file; prototype summary is educational only.',
+  'reserve-bank-of-india-commercial-banks-interest-rate-on-deposits-13685':
+    'Catalogue row for a live RBI notification. Open PDF opens the official RBI file; prototype summary is educational only.',
+  'reserve-bank-of-india-rural-co-operative-banks-cash-reserve-13684':
+    'Catalogue row for a live RBI notification. Open PDF opens the official RBI file; prototype summary is educational only.',
+  'reserve-bank-of-india-urban-co-operative-banks-cash-reserve-13683':
+    'Catalogue row for a live RBI notification. Open PDF opens the official RBI file; prototype summary is educational only.',
+  'reserve-bank-of-india-regional-rural-banks-cash-reserve-ratio-13682':
+    'Catalogue row for a live RBI notification. Open PDF opens the official RBI file; prototype summary is educational only.',
+  'reserve-bank-of-india-small-finance-banks-cash-reserve-ratio-13681':
+    'Catalogue row for a live RBI notification. Open PDF opens the official RBI file; prototype summary is educational only.',
+  'reserve-bank-of-india-commercial-banks-cash-reserve-ratio-and-13680':
+    'Catalogue row for a live RBI notification. Open PDF opens the official RBI file; prototype summary is educational only.',
+  'reserve-bank-of-india-non-banking-financial-companies-concentration-risk-13679':
+    'Catalogue row for a live RBI notification. Open PDF opens the official RBI file; prototype summary is educational only.',
+  'implementation-of-section-51a-of-uapa-1967-updates-to-unsc-13678':
+    'Catalogue row for a live RBI notification. Open PDF opens the official RBI file; prototype summary is educational only.',
+  'implementation-of-section-51a-of-uapa-1967-updates-to-unsc-13677':
+    'Catalogue row for a live RBI notification. Open PDF opens the official RBI file; prototype summary is educational only.',
+  'implementation-of-section-51a-of-uapa-1967-updates-to-unsc-13676':
+    'Catalogue row for a live RBI notification. Open PDF opens the official RBI file; prototype summary is educational only.',
+  'formation-of-new-districts-in-the-union-territory-of-ladakh-13675':
+    'Catalogue row for a live RBI notification. Open PDF opens the official RBI file; prototype summary is educational only.',
+  'reserve-bank-of-india-priority-sector-lending-targets-and-classification-13674':
+    'Catalogue row for a live RBI notification. Open PDF opens the official RBI file; prototype summary is educational only.',
 }
 
 export function buildApplicability(

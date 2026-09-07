@@ -86,7 +86,7 @@ export function Circulars() {
       <PageHeader
         eyebrow="Regulatory updates"
         title="Circulars"
-        description="Notification-style listing: Date · Title · Open PDF · Type. Open PDF / title links go to the official RBI notifications index or document in a new tab. Educational paraphrases stay on prototype detail pages."
+        description="Notification-style listing: Date · Title · Open PDF · Type. Open PDF / title links open the official RBI notification PDF (rbidocs) in a new tab when verified. Educational paraphrases stay on prototype detail pages."
       />
       <SearchFilter
         query={query}
