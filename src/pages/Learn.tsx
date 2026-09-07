@@ -17,6 +17,12 @@ import { PersonaCards } from '../components/PersonaCards'
 import { glossary, howRbiWorks } from '../data/glossary'
 import { slugifyTerm } from '../lib/searchIndex'
 import { ExploreMapTeaser } from '../components/InteractiveSiteMap'
+import {
+  ArtPayments,
+  ArtFema,
+  ArtMarkets,
+  ArtSupervision,
+} from '../components/illustrations/InstitutionalArt'
 
 const icons = { Target, Building2, Smartphone, Banknote, Globe2, Shield } as const
 
@@ -59,6 +65,20 @@ export function Learn() {
         description="Tone aimed at officers reviewing communication design and at students building central-banking literacy. Original educational copy for this prototype."
       />
 
+
+      <div className="mb-8 grid grid-cols-2 gap-3 sm:grid-cols-4" aria-hidden>
+        {[
+          { Art: ArtPayments, label: 'Payments' },
+          { Art: ArtSupervision, label: 'Supervision' },
+          { Art: ArtFema, label: 'FEMA / Forex' },
+          { Art: ArtMarkets, label: 'Markets' },
+        ].map(({ Art, label }) => (
+          <div key={label} className="portal-panel flex flex-col items-center gap-2 p-3 text-center">
+            <Art className="art h-14 w-14 text-rbi-blue dark:text-gold-soft" />
+            <span className="text-[11px] font-medium text-ink-muted dark:text-cream/70">{label}</span>
+          </div>
+        ))}
+      </div>
       <div className="mb-10">
         <ExploreMapTeaser />
       </div>
@@ -89,7 +109,7 @@ export function Learn() {
             or statutory schedule.
           </p>
         </Reveal>
-        <div className="rounded-xl border border-navy/10 bg-white/80 p-5 dark:border-white/10 dark:bg-navy-light/40">
+        <div className="portal-panel p-5">
           <div className="mb-4 text-center">
             <span className="inline-block rounded-md border border-gold/40 bg-gold/10 px-4 py-2 text-sm font-semibold text-navy dark:text-cream">
               Reserve Bank of India — public functions (educational map)
@@ -134,8 +154,8 @@ export function Learn() {
             const Icon = icons[item.icon as keyof typeof icons]
             return (
               <Reveal key={item.id} delay={i * 0.05}>
-                <div className="glass-card h-full rounded-xl p-5">
-                  <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-gold/15">
+                <div className="portal-panel h-full p-5">
+                  <div className="flex h-12 w-12 items-center justify-center border border-navy/10 bg-cream dark:border-white/15 dark:bg-navy/40">
                     <Icon className="h-6 w-6 text-gold-dim dark:text-gold" />
                   </div>
                   <h3 className="mt-4 text-sm font-semibold text-navy dark:text-cream">

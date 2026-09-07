@@ -8,11 +8,11 @@ import { Badge } from '../components/Badge'
 import { DisclaimerBanner } from '../components/DisclaimerBanner'
 import { ExploreNext } from '../components/ExploreNext'
 import { OfficialPdfLink, OfficialTitleLink } from '../components/OfficialPdfLink'
+import { DocumentTable, type DocTableRow } from '../components/DocumentTable'
 import { circulars, circularCategories } from '../data/circulars'
 import { AUDIENCE_FILTERS, yearFromDate, type AudienceFilter } from '../data/types'
 import { formatContentReviewed } from '../data/meta'
 import { fadeUp, stagger } from '../lib/motion'
-import { officialOpenUrl } from '../lib/officialDocs'
 
 const yearOptions = [
   'All',
@@ -35,7 +35,7 @@ export function Circulars() {
   const [category, setCategory] = useState('All')
   const audience = audienceFromParam(params.get('audience'))
   const [year, setYear] = useState<string>('All')
-  const [view, setView] = useState<'cards' | 'table'>('cards')
+  const [view, setView] = useState<'cards' | 'table'>('table')
 
   function setAudienceFilter(v: AudienceFilter) {
     const next = new URLSearchParams(params)
@@ -56,6 +56,23 @@ export function Circulars() {
     })
   }, [query, category, audience, year])
 
+  const tableRows: DocTableRow[] = useMemo(
+    () =>
+      filtered.map((c) => ({
+        id: c.slug,
+        date: c.date,
+        title: c.title,
+        category: c.category,
+        meta: c.ref,
+        officialPdfUrl: c.officialPdfUrl,
+        officialHtmlUrl: c.officialHtmlUrl,
+        pdfMode: c.pdfMode,
+        summaryPath: `/circulars/${c.slug}`,
+        summaryLabel: 'Summary',
+      })),
+    [filtered],
+  )
+
   function clearFilters() {
     setQuery('')
     setCategory('All')
@@ -64,11 +81,11 @@ export function Circulars() {
   }
 
   return (
-    <div className="mx-auto max-w-6xl px-4 py-10 md:px-6 md:py-14">
+    <div className="mx-auto max-w-6xl px-4 py-8 md:px-6 md:py-10">
       <PageHeader
         eyebrow="Regulatory updates"
         title="Circulars"
-        description="Illustrative circular-style notes. Title click / Open on RBI opens the official Notifications index in a new tab (RBI-like). Educational paraphrases remain on the prototype detail pages."
+        description="Notification-style listing: Date · Title · Open PDF · Type. Open PDF / title links go to the official RBI notifications index or document in a new tab. Educational paraphrases stay on prototype detail pages."
       />
       <SearchFilter
         query={query}
@@ -89,20 +106,10 @@ export function Circulars() {
           Showing {filtered.length} of {circulars.length}
         </p>
         <div
-          className="flex rounded-md border border-navy/10 dark:border-white/15"
+          className="flex border border-navy/15 dark:border-white/15"
           role="group"
           aria-label="View mode"
         >
-          <button
-            type="button"
-            onClick={() => setView('cards')}
-            className={`inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium ${
-              view === 'cards' ? 'bg-navy text-cream dark:bg-gold dark:text-navy' : 'text-ink-muted'
-            }`}
-            aria-pressed={view === 'cards'}
-          >
-            <LayoutGrid className="h-3.5 w-3.5" /> Cards
-          </button>
           <button
             type="button"
             onClick={() => setView('table')}
@@ -113,10 +120,27 @@ export function Circulars() {
           >
             <Table2 className="h-3.5 w-3.5" /> Table
           </button>
+          <button
+            type="button"
+            onClick={() => setView('cards')}
+            className={`inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium ${
+              view === 'cards' ? 'bg-navy text-cream dark:bg-gold dark:text-navy' : 'text-ink-muted'
+            }`}
+            aria-pressed={view === 'cards'}
+          >
+            <LayoutGrid className="h-3.5 w-3.5" /> Cards
+          </button>
         </div>
       </div>
 
-      {view === 'cards' ? (
+      {view === 'table' ? (
+        <DocumentTable
+          rows={tableRows}
+          dateHeader="Date"
+          groupByCategory={category === 'All'}
+          emptyMessage="No circulars match your filters."
+        />
+      ) : (
         <motion.div
           className="space-y-2"
           variants={reduce ? undefined : stagger}
@@ -127,14 +151,14 @@ export function Circulars() {
             <motion.article
               key={c.slug}
               variants={reduce ? undefined : fadeUp}
-              className="glass-card rounded-xl p-4 transition-colors duration-200 hover:border-gold/35"
+              className="portal-panel p-4 transition-colors duration-150 hover:border-gold/40"
             >
               <div className="flex flex-wrap items-center gap-2">
                 <Badge tone="muted">{c.category}</Badge>
                 <span className="text-xs text-ink-muted dark:text-cream/45">{c.date}</span>
                 <span className="font-mono text-[11px] text-gold-dim">{c.ref}</span>
                 {c.pdfMode === 'index' && (
-                  <span className="rounded border border-navy/10 px-1.5 py-0.5 text-[10px] text-ink-muted dark:border-white/15">
+                  <span className="border border-navy/10 px-1.5 py-0.5 text-[10px] text-ink-muted dark:border-white/15">
                     RBI notifications index
                   </span>
                 )}
@@ -142,7 +166,7 @@ export function Circulars() {
               <h2 className="mt-1.5 text-sm font-semibold text-navy dark:text-cream">
                 <OfficialTitleLink
                   doc={c}
-                  className="underline-offset-2 hover:text-gold-dim hover:underline dark:hover:text-gold"
+                  className="underline-offset-2 hover:text-rbi-blue hover:underline dark:hover:text-gold"
                 >
                   {c.title}
                 </OfficialTitleLink>
@@ -164,56 +188,13 @@ export function Circulars() {
             </motion.article>
           ))}
         </motion.div>
-      ) : (
-        <div className="overflow-x-auto rounded-xl border border-navy/10 dark:border-white/10">
-          <table className="data-table w-full min-w-[820px] text-left text-sm">
-            <thead className="bg-navy/5 dark:bg-white/5">
-              <tr>
-                <th className="px-3 py-2.5">Ref</th>
-                <th className="px-3 py-2.5">Title</th>
-                <th className="px-3 py-2.5">Category</th>
-                <th className="px-3 py-2.5">Date</th>
-                <th className="px-3 py-2.5">Official</th>
-                <th className="px-3 py-2.5">Summary</th>
-              </tr>
-            </thead>
-            <tbody>
-              {filtered.map((c) => (
-                <tr key={c.slug} className="border-t border-navy/5 dark:border-white/5">
-                  <td className="px-3 py-2 font-mono text-xs text-gold-dim">{c.ref}</td>
-                  <td className="px-3 py-2">
-                    <a
-                      href={officialOpenUrl(c)}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="font-medium hover:underline"
-                    >
-                      {c.title}
-                    </a>
-                  </td>
-                  <td className="px-3 py-2 text-ink-muted dark:text-cream/65">{c.category}</td>
-                  <td className="px-3 py-2 tabular-nums text-ink-muted">{c.date}</td>
-                  <td className="px-3 py-2">
-                    <OfficialPdfLink doc={c} variant="inline" />
-                  </td>
-                  <td className="px-3 py-2">
-                    <Link to={`/circulars/${c.slug}`} className="text-xs hover:underline">
-                      Prototype
-                    </Link>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
       )}
 
       {filtered.length === 0 && (
-        <div className="rounded-xl border border-dashed border-navy/20 py-14 text-center">
-          <p className="text-ink-muted">No circulars match your filters.</p>
+        <div className="mt-3 text-center">
           <button
             type="button"
-            className="mt-3 text-sm font-medium text-gold-dim underline dark:text-gold"
+            className="text-sm font-medium text-gold-dim underline dark:text-gold"
             onClick={clearFilters}
           >
             Clear filters

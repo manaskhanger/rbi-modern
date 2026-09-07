@@ -8,10 +8,10 @@ export function Footer() {
       <div className="mx-auto grid max-w-6xl gap-10 px-4 py-12 md:grid-cols-4 md:px-6">
         <div className="md:col-span-2">
           <div className="mb-3 flex items-center gap-2">
-            <span className="flex h-8 w-8 items-center justify-center rounded-md border border-gold/50 bg-navy-light text-[10px] font-bold text-gold">
+            <span className="flex h-8 w-8 items-center justify-center border border-gold/50 bg-navy-light text-[10px] font-bold text-gold">
               KP
             </span>
-            <span className="font-semibold">RBI Knowledge Prototype</span>
+            <span className="font-serif font-semibold">RBI Knowledge Prototype</span>
           </div>
           <p className="max-w-md text-sm leading-relaxed text-cream/70">
             An unofficial educational and UX concept exploring clearer public communication of

@@ -4,18 +4,22 @@
 @custom-variant hc (&:where(.hc, .hc *));
 
 @theme {
-  --color-navy: #0B1D36;
-  --color-navy-light: #132a4a;
-  --color-navy-muted: #1a3558;
+  --color-navy: #002147;
+  --color-navy-light: #003366;
+  --color-navy-muted: #1a4a7a;
+  --color-rbi-blue: #003366;
+  --color-rbi-deep: #002147;
   --color-gold: #C5A572;
   --color-gold-soft: #d4bc94;
   --color-gold-dim: #8a6b38;
   --color-cream: #F7F4EF;
   --color-cream-dark: #ebe6dc;
   --color-surface: #ffffff;
-  --color-ink: #0B1D36;
+  --color-well: #fffcf7;
+  --color-ink: #1a2332;
   --color-ink-muted: #3d4a5c;
   --font-sans: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-serif: "Source Serif 4", "Libre Baskerville", Georgia, "Times New Roman", serif;
 }
 
 html {
@@ -40,6 +44,37 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   line-height: 1.55;
+  background: var(--color-cream);
+}
+
+.font-serif,
+.prose-read {
+  font-family: var(--font-serif);
+}
+
+.prose-read {
+  max-width: 70ch;
+  font-size: 1.0625rem;
+  line-height: 1.7;
+  color: var(--color-ink);
+}
+
+html.dark .prose-read {
+  color: rgba(247, 244, 239, 0.92);
+}
+
+.measure {
+  max-width: 70ch;
+}
+
+.content-well {
+  background: var(--color-well);
+  border: 1px solid rgba(0, 33, 71, 0.1);
+}
+
+html.dark .content-well {
+  background: rgba(0, 33, 71, 0.35);
+  border-color: rgba(247, 244, 239, 0.1);
 }
 
 /* Focus visible everywhere — gold ring with navy fallback for contrast */
@@ -68,7 +103,7 @@ body {
   top: 0;
   z-index: 100;
   padding: 0.75rem 1rem;
-  background: #0B1D36;
+  background: #002147;
   color: #F7F4EF;
   font-size: 0.875rem;
   font-weight: 600;
@@ -83,56 +118,261 @@ body {
 }
 
 .glass {
-  background: rgba(255, 255, 255, 0.88);
-  backdrop-filter: blur(12px) saturate(140%);
-  -webkit-backdrop-filter: blur(12px) saturate(140%);
-  border-bottom: 1px solid rgba(11, 29, 54, 0.1);
+  background: #ffffff;
+  border-bottom: 1px solid rgba(0, 33, 71, 0.14);
+  box-shadow: 0 1px 0 rgba(0, 33, 71, 0.04);
 }
 
 .dark .glass {
-  background: rgba(11, 29, 54, 0.92);
-  border-bottom: 1px solid rgba(197, 165, 114, 0.14);
+  background: #002147;
+  border-bottom: 1px solid rgba(197, 165, 114, 0.18);
+  box-shadow: none;
 }
 
 .glass-card {
-  background: rgba(255, 255, 255, 0.92);
-  backdrop-filter: blur(8px);
-  border: 1px solid rgba(11, 29, 54, 0.08);
+  background: #ffffff;
+  border: 1px solid rgba(0, 33, 71, 0.12);
+  box-shadow: none;
 }
 
 .dark .glass-card {
-  background: rgba(19, 42, 74, 0.75);
-  border: 1px solid rgba(197, 165, 114, 0.12);
+  background: rgba(0, 51, 102, 0.45);
+  border: 1px solid rgba(197, 165, 114, 0.14);
 }
 
 .proto-strip {
-  background: #0B1D36;
+  background: #001a33;
   color: rgba(247, 244, 239, 0.94);
   font-size: 0.6875rem;
   letter-spacing: 0.04em;
   line-height: 1.4;
+  border-bottom: 1px solid rgba(197, 165, 114, 0.28);
 }
 
 .dark .proto-strip {
-  background: #061224;
-  border-bottom: 1px solid rgba(197, 165, 114, 0.2);
+  background: #000d1a;
+  border-bottom: 1px solid rgba(197, 165, 114, 0.22);
+}
+
+.masthead {
+  background: #003366;
+  color: #F7F4EF;
+  border-bottom: 3px solid #C5A572;
+}
+
+html.dark .masthead {
+  background: #002147;
+  border-bottom-color: #C5A572;
+}
+
+.section-rule {
+  border-top: 1px solid rgba(0, 33, 71, 0.14);
+}
+
+html.dark .section-rule {
+  border-top-color: rgba(247, 244, 239, 0.12);
+}
+
+.portal-panel {
+  background: #ffffff;
+  border: 1px solid rgba(0, 33, 71, 0.14);
+}
+
+html.dark .portal-panel {
+  background: rgba(0, 33, 71, 0.4);
+  border-color: rgba(247, 244, 239, 0.12);
+}
+
+.portal-panel-head {
+  background: #003366;
+  color: #F7F4EF;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  padding: 0.55rem 0.85rem;
+  border-bottom: 2px solid #C5A572;
+}
+
+html.dark .portal-panel-head {
+  background: #001a33;
+}
+
+.rates-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.8125rem;
+}
+
+.rates-table th,
+.rates-table td {
+  padding: 0.45rem 0.75rem;
+  border-bottom: 1px solid rgba(0, 33, 71, 0.1);
+  text-align: left;
+}
+
+.rates-table th {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: #3d4a5c;
+  background: #f3efe6;
+}
+
+.rates-table td:last-child,
+.rates-table th:last-child {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
+}
+
+.rates-table tr:nth-child(even) td {
+  background: rgba(0, 51, 102, 0.03);
+}
+
+html.dark .rates-table th {
+  background: rgba(0, 26, 51, 0.8);
+  color: rgba(247, 244, 239, 0.78);
+}
+
+html.dark .rates-table th,
+html.dark .rates-table td {
+  border-bottom-color: rgba(247, 244, 239, 0.1);
+}
+
+html.dark .rates-table tr:nth-child(even) td {
+  background: rgba(247, 244, 239, 0.04);
+}
+
+.whats-new-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.whats-new-list li {
+  display: grid;
+  grid-template-columns: 5.75rem 1fr auto;
+  gap: 0.75rem;
+  align-items: start;
+  padding: 0.65rem 0.85rem;
+  border-bottom: 1px solid rgba(0, 33, 71, 0.08);
+  font-size: 0.8125rem;
+}
+
+.whats-new-list li:nth-child(even) {
+  background: rgba(0, 51, 102, 0.03);
+}
+
+html.dark .whats-new-list li {
+  border-bottom-color: rgba(247, 244, 239, 0.08);
+}
+
+html.dark .whats-new-list li:nth-child(even) {
+  background: rgba(247, 244, 239, 0.03);
+}
+
+.doc-table {
+  border-collapse: collapse;
+}
+
+.doc-table thead th {
+  background: #003366;
+  color: #F7F4EF;
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  padding: 0.6rem 0.75rem;
+  border-bottom: 2px solid #C5A572;
+}
+
+html.dark .doc-table thead th {
+  background: #001a33;
+}
+
+.doc-table tbody td {
+  padding: 0.55rem 0.75rem;
+  border-bottom: 1px solid rgba(0, 33, 71, 0.08);
+  vertical-align: top;
+}
+
+.doc-table tbody tr:nth-child(even) td {
+  background: rgba(0, 51, 102, 0.035);
+}
+
+html.dark .doc-table tbody td {
+  border-bottom-color: rgba(247, 244, 239, 0.08);
+}
+
+html.dark .doc-table tbody tr:nth-child(even) td {
+  background: rgba(247, 244, 239, 0.035);
+}
+
+.doc-table-cat td {
+  background: #ebe6dc !important;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #002147;
+  padding: 0.45rem 0.75rem !important;
+}
+
+html.dark .doc-table-cat td {
+  background: rgba(197, 165, 114, 0.15) !important;
+  color: #F7F4EF;
+}
+
+.function-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+  padding: 1rem;
+  background: #ffffff;
+  border: 1px solid rgba(0, 33, 71, 0.12);
+  border-top: 3px solid #003366;
+  transition: border-color 0.15s ease, background 0.15s ease;
+  text-decoration: none;
+  color: inherit;
+  height: 100%;
+}
+
+.function-card:hover {
+  border-color: #C5A572;
+  background: #fffcf7;
+}
+
+html.dark .function-card {
+  background: rgba(0, 33, 71, 0.4);
+  border-color: rgba(247, 244, 239, 0.12);
+  border-top-color: #C5A572;
+}
+
+html.dark .function-card:hover {
+  background: rgba(0, 51, 102, 0.55);
+}
+
+.function-card .art {
+  color: #003366;
+}
+
+html.dark .function-card .art {
+  color: #d4bc94;
 }
 
 /* breadcrumb top set with live-ticker below */
 .breadcrumb-bar {
-  top: 5.9rem; /* under sticky header + live ticker */
+  top: 7.2rem; /* under utility + masthead + live ticker */
 }
 
 @media (min-width: 1280px) {
   .breadcrumb-bar {
-    top: 6.1rem;
+    top: 7.4rem;
   }
 }
 
-
 /*
- * Gold-on-navy contrast: #C5A572 on #0B1D36 is ~5.2:1 (AA large only).
- * Prefer brighter gold for small text on navy surfaces.
+ * Gold-on-navy contrast: prefer brighter gold for small text on navy surfaces.
  */
 .text-gold-on-navy,
 footer .text-gold,
@@ -187,10 +427,10 @@ html.dark {
 
 :root {
   --chart-tick: #3d4a5c;
-  --chart-legend: #0B1D36;
+  --chart-legend: #002147;
   --chart-grid: rgba(128, 128, 128, 0.2);
-  --chart-series-navy: #0B1D36;
-  --chart-series-navy-alt: #1a3558;
+  --chart-series-navy: #002147;
+  --chart-series-navy-alt: #003366;
 }
 
 /* Sitewide: raise low-opacity cream utilities on dark navy surfaces */
@@ -268,12 +508,12 @@ html.dark thead th {
 
 /* Live updates ticker */
 .live-ticker {
-  background: #0B1D36;
+  background: #002147;
   color: rgba(247, 244, 239, 0.92);
   border-bottom: 1px solid rgba(197, 165, 114, 0.22);
 }
 html.dark .live-ticker {
-  background: #061224;
+  background: #001a33;
   border-bottom-color: rgba(197, 165, 114, 0.28);
 }
 .live-ticker-track {
@@ -305,11 +545,11 @@ html.dark .live-ticker {
 }
 
 .breadcrumb-bar {
-  top: 5.9rem; /* under sticky header + live ticker */
+  top: 7.2rem;
 }
 @media (min-width: 1280px) {
   .breadcrumb-bar {
-    top: 6.1rem;
+    top: 7.4rem;
   }
 }
 
@@ -341,7 +581,7 @@ html.hc .glass {
 }
 
 html.hc.dark .glass {
-  background: #0B1D36;
+  background: #002147;
   border-bottom: 2px solid #f0d9a0;
 }
 

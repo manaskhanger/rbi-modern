@@ -42,7 +42,7 @@ export function OfficialPdfLink({
     return (
       <a
         {...baseProps}
-        className={`inline-flex items-center gap-2 rounded-md bg-navy px-5 py-2.5 text-sm font-semibold text-cream transition hover:bg-navy-light dark:bg-gold dark:text-navy dark:hover:bg-gold-soft ${className}`}
+        className={`inline-flex items-center gap-2 bg-navy px-5 py-2.5 text-sm font-semibold text-cream transition hover:bg-navy-light dark:bg-gold dark:text-navy dark:hover:bg-gold-soft ${className}`}
       >
         <FileText className="h-4 w-4" aria-hidden />
         {label}
@@ -67,7 +67,7 @@ export function OfficialPdfLink({
   return (
     <a
       {...baseProps}
-      className={`inline-flex items-center gap-1.5 rounded-md border border-navy/15 bg-white/90 px-3 py-1.5 text-xs font-semibold text-navy transition hover:border-gold/50 hover:bg-gold/10 dark:border-white/20 dark:bg-navy-light/50 dark:text-cream dark:hover:border-gold/40 ${className}`}
+      className={`inline-flex items-center gap-1.5 border border-navy/20 bg-white px-3 py-1.5 text-xs font-semibold text-navy transition hover:border-gold/50 hover:bg-gold/10 dark:border-white/20 dark:bg-navy-light/50 dark:text-cream dark:hover:border-gold/40 ${className}`}
       onClick={(e) => {
         e.stopPropagation()
         onClick?.(e)

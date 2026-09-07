@@ -1,307 +1,465 @@
 import { Link } from 'react-router-dom'
-import { motion, useReducedMotion } from 'framer-motion'
-import { ArrowRight, Compass, Landmark, Scale, Smartphone, Shield, Info } from 'lucide-react'
-import { newsItems } from '../data/news'
-import { Reveal } from '../components/Reveal'
-import { CardLink } from '../components/Card'
-import { Badge } from '../components/Badge'
+import { ExternalLink, FileText, ArrowRight, Compass } from 'lucide-react'
+import { liveFeedItems } from '../data/liveFeed'
+import { keyRates, keyRatesAsOf } from '../data/rates'
+import { mastersDirections } from '../data/mastersDirections'
+import { circulars } from '../data/circulars'
+import { RBI_SECTIONS, RBI_HOME } from '../data/meta'
 import { DisclaimerBanner } from '../components/DisclaimerBanner'
-import { KeyRatesStrip } from '../components/KeyRatesStrip'
 import { TourPrompt } from '../components/TourPrompt'
 import { PersonaCards } from '../components/PersonaCards'
-import { fadeUp, stagger } from '../lib/motion'
-import { TOUR_DURATION_LABEL } from '../data/tour'
 import { InteractiveSiteMap } from '../components/InteractiveSiteMap'
+import { DocumentTable, type DocTableRow } from '../components/DocumentTable'
+import { TOUR_DURATION_LABEL } from '../data/tour'
+import {
+  ArtCurrency,
+  ArtMonetaryPolicy,
+  ArtPayments,
+  ArtRegulation,
+  ArtSupervision,
+  ArtFema,
+  ArtMarkets,
+  ArtStability,
+} from '../components/illustrations/InstitutionalArt'
 
-const pillars = [
+const functions = [
   {
-    icon: Scale,
-    title: 'Monetary policy',
-    text: 'Operates flexible inflation targeting through the Monetary Policy Committee, signalling the policy repo rate to anchor inflation expectations while supporting growth.',
+    title: 'Monetary Policy',
+    hi: 'मौद्रिक नीति',
+    text: 'Flexible inflation targeting, the Monetary Policy Committee, and the policy repo corridor — educational framing.',
+    to: '/monetary-policy',
+    Art: ArtMonetaryPolicy,
   },
   {
-    icon: Landmark,
-    title: 'Regulation & supervision',
-    text: 'Licenses and supervises banks, NBFCs and other regulated entities under prudential and conduct frameworks that protect depositors and market integrity.',
+    title: 'Currency',
+    hi: 'मुद्रा',
+    text: 'Note issue, distribution and clean-note practices explained for learners — not an operational desk.',
+    to: '/learn',
+    Art: ArtCurrency,
   },
   {
-    icon: Smartphone,
-    title: 'Payment systems',
-    text: 'Authorises and oversees payment and settlement systems so retail and wholesale transfers remain safe, efficient and interoperable.',
+    title: 'Payments',
+    hi: 'भुगतान',
+    text: 'Authorisation and oversight of payment and settlement systems; links into circulars and learn paths.',
+    to: '/circulars?audience=PSPs',
+    Art: ArtPayments,
   },
   {
-    icon: Shield,
-    title: 'Financial stability & reserves',
-    text: 'Monitors systemic risk, issues currency, and manages foreign exchange reserves as an external buffer for the economy.',
+    title: 'Regulation',
+    hi: 'विनियमन',
+    text: 'Masters Directions and prudential themes for banks, NBFCs and other regulated entities.',
+    to: '/masters-directions',
+    Art: ArtRegulation,
+  },
+  {
+    title: 'Supervision',
+    hi: 'पर्यवेक्षण',
+    text: 'How supervisory expectations are communicated in this prototype’s document library.',
+    to: '/masters-directions?audience=Banks',
+    Art: ArtSupervision,
+  },
+  {
+    title: 'FEMA / Forex',
+    hi: 'विदेशी मुद्रा',
+    text: 'Foreign exchange administration themes and related educational circulars.',
+    to: '/circulars',
+    Art: ArtFema,
+  },
+  {
+    title: 'Financial Markets',
+    hi: 'वित्तीय बाज़ार',
+    text: 'Money, gilt and related market communication patterns — illustrative only.',
+    to: '/data',
+    Art: ArtMarkets,
+  },
+  {
+    title: 'Financial Stability',
+    hi: 'वित्तीय स्थिरता',
+    text: 'Systemic-risk framing and sample reports for classroom and UX review.',
+    to: '/reports',
+    Art: ArtStability,
   },
 ]
 
+function formatDate(iso: string) {
+  const [y, m, d] = iso.split('-')
+  if (!y || !m || !d) return iso
+  return `${d}-${m}-${y}`
+}
+
 export function Home() {
-  const reduce = useReducedMotion()
-  const featured = newsItems.filter((n) => n.featured).slice(0, 3)
+  const whatsNew = liveFeedItems.slice(0, 12)
+  const mdRows: DocTableRow[] = mastersDirections.slice(0, 6).map((d) => ({
+    id: d.slug,
+    date: d.updated || d.issued,
+    title: d.title,
+    category: d.category,
+    meta: d.code,
+    officialPdfUrl: d.officialPdfUrl,
+    officialHtmlUrl: d.officialHtmlUrl,
+    pdfMode: d.pdfMode,
+    summaryPath: `/masters-directions/${d.slug}`,
+    summaryLabel: 'Summary',
+  }))
+  const circRows: DocTableRow[] = circulars.slice(0, 6).map((c) => ({
+    id: c.slug,
+    date: c.date,
+    title: c.title,
+    category: c.category,
+    meta: c.ref,
+    officialPdfUrl: c.officialPdfUrl,
+    officialHtmlUrl: c.officialHtmlUrl,
+    pdfMode: c.pdfMode,
+    summaryPath: `/circulars/${c.slug}`,
+    summaryLabel: 'Summary',
+  }))
+
+  const policy = RBI_SECTIONS.policyRates
 
   return (
-    <div>
-      <section className="relative overflow-hidden border-b border-navy/8 dark:border-white/10">
-        <motion.div
-          aria-hidden
-          className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_rgba(197,165,114,0.14),_transparent_55%)]"
-          initial={reduce ? false : { opacity: 0.7, y: -12 }}
-          animate={reduce ? undefined : { opacity: 1, y: 0 }}
-          transition={{ duration: 1.1, ease: [0.22, 1, 0.36, 1] }}
-        />
-        <div className="mx-auto max-w-6xl px-4 pb-14 pt-12 md:px-6 md:pb-20 md:pt-16">
-          <motion.div
-            variants={reduce ? undefined : stagger}
-            initial={reduce ? undefined : 'hidden'}
-            animate={reduce ? undefined : 'visible'}
-            className="max-w-3xl"
-          >
-            <motion.div variants={reduce ? undefined : fadeUp}>
-              <Badge>Unofficial educational / UX prototype</Badge>
-            </motion.div>
-            <motion.h1
-              variants={reduce ? undefined : fadeUp}
-              className="mt-5 text-3xl font-bold tracking-tight text-navy dark:text-cream md:text-5xl md:leading-[1.12]"
+    <div className="bg-cream dark:bg-navy">
+      {/* Masthead welcome */}
+      <section className="masthead">
+        <div className="mx-auto max-w-6xl px-4 py-6 md:px-6 md:py-8">
+          <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-gold-soft">
+            Knowledge Prototype · Unofficial modernisation of public RBI web patterns
+            <span lang="hi" className="ml-2 font-medium normal-case tracking-normal opacity-85">
+              ज्ञान प्रोटोटाइप · अनौपचारिक
+            </span>
+          </p>
+          <h1 className="font-serif mt-2 text-2xl font-semibold tracking-tight text-cream md:text-3xl">
+            Welcome
+            <span lang="hi" className="ml-2 text-xl font-normal text-cream/80 md:text-2xl">
+              / स्वागत है
+            </span>
+          </h1>
+          <p className="mt-1 max-w-3xl text-sm text-cream/80 md:text-[15px]">
+            An educational portal prototype exploring how India’s central bank public information
+            might be organised for reading — denser lists, clearer rates panels, and function-wise
+            directories. Not affiliated with the Reserve Bank of India.
+          </p>
+          <div className="mt-4 flex flex-wrap gap-2">
+            <Link
+              to="/tour"
+              className="inline-flex items-center gap-1.5 border border-gold/50 bg-gold/15 px-3 py-1.5 text-xs font-semibold text-gold-soft transition hover:bg-gold/25"
             >
-              Clearer public communication of India’s central bank — as a concept prototype.
-              <span
-                lang="hi"
-                className="mt-2 block text-lg font-semibold tracking-normal text-ink-muted dark:text-cream/65 md:text-2xl md:leading-snug"
-              >
-                भारत के केंद्रीय बैंक का स्पष्ट सार्वजनिक संचार — एक अवधारणा प्रोटोटाइप।
-              </span>
-            </motion.h1>
-            <motion.p
-              variants={reduce ? undefined : fadeUp}
-              className="mt-5 text-base leading-relaxed text-ink-muted dark:text-cream/70 md:text-lg"
-            >
-              The Reserve Bank of India is the nation’s monetary authority and the principal
-              regulator of banks and payment systems. Its public mandate spans price stability,
-              financial system soundness, currency issue, and the orderly development of markets.
-            </motion.p>
-            <motion.p
-              variants={reduce ? undefined : fadeUp}
-              className="mt-4 text-base leading-relaxed text-ink-muted dark:text-cream/70 md:text-lg"
-            >
-              <strong className="font-semibold text-navy dark:text-cream">Why this prototype
-              exists:</strong>{' '}
-              to explore how Masters Directions, circulars, reports and data might be presented with
-              denser, more navigable information architecture for officers, students and serious
-              stakeholders — without impersonating the official website.
-            </motion.p>
-            <motion.div variants={reduce ? undefined : fadeUp} className="mt-8 flex flex-wrap gap-3">
-              <Link
-                to="/tour"
-                className="inline-flex items-center gap-2 rounded-md bg-navy px-5 py-2.5 text-sm font-semibold text-cream transition hover:bg-navy-light dark:bg-gold dark:text-navy dark:hover:bg-gold-soft"
-              >
-                <Compass className="h-4 w-4" aria-hidden /> Start here · Guided tour
-              </Link>
-              <Link
-                to="/about"
-                className="inline-flex items-center gap-2 rounded-md border border-navy/15 bg-white/80 px-5 py-2.5 text-sm font-semibold text-navy transition hover:bg-white dark:border-white/20 dark:bg-white/5 dark:text-cream"
-              >
-                Mandate &amp; organisation <ArrowRight className="h-4 w-4" />
-              </Link>
-              <Link
-                to="/masters-directions"
-                className="inline-flex items-center gap-2 rounded-md border border-navy/15 bg-white/80 px-5 py-2.5 text-sm font-semibold text-navy transition hover:bg-white dark:border-white/20 dark:bg-white/5 dark:text-cream"
-              >
-                Masters Directions
-              </Link>
-            </motion.div>
-          </motion.div>
-
-          <motion.div
-            variants={reduce ? undefined : fadeUp}
-            initial={reduce ? undefined : 'hidden'}
-            animate={reduce ? undefined : 'visible'}
-            className="mt-10 max-w-3xl"
-          >
+              <Compass className="h-3.5 w-3.5" aria-hidden /> Guided tour ({TOUR_DURATION_LABEL})
+            </Link>
             <Link
               to="/about/prototype"
-              className="group flex gap-3 rounded-xl border border-gold/40 bg-gold/10 p-4 transition hover:border-gold/60 hover:bg-gold/15 dark:border-gold/30"
+              className="inline-flex items-center gap-1.5 border border-cream/25 px-3 py-1.5 text-xs font-semibold text-cream/90 transition hover:bg-white/10"
             >
-              <Info
-                className="mt-0.5 h-5 w-5 shrink-0 text-gold-dim dark:text-gold"
-                aria-hidden
-              />
-              <div className="min-w-0">
-                <p className="text-sm font-semibold text-navy dark:text-cream">
-                  What this prototype is / isn’t
-                </p>
-                <p className="mt-1 text-sm text-ink-muted dark:text-cream/65">
-                  Educational UX concept · not affiliated with RBI · illustrative data · always
-                  defer to rbi.org.in for official text.
-                </p>
-                <span className="mt-2 inline-flex items-center gap-1 text-sm font-medium text-gold-dim group-hover:underline dark:text-gold">
-                  About this prototype <ArrowRight className="h-3.5 w-3.5" />
-                </span>
-              </div>
+              What this is / isn’t
             </Link>
-          </motion.div>
+            <a
+              href={RBI_HOME}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 border border-cream/25 px-3 py-1.5 text-xs font-semibold text-cream/90 transition hover:bg-white/10"
+            >
+              Official rbi.org.in <ExternalLink className="h-3 w-3" aria-hidden />
+            </a>
+          </div>
+        </div>
+      </section>
 
-          <motion.div
-            variants={reduce ? undefined : fadeUp}
-            initial={reduce ? undefined : 'hidden'}
-            animate={reduce ? undefined : 'visible'}
-            className="mt-4 max-w-3xl"
+      <div className="mx-auto max-w-6xl px-4 py-6 md:px-6 md:py-8">
+        {/* Preamble */}
+        <section
+          className="content-well px-5 py-5 md:px-7 md:py-6"
+          aria-labelledby="preamble-heading"
+        >
+          <h2
+            id="preamble-heading"
+            className="font-serif text-lg font-semibold text-navy dark:text-cream md:text-xl"
           >
+            Preamble
+            <span lang="hi" className="bilingual-hi mt-0.5 text-sm font-medium">
+              प्रस्तावना
+            </span>
+          </h2>
+          <div className="prose-read mt-3 text-[15px] text-ink dark:text-cream/90">
+            <p>
+              India’s central bank is charged with securing monetary stability, regulating and
+              supervising the banking system, issuing currency, overseeing payment systems, and
+              fostering the orderly development of financial markets. Its public communications —
+              circulars, Masters Directions, policy statements and statistical releases — are a
+              primary interface with banks, markets and citizens.
+            </p>
+            <p className="mt-3">
+              This site is an <strong>unofficial educational prototype</strong>. It paraphrases
+              institutional roles in original language, uses clearly labelled illustrative figures,
+              and links outbound to official RBI PDFs and pages. It does not reproduce copyrighted
+              RBI preamble text, seals or logos, and must never be treated as an authoritative
+              source.
+            </p>
+          </div>
+          <div className="mt-4">
             <TourPrompt />
-          </motion.div>
+          </div>
+        </section>
+
+        {/* Current Rates | What's New */}
+        <div className="mt-6 grid gap-5 lg:grid-cols-2">
+          <section className="portal-panel" aria-labelledby="rates-heading">
+            <div className="portal-panel-head flex flex-wrap items-center justify-between gap-2">
+              <h2 id="rates-heading">
+                Current Rates
+                <span lang="hi" className="ml-2 text-[11px] font-normal opacity-80">
+                  वर्तमान दरें
+                </span>
+              </h2>
+              <span className="text-[10px] font-medium uppercase tracking-wider text-gold-soft">
+                Illustrative sample · {keyRatesAsOf}
+              </span>
+            </div>
+            <div className="p-0">
+              <table className="rates-table">
+                <thead>
+                  <tr>
+                    <th scope="col">Instrument / ratio</th>
+                    <th scope="col">Rate</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {keyRates.map((r) => (
+                    <tr key={r.label}>
+                      <td>
+                        {r.label}
+                        <span className="mt-0.5 block text-[10px] font-normal text-ink-muted dark:text-cream/55">
+                          Sample · not live official extract
+                        </span>
+                      </td>
+                      <td className="text-navy dark:text-cream">{r.value}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+              <p className="border-t border-navy/10 px-3 py-2.5 text-[11px] leading-snug text-ink-muted dark:border-white/10 dark:text-cream/65">
+                Figures above are for layout and teaching only. Confirm live policy rates on{' '}
+                <a
+                  href={policy.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="font-medium text-gold-dim underline-offset-2 hover:underline dark:text-gold"
+                >
+                  rbi.org.in
+                  <ExternalLink className="ml-0.5 inline h-3 w-3" aria-hidden />
+                </a>
+                .
+              </p>
+            </div>
+          </section>
+
+          <section className="portal-panel" aria-labelledby="whats-new-heading">
+            <div className="portal-panel-head flex flex-wrap items-center justify-between gap-2">
+              <h2 id="whats-new-heading">
+                What’s New
+                <span lang="hi" className="ml-2 text-[11px] font-normal opacity-80">
+                  क्या नया है
+                </span>
+              </h2>
+              <Link
+                to="/news"
+                className="text-[10px] font-semibold uppercase tracking-wider text-gold-soft hover:underline"
+              >
+                View all
+              </Link>
+            </div>
+            <ol className="whats-new-list max-h-[22rem] overflow-y-auto">
+              {whatsNew.map((item) => (
+                <li key={item.id}>
+                  <time dateTime={item.date} className="tabular-nums text-ink-muted dark:text-cream/60">
+                    {formatDate(item.date)}
+                  </time>
+                  <div className="min-w-0">
+                    <span className="mr-1.5 inline-block rounded border border-navy/15 px-1 py-px text-[9px] font-bold uppercase tracking-wide text-ink-muted dark:border-white/20 dark:text-cream/70">
+                      {item.kind}
+                    </span>
+                    <Link
+                      to={item.to}
+                      className="font-medium text-navy hover:underline dark:text-cream"
+                    >
+                      {item.title}
+                    </Link>
+                  </div>
+                  {item.pdfUrl ? (
+                    <a
+                      href={item.pdfUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-0.5 text-[10px] font-semibold text-gold-dim hover:underline dark:text-gold"
+                      title="Open official document"
+                    >
+                      <FileText className="h-3 w-3" aria-hidden />
+                      PDF
+                    </a>
+                  ) : (
+                    <span className="text-[10px] text-ink-muted/50">—</span>
+                  )}
+                </li>
+              ))}
+            </ol>
+          </section>
         </div>
-      </section>
 
-      <KeyRatesStrip />
+        {/* Function-wise directory */}
+        <section className="mt-8" aria-labelledby="functions-heading">
+          <div className="mb-4 flex flex-wrap items-end justify-between gap-3 border-b border-navy/15 pb-2 dark:border-white/15">
+            <div>
+              <h2
+                id="functions-heading"
+                className="font-serif text-xl font-semibold text-navy dark:text-cream"
+              >
+                Function-wise directory
+                <span lang="hi" className="bilingual-hi mt-0.5 text-sm font-medium">
+                  कार्य-वार निर्देशिका
+                </span>
+              </h2>
+              <p className="mt-1 max-w-2xl text-sm text-ink-muted dark:text-cream/65">
+                Serious cards into this prototype’s routes — inspired by public function groupings,
+                not a statutory schedule.
+              </p>
+            </div>
+            <Link
+              to="/learn"
+              className="text-xs font-semibold text-gold-dim hover:underline dark:text-gold"
+            >
+              Learn hub <ArrowRight className="inline h-3 w-3" />
+            </Link>
+          </div>
+          <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+            {functions.map((f) => (
+              <Link key={f.title} to={f.to} className="function-card group">
+                <f.Art className="art h-12 w-12" />
+                <div>
+                  <h3 className="text-sm font-semibold text-navy group-hover:text-rbi-blue dark:text-cream">
+                    {f.title}
+                  </h3>
+                  <span lang="hi" className="bilingual-hi text-[11px]">
+                    {f.hi}
+                  </span>
+                  <p className="mt-1.5 text-xs leading-relaxed text-ink-muted dark:text-cream/65">
+                    {f.text}
+                  </p>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </section>
 
-      <section className="mx-auto max-w-6xl px-4 py-14 md:px-6 md:py-16">
-        <Reveal>
-          <h2 className="text-2xl font-bold text-navy dark:text-cream md:text-[1.75rem]">
-            Core public functions
-            <span lang="hi" className="bilingual-hi mt-1 text-base font-semibold normal-case tracking-normal text-ink-muted dark:text-cream/60">
-              मुख्य सार्वजनिक कार्य
+        {/* Master Directions quick table */}
+        <section className="mt-10" aria-labelledby="md-home-heading">
+          <div className="mb-3 flex flex-wrap items-end justify-between gap-2">
+            <h2
+              id="md-home-heading"
+              className="font-serif text-xl font-semibold text-navy dark:text-cream"
+            >
+              Masters Directions
+              <span lang="hi" className="bilingual-hi mt-0.5 text-sm font-medium">
+                मास्टर निर्देश
+              </span>
+            </h2>
+            <Link
+              to="/masters-directions"
+              className="text-xs font-semibold text-gold-dim hover:underline dark:text-gold"
+            >
+              Full catalogue →
+            </Link>
+          </div>
+          <p className="mb-3 text-xs text-ink-muted dark:text-cream/60">
+            Date · Title · Open PDF (official outbound) · Type — educational summaries stay on this
+            site.
+          </p>
+          <DocumentTable rows={mdRows} dateHeader="Updated" />
+        </section>
+
+        {/* Circulars quick table */}
+        <section className="mt-8" aria-labelledby="circ-home-heading">
+          <div className="mb-3 flex flex-wrap items-end justify-between gap-2">
+            <h2
+              id="circ-home-heading"
+              className="font-serif text-xl font-semibold text-navy dark:text-cream"
+            >
+              Circulars / Notifications
+              <span lang="hi" className="bilingual-hi mt-0.5 text-sm font-medium">
+                परिपत्र
+              </span>
+            </h2>
+            <Link
+              to="/circulars"
+              className="text-xs font-semibold text-gold-dim hover:underline dark:text-gold"
+            >
+              All circulars →
+            </Link>
+          </div>
+          <DocumentTable rows={circRows} dateHeader="Date" />
+        </section>
+
+        {/* Map + personas — kept, denser */}
+        <section className="mt-10" aria-labelledby="home-map">
+          <h2 id="home-map" className="font-serif text-xl font-semibold text-navy dark:text-cream">
+            Explore the information map
+            <span lang="hi" className="bilingual-hi mt-0.5 text-sm font-medium">
+              सूचना मानचित्र
             </span>
           </h2>
-          <p className="mt-2 max-w-2xl text-sm text-ink-muted dark:text-cream/65 md:text-base">
-            High-level framing for educational use — not a statutory schedule.
+          <p className="mt-1 mb-4 max-w-2xl text-sm text-ink-muted dark:text-cream/65">
+            Clickable architecture of this prototype — every node is a real route.
           </p>
-        </Reveal>
-        <div className="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-          {pillars.map((p, i) => (
-            <Reveal key={p.title} delay={i * 0.04}>
-              <div className="glass-card h-full rounded-xl p-5">
-                <p.icon className="h-6 w-6 text-gold-dim dark:text-gold" aria-hidden />
-                <h3 className="mt-3 text-sm font-semibold text-navy dark:text-cream">{p.title}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-ink-muted dark:text-cream/65">
-                  {p.text}
-                </p>
-              </div>
-            </Reveal>
-          ))}
-        </div>
-      </section>
-
-
-
-      <section className="mx-auto max-w-6xl px-4 pb-4 md:px-6" aria-labelledby="home-map">
-        <Reveal>
-          <h2 id="home-map" className="text-2xl font-bold text-navy dark:text-cream md:text-[1.75rem]">
-            Explore the map
-            <span lang="hi" className="bilingual-hi mt-1 text-base font-semibold normal-case tracking-normal text-ink-muted dark:text-cream/60">
-              मानचित्र देखें
-            </span>
-          </h2>
-          <p className="mt-2 max-w-2xl text-sm text-ink-muted dark:text-cream/65 md:text-base">
-            Animated, clickable information architecture — every node links to a real page in this prototype.
-          </p>
-        </Reveal>
-        <div className="mt-6">
           <InteractiveSiteMap teaser />
-        </div>
-      </section>
+        </section>
 
-      <section className="mx-auto max-w-6xl px-4 py-14 md:px-6 md:py-16" aria-labelledby="personas-heading">
-        <Reveal>
-          <h2 id="personas-heading" className="text-2xl font-bold text-navy dark:text-cream md:text-[1.75rem]">
+        <section className="mt-10" aria-labelledby="personas-heading">
+          <h2
+            id="personas-heading"
+            className="font-serif text-xl font-semibold text-navy dark:text-cream"
+          >
             Start with a persona
-            <span lang="hi" className="bilingual-hi mt-1 text-base font-semibold normal-case tracking-normal text-ink-muted dark:text-cream/60">
+            <span lang="hi" className="bilingual-hi mt-0.5 text-sm font-medium">
               व्यक्तित्व से शुरू करें
             </span>
           </h2>
-          <p className="mt-2 max-w-2xl text-sm text-ink-muted dark:text-cream/65 md:text-base">
-            Three short prescribed paths for demos — banker, student, or journalist. Deep-links into
-            filtered catalogues and sample-mode data. Unofficial educational framing throughout.
+          <p className="mt-1 mb-5 max-w-2xl text-sm text-ink-muted dark:text-cream/65">
+            Prescribed paths for banker, student or journalist demos.
           </p>
-        </Reveal>
-        <div className="mt-8">
           <PersonaCards />
-        </div>
-        <p className="mt-4 text-sm text-ink-muted dark:text-cream/55">
-          Or take the{' '}
-          <Link to="/tour" className="font-medium text-gold-dim hover:underline dark:text-gold">
-            guided tour ({TOUR_DURATION_LABEL})
-          </Link>
-          .
-        </p>
-      </section>
+        </section>
 
-      <section className="bg-white/60 dark:bg-navy-light/25">
-        <div className="mx-auto max-w-6xl px-4 py-14 md:px-6">
-          <div className="mb-6 flex items-end justify-between gap-4">
-            <Reveal>
-              <h2 className="text-2xl font-bold text-navy dark:text-cream md:text-[1.75rem]">
-                Sample updates
-                <span lang="hi" className="bilingual-hi mt-1 text-base font-semibold normal-case tracking-normal text-ink-muted dark:text-cream/60">
-                  नमूना अपडेट
-                </span>
-              </h2>
-              <p className="mt-1 text-sm text-ink-muted dark:text-cream/55">
-                Illustrative press-style cards for navigation testing.
-              </p>
-            </Reveal>
-            <Link
-              to="/news"
-              className="text-sm font-medium text-gold-dim hover:underline dark:text-gold"
-            >
-              All news
-            </Link>
-          </div>
-          <div className="grid gap-3 md:grid-cols-3">
-            {featured.map((n) => (
-              <CardLink key={n.slug} to={`/news/${n.slug}`} className="!rounded-xl !p-4">
-                <Badge tone="muted">{n.category}</Badge>
-                <h3 className="mt-2 text-sm font-semibold text-navy group-hover:text-gold-dim dark:text-cream dark:group-hover:text-gold">
-                  {n.title}
-                </h3>
-                <p className="mt-2 line-clamp-3 text-sm text-ink-muted dark:text-cream/60">
-                  {n.excerpt}
-                </p>
-                <p className="mt-3 text-xs text-ink-muted/80 dark:text-cream/45">{n.date}</p>
-              </CardLink>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="mx-auto max-w-6xl px-4 py-14 md:px-6">
-        <Reveal>
-          <div className="overflow-hidden rounded-2xl bg-navy p-8 text-cream md:flex md:items-center md:justify-between md:p-10">
+        <section className="mt-10 portal-panel overflow-hidden">
+          <div className="flex flex-col gap-4 bg-navy px-5 py-6 text-cream md:flex-row md:items-center md:justify-between md:px-7">
             <div className="max-w-xl">
-              <p className="text-xs font-semibold uppercase tracking-widest text-gold-on-navy">
-                Organisation
-                <span lang="hi" className="ml-1.5 font-medium normal-case tracking-normal opacity-80">संगठन</span>
+              <p className="text-[10px] font-bold uppercase tracking-widest text-gold-soft">
+                Organisation schematic
               </p>
-              <h2 className="mt-2 text-xl font-bold md:text-2xl">
-                Central Board → departments (illustrative schematic)
-                <span lang="hi" className="mt-1 block text-base font-semibold text-cream/75 md:text-lg">
-                  केंद्रीय बोर्ड → विभाग (उदाहरणात्मक आरेख)
-                </span>
+              <h2 className="font-serif mt-1 text-lg font-semibold md:text-xl">
+                Central Board → departments (illustrative)
               </h2>
-              <p className="mt-3 text-sm text-cream/70">
-                A structured sketch of how oversight, the MPC and functional departments relate —
-                labelled illustrative for training and UX review.
+              <p className="mt-2 text-sm text-cream/75">
+                Training sketch of oversight, MPC and functional departments — labelled illustrative.
               </p>
             </div>
-            <div className="mt-6 flex flex-wrap gap-3 md:mt-0">
+            <div className="flex flex-wrap gap-2">
               <Link
                 to="/sitemap"
-                className="inline-flex items-center gap-2 rounded-md bg-gold px-5 py-2.5 text-sm font-semibold text-navy transition hover:bg-gold-soft"
+                className="inline-flex items-center gap-1.5 bg-gold px-4 py-2 text-xs font-semibold text-navy hover:bg-gold-soft"
               >
-                Explore the map <ArrowRight className="h-4 w-4" />
+                Sitemap map <ArrowRight className="h-3.5 w-3.5" />
               </Link>
               <Link
                 to="/about"
-                className="inline-flex items-center gap-2 rounded-md border border-cream/30 px-5 py-2.5 text-sm font-semibold text-cream transition hover:bg-white/10"
+                className="inline-flex items-center gap-1.5 border border-cream/30 px-4 py-2 text-xs font-semibold text-cream hover:bg-white/10"
               >
-                About page
+                About &amp; mandate
               </Link>
             </div>
           </div>
-        </Reveal>
+        </section>
+
         <div className="mt-8">
           <DisclaimerBanner />
         </div>
-      </section>
+      </div>
     </div>
   )
 }

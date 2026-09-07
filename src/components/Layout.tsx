@@ -27,9 +27,9 @@ export function Layout() {
       >
         Skip to content
       </a>
-      <Navbar />
       <ProtoStrip />
-      <div className="sticky top-[3.4rem] z-40 xl:top-[3.6rem]">
+      <Navbar />
+      <div className="sticky top-[6.1rem] z-40 xl:top-[6.35rem]">
         <LiveUpdatesTicker />
       </div>
       {!isHome && <Breadcrumbs />}

@@ -6,6 +6,17 @@ import { useTheme } from '../hooks/useTheme'
 type NavItem = { to: string; label: string; hi: string }
 type NavGroup = { label: string; hi: string; items: NavItem[] }
 
+const topLinks: NavItem[] = [
+  { to: '/about', label: 'About Us', hi: 'परिचय' },
+  { to: '/monetary-policy', label: 'Monetary Policy', hi: 'मौद्रिक नीति' },
+  { to: '/masters-directions', label: 'Masters Directions', hi: 'मास्टर निर्देश' },
+  { to: '/circulars', label: 'Circulars', hi: 'परिपत्र' },
+  { to: '/news', label: 'Press / News', hi: 'समाचार' },
+  { to: '/reports', label: 'Publications', hi: 'प्रकाशन' },
+  { to: '/data', label: 'Statistics', hi: 'सांख्यिकी' },
+  { to: '/learn', label: 'Learn', hi: 'सीखें' },
+]
+
 const groups: NavGroup[] = [
   {
     label: 'About & Policy',
@@ -48,7 +59,14 @@ function BiLabel({ en, hi, compact }: { en: string; hi: string; compact?: boolea
   return (
     <span className={compact ? 'inline' : 'inline-flex flex-col items-start leading-tight'}>
       <span>{en}</span>
-      <span lang="hi" className={compact ? 'ml-1 text-[10px] text-ink-muted opacity-80 dark:text-cream/85 dark:opacity-95' : 'bilingual-hi'}>
+      <span
+        lang="hi"
+        className={
+          compact
+            ? 'ml-1 text-[10px] opacity-80'
+            : 'mt-0.5 text-[10px] font-normal opacity-75'
+        }
+      >
         {compact ? `(${hi})` : hi}
       </span>
     </span>
@@ -56,10 +74,10 @@ function BiLabel({ en, hi, compact }: { en: string; hi: string; compact?: boolea
 }
 
 function linkClass({ isActive }: { isActive: boolean }) {
-  return `rounded-md px-2 py-1.5 text-[13px] font-medium transition-colors ${
+  return `border-b-2 px-2.5 py-2 text-[12px] font-semibold transition-colors ${
     isActive
-      ? 'bg-gold/15 text-gold-dim dark:bg-gold/20 dark:text-gold'
-      : 'text-navy/80 hover:bg-navy/5 hover:text-navy dark:text-cream/90 dark:hover:bg-white/10 dark:hover:text-cream'
+      ? 'border-gold text-gold-soft'
+      : 'border-transparent text-cream/85 hover:border-gold/50 hover:text-cream'
   }`
 }
 
@@ -79,22 +97,25 @@ function HeaderSearch({ compact }: { compact?: boolean }) {
     <form
       onSubmit={submit}
       role="search"
-      className={compact ? 'w-full' : 'hidden md:block'}
+      className={compact ? 'w-full' : 'hidden lg:block'}
       aria-label="Site search"
     >
       <label htmlFor={inputId} className="sr-only">
         Search
       </label>
       <div className="relative">
-        <Search className="pointer-events-none absolute left-2.5 top-1/2 h-3.5 w-3.5 -translate-y-1/2 text-ink-muted dark:text-cream/70" aria-hidden />
+        <Search
+          className="pointer-events-none absolute left-2.5 top-1/2 h-3.5 w-3.5 -translate-y-1/2 text-cream/55"
+          aria-hidden
+        />
         <input
           id={inputId}
           value={value}
           onChange={(e) => setValue(e.target.value)}
-          placeholder="Search…"
+          placeholder="Search prototype…"
           autoComplete="off"
-          className={`rounded-lg border border-navy/10 bg-white/90 py-1.5 pl-8 pr-2 text-xs outline-none focus-visible:ring-2 focus-visible:ring-gold/50 dark:border-white/15 dark:bg-navy-light/80 dark:text-cream dark:placeholder:text-cream/60 ${
-            compact ? 'w-full' : 'w-40 lg:w-48'
+          className={`border border-cream/25 bg-white/10 py-1.5 pl-8 pr-2 text-xs text-cream outline-none placeholder:text-cream/50 focus-visible:ring-2 focus-visible:ring-gold/50 ${
+            compact ? 'w-full' : 'w-40 xl:w-52'
           }`}
         />
       </div>
@@ -203,10 +224,10 @@ function DesktopDropdown({ group }: { group: NavGroup }) {
       <button
         ref={buttonRef}
         type="button"
-        className={`inline-flex items-center gap-1 rounded-md px-2 py-1.5 text-[13px] font-medium transition-colors ${
+        className={`inline-flex items-center gap-1 border-b-2 px-2.5 py-2 text-[12px] font-semibold transition-colors ${
           open || anyActive
-            ? 'bg-gold/10 text-navy ring-1 ring-gold/35 dark:bg-gold/15 dark:text-gold dark:ring-gold/40'
-            : 'text-navy/80 hover:bg-navy/5 hover:text-navy dark:text-cream/90 dark:hover:bg-white/10 dark:hover:text-cream'
+            ? 'border-gold text-gold-soft'
+            : 'border-transparent text-cream/85 hover:border-gold/40 hover:text-cream'
         }`}
         aria-expanded={open}
         aria-haspopup="menu"
@@ -228,12 +249,11 @@ function DesktopDropdown({ group }: { group: NavGroup }) {
           id={menuId}
           role="menu"
           aria-label={`${group.label} / ${group.hi}`}
-          className="absolute left-0 top-full z-50 pt-1"
+          className="absolute left-0 top-full z-50 pt-0"
           onKeyDown={onMenuKeyDown}
           onMouseEnter={scheduleOpen}
         >
-          {/* pt-1 bridge prevents accidental close when moving pointer into menu */}
-          <div className="min-w-[14rem] rounded-lg border border-navy/10 bg-white py-1 shadow-lg dark:border-white/15 dark:bg-navy-light">
+          <div className="min-w-[15rem] border border-navy/15 bg-white py-1 shadow-md dark:border-white/15 dark:bg-navy-light">
             {group.items.map((item, i) => (
               <NavLink
                 key={item.to}
@@ -244,10 +264,10 @@ function DesktopDropdown({ group }: { group: NavGroup }) {
                   itemRefs.current[i] = el
                 }}
                 className={({ isActive }) =>
-                  `block px-3 py-2 text-[13px] transition-colors ${
+                  `block border-l-2 px-3 py-2 text-[13px] transition-colors ${
                     isActive
-                      ? 'bg-gold/15 font-medium text-gold-dim dark:text-gold'
-                      : 'text-navy/85 hover:bg-navy/5 dark:text-cream/90 dark:hover:bg-white/10'
+                      ? 'border-gold bg-gold/10 font-medium text-navy dark:text-gold'
+                      : 'border-transparent text-navy/85 hover:bg-cream dark:text-cream/90 dark:hover:bg-white/10'
                   }`
                 }
                 onClick={() => close()}
@@ -282,108 +302,154 @@ export function Navbar() {
   }, [open])
 
   return (
-    <header className="glass sticky top-0 z-50">
-      <div className="mx-auto flex max-w-6xl items-center justify-between gap-3 px-4 py-2.5 md:px-6">
-        <Link
-          to="/"
-          className="flex min-w-0 items-center gap-2.5"
-          onClick={() => setOpen(false)}
-        >
-          <span
-            className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg border border-gold/40 bg-navy text-[10px] font-bold tracking-wide text-gold-on-navy dark:bg-navy-light"
-            aria-hidden
+    <header className="sticky top-0 z-50">
+      {/* Formal masthead band */}
+      <div className="masthead">
+        <div className="mx-auto flex max-w-6xl items-center justify-between gap-3 px-4 py-2.5 md:px-6">
+          <Link
+            to="/"
+            className="flex min-w-0 items-center gap-3"
+            onClick={() => setOpen(false)}
           >
-            KP
-          </span>
-          <span className="min-w-0">
-            <span className="block truncate text-sm font-semibold tracking-tight text-navy dark:text-cream">
-              RBI Knowledge Prototype
+            <span
+              className="flex h-10 w-10 shrink-0 flex-col items-center justify-center border border-gold/55 bg-navy text-[9px] font-bold leading-tight tracking-wide text-gold-soft"
+              aria-hidden
+            >
+              <span>KP</span>
             </span>
-            <span className="block text-[10px] font-medium uppercase tracking-wider text-ink-muted dark:text-cream/75">
-              Unofficial · Educational UX
-              <span lang="hi" className="ml-1 font-normal normal-case tracking-normal opacity-80">
-                · अनौपचारिक
+            <span className="min-w-0">
+              <span className="font-serif block truncate text-[15px] font-semibold tracking-tight text-cream md:text-base">
+                Reserve Bank of India
+                <span className="ml-1.5 text-[11px] font-sans font-medium text-gold-soft md:text-xs">
+                  Knowledge Prototype
+                </span>
+              </span>
+              <span className="block text-[10px] font-medium text-cream/75">
+                Unofficial modernisation of public RBI web patterns · Educational
+                <span lang="hi" className="ml-1 opacity-80">
+                  · अनौपचारिक शैक्षिक प्रोटोटाइप
+                </span>
               </span>
             </span>
-          </span>
-        </Link>
+          </Link>
 
-        <nav className="hidden items-center gap-0.5 xl:flex" aria-label="Primary">
-          {groups.map((g) => (
-            <DesktopDropdown key={g.label} group={g} />
-          ))}
-        </nav>
-
-        <div className="flex items-center gap-2">
-          <Link
-            to="/tour"
-            className="hidden rounded-lg border border-navy/10 px-2.5 py-1.5 text-[12px] font-semibold text-navy transition hover:bg-navy/5 sm:inline-flex dark:border-white/15 dark:text-cream dark:hover:bg-white/10"
-            onClick={() => setOpen(false)}
-          >
-            Tour
-          </Link>
-          <Link
-            to="/sitemap"
-            className="hidden rounded-lg border border-navy/10 px-2.5 py-1.5 text-[12px] font-semibold text-navy/80 transition hover:bg-navy/5 lg:inline-flex dark:border-white/15 dark:text-cream/90 dark:hover:bg-white/10"
-            onClick={() => setOpen(false)}
-          >
-            Sitemap
-          </Link>
-          <HeaderSearch />
-          <Link
-            to="/search"
-            className="rounded-lg border border-navy/10 p-2 text-navy transition hover:bg-navy/5 md:hidden dark:border-white/15 dark:text-cream dark:hover:bg-white/10"
-            aria-label="Open search"
-            onClick={() => setOpen(false)}
-          >
-            <Search className="h-4 w-4" aria-hidden />
-          </Link>
-          <button
-            type="button"
-            onClick={toggleHighContrast}
-            aria-label="Toggle high contrast"
-            aria-pressed={highContrast}
-            title={highContrast ? 'High contrast on' : 'High contrast off'}
-            className={`rounded-lg border p-2 transition ${
-              highContrast
-                ? 'border-navy bg-navy/10 text-navy dark:border-gold dark:bg-gold/15 dark:text-gold'
-                : 'border-navy/10 text-navy hover:bg-navy/5 dark:border-white/15 dark:text-cream dark:hover:bg-white/10'
-            }`}
-          >
-            <Contrast className="h-4 w-4" aria-hidden />
-          </button>
-          <button
-            type="button"
-            onClick={toggle}
-            aria-label="Toggle dark mode"
-            aria-pressed={theme === 'dark'}
-            className="rounded-lg border border-navy/10 p-2 text-navy transition hover:bg-navy/5 dark:border-white/15 dark:text-cream dark:hover:bg-white/10"
-          >
-            {theme === 'dark' ? <Sun className="h-4 w-4" aria-hidden /> : <Moon className="h-4 w-4" aria-hidden />}
-          </button>
-          <button
-            type="button"
-            className="rounded-lg border border-navy/10 p-2 text-navy xl:hidden dark:border-white/15 dark:text-cream"
-            aria-label={open ? 'Close menu' : 'Open menu'}
-            aria-expanded={open}
-            aria-controls={drawerId}
-            onClick={() => setOpen((v) => !v)}
-          >
-            {open ? <X className="h-5 w-5" aria-hidden /> : <Menu className="h-5 w-5" aria-hidden />}
-          </button>
+          <div className="flex items-center gap-1.5 md:gap-2">
+            <Link
+              to="/tour"
+              className="hidden border border-cream/25 px-2.5 py-1 text-[11px] font-semibold text-cream/90 transition hover:bg-white/10 sm:inline-flex"
+              onClick={() => setOpen(false)}
+            >
+              Tour
+            </Link>
+            <Link
+              to="/sitemap"
+              className="hidden border border-cream/25 px-2.5 py-1 text-[11px] font-semibold text-cream/90 transition hover:bg-white/10 md:inline-flex"
+              onClick={() => setOpen(false)}
+            >
+              Sitemap
+            </Link>
+            <HeaderSearch />
+            <Link
+              to="/search"
+              className="border border-cream/25 p-1.5 text-cream lg:hidden"
+              aria-label="Open search"
+              onClick={() => setOpen(false)}
+            >
+              <Search className="h-4 w-4" aria-hidden />
+            </Link>
+            <button
+              type="button"
+              onClick={toggleHighContrast}
+              aria-label="Toggle high contrast"
+              aria-pressed={highContrast}
+              title={highContrast ? 'High contrast on' : 'High contrast off'}
+              className={`border p-1.5 transition ${
+                highContrast
+                  ? 'border-gold bg-gold/20 text-gold-soft'
+                  : 'border-cream/25 text-cream hover:bg-white/10'
+              }`}
+            >
+              <Contrast className="h-4 w-4" aria-hidden />
+            </button>
+            <button
+              type="button"
+              onClick={toggle}
+              aria-label="Toggle dark mode"
+              aria-pressed={theme === 'dark'}
+              className="border border-cream/25 p-1.5 text-cream transition hover:bg-white/10"
+            >
+              {theme === 'dark' ? (
+                <Sun className="h-4 w-4" aria-hidden />
+              ) : (
+                <Moon className="h-4 w-4" aria-hidden />
+              )}
+            </button>
+            <button
+              type="button"
+              className="border border-cream/25 p-1.5 text-cream xl:hidden"
+              aria-label={open ? 'Close menu' : 'Open menu'}
+              aria-expanded={open}
+              aria-controls={drawerId}
+              onClick={() => setOpen((v) => !v)}
+            >
+              {open ? <X className="h-5 w-5" aria-hidden /> : <Menu className="h-5 w-5" aria-hidden />}
+            </button>
+          </div>
         </div>
       </div>
+
+      {/* Portal nav row */}
+      <nav
+        className="hidden border-b border-navy/15 bg-navy-light xl:block dark:border-white/10 dark:bg-navy"
+        aria-label="Primary"
+      >
+        <div className="mx-auto flex max-w-6xl items-stretch gap-0 px-4 md:px-6">
+          {topLinks.map((l) => (
+            <NavLink key={l.to} to={l.to} className={linkClass} end={l.to === '/about'}>
+              {l.label}
+            </NavLink>
+          ))}
+          <div className="ml-auto flex items-center gap-0.5">
+            {groups.map((g) => (
+              <DesktopDropdown key={g.label} group={g} />
+            ))}
+          </div>
+        </div>
+      </nav>
 
       {open && (
         <div
           id={drawerId}
-          className="border-t border-navy/10 bg-cream/95 px-4 py-4 xl:hidden dark:border-white/10 dark:bg-navy/95"
+          className="border-b border-navy/15 bg-cream px-4 py-4 xl:hidden dark:border-white/10 dark:bg-navy"
           role="dialog"
           aria-modal="true"
           aria-label="Site navigation"
         >
           <div className="mx-auto flex max-w-6xl flex-col gap-5">
             <HeaderSearch compact />
+            <div>
+              <p className="mb-2 text-[10px] font-semibold uppercase tracking-widest text-gold-dim dark:text-gold">
+                Main sections
+              </p>
+              <div className="flex flex-col gap-0.5">
+                {topLinks.map((l) => (
+                  <NavLink
+                    key={l.to}
+                    to={l.to}
+                    className={({ isActive }) =>
+                      `rounded-sm px-2 py-1.5 text-[13px] font-medium ${
+                        isActive
+                          ? 'bg-navy/10 text-navy dark:bg-gold/15 dark:text-gold'
+                          : 'text-navy/85 dark:text-cream/90'
+                      }`
+                    }
+                    onClick={() => setOpen(false)}
+                  >
+                    <BiLabel en={l.label} hi={l.hi} compact />
+                  </NavLink>
+                ))}
+              </div>
+            </div>
             {groups.map((g) => (
               <div key={g.label}>
                 <p className="mb-2 text-[10px] font-semibold uppercase tracking-widest text-gold-dim dark:text-gold">
@@ -397,7 +463,13 @@ export function Navbar() {
                     <NavLink
                       key={l.to}
                       to={l.to}
-                      className={linkClass}
+                      className={({ isActive }) =>
+                        `rounded-sm px-2 py-1.5 text-[13px] font-medium ${
+                          isActive
+                            ? 'bg-navy/10 text-navy dark:bg-gold/15 dark:text-gold'
+                            : 'text-navy/85 dark:text-cream/90'
+                        }`
+                      }
                       onClick={() => setOpen(false)}
                     >
                       <BiLabel en={l.label} hi={l.hi} compact />
@@ -408,14 +480,14 @@ export function Navbar() {
             ))}
             <NavLink
               to="/sitemap"
-              className={linkClass}
+              className="px-2 py-1.5 text-[13px] font-medium text-navy/80 dark:text-cream/75"
               onClick={() => setOpen(false)}
             >
               Sitemap
             </NavLink>
             <button
               type="button"
-              className="rounded-md px-2 py-1.5 text-left text-[13px] font-medium text-navy/80 dark:text-cream/75"
+              className="rounded-sm px-2 py-1.5 text-left text-[13px] font-medium text-navy/80 dark:text-cream/75"
               onClick={() => {
                 setOpen(false)
                 navigate('/search')

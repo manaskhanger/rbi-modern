@@ -15,6 +15,12 @@ import { Reveal } from '../components/Reveal'
 import { DisclaimerBanner } from '../components/DisclaimerBanner'
 import { ExploreNext, SectionHubCards } from '../components/ExploreNext'
 import { ExploreMapTeaser } from '../components/InteractiveSiteMap'
+import {
+  ArtMonetaryPolicy,
+  ArtRegulation,
+  ArtCurrency,
+  ArtStability,
+} from '../components/illustrations/InstitutionalArt'
 
 const timeline = [
   { year: '1934–35', text: 'Reserve Bank of India Act, 1934 establishes the Bank; operations begin in 1935 as India’s central bank.' },
@@ -118,6 +124,20 @@ export function About() {
         description="High-level educational framing of why RBI exists under the Reserve Bank of India Act, 1934, how the institution evolved, and how major functions connect. Original copy for this prototype — not official RBI text."
       />
 
+
+      <div className="mb-8 grid grid-cols-2 gap-3 sm:grid-cols-4" aria-hidden>
+        {[
+          { Art: ArtMonetaryPolicy, label: 'Monetary authority' },
+          { Art: ArtRegulation, label: 'Regulation' },
+          { Art: ArtCurrency, label: 'Currency issue' },
+          { Art: ArtStability, label: 'Financial stability' },
+        ].map(({ Art, label }) => (
+          <div key={label} className="portal-panel flex flex-col items-center gap-2 p-3 text-center">
+            <Art className="art h-14 w-14 text-rbi-blue dark:text-gold-soft" />
+            <span className="text-[11px] font-medium text-ink-muted dark:text-cream/70">{label}</span>
+          </div>
+        ))}
+      </div>
       <SectionHubCards
         heading="Browse this section"
         links={[
@@ -135,11 +155,11 @@ export function About() {
       </div>
 
       <Reveal>
-        <div className="glass-card mb-12 rounded-xl p-6 md:p-8">
-          <h2 className="text-lg font-bold text-navy dark:text-cream">
+        <div className="content-well mb-12 p-6 md:p-8">
+          <h2 className="font-serif text-lg font-semibold text-navy dark:text-cream">
             Statutory mandate (high-level)
           </h2>
-          <p className="mt-3 text-sm leading-relaxed text-ink-muted dark:text-cream/70 md:text-base">
+          <p className="prose-read mt-3 text-[15px] leading-relaxed text-ink-muted dark:text-cream/70">
             The Reserve Bank of India was constituted under the <strong>Reserve Bank of India Act,
             1934</strong>. In educational terms, the Act provides the legal foundation for a central
             bank tasked with regulating the issue of banknotes, keeping reserves to secure monetary
@@ -147,7 +167,7 @@ export function About() {
             time, Parliament and the Government have layered additional statutes and policy frameworks
             (including flexible inflation targeting and payment-system law) onto that foundation.
           </p>
-          <p className="mt-3 text-sm leading-relaxed text-ink-muted dark:text-cream/70 md:text-base">
+          <p className="prose-read mt-3 text-[15px] leading-relaxed text-ink-muted dark:text-cream/70">
             This page paraphrases those themes for officers and learners reviewing communication
             design. It is <em>not</em> a legal commentary and omits procedural detail that belongs in
             primary sources.
@@ -238,7 +258,7 @@ export function About() {
             <p className="text-[10px] font-semibold uppercase tracking-widest text-gold-dim dark:text-gold">
               Selected · illustrative
             </p>
-            <h3 className="mt-2 text-lg font-bold text-navy dark:text-cream">{node.name}</h3>
+            <h3 className="mt-2 font-serif text-lg font-semibold text-navy dark:text-cream">{node.name}</h3>
             <p className="mt-2 text-sm text-ink-muted dark:text-cream/70">{node.blurb}</p>
             {node.children && (
               <ul className="mt-5 space-y-2">

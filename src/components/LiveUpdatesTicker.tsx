@@ -79,7 +79,7 @@ export function LiveUpdatesTicker({ limit = 16, className = '' }: Props) {
       <div className="mx-auto flex max-w-6xl items-stretch gap-3 px-4 md:px-6">
         <p className="flex shrink-0 items-center gap-2 py-1.5 text-[10px] font-bold uppercase tracking-widest text-gold-soft">
           <span className="inline-block h-1.5 w-1.5 rounded-full bg-gold-soft" aria-hidden />
-          Live updates
+          What's new
           <span className="hidden font-medium normal-case tracking-normal text-cream/70 sm:inline">
             · Prototype feed · illustrative
           </span>

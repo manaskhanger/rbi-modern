@@ -10,18 +10,18 @@ export function PageHeader({
   description?: string
 }) {
   return (
-    <div className="mb-10 md:mb-14">
+    <div className="mb-8 border-b border-navy/12 pb-6 dark:border-white/12 md:mb-10">
       <Reveal>
         {eyebrow && (
-          <p className="mb-3 text-sm font-semibold uppercase tracking-[0.14em] text-gold-dim dark:text-gold">
+          <p className="mb-2 text-[11px] font-semibold uppercase tracking-[0.14em] text-gold-dim dark:text-gold">
             {eyebrow}
           </p>
         )}
-        <h1 className="text-3xl font-bold tracking-tight text-navy dark:text-cream md:text-5xl">
+        <h1 className="font-serif text-2xl font-semibold tracking-tight text-navy dark:text-cream md:text-3xl md:leading-snug">
           {title}
         </h1>
         {description && (
-          <p className="mt-4 max-w-2xl text-base leading-relaxed text-ink-muted dark:text-cream/70 md:text-lg">
+          <p className="prose-read mt-3 text-[15px] leading-relaxed text-ink-muted dark:text-cream/75">
             {description}
           </p>
         )}

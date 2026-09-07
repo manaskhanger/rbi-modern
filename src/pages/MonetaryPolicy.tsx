@@ -20,6 +20,7 @@ import { ChartFootnote } from '../components/ChartFootnote'
 import { policyRateHistory, keyRatesAsOf, chartMethodology } from '../data/rates'
 import { RBI_SECTIONS } from '../data/meta'
 import { chartTick, chartGrid, chartSeriesNavy, chartLegendStyle } from '../lib/chartTheme'
+import { ArtMonetaryPolicy } from '../components/illustrations/InstitutionalArt'
 
 const mpcSteps = [
   {
@@ -79,20 +80,31 @@ export function MonetaryPolicy() {
       />
       <ContentReviewed className="mb-6 -mt-4" />
 
+      <div className="mb-8 flex flex-col items-start gap-4 sm:flex-row sm:items-center">
+        <div className="portal-panel p-4" aria-hidden>
+          <ArtMonetaryPolicy className="art h-20 w-20 text-rbi-blue dark:text-gold-soft" />
+        </div>
+        <p className="prose-read text-[15px] text-ink-muted dark:text-cream/75">
+          Original line illustration for this prototype — a policy dial / balance motif, not an
+          official emblem. Use the panels below for MPC framing and the sample chart for teaching
+          layouts only.
+        </p>
+      </div>
+
       <div className="mb-10">
         <AuthoritativeSource section="monetaryPolicy" />
       </div>
 
       <section className="mb-12">
         <Reveal>
-          <h2 className="mb-5 text-xl font-bold text-navy dark:text-cream md:text-2xl">
+          <h2 className="mb-5 font-serif text-xl font-semibold text-navy dark:text-cream md:text-2xl">
             Monetary Policy Committee
           </h2>
         </Reveal>
         <div className="grid gap-3 md:grid-cols-2 lg:grid-cols-4">
           {mpcSteps.map((s, i) => (
             <Reveal key={s.title} delay={i * 0.04}>
-              <div className="glass-card h-full rounded-xl p-4">
+              <div className="portal-panel h-full p-4">
                 <span className="text-[10px] font-bold uppercase tracking-wider text-gold-dim dark:text-gold">
                   0{i + 1}
                 </span>
@@ -108,7 +120,7 @@ export function MonetaryPolicy() {
         <Reveal>
           <div className="mb-5 flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
             <div>
-              <h2 className="text-xl font-bold text-navy dark:text-cream md:text-2xl">
+              <h2 className="font-serif text-xl font-semibold text-navy dark:text-cream md:text-2xl">
                 Policy rates &amp; inflation (sample chart)
               </h2>
               <IllustrativeLabel asOf={keyRatesAsOf} className="mt-1" />
@@ -170,7 +182,7 @@ export function MonetaryPolicy() {
 
       <section className="mb-12">
         <Reveal>
-          <h2 className="mb-5 text-xl font-bold text-navy dark:text-cream md:text-2xl">
+          <h2 className="mb-5 font-serif text-xl font-semibold text-navy dark:text-cream md:text-2xl">
             Inflation targeting band (educational)
           </h2>
         </Reveal>
