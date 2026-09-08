@@ -25,6 +25,7 @@ export const sectionLandings: SitemapLink[] = [
   { label: 'News', to: '/news' },
   { label: 'Publications', to: '/publications' },
   { label: 'Reports', to: '/reports' },
+  { label: 'Statistics', to: '/statistics' },
   { label: 'Sample data lab', to: '/data' },
   { label: 'Learn & glossary', to: '/learn' },
   { label: 'Functions', to: '/functions' },
@@ -80,13 +81,22 @@ export const exploreRails: Record<string, { title: string; links: SitemapLink[] 
       { label: 'Tour', to: '/tour', note: 'Guided walkthrough' },
     ],
   },
+  '/statistics': {
+    title: 'Explore next',
+    links: [
+      { label: 'Sample data lab', to: '/data', note: 'Illustrative charts & series' },
+      { label: 'Monetary policy', to: '/monetary-policy', note: 'Rates & inflation framing' },
+      { label: 'Publications hub', to: '/publications', note: 'Category landing' },
+      { label: 'Reports', to: '/reports', note: 'Seeded digests' },
+    ],
+  },
   '/data': {
     title: 'Related',
     links: [
+      { label: 'Statistics hub', to: '/statistics', note: 'DBIE-style categories' },
       { label: 'Monetary policy', to: '/monetary-policy', note: 'Policy rate story' },
       { label: 'Reports', to: '/reports', note: 'Publication digests' },
       { label: 'Learn', to: '/learn', note: 'Glossary' },
-      { label: 'News', to: '/news', note: 'Updates' },
     ],
   },
   '/offices': {
@@ -204,6 +214,7 @@ const staticCrumbLabels: Record<string, string> = {
   '/news': 'News',
   '/publications': 'Publications',
   '/reports': 'Reports',
+  '/statistics': 'Statistics',
   '/data': 'Data',
   '/learn': 'Learn',
   '/functions': 'Functions',

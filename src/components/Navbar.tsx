@@ -15,7 +15,7 @@ const topLinks: NavItem[] = [
   { to: '/news', label: 'Press / News', hi: 'समाचार' },
   { to: '/publications', label: 'Publications', hi: 'प्रकाशन' },
   { to: '/citizens', label: "Citizens' Corner", hi: 'नागरिक कॉर्नर' },
-  { to: '/data', label: 'Statistics', hi: 'सांख्यिकी' },
+  { to: '/statistics', label: 'Statistics', hi: 'सांख्यिकी' },
   { to: '/learn', label: 'Learn', hi: 'सीखें' },
 ]
 
@@ -54,7 +54,8 @@ const groups: NavGroup[] = [
     label: 'Data & Learn',
     hi: 'डेटा और सीखें',
     items: [
-      { to: '/data', label: 'Data', hi: 'डेटा' },
+      { to: '/statistics', label: 'Statistics', hi: 'सांख्यिकी' },
+      { to: '/data', label: 'Sample data lab', hi: 'नमूना डेटा लैब' },
       { to: '/learn', label: 'Learn', hi: 'सीखें' },
     ],
   },

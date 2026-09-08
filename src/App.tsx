@@ -33,6 +33,9 @@ const ReportDetail = lazy(() =>
   import('./pages/ReportDetail').then((m) => ({ default: m.ReportDetail })),
 )
 const Data = lazy(() => import('./pages/Data').then((m) => ({ default: m.Data })))
+const Statistics = lazy(() =>
+  import('./pages/Statistics').then((m) => ({ default: m.Statistics })),
+)
 const Learn = lazy(() => import('./pages/Learn').then((m) => ({ default: m.Learn })))
 const Tour = lazy(() => import('./pages/Tour').then((m) => ({ default: m.Tour })))
 const Offices = lazy(() => import('./pages/Offices').then((m) => ({ default: m.Offices })))
@@ -77,6 +80,7 @@ export default function App() {
               <Route path="publications" element={<Publications />} />
               <Route path="reports" element={<Reports />} />
               <Route path="reports/:slug" element={<ReportDetail />} />
+              <Route path="statistics" element={<Statistics />} />
               <Route path="data" element={<Data />} />
               <Route path="learn" element={<Learn />} />
               <Route path="functions" element={<Functions />} />
