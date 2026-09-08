@@ -14,6 +14,7 @@ import { formatContentReviewed } from '../data/meta'
 import { fadeUp, stagger } from '../lib/motion'
 import { LayoutGrid, Table2, ExternalLink } from 'lucide-react'
 import { WITHDRAWN_CIRCULARS_URL, WITHDRAWN_NOTE } from '../data/withdrawn'
+import { compactGist } from '../lib/gist'
 
 const yearOptions = [
   'All',
@@ -65,6 +66,7 @@ export function Circulars() {
         title: c.title,
         category: c.category,
         meta: c.ref,
+        gist: c.summary,
         officialPdfUrl: c.officialPdfUrl,
         officialHtmlUrl: c.officialHtmlUrl,
         pdfMode: c.pdfMode,
@@ -172,7 +174,9 @@ export function Circulars() {
                   {c.title}
                 </OfficialTitleLink>
               </h2>
-              <p className="mt-1 text-sm text-ink-muted dark:text-cream/65">{c.summary}</p>
+              <p className="mt-1.5 inline-block max-w-3xl rounded-sm border border-navy/8 bg-navy/[0.03] px-1.5 py-0.5 text-[11px] leading-snug text-ink-muted dark:border-white/10 dark:bg-white/[0.04] dark:text-cream/55">
+                {compactGist(c.summary)}
+              </p>
               <p className="mt-1.5 text-xs text-ink-muted dark:text-cream/50">Audience: {c.audience}</p>
               <div className="mt-3 flex flex-wrap items-center gap-2">
                 <OfficialPdfLink doc={c} variant="button" />

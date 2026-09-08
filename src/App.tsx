@@ -26,6 +26,9 @@ const NewsDetail = lazy(() =>
   import('./pages/NewsDetail').then((m) => ({ default: m.NewsDetail })),
 )
 const Reports = lazy(() => import('./pages/Reports').then((m) => ({ default: m.Reports })))
+const Publications = lazy(() =>
+  import('./pages/Publications').then((m) => ({ default: m.Publications })),
+)
 const ReportDetail = lazy(() =>
   import('./pages/ReportDetail').then((m) => ({ default: m.ReportDetail })),
 )
@@ -71,6 +74,7 @@ export default function App() {
               <Route path="circulars/:slug" element={<CircularDetail />} />
               <Route path="news" element={<News />} />
               <Route path="news/:slug" element={<NewsDetail />} />
+              <Route path="publications" element={<Publications />} />
               <Route path="reports" element={<Reports />} />
               <Route path="reports/:slug" element={<ReportDetail />} />
               <Route path="data" element={<Data />} />

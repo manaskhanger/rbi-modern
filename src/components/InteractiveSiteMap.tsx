@@ -103,8 +103,8 @@ const NODES: MapNode[] = [
   {
     id: 'reports',
     label: 'Publications',
-    blurb: 'Reports digests',
-    to: '/reports',
+    blurb: 'Hub + digests',
+    to: '/publications',
     x: 620,
     y: 370,
     ring: 'publish',

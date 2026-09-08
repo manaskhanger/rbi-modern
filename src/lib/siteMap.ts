@@ -23,6 +23,7 @@ export const sectionLandings: SitemapLink[] = [
   { label: 'Masters Directions', to: '/masters-directions' },
   { label: 'Circulars', to: '/circulars' },
   { label: 'News', to: '/news' },
+  { label: 'Publications', to: '/publications' },
   { label: 'Reports', to: '/reports' },
   { label: 'Sample data lab', to: '/data' },
   { label: 'Learn & glossary', to: '/learn' },
@@ -133,9 +134,19 @@ export const exploreRails: Record<string, { title: string; links: SitemapLink[] 
       { label: 'Sitemap', to: '/sitemap', note: 'All articles' },
     ],
   },
+  '/publications': {
+    title: 'Explore next',
+    links: [
+      { label: 'Report digests', to: '/reports', note: 'Seeded publication cards' },
+      { label: 'Monetary policy', to: '/monetary-policy', note: 'Policy framing' },
+      { label: 'Circulars', to: '/circulars', note: 'Regulatory notes' },
+      { label: 'Data lab', to: '/data', note: 'Sample indicators' },
+    ],
+  },
   '/reports': {
     title: 'Explore next',
     links: [
+      { label: 'Publications hub', to: '/publications', note: 'Category landing' },
       { label: 'Data lab', to: '/data', note: 'Sample indicators' },
       { label: 'Monetary policy', to: '/monetary-policy', note: 'Policy framing' },
       { label: 'News', to: '/news', note: 'Press-style notes' },
@@ -191,6 +202,7 @@ const staticCrumbLabels: Record<string, string> = {
   '/masters-directions': 'Masters Directions',
   '/circulars': 'Circulars',
   '/news': 'News',
+  '/publications': 'Publications',
   '/reports': 'Reports',
   '/data': 'Data',
   '/learn': 'Learn',

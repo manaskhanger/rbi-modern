@@ -2,6 +2,7 @@ import { Fragment } from 'react'
 import { Link } from 'react-router-dom'
 import { OfficialPdfLink, OfficialTitleLink } from './OfficialPdfLink'
 import type { OfficialDocFields } from '../lib/officialDocs'
+import { compactGist } from '../lib/gist'
 
 export type DocTableRow = OfficialDocFields & {
   id: string
@@ -10,6 +11,8 @@ export type DocTableRow = OfficialDocFields & {
   category?: string
   meta?: string
   sizeLabel?: string
+  /** Optional plain-language gist shown under the title (truncated). */
+  gist?: string
   summaryPath: string
   summaryLabel?: string
 }
@@ -98,6 +101,11 @@ export function DocumentTable({
                     {r.meta && (
                       <span className="mt-0.5 block font-mono text-[11px] text-ink-muted dark:text-cream/55">
                         {r.meta}
+                      </span>
+                    )}
+                    {r.gist && (
+                      <span className="mt-1 inline-block max-w-xl rounded-sm border border-navy/8 bg-navy/[0.03] px-1.5 py-0.5 text-[11px] leading-snug text-ink-muted dark:border-white/10 dark:bg-white/[0.04] dark:text-cream/55">
+                        {compactGist(r.gist)}
                       </span>
                     )}
                   </td>
