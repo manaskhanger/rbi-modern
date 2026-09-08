@@ -12,7 +12,7 @@ const topLinks: NavItem[] = [
   { to: '/functions', label: 'Functions', hi: 'कार्य' },
   { to: '/masters-directions', label: 'Masters Directions', hi: 'मास्टर निर्देश' },
   { to: '/circulars', label: 'Circulars', hi: 'परिपत्र' },
-  { to: '/news', label: 'Press / News', hi: 'समाचार' },
+  { to: '/press', label: 'Press / News', hi: 'प्रेस / समाचार' },
   { to: '/publications', label: 'Publications', hi: 'प्रकाशन' },
   { to: '/citizens', label: "Citizens' Corner", hi: 'नागरिक कॉर्नर' },
   { to: '/statistics', label: 'Statistics', hi: 'सांख्यिकी' },
@@ -46,6 +46,7 @@ const groups: NavGroup[] = [
     hi: 'प्रकाशन',
     items: [
       { to: '/publications', label: 'Publications hub', hi: 'प्रकाशन हब' },
+      { to: '/press', label: 'Press releases', hi: 'प्रेस विज्ञप्तियाँ' },
       { to: '/news', label: 'News', hi: 'समाचार' },
       { to: '/reports', label: 'Reports', hi: 'रिपोर्ट' },
     ],

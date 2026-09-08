@@ -95,6 +95,11 @@ export function Footer() {
               </Link>
             </li>
             <li>
+              <Link to="/press" className="hover:text-cream">
+                Press releases
+              </Link>
+            </li>
+            <li>
               <Link to="/news" className="hover:text-cream">
                 News
               </Link>

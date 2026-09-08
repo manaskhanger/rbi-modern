@@ -112,9 +112,9 @@ const NODES: MapNode[] = [
   },
   {
     id: 'news',
-    label: 'News',
-    blurb: 'Sample updates',
-    to: '/news',
+    label: 'Press releases',
+    blurb: 'Press-desk list',
+    to: '/press',
     x: 840,
     y: 360,
     ring: 'publish',

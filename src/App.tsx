@@ -22,6 +22,7 @@ const CircularDetail = lazy(() =>
   import('./pages/CircularDetail').then((m) => ({ default: m.CircularDetail })),
 )
 const News = lazy(() => import('./pages/News').then((m) => ({ default: m.News })))
+const Press = lazy(() => import('./pages/Press').then((m) => ({ default: m.Press })))
 const NewsDetail = lazy(() =>
   import('./pages/NewsDetail').then((m) => ({ default: m.NewsDetail })),
 )
@@ -75,6 +76,7 @@ export default function App() {
               <Route path="masters-directions/:slug" element={<MastersDirectionDetail />} />
               <Route path="circulars" element={<Circulars />} />
               <Route path="circulars/:slug" element={<CircularDetail />} />
+              <Route path="press" element={<Press />} />
               <Route path="news" element={<News />} />
               <Route path="news/:slug" element={<NewsDetail />} />
               <Route path="publications" element={<Publications />} />
