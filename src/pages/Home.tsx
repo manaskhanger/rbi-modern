@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { ExternalLink, FileText, ArrowRight, Compass } from 'lucide-react'
+import { ExternalLink, FileText, ArrowRight, Compass, Banknote, MessageSquareWarning } from 'lucide-react'
 import { mastersDirections } from '../data/mastersDirections'
 import { circulars } from '../data/circulars'
 import { RBI_HOME } from '../data/meta'
@@ -128,6 +128,84 @@ export function Home() {
           </div>
           <div className="mt-4">
             <TourPrompt />
+          </div>
+        </section>
+
+        {/* Utilities / quick-access (illustrative entry points) */}
+        <section className="mt-6" aria-labelledby="utilities-heading">
+          <div className="mb-3 flex flex-wrap items-end justify-between gap-2">
+            <div>
+              <h2
+                id="utilities-heading"
+                className="font-serif text-xl font-semibold text-navy dark:text-cream"
+              >
+                {t('Utilities', 'उपयोगिताएँ')}
+                <span lang="hi" className="bilingual-hi mt-0.5 text-sm font-medium">
+                  {isHi ? 'Utilities' : 'उपयोगिताएँ'}
+                </span>
+              </h2>
+              <p className="mt-1 text-sm text-ink-muted dark:text-cream/65">
+                {t(
+                  'Quick-access entry points — illustrative only; neither tool is functional on this prototype.',
+                  'त्वरित पहुँच प्रवेश बिंदु — केवल उदाहरणात्मक; इस प्रोटोटाइप पर कोई भी उपकरण क्रियाशील नहीं है।',
+                )}
+              </p>
+            </div>
+            <span className="text-[10px] font-semibold uppercase tracking-wider text-gold-dim dark:text-gold">
+              {t('Illustrative · not functional', 'उदाहरणात्मक · क्रियाशील नहीं')}
+            </span>
+          </div>
+          <div className="grid gap-3 sm:grid-cols-2">
+            <Link
+              to="/utilities/currency-identifier"
+              className="function-card group flex items-start gap-3"
+            >
+              <div className="rounded-lg bg-gold/15 p-2.5" aria-hidden>
+                <Banknote className="h-5 w-5 text-gold-dim dark:text-gold" />
+              </div>
+              <div className="min-w-0">
+                <h3 className="text-sm font-semibold text-navy group-hover:text-rbi-blue dark:text-cream">
+                  {t('Currency Identifier', 'मुद्रा पहचानकर्ता')}
+                </h3>
+                <span lang="hi" className="bilingual-hi text-[11px]">
+                  {isHi ? 'Currency Identifier' : 'मुद्रा पहचानकर्ता'}
+                </span>
+                <p className="mt-1.5 text-xs leading-relaxed text-ink-muted dark:text-cream/65">
+                  {t(
+                    'Note page explaining a real identifier — no camera, upload, or ID logic here.',
+                    'वास्तविक पहचानकर्ता की व्याख्या — यहाँ कोई कैमरा, अपलोड या पहचान तर्क नहीं।',
+                  )}
+                </p>
+                <span className="mt-2 inline-block text-[10px] font-bold uppercase tracking-wide text-gold-dim dark:text-gold">
+                  {t('Open note →', 'नोट खोलें →')}
+                </span>
+              </div>
+            </Link>
+            <Link
+              to="/utilities/complaint"
+              className="function-card group flex items-start gap-3"
+            >
+              <div className="rounded-lg bg-gold/15 p-2.5" aria-hidden>
+                <MessageSquareWarning className="h-5 w-5 text-gold-dim dark:text-gold" />
+              </div>
+              <div className="min-w-0">
+                <h3 className="text-sm font-semibold text-navy group-hover:text-rbi-blue dark:text-cream">
+                  {t('Complaint Lodging', 'शिकायत दर्ज करना')}
+                </h3>
+                <span lang="hi" className="bilingual-hi text-[11px]">
+                  {isHi ? 'Complaint Lodging' : 'शिकायत दर्ज करना'}
+                </span>
+                <p className="mt-1.5 text-xs leading-relaxed text-ink-muted dark:text-cream/65">
+                  {t(
+                    'Inert lodging note — no form fields; you cannot submit a complaint here.',
+                    'निष्क्रिय शिकायत नोट — कोई फ़ॉर्म फ़ील्ड नहीं; यहाँ शिकायत जमा नहीं कर सकते।',
+                  )}
+                </p>
+                <span className="mt-2 inline-block text-[10px] font-bold uppercase tracking-wide text-gold-dim dark:text-gold">
+                  {t('Open note →', 'नोट खोलें →')}
+                </span>
+              </div>
+            </Link>
           </div>
         </section>
 

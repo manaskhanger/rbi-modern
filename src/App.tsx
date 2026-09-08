@@ -51,6 +51,12 @@ const FunctionDetail = lazy(() =>
   import('./pages/FunctionDetail').then((m) => ({ default: m.FunctionDetail })),
 )
 const Citizens = lazy(() => import('./pages/Citizens').then((m) => ({ default: m.Citizens })))
+const CurrencyIdentifier = lazy(() =>
+  import('./pages/CurrencyIdentifier').then((m) => ({ default: m.CurrencyIdentifier })),
+)
+const ComplaintLodging = lazy(() =>
+  import('./pages/ComplaintLodging').then((m) => ({ default: m.ComplaintLodging })),
+)
 
 function RouteFallback() {
   return (
@@ -88,6 +94,8 @@ export default function App() {
               <Route path="functions" element={<Functions />} />
               <Route path="functions/:slug" element={<FunctionDetail />} />
               <Route path="citizens" element={<Citizens />} />
+              <Route path="utilities/currency-identifier" element={<CurrencyIdentifier />} />
+              <Route path="utilities/complaint" element={<ComplaintLodging />} />
               <Route path="tour" element={<Tour />} />
               <Route path="offices" element={<Offices />} />
               <Route path="search" element={<Search />} />

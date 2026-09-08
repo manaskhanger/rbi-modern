@@ -31,6 +31,8 @@ export const sectionLandings: SitemapLink[] = [
   { label: 'Learn & glossary', to: '/learn' },
   { label: 'Functions', to: '/functions' },
   { label: "Citizens' Corner", to: '/citizens' },
+  { label: 'Currency Identifier', to: '/utilities/currency-identifier', note: 'Illustrative — not functional' },
+  { label: 'Complaint Lodging', to: '/utilities/complaint', note: 'Illustrative — not functional' },
   { label: 'Search', to: '/search' },
   { label: 'Sitemap', to: '/sitemap' },
 ]
@@ -187,9 +189,27 @@ export const exploreRails: Record<string, { title: string; links: SitemapLink[] 
     title: 'Explore next',
     links: [
       { label: 'Functions', to: '/functions', note: 'Function directory' },
-      { label: 'Learn', to: '/learn', note: 'Literacy' },
-      { label: 'Circulars', to: '/circulars', note: 'Updates' },
+      { label: 'Currency Identifier', to: '/utilities/currency-identifier', note: 'Illustrative utility' },
+      { label: 'Complaint Lodging', to: '/utilities/complaint', note: 'Illustrative utility' },
       { label: 'Home', to: '/' },
+    ],
+  },
+  '/utilities/currency-identifier': {
+    title: 'Explore next',
+    links: [
+      { label: 'Complaint Lodging', to: '/utilities/complaint', note: 'Illustrative — not functional' },
+      { label: "Citizens' Corner", to: '/citizens', note: 'Public services' },
+      { label: 'Functions', to: '/functions', note: 'Function directory' },
+      { label: 'Home', to: '/', note: 'Quick-access utilities' },
+    ],
+  },
+  '/utilities/complaint': {
+    title: 'Explore next',
+    links: [
+      { label: 'Currency Identifier', to: '/utilities/currency-identifier', note: 'Illustrative — not functional' },
+      { label: "Citizens' Corner", to: '/citizens', note: 'Public services' },
+      { label: 'Functions', to: '/functions', note: 'Function directory' },
+      { label: 'Home', to: '/', note: 'Quick-access utilities' },
     ],
   },
   '/search': {
@@ -231,6 +251,8 @@ const staticCrumbLabels: Record<string, string> = {
   '/learn': 'Learn',
   '/functions': 'Functions',
   '/citizens': "Citizens' Corner",
+  '/utilities/currency-identifier': 'Currency Identifier',
+  '/utilities/complaint': 'Complaint Lodging',
   '/search': 'Search',
   '/sitemap': 'Sitemap',
   '/viewer': 'PDF viewer',
@@ -269,6 +291,12 @@ export function crumbsForPath(pathname: string, itemLabel?: string): Crumb[] {
   if (path === '/about/prototype' || path === '/prototype') {
     crumbs.push({ label: 'About', to: '/about' })
     crumbs.push({ label: 'About this prototype' })
+    return crumbs
+  }
+
+  if (path.startsWith('/utilities/')) {
+    crumbs.push({ label: 'Utilities' })
+    crumbs.push({ label: staticCrumbLabels[path] ?? path.split('/').pop()!.replace(/-/g, ' ') })
     return crumbs
   }
 
