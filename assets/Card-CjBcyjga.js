@@ -1,0 +1,1 @@
+import{r as e,t}from"./jsx-runtime-BNV35Det.js";var n=t(),r=`group portal-panel p-4 md:p-5 transition-colors duration-150 hover:border-gold/45`;function i({children:e,className:t=``}){return(0,n.jsx)(`div`,{className:`${r} ${t}`,children:e})}function a({to:t,children:i,className:a=``}){return(0,n.jsx)(e,{to:t,className:`${r} block ${a}`,children:i})}export{a as n,i as t};

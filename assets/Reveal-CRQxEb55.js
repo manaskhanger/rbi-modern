@@ -1,0 +1,1 @@
+import{t as e}from"./jsx-runtime-BNV35Det.js";import{A as t,h as n,j as r}from"./index-C8KiZ1wl.js";var i=e();function a({children:e,className:a=``,delay:o=0}){return t()?(0,i.jsx)(`div`,{className:a,children:e}):(0,i.jsx)(r.div,{className:a,variants:n,initial:`hidden`,whileInView:`visible`,viewport:{once:!0,margin:`-40px`},transition:{delay:o},children:e})}export{a as t};
